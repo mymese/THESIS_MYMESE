@@ -1,10 +1,20 @@
 \chapter{INTRODUCTION}
 
-Gordon: Introduction describes the setting for what you want to do. Tell a story. Why are you doing this work? What are the issues? What are the objectives?
+%Gordon: Introduction describes the setting for what you want to do. Tell a story. Why are you doing this work? What are the issues? What are the objectives?
 
-Blender es una plataforma de XXX 	que es capable of doing rendering, simulation, animations, and many others. Nosotros estamos interesados en enhance the Game Engine. Acutalmente Blender Game Engine tiene XXX, XXX, XXX.  Si comparamos las capacidades que tiene el Game Engine con Blender Render nos damos cuenta de que hay varias cosas que estan missing, entre ellas the Particle System.
+Blender is 3D content creation suite which is also open source. Blender is free and it is available for most platforms. Some of the capabilities of Blender are doing rendering, creating simulations and animations, and others. Currently, we are interested on enhancing the Game Engine. Blender Game Engine has very powerful tools to create game without need of any programming.  
 
-The Particle Systems available in the Physics XXX of Blender have the capability of simulate rigid bodies, XXX, XXX, boids, and many others. In this project pretende implementar las capacidades disponibles en Blender Render para simular boids pero dentro del Game Engine.
+Comparing the capacities of the Game Engine with the one available for rendering and simulation we noticed that they are some very important tools missing in the Game Engine e.g. Particle Systems. The Particle Systems available in Blender have the capability of simulate different physics in the particles e.g. newtonian, boids and some others. 
+
+This project intends to implement the capabilities already available for simulation boids but inside the Blender Game Engine. Modifying the Game Engine implies that we would eventually need to build Blender again on our own. We would like to preserve the property of the portability of Blender while we modify the source code. This is not and easy job. The modified Blender 2.5 that we worked on, currently works for the major platforms Linux and Mac OS X.
+
+Runing a  game inside Blender may be a very computationally exhaustive work, therefore we would like to  accelerate as much as possible the computations of the particles and efficiently render our game. We can achieve this doing this work in Graphic Processor Units (GPUs). Since, Blender already have the portability property we would like to choose a computer language to program in our GPUs that does not depend on the type of GPU that is available on the machine. That is why OpenCL was selected as the language to be used for coding the parts of the code that we want to accelerate. OpenCL ensures the portability between the differen GPUs.
+
+The plan of attack for this project is to use the Run-Time Particle Systems (RTPS) library developed by Ian Johnson to generate the base code which is going to take care of using boids inside Blender Game Engine. Then, using different approaches for flocking algorithms, the steering behaviors that controls the boids are improved.
+
+The interface between Blender Game Engine and RTPS library is through the Modifiers. A new Modifier is defined, and called RTPS. This modifier is available only in our modified Blender build and it links to RTPS in order to modify the Blender's objects. 
+
+Both the RTPS library and Blender Custom Modifier were expended in order to enhance the capabilities already implemented by Ian Johnson.
 
 
 
