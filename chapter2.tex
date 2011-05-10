@@ -1,34 +1,36 @@
 \chapter{RELATED WORK}
 
+
 %%%%%%%%%%%%%
 % Introduction
 %%%%%%%%%%%%%
 \section{Introduction}
-Flocking is a nature inspired behavior that can be seen in different social animals. It is most seen in birds, i.e. flock of birds. Craig Reynolds the pioneer of flocking defined as \textit{the result of the interaction between the behaviors of individual birds}\cite{craig1}.Research work related to flocking started to been developed by mid 1980s. 
+Flocking is a nature-inspired behavior that can be seen in different social animals. It is most seen in birds, i.e. flock of birds. The pioneer of flocking, Craig Reynolds defined flocking as \textit{the result of the interaction between the behaviors of individual birds}\cite{craig1}. Since its publication in 1987 the field of flocking started to grown rapidly. %Research work related to flocking started to been developed by mid 1980s. 
 
-This chapter we are going to discuss some the related work that have been done in flocking, more general in Swarm Intelligence. The chapter goes as follows, first we are going to talk about Swarm Intelligence this is the discipline that study all swarm behaviors including flocking. Then, some results about basic flocking are going to be mentioned. This is going to include a summary of the early work done by Reynolds and the current work done by other researchers. This is going to be follow by a discussion on Flocking and GPU computing, and the final section describes the relation between Flocking and Games.
+This chapter we are going to discuss some the related work that have been done in flocking. The chapter goes as follows, first we are going to talk about flocking, we would start mentioning Reynolds early work and then we would go more deeply on some of the current work that have been or its been done using flocking. This is going to be followed by a discussion on GPU computing, and some work that have been dome with flocking and GPUs. The final section talks about Educational Games and some of the approaches that have been done with Flocking and Games.
+
 
 %%%%%%%%%%%%%
 % Computational Intelligence
 %%%%%%%%%%%%%
-\section{Computational Intelligence}
+%\section{Computational Intelligence}
 
 % Swarm intelligence
-\subsection{Swarm Intelligence} 
-Swarms are seen in nature mostly as large groups of small insects \cite{?}. Each entity of a swarm performs a simple role that evolves into a complex behavior as a whole. The emerge of this complex behavior goes beyond swarm since it can also be seen in social animals like birds and fishes. 
+%\subsection{Swarm Intelligence} 
+%Swarms are seen in nature mostly as large groups of small insects \cite{?}. Each entity of a swarm performs a simple role that evolves into a complex behavior as a whole. The emerge of this complex behavior goes beyond swarm since it can also be seen in social animals like birds and fishes. 
 
 % take a picture of a flock to add it here 
 
-Each entity of a swarm will follow a set of simple rules which depends from the entities of the swarm. Every time the rules are changed the environment conditions are evaluated. Since this process is sometimes very simple researches started trying to model it. Therefore, a new discipline in the area of artificial intelligence started to growth.
+%Each entity of a swarm will follow a set of simple rules which depends from the entities of the swarm. Every time the rules are changed the environment conditions are evaluated. Since this process is sometimes very simple researches started trying to model it. Therefore, a new discipline in the area of artificial intelligence started to growth.
 
-In 1989 Gerardo Beni and Jing Wang introduced the term Swarm Intelligence (SI) to the Artificial Intelligence (AI) community. SI was born in order to understand the biological insights about the ability of social life insects to solve their everyday problems \cite{BioPrinciplesSI}. As many areas of science, researchers give different definitions to it. XXXX and XXX defined SI as an AI discipline that studies the self-organized behavior of multi-agent systems \cite{?}. 
+%In 1989 Gerardo Beni and Jing Wang introduced the term Swarm Intelligence (SI) to the Artificial Intelligence (AI) community. SI was born in order to understand the biological insights about the ability of social life insects to solve their everyday problems \cite{BioPrinciplesSI}. As many areas of science, researchers give different definitions to it. XXXX and XXX defined SI as an AI discipline that studies the self-organized behavior of multi-agent systems \cite{?}. 
 
-Lets explain what is self-organized behavior and multi-agent systems are and were are they used for. Self-organized behavior.
+%Lets explain what is self-organized behavior and multi-agent systems are and were are they used for. Self-organized behavior.
 
 % mention ACO and PSO
 
 % Evolutionary computation
-\subsection{Evolutionary Computation}
+%\subsection{Evolutionary Computation}
 
 % mention GA
 
@@ -37,7 +39,7 @@ Lets explain what is self-organized behavior and multi-agent systems are and wer
 % Flocking
 %%%%%%%%%%%%%
 \section{Flocking}
-Flocking became very popular in the late 1980s. Inspired by the behavior of birds, Craig Reynolds developed a behavioral model that simulates self-organizing boids.
+Flocking became very popular in the late 1980s. Inspired by the behavior of birds, Craig Reynolds developed a behavioral model that simulates self-organizing boids. After, this development flocking became very popular and many applications of it have been published. We would discuss some of the current work that have been done in the last decade and also we would mention some of the applications.
 
 % Early work by Craig Reynolds
 \subsection{Early Work by Craig Reynolds}
@@ -57,17 +59,59 @@ This paper was successful in the developing of an algorithm that simulates indep
 
 % Current work
 \subsection{Current Work}
+After Craig's paper describing his Boid model more papers have been published in this area. Some researchers have focus in expanding the list of the steering behaviors, enhancing the neighbor search, analyzing the different boid's formations, or just simply applying flocking or modified flocking algorithms to an specific research problem.
+
+In 1999, Reynolds published another paper in which he introduced more steering behaviors to define autonomous characters\cite{craigSteeringBehaviors}. Autonomous characters are the agents in the animations or games that does not need to be controlled because they improvise their actions and moves. In games these agents are called, non-player characters. The motion behaviors of autonomous character can be divided into three layers: action selection (strategy, goals, and planning), steering behaviors (path determination), and locomotion (animation). In this paper he focused in the second layer. The steering behaviors presented were:
+\begin{enumerate}
+\item \textbf{seek}: boids steer towards a static target in global space
+\item \textbf{flee}: the inverse of seek, steers aways from the target in global space
+\item \textbf{pursuit}: similar to seek but the target is a moving object
+\item \textbf{evasion}: similar to flee but the target is a moving object
+\item \textbf{offset pursuit}: steer the path to pass near to but not directly to the moving object
+\item \textbf{arrival}: identical to seek, but the character is far from the target
+\item \textbf{obstacle avoidance}: gives the ability to the character to maneuver in the environment while not colliding with the obstacles 
+\item \textbf{wander}: random steering
+\item \textbf{path following}: steer along a predetermined path
+\item \textbf{wall following}: variation of path following, approach a wall and maintain a certain offset from it
+\item \textbf{containment}: variation of path following, motion is restricted to a region
+\item \textbf{flow field following}: steers the position of the character in direction to the flow
+\item \textbf{unaligned collision avoidance}: prevent collision between characters that are moving in arbitrary directions
+\item \textbf{separation}: maintain certain separation from others nearby
+\item \textbf{cohesion}: steers towards the center of nearby characters
+\item \textbf{alignment}: align itself with nearby characters
+\item \textbf{flocking}: combination of separation, alignment, and cohesion
+\item \textbf{leader following}: one or more character follow another moving character (leader)
+\end{enumerate} 
+ 
+The behavior mentioned above can be combined to produce more complex patterns of behavior. Later in 2000, Reynolds published another paper\cite{craigInteractionGroups} in which he focused on the interaction of large groups of autonomous characters in real-time. 
+
+Von Mammen did a study in how the formations of the flock are going to be, depending on the dynamic change of the neighbor search\cite{spatialSwarms}. Marina Klotsman and Ayellet Tal  did a classification of the different flock formations\cite{lineFormations}. They classify them in two groups: \textit{cluster} and \textit{line} formations.
+
+\subsubsection{Applications}
+The application areas of flocking are broad, they can range from bio-inspired systems to clustering. Next, we would mention some results in a few of these application areas. One of the nature-inspired applications is prey/predator. Flocking can be used for both, the group of preys and the group of predators\cite{gems2}. Also, crowds simulations have been done using flocking\cite{crowdsPS3}. 
+
+In the area of robotics, Yang et al. developed a collision avoidance flocking algorithm in which they used convex objects as obstacles\cite{flockingRobots}. They defined four states that a robot may be in: wait, observe, compute, and move. The life of this robots was a defined sequence of cycles of these states. The applications that Yang et al. are looking forward in this research are rescue after earthquake and space exploration. They found that the algorithm that they developed can efficiently adapt to complex environments. Lindhé also focused in using a flocking algorithm to move a group of robots but he also tested his implementation in real robots\cite{flockingRobotsThesis}. Lindhé prioritize his algorithm, the highest priority would be safety which means collision avoidance, then goal converge, then cohesion. He found that when robots were moving in open fields they maintain together while having a formation that facilitates the communication between the robots. 
+
+Related to the area of robotics is the unmanned air vehicles (UAV) application. Crowther focus in civil and military applications of  UAV\cite{flockingUAV}. Crowther determined that using only cohesion and alignment was sufficient to generate the wanted behavior. Another UAV investigation was conducted by Ryan et al\cite{UAVControl}. They used flocking to UAV control. Collision avoidance with respect to other UAV and obstacles was implemented.
+
+In 2006 Cui et al. presented a flocking based approach for document clustering\cite{document1}. In this study each document is represented by a boid. They did the study using the three basic flocking rules plus they added another rule which they called feature similarity and dissimilarity rule. This rule is introduced in order to do the classification. 
+
+The last application that we would mention is a variation of flocking, influence maps are used to implemented the flocking behavior, and it is compared to the traditional implementation of flocking\cite{flockingInfluenceMaps}. The influence map procedure outperform the traditional procedure for large compact and for large flocks in general. Many other applications of flocking are currently investigated, here we just mentioned a few of them.
 
 %%%%%%%%%%%%%
 % GPU Computing
 %%%%%%%%%%%%%
 \section{GPU Computing}
+In the previous section we mention GPUs, GPUs stands for \textit{Graphics Processing Units}. GPUs are mainly used for massively computation. Two of the most used GPU programming languages are CUDA and OpenCL. Since flocking is a parallelizable algorithm, GPUs can be used to improve its performance.
+
+%They are used for graphics but lately they are commonly used as computation devices since their vectorial architecture has significant advantages to do vector operations.
 
 % GPU device
 \subsection{GPU Device}
 
 % GPU programming languages
 \subsection{GPU Programming Languages}
+The two main programming languages used for GPU programming are CUDA (  ) and OpenCL.
 
 % Flocking in GPU
 \subsection{Flocking in GPU}
@@ -78,9 +122,14 @@ Swarm intelligence algorithms can take the advantage of GPU-based implementation
 % Educational Games
 %%%%%%%%%%%%%
 \section{Educational Games}
+Games can be classified in multiple types. We focus on educational games which are games that teach the user. Some of the academic areas that educational games have been addressing are language and literacy, mathematics, history, and science\cite{makingDesignGames}. Three issues that have to be addressed while integrating educational content in computer games are\cite{educationalComputerGames}:
+\begin{enumerate}
+\item{matching particular educational topics or concepts to their most appropiate media}
+\item{placing educational content at the heart of game play do that children engage in the targeted real-world behavior or thinking as they play the game}
+\item{building feedback and hint structures in ways that support and scaffold children into challenging content} 
+\end{enumerate} 
+Some of the benefits of educational games are: enriching knowledge, fostering skills, and stimulating motivation and interest.  Fun educational games must have fantasy, curiosity and they have to be challenge\cite{computerGamesEducationalTool}.
 
 % Flocking games
 \subsection{Flocking Games}
-
-
-
+Steven Woodcock published a code in the book Game Programming Gems in which he implemented flocking as a simple technique to simulate group behavior\cite{gems1}. In this code, only four rules were implemented i.e. separation, alignment, cohesion, and avoidance. One advantage of flocking that can be used as an advantage when implementing it is that flocking is a stateless algorithm which means that no information has to be stored at each update step. Flocking can be used in games to create this illusion of reality to the user. In 2001 Woodcock published on the 2nd edition of Game Programming Gems. In here, he describes an application of flocking using a predators and prey inspiration\cite{gems2}. He also implemented obstacle avoidance.
