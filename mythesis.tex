@@ -1,10 +1,18 @@
 \documentclass[11pt]{fsuthesis}
 %\usepackage[overload]{textcase}
 %\usepackage[dvips]{graphics}
-%\usepackage{hyperref}
+\usepackage{hyperref}
 %\hypersetup{breaklinks=true}
 %\usepackage{natbib}
 \usepackage{setspace}
+
+\usepackage{verbatim}
+\usepackage{amsmath, amssymb, graphics}
+\usepackage[pdftex]{graphicx}
+\usepackage{subfig}
+
+\input{macros.tex}
+\input{misc_mac.tex}
 
 \title{FLOCKING IMPLEMENTATION FOR THE BLENDER GAME ENGINE}
 \author{Myrna I. Merced Serrano}
@@ -22,7 +30,7 @@
 \committeesig{XXX}{Committee Member}
 
 \collegesig{Max Gunzburger}{Chair}{Department of Scientific Computing}
-\collegesig{Robert O. Lawton}{Dean}{College of Arts and Sciences}
+\collegesig{Ima Bigwig}{Dean}{College of Arts and Sciences}
 
 \begin{document}
 
@@ -69,7 +77,7 @@ The author if this thesis would like to acknowledge the unconditional help of he
 \input chapter5		% Interface Developed for the Blender Game Engine
 \input chapter6		% Interaction between Boids and SPH Particles
 \input chapter7		% Conclusions
-%\input chapterTesting
+
 
 %\appendix
 %\input appendix1

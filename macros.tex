@@ -1,0 +1,373 @@
+\usepackage[usenames,dvipsnames]{color}
+%\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{soul}
+\usepackage{xparse}
+\usepackage{listings}
+
+
+%%%%%%%%%%%%%%%
+% Show a list of items "todo" or "done" 
+% USAGE: 
+% \begin{todolist} 
+% 	\todo Something not finished
+% 	\done Something finished
+% \end{todolist} 
+\newenvironment{todolist}{%
+  \begin{list}{}{}% whatever you want the list to be
+  \let\olditem\item
+  \renewcommand\item{\olditem \textcolor{red}{(TODO)}: }
+  \newcommand\todo{\olditem \textcolor{red}{(TODO)}: }
+   \newcommand\done{\olditem \textcolor{ForestGreen}{(DONE)}: }
+}{%
+  \end{list}
+} 
+%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%
+% Show a Author's Note
+% USAGE: 
+% \authnote[Optional footnote message to further clarify note]{The note to your readers}
+\DeclareDocumentCommand \authnote { o m }
+{%
+\IfNoValueTF {#1}
+{\textcolor{blue}{Author's Note: \uline{#2}}} 
+{\textcolor{blue}{Author's Note: \uline{#2}}\footnote{Comment: #1}}%
+}
+%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%
+% Strike out text that doesn't belong in the paper
+% USAGE: 
+% \strike[Optional footnote to state why it doesnt belong]{Text to strike out}
+\DeclareDocumentCommand \strike { o m }
+{%
+\IfNoValueTF {#1}
+{\textcolor{red}{\sout{#2}}} 
+{\textcolor{red}{\sout{#2}}\footnote{Comment: #1}}%
+}
+%%%%%%%%%%%%%%%
+
+\definecolor{light-gray}{gray}{0.95}
+
+\newcommand{\cbox}[3]{
+\ \\
+\fcolorbox{#1}{#2}{
+\parbox{\textwidth}{
+#3
+}
+}
+}
+
+% Setup an environment similar to verbatim but which will highlight any bash commands we have
+\lstnewenvironment{unixcmds}[0]
+{
+%\lstset{language=bash,frame=shadowbox,rulesepcolor=\color{blue}}
+\lstset{ %
+language=sh,		% Language
+basicstyle=\ttfamily,
+backgroundcolor=\color{light-gray}, 
+rulecolor=\color{blue},
+%frame=tb, 
+columns=fullflexible,
+%framexrightmargin=-.2\textwidth,
+linewidth=0.8\textwidth,
+breaklines=true,
+%prebreak=/, 
+  prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+%basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+%numbers=left,                   % where to put the line-numbers
+%numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+%stepnumber=2,                   % the step between two line-numbers. If it's 1 each line 
+                                % will be numbered
+%numbersep=5pt,                  % how far the line-numbers are from the code
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,	                % adds a frame around the code
+tabsize=2,	                % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+}
+} { }
+
+% Setup an environment similar to verbatim but which will highlight c++ syntax
+\lstnewenvironment{cppcode}[1]
+{
+%\lstset{language=bash,frame=shadowbox,rulesepcolor=\color{blue}}
+\lstset{ %
+	backgroundcolor=\color{light-gray},
+	rulecolor=\color[rgb]{0.133,0.545,0.133},
+	tabsize=4,
+	language=[GNU]C++,
+%	basicstyle=\ttfamily,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        %columns=fullflexible,
+        %framexrightmargin=-.1\textwidth,
+       %framexleftmargin=6mm,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        tabsize=4,
+        showspaces=false,
+        showstringspaces=false,
+        numbers=left,                   % where to put the line-numbers
+        numbers=none,                   % where to put the line-numbers
+	numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+	stepnumber=4,                   % the step between two line-numbers. If it's 1 each line 
+                                % will be numbered
+	firstnumber=#1,
+         numbersep=5pt,                  % how far the line-numbers are from the code
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+} { }
+
+% Setup an environment similar to verbatim but which will highlight any bash commands we have
+\lstnewenvironment{mcode}[1]
+{
+\lstset{ %
+	backgroundcolor=\color{light-gray}, 
+	rulecolor=\color[rgb]{0.133,0.545,0.133},
+	tabsize=4,
+	language=Matlab,
+%	basicstyle=\ttfamily,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fullflexible,
+        %framexrightmargin=-.1\textwidth,
+       %framexleftmargin=6mm,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        numbers=left,                   % where to put the line-numbers
+	numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+	stepnumber=4,                   % the step between two line-numbers. If it's 1 each line 
+                                % will be numbered
+	firstnumber=#1,
+         numbersep=5pt,                  % how far the line-numbers are from the code
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+} { }
+
+\newcommand{\inputmcode}[1]{%
+\lstset{ %
+	backgroundcolor=\color{light-gray},  %
+	rulecolor=\color[rgb]{0.133,0.545,0.133}, %
+	tabsize=4, %
+	language=Matlab, %
+%	basicstyle=\ttfamily,
+        basicstyle=\scriptsize, %
+        %        upquote=true,
+        aboveskip={1.5\baselineskip}, %
+        columns=fullflexible, %
+        %framexrightmargin=-.1\textwidth,
+       %framexleftmargin=6mm,
+        showstringspaces=false, %
+        extendedchars=true, %
+        breaklines=true, %
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}}, %
+        frame=single, %
+        showtabs=false, %
+        showspaces=false, %
+        showstringspaces=false,%
+        numbers=left,                   % where to put the line-numbers
+	numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+	stepnumber=4,                   % the step between two line-numbers. If it's 1 each line 
+                                % will be numbered
+         numbersep=5pt,                  % how far the line-numbers are from the code
+        identifierstyle=\ttfamily, %
+        keywordstyle=\color[rgb]{0,0,1}, %
+        commentstyle=\color[rgb]{0.133,0.545,0.133}, %
+        stringstyle=\color[rgb]{0.627,0.126,0.941} %
+}
+\lstinputlisting{#1}%
+}
+
+%\lstset{ %
+%	backgroundcolor=\color{light-gray}, 
+%	rulecolor=\color[rgb]{0.133,0.545,0.133},
+%	tabsize=4,
+%	language=Matlab,
+%%	basicstyle=\ttfamily,
+%        basicstyle=\scriptsize,
+%        upquote=true,
+%        aboveskip={1.5\baselineskip},
+%        columns=fullflexible,
+%        %framexrightmargin=-.1\textwidth,
+%       %framexleftmargin=6mm,
+%        showstringspaces=false,
+%        extendedchars=true,
+%        breaklines=true,
+%        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+%        frame=single,
+%        showtabs=false,
+%        showspaces=false,
+%        showstringspaces=false,
+%        numbers=left,                   % where to put the line-numbers
+%	numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+%	stepnumber=4,                   % the step between two line-numbers. If it's 1 each line 
+%                                % will be numbered
+%	firstnumber=#1,
+%         numbersep=5pt,                  % how far the line-numbers are from the code
+%        identifierstyle=\ttfamily,
+%        keywordstyle=\color[rgb]{0,0,1},
+%        commentstyle=\color[rgb]{0.133,0.545,0.133},
+%        stringstyle=\color[rgb]{0.627,0.126,0.941},
+%}
+
+
+\newcommand{\Laplacian}[1]{\nabla^2 #1}
+
+% set of all nodes received and contained on GPU
+\newcommand{\setAllNodes}[0]{\mathcal{G}}
+% set of stencil centers on GPU
+\newcommand{\setCenters}[0]{\mathcal{Q}}
+% set of stencil centers with nodes in \setDepend
+\newcommand{\setBoundary}[0]{\mathcal{B}}
+% set of nodes received by other GPUs
+\newcommand{\setDepend}[0]{\mathcal{R}}
+% set of nodes sent to other GPUs
+\newcommand{\setProvide}[0]{\mathcal{O}}
+
+
+\newcommand{\toprule}[0]{\hline}
+\newcommand{\midrule}[0]{\hline\hline}
+\newcommand{\bottomrule}[0]{\hline}
+
+\newcolumntype{C}{>{\centering\arraybackslash}b{1in}}
+\newcolumntype{L}{>{\flushleft\arraybackslash}b{1.5in}}
+\newcolumntype{R}{>{\flushright\arraybackslash}b{1.5in}}
+\newcolumntype{D}{>{\flushright\arraybackslash}b{2.0in}}
+\newcolumntype{E}{>{\flushright\arraybackslash}b{1.0in}}
+
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\PP}{\mathbin}{AMSb}{"50}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+
+%%%%%% VECTOR NORM: %%%%%%%
+\newcommand{\vectornorm}[1]{\left|\left|#1\right|\right|}
+%\renewcommand{\vec}[1]{ \textbf{#1} }
+%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% THM, COR, DEF %%%%%%%
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newenvironment{proof}[1][Proof]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{definition}[1][Definition]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{example}[1][Example]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{remark}[1][Remark]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newcommand{\qed}{\nobreak \ifvmode \relax \else
+%      \ifdim\lastskip<1.5em \hskip-\lastskip
+%      \hskip1.5em plus0em minus0.5em \fi \nobreak
+%      \vrule height0.75em width0.5em depth0.25em\fi}
+%%%%%%%%%%%%%%%%%%%%%%
+
+%
+%\usepackage[algochapter]{algorithm2e}
+%\usepackage[usenames]{color}
+% colors to show the corrections
+\newcommand{\red}[1]{\textbf{\textcolor{red}{#1}}}
+\newcommand{\blue}[1]{\textbf{\textcolor{blue}{#1}}}
+\newcommand{\cyan}[1]{\textbf{\textcolor{cyan}{#1}}}
+\newcommand{\green}[1]{\textbf{\textcolor{green}{#1}}}
+\newcommand{\magenta}[1]{\textbf{\textcolor{magenta}{#1}}}
+\newcommand{\orange}[1]{\textbf{\textcolor{orange}{#1}}}
+%%%%%%%%%% DK DK
+% comments between authors
+\newcommand{\toall}[1]{\textbf{\green{@@@ All: #1 @@@}}}
+\newcommand{\toevan}[1]{\textbf{\red{*** Evan: #1 ***}}}
+\newcommand{\toe}[1]{\textbf{\red{*** Evan: #1 ***}}}
+
+\newcommand{\tog}[1]{\textbf{\blue{*** Gordon: #1 ***}}}
+\newcommand{\toi}[1]{\textbf{\magenta{*** Ian: #1 ***}}}
+\newcommand{\togordon}[1]{\textbf{\blue{*** Gordon: #1 ***}}}
+\newcommand{\gee}[1]{{\bf{\blue{{\em #1}}}}}
+\newcommand{\old}[1]{}
+\newcommand{\del}[1]{***#1*** }
+
+
+
+% \DeclareMathOperator{\Sample}{Sample}
+%\let\vaccent=\v % rename builtin command \v{} to \vaccent{}
+%\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+% for vectors of Greek letters
+\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
+\newcommand{\abs}[1]{\left| #1 \right|} % for absolute value
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+\let\underdot=\d % rename builtin command \d{} to \underdot{}
+\renewcommand{\d}[2]{\frac{d #1}{d #2}} % for derivatives
+\newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}} % for double derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} 
+% for partial derivatives
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} 
+\newcommand{\pdda}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}} 
+% for double partial derivatives
+\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2}
+ \right)_{#3}} % for thermodynamic partial derivatives
+\newcommand{\ket}[1]{\left| #1 \right>} % for Dirac bras
+\newcommand{\bra}[1]{\left< #1 \right|} % for Dirac kets
+\newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right|
+ \left. #2 \vphantom{#1} \right>} % for Dirac brackets
+\newcommand{\matrixel}[3]{\left< #1 \vphantom{#2#3} \right|
+ #2 \left| #3 \vphantom{#1#2} \right>} % for Dirac matrix elements
+\newcommand{\grad}[1]{\gv{\nabla} #1} % for gradient
+\let\divsymb=\div % rename builtin command \div to \divsymb
+\renewcommand{\div}[1]{\gv{\nabla} \cdot #1} % for divergence
+\newcommand{\curl}[1]{\gv{\nabla} \times #1} % for curl
+\let\baraccent=\= % rename builtin command \= to \baraccent
+\renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above =
+\newcommand{\diffop}[1]{\mathcal{L}#1}
+\newcommand{\boundop}[1]{\mathcal{B}#1}
+\newcommand{\rvec}[0]{{\bf r}}
+
+\newcommand{\Interior}[0]{\Omega}
+\newcommand{\Boundary}[0]{\partial \Omega}
+
+\newcommand{\on}[1]{\hskip1.5em \textrm{ on } #1}
+
+\newcommand{\gemm}{\texttt{GEMM}}
+\newcommand{\trmm}{\texttt{TRMM}}
+\newcommand{\gesvd}{\texttt{GESVD}}
+\newcommand{\geqrf}{\texttt{GEQRF}}
+
+
+\newcommand{\minitab}[2][l]{\begin{tabular}{#1}#2\end{tabular}}
+\newcommand{\comm}[1]{\textcolor{red}{\textit{#1}}}
+
+\newcommand{\nfrac}[2]{
+\nicefrac{#1}{#2}
+%\frac{#1}{#2}
+}
