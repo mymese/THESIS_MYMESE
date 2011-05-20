@@ -76,11 +76,11 @@ The \texttt{SPH} system is the main system of the RTPS library. It was developed
 
 % FLOCK
 \subsection{FLOCK}
-\texttt{FLOCK} system is the system of our concern. We used the \texttt{SPH} system as a guide to create the \texttt{FLOCK} system. Both of these systems are inherited from the \texttt{System} class. \texttt{FLOCK} has a main class located at \texttt{rtpslib/system/FLOCK.h}. Also, we developed a class for the settings called \texttt{FLOCKSettings.h}, and the different implementation for the flocking behavior which can be found at the \texttt{rtpslib/system/flock} folder. Figure \label{flockdiagram} shows the hierarchy of the \texttt{FLOCK} system.
+\texttt{FLOCK} system is the system of our concern. We used the \texttt{SPH} system as a guide to create the \texttt{FLOCK} system. Both of these systems are inherited from the \texttt{System} class. \texttt{FLOCK} has a main class located at \texttt{rtpslib/system/FLOCK.h}. Also, we developed a class for the settings called \texttt{FLOCKSettings.h}, and the different implementation for the flocking behavior which can be found at the \texttt{rtpslib/system/flock} folder. Figure~\ref{flockdiagram} shows the hierarchy of the \texttt{FLOCK} system.
 
 \textcolor{red}{*** TODO: Diagram of the FLOCK hierarchy ***}
 
-Next, we are going to discuss in detail the implementation of the classes shown in the diagram of Figure \label{flockdiagram}.
+Next, we are going to discuss in detail the implementation of the classes shown in the diagram of Figure~\ref{flockdiagram}.
 
 % FLOCK class
 \subsubsection{FLOCK class}
@@ -168,7 +168,161 @@ In order to run a simulation we need some settings, the flocking specific settin
 
 % Rules class
 \subsubsection{Rules class}
+The \texttt{Rules} class defines the different rules that were implemented to simulate the flocking behavior. \texttt{Rules} is located at \texttt{rtpslib/system/flock/Rules.h}, it defines the respective kernels for each of the rules.
+
+\begin{cppcode}{0}
+#ifndef RTPS_RULES_H_INCLUDED
+#define RTPS_RULES_H_INCLUDED
+
+#include <CLL.h>
+ #include <Buffer.h>
+
+namespace rtps
+ {
+	class Rules
+	{
+		public:
+			// constructors
+			Rules() { cli = NULL; timer = NULL; };
+			Rules(std::string path, CL* cli, EB::Timer* timer);
+			
+			// execution of kernels
+			void executeFlockmates( /* arguments */ );
+			void executeSeparation( /* arguments */ );
+			void executeAlignment( /* arguments */ );
+			void executeCohesion( /* arguments */ );
+			void executeLeaderFollowing( /* arguments */ );
+			
+		private:
+			// OpenCL
+			CL* cli;
+			
+			// kernels
+			Kernel k_flockmates;
+			Kernel k_rule_separation;
+			Kernel k_rule_alignment;
+			Kernel k_rule_cohesion;
+			Kernel k_rule_leaderfollowing;
+			
+			// timer
+			EB::Timer* timer;
+	};
+}
+#endif
+\end{cppcode}
+
+Each of the functions that execute the kernels are defined in \texttt{Rules.cpp}. First, we initialize each of the kernels in the constructor, then in the implementation of the functions that executes the kernels we set the arguments of the kernels. In this file we also define the function that executes the rules in the CPU.
+
+\begin{cppcode}{0}
+#include<FLOCK.h>
+#include<math.h>
+
+namespace rtps
+{
+	// Rules constructor
+	Rules::Rules(std::string wpath, CL* cli_, EB::Timer* timer_)
+	{
+		...
+		try
+		{
+			path = wpath + "/flockmates.cl";
+			k_flockmates = Kernel(cli, path, "flockmates");
+		}
+		....
+	}
+
+	// flockmates
+	void Rules::executeFlockmates( /* arguments */ )
+	{
+		// set the arguments for the kernel
+		int iarg = 0;
+		k_flockmates.setArg(iarg++, pos_s.getDevicePtr());
+		k_flockmates.setArg(iarg++, neigh_s.getDevicePtr());
+		...
+	}
+	...
+	
+	void FLOCK::cpuRules()
+	{
+		...
+	}
+}
+\end{cppcode}
+
+Each of the kernels is defined at \texttt{rtpslib/system/flock/cl\_src/}. The kernels defined in \texttt{Rules} are: \texttt{flockmates}, \texttt{rule\_separation}, \texttt{rule\_alignment}, \texttt{rule\_cohesion}, and \texttt{rule\_leaderfollowing}. We would discuss each of them now.
+
+\texttt{\textbf{flockmates}} goes through the list of neighbors and determines which ones are within a searching radius, and count them. Also, it counts how many neighbors are within the minimum separation distance. At the end, the vector \texttt{flockmates} allocated in the GPU is updated for each boid with the values counted.
+
+\texttt{\textbf{rule\_separation}} goes through the list of neighbors and determines which ones are within a certain radius, for those neighbors the rule is computed\footnote{for more details on how the rule is computed see the formulation in the previous chapter}. After the rule is computed we average over the number of flockmates that are within the minimum separation distance and then normalize. Finally, we copy the value to the vector \texttt{separation} allocated in the GPU.
+
+\texttt{\textbf{rule\_alignment}} goes through the list of neighbors and determines which ones are within a certain radius, for those neighbors we adds up the velocities. After we are done with the neighbors, we take the average using the number of flockmates, subtract the velocity of the current boid and normalize. At the end the value is updated in the respective GPU vector. 
+
+\texttt{\textbf{rule\_cohesion}} is analogous to the alignment rule, the only difference is that we use the positions instead of the velocities.
+
+\texttt{\textbf{rule\_leaderfollowing}} \textcolor{red}{*** TODO: still need to develop the leader behavior, then I would write the description of this kernel ***}
+
+This would finish the description of the \texttt{Rules} class and now we are ready to take the next step which is to integrate over time to get our new position.
 
 % Euler Integration class
 \subsubsection{EulerIntegration class}
+We have discuss how to get the different steering behaviors vectors, now we are going to explain how to combine those vectors in order to get one sing behavior and obtain out new position. A class called \texttt{EulerIntegration} have been developed in order to do what was stated above and is located at \texttt{rtpslib/system/flock/EulerIntegration.h}.
+
+\begin{cppcode}{0}
+#ifndef RTPS_EULER_INTEGRATION_H_
+#define RTPS_EULER_INTEGRATION_H_
+
+#include <CLL.h>
+#include <Buffer.h>
+
+namespace rtps
+{
+	class EulerIntegration
+	{
+		public:
+			EulerIntegration() { cli = NULL; timer = NULL; };
+	 		EulerIntegration(std::string path, CL* cli, EB::Timer* timer);
+			void execute( /* arguments */ );
+
+		private:
+			CL* cli;
+			Kernel k_euler_integration;
+			EB::Timer* timer;
+	};
+}
+#endif
+\end{cppcode}
+
+The \texttt{EulerIntegration} class structure is similar to the \texttt{Rules} class structure. That means that the \texttt{EulerIntegration.cpp} would initialize the kernel and implement the \texttt{execute} function. It also has the \texttt{void FLOCK::cpuEulerIntegration()} function implementation. The name of the kernel developed for the integration is \texttt{euler\_integration}, it is also located in the same folder as the other flocking kernels.
+
+\texttt{\textbf{euler\_integration}} starts by getting the respective steering vectors from the GPU, and also getting the weight of each of the rules from the flocking parameters object. Then, we compute the acceleration vectors for each of the rules, and finally compute the global acceleration vector.
+
+\begin{cppcode}{0}
+// RULE 1. SEPARATION
+acc_sep = separation * w_sep;
+   
+// RULE 2. ALIGNMENT
+acc_aln = alignment * w_aln;
+
+// RULE 3. COHESION
+acc_coh = cohesion * w_coh;
+
+// RULE 4. LEADER FOLLOWING
+acc_leadfoll = leaderfollowing * w_leadfoll;
+
+// GLOBAL ACCELERATION
+acc = vi + acc_sep + acc_aln + acc_coh + acc_leadfoll;
+\end{cppcode}
+
+After we have the global acceleration vector, we constrained to the maximum speed. As an option we have a circular velocity field that modifies the acceleration by adding it.
+
+\begin{cppcode}{0}
+// ADD THE ACCELERATION AND OPTIONAL CIRCULAR VELOCITY TO THE VELOCITY
+vi = v + acc;
+vi.w = 0.f;
+
+// INTEGRATION
+pi += dt*vi; 
+\end{cppcode}
+
+Finally, we integrate to get the next position. Then, we make sure that boids stay inside the domain by applying periodic boundary conditions. Now we have finish one step of the simulation. All this process would repeat in real-time until the user quits the program.
 
