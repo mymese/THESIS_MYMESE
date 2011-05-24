@@ -4,10 +4,10 @@
 \section{Introduction}
 
 % video game history
-Video games have been around since the 1950s\cite{computerVideoGamesHistory}. They became available in the market by the 1970s, at that time they were very popular. Currently, games are the attraction of many people. They are all kinds of game available now. They are available for consoles, portable consoles, computer, cell phones; games are everywhere. 
+Video games have been around since the 1950s\cite{computerVideoGamesHistory}. They became available in the market by the 1970s, at that time they were very popular. Currently, games are the attraction of many people. There are all kinds of video game available now. They are available for consoles, portable consoles, computer, cell phones; video games are everywhere. 
 
 % our aim
-Our intention is to create tools that helps to create games but not any kind of games, we focus in \textit{educational games}. Educational games are the games that not only the player enjoy while he/she is playing moreover the player also learn playing it. Therefore we chose \textit{Blender} as the software to enhance in this project. We would be working on it \textit{Game Engine} which lacks of Particle Systems.
+Our intention is to create tools that helps to create games but not any kind of games, we focus in \textit{educational games}. Educational games are the games that not only the player enjoy while he/she is playing moreover the player also learn playing it. Therefore we chose \textit{Blender} as the software to enhance in this project. We would be working on its \textit{Game Engine} which lacks of Particle Systems.
 
 % layout of the chapter
 This chapter goes as follows, we are going to briefly discuss what is \textit{Blender}, following by a description of its \textit{Game Engine}. Then, we are going to present the Boids particle system outside the Blender Game Engine, and finally we would present the modifier developed for the use of the RTPS library.
@@ -16,7 +16,7 @@ This chapter goes as follows, we are going to briefly discuss what is \textit{Bl
 \section{Blender}\label{blenderSec}
 \textit{Blender}\footnote{http://www.blender.org} is a free modeling/simulation software that has been out since 1993, it was most used to create 2D and 3D content. Currently, it has been extended and it can also do modeling, texturing, animation, particle simulation, rendering, game creation, etc.
 
-When searching for the right software to use the following properties of Blender made it the top software in the list. Blender has a free game engine built-in, it can be extended (Open Source project), it is cross-platform i.e. it can be used in either Windows, MacOSX and Linux, and that it can support simulations with real physics. Blender also has a big support from the gaming industry, and there is a large community helping with tutorials and documentation for either beginners or technical functionality of Blender.
+When searching for the right software to use the following properties of Blender made it the top software in the list. Blender has a free game engine built-in, it can be extended (Open Source project), it is cross-platform i.e. it can be used in either Windows, MacOSX and Linux, and it can support simulations with real physics. Blender also has a big support from the gaming industry, and there is a large community helping with tutorials and documentation for either beginners or technical functionality of Blender.
 
 For this thesis we worked on Blender 2.57.
 
@@ -24,12 +24,12 @@ For this thesis we worked on Blender 2.57.
 \section{Game Engines}
 
 % what is a game engine?
-A game engine is a software or part of a software that simulates part of reality\cite{bookGameKit2}. Game engines let you interact with 3D world in real-time. Also, you can control objects that interact with other objects in the world. A game engine consist of several parts:
+A game engine is a software or \textcolor{red}{** OLMO: change the word part in this sentence **}part of a software that simulates part of reality\cite{bookGameKit2}. Game engines let you interact with 3D world in real-time. Also, you can control objects that interact with other objects in the world. A game engine consist of several functions:
 \begin{enumerate}
 \item{render the 3D world and the objects on it}
-\item{rerender the scenes when something in the world changes}
-\item{game logic, decide what to do when the game is been play}
-\item{simulates the physics of the game i.e. gravity}
+\item{re-render the scenes when something in the world changes}
+\item{game logic, decide what to do when the game is being played}
+\item{simulate the physics of the game i.e. gravity}
 \item{collision detection and reaction}
 \end{enumerate}
 
@@ -46,9 +46,9 @@ As we mentioned in section~\ref{blenderSec} Blender has a \textit{Game Engine} b
 \end{center}
 \end{figure}
 
-The logic editor interface consists in two parts: \textit{Properties} and \textit{Logic Bricks}. Properties are used to give more specific actions to the objects, this properties can be called using the variable's names. The name of the variables has to match with the specific implementation in the source code. The second part are the logic bricks. The logic bricks are divided in \textit{sensors}, \textit{controllers}, and \textit{actuators}. Each of this has different subtypes to chose from.
+The logic editor interface consists of two parts: \textit{Properties} and \textit{Logic Bricks}. Properties are used to give more specific actions to the objects, these properties can be called using the variable's names. The name of the variables has to match with the implementation in the source code. The second part are the logic bricks. The logic bricks are divided in \textit{sensors}, \textit{controllers}, and \textit{actuators}. Each of this has different subtypes to chose from.
 
-Sensors are used to detect the input from the user e.g. sensors can be from the keybord, mouse, joysticks, etc. Controllers link the Sensors with the Actuators, using Controllers you can decide what action to take after the input has been received. The Actuators would make the actual action within the game. As an example the object might move, rotate, create, destroyed, change in shape, etc.
+Sensors are used to detect the input from the user e.g. sensors can be from the keybord, mouse, joysticks, etc. Controllers link the Sensors with the Actuators, using Controllers you can decide what action to take after the input has been received. The Actuators would make the actual action within the game. As an example the object might move, rotate, create, destroy, change in shape, etc.
 
 To create logic for an object in the world you just have to add as many logic bricks you need, and do not forget to connect them by dragging the connector from the sensor to the controller and from the controller to the actuator. The example move showed in Figure~\ref{logic} shows the forward movement of a cube using the down arrow.
 
@@ -58,7 +58,7 @@ This is the simplest way to create life within the world. For more complex behav
 \section{Boids Particle System outside the Blender Game Engine}
 Although Blender has extensive particle-based tools, including hair styling, these are absent from the Game Engine. A submodule of the particle system is a rather sophisticated Boid system. In this section we would present how this Boid system works.
 
-First you would need to create a particle emitter, it can be a cube, a plane, or any other object. Then, you make that object a particle system. Figure~\ref{boidsCreatePS} shows the panel used to add the particle system. The amount of particles is set to 50, using the starting and ending time as 1 would make the simulation to be calculate at each time step, there is no repetition (oscillation) in the movement of the boids, the lifetime is set to a big number to keep our boids a life for long time, using these settings would as much as we can do for real-time like simulation using the Boids system of Blender.
+First you would need to create a particle emitter, it can be a cube, a plane, or any other object. Then, you make that object a particle system. Figure~\ref{boidsCreatePS} shows the panel used to add the particle system. The amount of particles is set to 50, using the starting and ending time as 1 would make the simulation to be calculate at each time step, there is no repetition (oscillation) in the movement of the boids, the lifetime is set to a big number to keep our boids a life for long time, using these settings would be as much as we can do to run real-time like simulation using the Boids system of Blender.
 
 % figure: create PS
 \begin{figure}[htbp]
@@ -94,7 +94,7 @@ Each boid has its own brain, therefore their actions are evaluated individually.
 \item{Fight: go to closest enemy and attack when in range}
 \end{enumerate}
 
-When clicking in a rule, if that rule needs some extra parameters, the respective input areas are going to show up. As can be seen in Figure~\ref{boidsBrain}, after clicking the rule Goal the options of which object is going to be target shows, we set it to the empty object target which was created by us. They are three ways available to evaluate the rule: fuzzy logic with a fuzziness level, averaging all rules, and weighting the rules randomly. Each of these evaluations leads to completely different results. The type of evaluation that is most commonly used is Fuzzy.
+When clicking in a rule, if that rule needs some extra parameters, the respective input areas are going to show up. As can be seen in Figure~\ref{boidsBrain}, after clicking the rule Goal the options of which object is going to be target shows, we set it to the empty object target which was created by us. There are three ways available to evaluate the rule: fuzzy logic with a fuzziness level, averaging all rules, and weighting the rules randomly. Each of these evaluations leads to completely different results. The type of evaluation that is most commonly used is Fuzzy.
 
 The render panel can be also seen in Figure~\ref{boidsBrain}. We changed the rendering type to object and set a monkey to be the object to be render as a boid.
 
@@ -107,7 +107,7 @@ The render panel can be also seen in Figure~\ref{boidsBrain}. We changed the ren
 \end{center}
 \end{figure}
 
-Figure~\ref{boidsAction} shows two screenshots of an animation in which the boids are approaching an empty object as the target. This animation was ran using the settings presented in the previous Figures.
+Figure~\ref{boidsAction} shows two screenshots of an animation in which the boids are approaching an empty object as the target. This animation was run using the settings presented in the previous Figures.
 
 % figure: boids in action
 \begin{figure}[htbp]

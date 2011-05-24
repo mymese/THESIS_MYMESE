@@ -2,7 +2,7 @@
 
 % Introduction
 \section{Introduction}
-The Real-Time Particle Systems (RTPS) library designed and developed by Ian Johnson\cite{ianPaper}. This library is able to simulate various systems. In our collaboration with Ian Johnson, we created the \texttt{FLOCK} system, which is the system of our concern. RTPS also have a Smooth Particle Hydrodynamics (\texttt{SPH}) system. In this chapter we intend to introduce the RTPS framework and discuss all the extended implementation developed for the \texttt{FLOCK} system. The home folder of RTPS is \texttt{rtpslib/}.
+The Real-Time Particle Systems (RTPS) library, designed and developed by Ian Johnson\cite{ianPaper}, is able to simulate various systems. In collaboration with Ian Johnson, we created the \texttt{FLOCK} system, which is the system of concern. RTPS also have a Smooth Particle Hydrodynamics (\texttt{SPH}) system. In this chapter we introduce the RTPS framework and discuss all the extended implementation developed for the \texttt{FLOCK} system. 
 
 \textcolor{red}{*** TODO: Diagram of the RTPS hierarchy ***}
 \begin{figure}[htbp]
@@ -17,7 +17,7 @@ The Real-Time Particle Systems (RTPS) library designed and developed by Ian John
 
 % RTPS
 \section{RTPS}
-\texttt{RTPS} is the head class, it is located at \texttt{rtpslib/RTPS.h}. This class creates a particle system given a set of settings\footnote{the settings are going to be discussed in the next section}. \texttt{RTPS} has various instance variables: a \texttt{CL} object which is used to manage the \textit{OpenCL} stuff,  an \texttt{RTPSettings} object to manage the settings of the system and a \texttt{System} object which stores the type of particle system that has been created. Only two methods are defined in this class: \texttt{update()} and \texttt{render()}. Next is the definition of the \texttt{RTPS} constructor used for the \texttt{FLOCK} system.
+\texttt{RTPS} is the head class, it is located at \texttt{rtpslib/RTPS.h}. This class creates a particle system given a set of settings, discussed in Section~\ref{rtpsettings}. \texttt{RTPS} has various instance variables: a \texttt{CL} object which is used to manage the \textit{OpenCL} functionality,  an \texttt{RTPSettings} object to manage the settings of the system and a \texttt{System} object which stores the type of particle system that has been created. Only two methods are defined in this class: \texttt{update()} and \texttt{render()}. Next is the definition of the \texttt{RTPS} constructor used for the \texttt{FLOCK} system.
 
 % RTPS constructor
 \begin{cppcode}{0}
@@ -33,8 +33,8 @@ RTPS::RTPS(RTPSettings *s, CL* _cli)
 The \texttt{Init()} method would create the respective system\footnote{\texttt{SPH}, \texttt{FLOCK}, or any other defined system} depending on the settings.
 
 % RTPSettings
-\section{RTPS Settings}
-\texttt{RTPSettings} defines the set of settings for the particle system. The location of this class is at \texttt{rtpslib/RTPSettings.h}. It has the following instance variables defined: the maximum number of particles, the time step, and a \texttt{Domain} object. Also, there is an enumeration variable \texttt{SysType} that defines the names of the three available particle systems. Some of the rendering settings are set and get in this class. Here is the \texttt{RTPSettings} constructor that we use for the \texttt{FLOCK} system.
+\section{RTPS Settings}\label{rtpsettings}
+\texttt{RTPSettings} defines the settings for the particle system. The location of this class is at \texttt{rtpslib/RTPSettings.h}. It has the following instance variables defined: the maximum number of particles, the time step, and a \texttt{Domain} object. Also, there is an enumeration variable \texttt{SysType} that defines the names of the three available particle systems. Some of the rendering settings are set and get in this class. Here is the \texttt{RTPSettings} constructor that we use for the \texttt{FLOCK} system.
 
 % RTPSettings constructor
 \begin{cppcode}{0}
@@ -48,15 +48,15 @@ RTPSettings::RTPSettings(SysType system, int max_particles, float dt, Domain* gr
 }
 \end{cppcode}
 
-The parameters for this constructor are the type of system, the maximum number of particles, the time step and the grid domain. The maximum number of particles has to be a power of two that is why \texttt{max\_particles} is process it with the \texttt{nlpo2} function, which takes care of that.
+The parameters for this constructor are the type of system, the maximum number of particles, the time step and the grid domain. The maximum number of particles has to be a power of two that is why \texttt{max\_particles} is processed with the \texttt{nlpo2} function, which takes care of that.
 
 % Domain
 \section{Domain}
-The class that defines the grid in which the simulation is going to be computed is in \texttt{rtpslib/domain/Domain.h}. This class also stores all the different grid parameters that are needed through out the computation process. The class \texttt{IV} is defined in the \texttt{rtpslib/Domain} folder. This class has the methods which initialize the positions of the particles. Various shapes are defined: rectangles, spheres, and discs. The \texttt{UniformGrid} class is also defined here but not used in the \texttt{FLOCK} system.
+The class that defines the grid in which the simulation is being computed is in \texttt{rtpslib/domain/Domain.h}. This class also stores all the different grid parameters that are needed through out the computation process. The class \texttt{IV} is defined in the \texttt{rtpslib/Domain} folder. This class has the methods which initialize the positions of the particles. Various shapes are defined: rectangles, spheres, and discs. The \texttt{UniformGrid} class is also defined here but not used in the \texttt{FLOCK} system.
 
 % Render
 \section{Render}
-Most of the render code developed in for the RTPS library has been developed by Andrew Young. The \texttt{rtpslib/render/Render.h} class takes care of rendering the particles. The \texttt{RTPSettings} class has an enumeration that defines the available types of rendering defined in the \texttt{Render} class: Render (Points), Sprites, and Screen Space. For our system \texttt{FLOCK}, we only use the \textit{Points} render and the \texttt{Sprites} render. A special shader was defined in order to use Sprites, \texttt{rtpslib/render/shaders/boid\_tex\_frag.glsl}. With this shader we are able to render any image with transparent background as a boid.
+Most of the render code developed in for the RTPS library has been developed by Andrew Young. The \texttt{rtpslib/render/Render.h} class takes care of rendering the particles. The \texttt{RTPSettings} class has an enumeration that defines the available types of rendering defined in the \texttt{Render} class: Render (Points), Sprites, and Screen Space. A special shader is defined in order to use Sprites, \texttt{rtpslib/render/shaders/boid\_tex\_frag.glsl}. With this shader we are able to render any image with transparent background as a boid.
 
 % System
 \section{System}
@@ -68,11 +68,11 @@ Inside the \texttt{rtpslib/system/common} folder are the files that are shared b
 
 \textcolor{red}{*** TODO:  list the steps for the neighbor search ***}
 
-Also, the definition of the \texttt{Hose} class is share. Hoses are very useful for doing demonstrations. In the \texttt{rtpslib/system/common/cl\_src} folder are the \textit{OpenCL} implementation of the respective kernels.
+Also, the definition of the \texttt{Hose} class is shared. Hoses are very useful for doing demonstrations. In the \texttt{rtpslib/system/common/cl\_src} folder is the \textit{OpenCL} implementation of the respective kernels.
 
 % SPH
 \subsection{SPH}
-The \texttt{SPH} system is the main system of the RTPS library. It was developed and it is currently maintained by Ian Johnson\footnote{http://enja.org/}\cite{ianPaper}. This system simulate uses the SPH formulation to compute the different forces between particles, for more detailed information please refer to Ian Johnson Master Thesis\cite{ianThesis}.
+The \texttt{SPH} system is the main system of the RTPS library. It was developed and it is currently maintained by Ian Johnson\footnote{http://enja.org/}\cite{ianPaper}. This system uses the SPH formulation to compute the different forces between particles, for more detailed information please refer to Ian Johnson Master Thesis\cite{ianThesis}.
 
 % FLOCK
 \subsection{FLOCK}
@@ -84,7 +84,7 @@ Next, we are going to discuss in detail the implementation of the classes shown 
 
 % FLOCK class
 \subsubsection{FLOCK class}
-The \texttt{FLOCK} class is the main class of our system. The location of the class is at \texttt{rtpslib/system/FLOCK.h}. In the header file we defined the prototypes of the functions to that are used to insert particles to our system. Also, all the vectors used to store the information of our system are declared in here. These vectors stores the data that is going to be handle in the CPU and in the GPU.
+The \texttt{FLOCK} class is the main class of our system. The location of the class is at \texttt{rtpslib/system/FLOCK.h}. In the header file we defined the prototypes of the functions that are used to insert particles into our system. Also, all the vectors used to store the information of our system are declared in here. These vectors stores the data that is handle in the CPU and in the GPU.
 
 The implementation starts at the \texttt{FLOCK.cpp}. This is the code used in the constructor of  our system.
 
@@ -154,17 +154,17 @@ FLOCK::FLOCK(RTPS *psfr, int n)
 }
 \end{cppcode}
 
-Let us discuss what we are doing in the constructor. First, we copy the particle system \texttt{psfr} to our instance variable \texttt{ps}. We do the same for the settings, the grid, and the maximum number of particles. The actual number of particles is set to zero. Then, we initialize the seed to generate random numbers. Next, we get the path of where we compiled the program. A buffer is then created to store the parameters in the GPU. Then, the initial \texttt{FLOCKParameters} are calculated and updated. The calculation means to set parameters to the default values, then when they are updated if the user changed any of them only those parameters are going to change in value. Then, we get the spacing that is used between the particles. Then, the domain and the timers are set up. For the domain we basically initialize the grid parameters and for the timers we allocate memory of each of the timers that we are going to use.
+\textcolor{red}{*** GORDON: describe interesting things not obvious things ***Let us discuss what we are doing in the constructor. First, we copy the particle system \texttt{psfr} to our instance variable \texttt{ps}. We do the same for the settings, the grid, and the maximum number of particles. The actual number of particles is set to zero.} Then, we initialize the seed to generate random numbers. Next, we get the path of where we compiled the program. A buffer is then created to store the parameters in the GPU. Then, the initial \texttt{FLOCKParameters} are calculated and updated. First, the parameters are set to the default values, then they are updated if the user changes them. Then, we get the spacing that is used between the particles. Then, the domain and the timers are set up. For the domain we basically initialize the grid parameters and for the timers we allocate memory of each of the timers that we are going to use.
 
-The next step is to call \texttt{prepareSorted()}. What \texttt{prepareSorted()} does is to initialize the different vectors we created i.e \texttt{velocities}, \texttt{flockmates}, etc. It also create the VBOs and copy the positions and color vectors to the respective VBOs\footnote{VBOs are used to store data with rendering purposes}. Then, if we are using the GPU we initialize the different \texttt{Buffer} objects with the respective CPU arrays and copy the parameters to the GPU. After \texttt{prepareSorted()} is done, if we are using the CPU we are done initializing our system, otherwise we still need to a few more stuff. A final OpenCL setup related with the directories in which the kernels are going to be copied is done. Then, the different objects used for the neighbor search and the flocking simulation are created. Finally, the \texttt{setRenderer()} function is called, and it creates the \texttt{renderer} object depending on which render type we set in the \texttt{RTPSettings}.
+The next step is to call \texttt{prepareSorted()}. What \texttt{prepareSorted()} does is to initialize the different vectors we created i.e \texttt{velocities}, \texttt{flockmates}, etc. \textcolor{red}{*** GORDON: describe VBOs and provide a reference ***} It also create the VBOs and copy the positions and color vectors to the respective VBOs\footnote{VBOs are used to store data with rendering purposes}. Then, if we are using the GPU we initialize the different \texttt{Buffer} objects with their respective CPU arrays and copy the parameters to the GPU. After \texttt{prepareSorted()} is done, if we are using the CPU we are done initializing our system, otherwise we still need to do a few more steps. A final OpenCL setup related with the directories in which the kernels are going to be copied is done. Then, the different objects used for the neighbor search and the flocking simulation are created. Finally, the \texttt{setRenderer()} function is called, and it creates the \texttt{renderer} object depending on which render type we set in the \texttt{RTPSettings}.
 
 A very important function in this file is the \texttt{update()} function. This function is in charge of doing the calls of the functions that are going to update the positions of the boids at each time step. If we were using only the CPU, we would call \texttt{updateCPU()} which only calls the function \texttt{cpuRules()}, then the rules are computed sequentially. We developed the CPU code for testing purposes only, and to do benchmarks. On the other hand, if we were using the GPU to do the calculations, we would call \texttt{updateGPU()} which calls the OpenCL kernels to do the neighbor search and then to compute the flocking rules. We would discuss these kernels in more detail in the \textbf{Rules class} subsection.
 
-\textit{How do we insert particles into the system?} There are a few functions defined \texttt{addBox} , \texttt{addBall}, and \texttt{addHose}, that insert particles to the system. These functions first, initialize the positions of the particles using the functions defined in \texttt{IV.h} class, then the positions are send it to the GPU. This ended up the description of the \texttt{FLOCK} class.
+\textit{How do we insert particles into the system?} There are a few functions defined \texttt{addBox} , \texttt{addBall}, and \texttt{addHose}, that insert particles to the system. These functions first, initialize the positions of the particles using the functions defined in \texttt{IV.h} class, then the positions are send it to the GPU. This ends the description of the \texttt{FLOCK} class.
  
 % FLOCKSettings class
 \subsubsection{FLOCKSettings class}
-In order to run a simulation we need some settings, the flocking specific settings are in the class \texttt{rtpslib/system/FLOCKSettings.h}. The \texttt{FLOCKParameters} struct is defined in here. Some of the parameters in this struct are: the simulation scale, the searching radius, the maximum speed of the boids, the weights of each of the rules, and a few others. In the \texttt{FLOCKSettings.cpp} are defined the functions \texttt{calculate()} and \texttt{updateFLOCKP()} which are called in the constructor of \texttt{FLOCK}, and we mentioned above that they initialize and update the parameters.
+In order to run a simulation we need some settings, the flocking specific settings are in the class \texttt{rtpslib/system/FLOCKSettings.h}. The \texttt{FLOCKParameters} struct is defined in the same class. Some of the parameters in the struct of this class are: the simulation scale, the searching radius, the maximum speed of the boids, the weights of each of the rules, and a few others. In the \texttt{FLOCKSettings.cpp} are defined the functions \texttt{calculate()} and \texttt{updateFLOCKP()} which are called in the constructor of \texttt{FLOCK}, and we mentioned above that they initialize and update the parameters.
 
 % Rules class
 \subsubsection{Rules class}
@@ -255,7 +255,7 @@ Each of the kernels is defined at \texttt{rtpslib/system/flock/cl\_src/}. The ke
 
 \texttt{\textbf{rule\_separation}} goes through the list of neighbors and determines which ones are within a certain radius, for those neighbors the rule is computed\footnote{for more details on how the rule is computed see the formulation in the previous chapter}. After the rule is computed we average over the number of flockmates that are within the minimum separation distance and then normalize. Finally, we copy the value to the vector \texttt{separation} allocated in the GPU.
 
-\texttt{\textbf{rule\_alignment}} goes through the list of neighbors and determines which ones are within a certain radius, for those neighbors we adds up the velocities. After we are done with the neighbors, we take the average using the number of flockmates, subtract the velocity of the current boid and normalize. At the end the value is updated in the respective GPU vector. 
+\texttt{\textbf{rule\_alignment}} goes through the list of neighbors and determines which ones are within a certain radius, for those neighbors we add the velocities. After we are done with the neighbors, we take the average using the number of flockmates, subtract the velocity of the current boid and normalize. At the end the value is updated in the respective GPU vector. 
 
 \texttt{\textbf{rule\_cohesion}} is analogous to the alignment rule, the only difference is that we use the positions instead of the velocities.
 
@@ -265,7 +265,7 @@ This would finish the description of the \texttt{Rules} class and now we are rea
 
 % Euler Integration class
 \subsubsection{EulerIntegration class}
-We have discuss how to get the different steering behaviors vectors, now we are going to explain how to combine those vectors in order to get one sing behavior and obtain out new position. A class called \texttt{EulerIntegration} have been developed in order to do what was stated above and is located at \texttt{rtpslib/system/flock/EulerIntegration.h}.
+We have discussed how to get the different steering behaviors vectors, now we are going to explain how to combine those vectors in order to get one single behavior and obtain a new position. A class called \texttt{EulerIntegration} have been developed in order to do what was stated above and is located at \texttt{rtpslib/system/flock/EulerIntegration.h}.
 
 \begin{cppcode}{0}
 #ifndef RTPS_EULER_INTEGRATION_H_
@@ -313,7 +313,7 @@ acc_leadfoll = leaderfollowing * w_leadfoll;
 acc = vi + acc_sep + acc_aln + acc_coh + acc_leadfoll;
 \end{cppcode}
 
-After we have the global acceleration vector, we constrained to the maximum speed. As an option we have a circular velocity field that modifies the acceleration by adding it.
+After we obtain the global acceleration vector, we constrained to the maximum speed. As an option we have a circular velocity field that modifies the acceleration by adding it.
 
 \begin{cppcode}{0}
 // ADD THE ACCELERATION AND OPTIONAL CIRCULAR VELOCITY TO THE VELOCITY
@@ -324,5 +324,5 @@ vi.w = 0.f;
 pi += dt*vi; 
 \end{cppcode}
 
-Finally, we integrate to get the next position. Then, we make sure that boids stay inside the domain by applying periodic boundary conditions. Now we have finish one step of the simulation. All this process would repeat in real-time until the user quits the program.
+Finally, we integrate to get the next position. Then, we make sure that boids stay inside the domain by applying periodic boundary conditions. Now we have finished one step of the simulation. All this process would repeat in real-time until the user quits the program.
 
