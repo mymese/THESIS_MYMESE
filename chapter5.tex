@@ -24,7 +24,7 @@ For this thesis we worked on Blender 2.57.
 \section{Game Engines}
 
 % what is a game engine?
-A game engine is a software or \textcolor{red}{** OLMO: change the word part in this sentence **}part of a software that simulates part of reality\cite{bookGameKit2}. Game engines let you interact with 3D world in real-time. Also, you can control objects that interact with other objects in the world. A game engine consist of several functions:
+\textcolor{red}{** OLMO: change the word part in this sentence ** A game engine is a software or part of a software that simulates part of reality\cite{bookGameKit2}}. Game engines let you interact with 3D world in real-time. Also, you can control objects that interact with other objects in the world. A game engine consist of several functions:
 \begin{enumerate}
 \item{render the 3D world and the objects on it}
 \item{re-render the scenes when something in the world changes}
@@ -122,7 +122,7 @@ Figure~\ref{boidsAction} shows two screenshots of an animation in which the boid
 \end{figure}
 
 % RTPS modifier
-\section{RTPS Modifier}
+\section{RTPS Modifier}\label{modifiersection}
 In this section we are going to present the interface we developed to connect Blender with our FLOCK system defined in the RTPS library described in Chapter~\ref{RTPSchapter}. This interface is a custom modifier. Modifiers are used to edit the object by assigning certain properties to it. For example in our case, we first create a domain using a Blender cube and then assign the RTPS modifier to it, this modifier is going to set the cube as the RTPS domain and assign all the properties defined to the domain depending on the system you selected to use.
 
 This modifier was mainly developed by Ian Johnson\footnote{Go to http://enja.org/2010/05/24/blender-creating-a-custom-modifier/ for a step by step description and full paths of the files.}, we created the functionality for the Boids system following the SPH one developed by him.

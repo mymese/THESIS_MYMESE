@@ -119,7 +119,7 @@ A GPU device is a numeric computing engine\cite{GPUbook}. It focus on perform a 
 Since the GPUs have a different architecture than the CPUs, they need to be programmed in a special way. Two of the main programming languages used for GPU programming are CUDA and OpenCL. \textcolor{red}{** OLMO: Who is NVIDIA and what is an API? **} CUDA is the NVIDIA  general purpose API\cite{CUDAandOpenCL}. While OpenCL belongs to Khronos Group. OpenCL is a specification, different computing devices can execute OpenCL code, this is not possible with CUDA.
 
 % Flocking in GPU
-\subsection{Flocking in GPU}
+\subsection{Flocking in GPU}\label{flockingGPU}
 Flocking algorithms can take the advantage of GPU-based implementations. Era et al. developed a GPU-based library for autonomous character called BehaveRT\cite{BehaveRT}. This library can be used to do simulations in real-time and visualization of large groups of individuals. BehaveRT was implemented using CUDA. They were able to run 130K individuals at 15 FPS in a NIVIDIA 8800GTS card. \textit{Boids that See}, this publication proposed a self-occlusion GPU flocking implementation that allows groups of up to 65K boids at 30 FPS\cite{boidsThatSee}. 
 
 Other applications of flocking have been also implemented in the GPU.  Crowd simulations of more than 1 million boids have been done\cite{supermassiveCrowd}. The frame rate of this simulation was 25 FPS. Weiss developed a ClusterFlockGPU algorithm\cite{SI_GPU}. ClusterFlockGPU was implemented in CUDA; and it was possible to achieve feasible result for large groups of up to 5000 instances at 12 FPS. The last application we are going to mention is document clustering, the GPU implementation clusters 3,000 documents 4.6 faster than in the CPU\cite{document2}.

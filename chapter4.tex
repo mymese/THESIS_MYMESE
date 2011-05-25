@@ -75,7 +75,7 @@ Also, the definition of the \texttt{Hose} class is shared. Hoses are very useful
 The \texttt{SPH} system is the main system of the RTPS library. It was developed and it is currently maintained by Ian Johnson\footnote{http://enja.org/}\cite{ianPaper}. This system uses the SPH formulation to compute the different forces between particles, for more detailed information please refer to Ian Johnson Master Thesis\cite{ianThesis}.
 
 % FLOCK
-\subsection{FLOCK}
+\subsection{FLOCK}\label{flocksection}
 \texttt{FLOCK} system is the system of our concern. We used the \texttt{SPH} system as a guide to create the \texttt{FLOCK} system. Both of these systems are inherited from the \texttt{System} class. \texttt{FLOCK} has a main class located at \texttt{rtpslib/system/FLOCK.h}. Also, we developed a class for the settings called \texttt{FLOCKSettings.h}, and the different implementation for the flocking behavior which can be found at the \texttt{rtpslib/system/flock} folder. Figure~\ref{flockdiagram} shows the hierarchy of the \texttt{FLOCK} system.
 
 \textcolor{red}{*** TODO: Diagram of the FLOCK hierarchy ***}

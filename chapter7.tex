@@ -1,7 +1,10 @@
 \chapter{CONCLUSION}
 
+The RTPS library was extended by adding another system, FLOCK. The flocking algorithm followed by the FLOCK system was implemented for CPU and GPU use. The GPU version was implemented using OpenCL. The flocking algorithm computed the three basic steering behaviors: separation, alignment, and cohesion. 
 
+The Blender Game Engine was enhanced by adding a custom modifier called RTPS. This modifier links the RTPS library with the Blender Game Engine. The modifier was implemented by Ian Johnson. Our contribution in the development of the UI modifier was for the FLOCK system.
 
-\section{Future Work}
+The RTPS modifier is capable to run three different particles systems, including our FLOCK system, inside the Blender Game Engine. This was our aim and the main contribution in this thesis.
 
+A comparison between our RTPS GPU implementation and Blender Boids system (which is available only outside the Blender Game Engine) was done. It was found that the performance of our library outperforms Blender capabilities for large flocks. A flock of more than $130K$ boids was render at a rate of $41$ fps and another flock of more than $500K$ boids was render at a rate of $10$ fps. 
 
