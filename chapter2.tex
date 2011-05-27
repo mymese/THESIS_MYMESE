@@ -105,19 +105,22 @@ The last application that we would mention is a variation of flocking, influence
 % GPU Computing
 %%%%%%%%%%%%%
 \section{GPU Computing}
-In the previous section we mention GPUs, GPUs stands for \textit{Graphics Processing Units}. GPUs are mainly used for massively computation. Two of the most used GPU programming languages are CUDA and OpenCL. Since flocking is a parallelizable algorithm, GPUs can be used to improve its performance.
+GPUs stand for \textit{Graphics Processing Units}, and they were original created for graphics, general imaging and games. GPUs been used lately for non-rendering purposes in which only intensive computation is needed. GPUs are mainly used for massively computation in the computers.  Two of the most used GPU programming languages are CUDA and OpenCL. Since flocking is a parallelizable algorithm, GPUs can be used to improve its performance.
 
 %They are used for graphics but lately they are commonly used as computation devices since their vectorial architecture has significant advantages to do vector operations.
 
 % GPU device
 \subsection{Programmable GPU}
 \textcolor{red}{*** GORDON: describe GPU architecture a little more ***}
+% GPUs eveolves rapidly, almost every 6 months NVIDIA duplicate their current computational power on the GPUs, allowing graphics artists, game developers and scientists to improve their work in quality and quantity. 
 A GPU device is a numeric computing engine\cite{GPUbook}. It focus on perform a massive number of floating-point calculations in parallel. They have many Arithmetic Logic Units with small control unit and a small cache memory. While CPU in contrast are made to improve sequential code performance, therefore they have a large logical control unit and a large cache memory.
 
 % GPU programming languages
+% OpenCL - Open Computing Language; is a C-language extension; use for parallel programming of heterogeneous systems, i.e. GPUs and CPUs; initially proposed by Apple and now managed by Khronos Group
 \subsection{GPU Programming Languages}
 Since the GPUs have a different architecture than the CPUs, they need to be programmed in a special way. Two of the main programming languages used for GPU programming are CUDA and OpenCL. \textcolor{red}{** OLMO: Who is NVIDIA and what is an API? **} CUDA is the NVIDIA  general purpose API\cite{CUDAandOpenCL}. While OpenCL belongs to Khronos Group. OpenCL is a specification, different computing devices can execute OpenCL code, this is not possible with CUDA.
 
+ 
 % Flocking in GPU
 \subsection{Flocking in GPU}\label{flockingGPU}
 Flocking algorithms can take the advantage of GPU-based implementations. Era et al. developed a GPU-based library for autonomous character called BehaveRT\cite{BehaveRT}. This library can be used to do simulations in real-time and visualization of large groups of individuals. BehaveRT was implemented using CUDA. They were able to run 130K individuals at 15 FPS in a NIVIDIA 8800GTS card. \textit{Boids that See}, this publication proposed a self-occlusion GPU flocking implementation that allows groups of up to 65K boids at 30 FPS\cite{boidsThatSee}. 

@@ -9,7 +9,7 @@ The behavior seen in social animals like birds and fishes is called \textit{floc
 These steering behaviors are velocity vectors, they have direction and magnitude. Each behavior is evaluated at each time step for each boid.
 
 % separation
-\subsection{Separation}
+\subsection{Separation}\label{separationsection}
 \textit{Separation} can be described as the steering force that would maintain each entity of the flock separated by at least a minimum determined distance. Craig Reynolds first called this rule \textit{collision avoidance} because he meant to avoid collision with nearby flockmates. Later on, the rule was named \textit{separation}. This steering behavior prevents crowding between the boids. As can be seen in Figure~\ref{separationPDF} we only consider the flockmates within a certain radius when we evaluate this behavior. The red vector is the obtained steering force with this behavior.
 
 % separation figure
