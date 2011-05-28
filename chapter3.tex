@@ -2,7 +2,7 @@
 
 % introduction
 \section{Introduction}
-The behavior seen in social animals like birds and fishes is called \textit{flocking}. Flocking can be used to simulate this social behavior between entities by following a set of simple rules. These rules were introduced by the pioneer of flocking Craig Reynolds\cite{craig1}. The three main steering behaviors are: separation, alignment, and cohesion. In this chapter we are going to discuss the different behaviors implemented in our code, which include the three main steering behaviors, along with a few others.
+The behavior seen in social animals like birds and fishes is called \textit{flocking}. Flocking can be used to simulate this social behavior between entities by following a set of simple rules. These rules were introduced by the pioneer of flocking Craig Reynolds\cite{craig1}. The three main steering behaviors are: separation, alignment, and cohesion. This chapter will discuss the different behaviors implemented in our code, which include the three main steering behaviors, along with a few others.
 
 % 3 steering behaviors
 \section{Three Main Steering Behaviors}
@@ -10,7 +10,7 @@ These steering behaviors are velocity vectors, they have direction and magnitude
 
 % separation
 \subsection{Separation}\label{separationsection}
-\textit{Separation} can be described as the steering force that would maintain each entity of the flock separated by at least a minimum determined distance. Craig Reynolds first called this rule \textit{collision avoidance} because he meant to avoid collision with nearby flockmates. Later on, the rule was named \textit{separation}. This steering behavior prevents crowding between the boids. As can be seen in Figure~\ref{separationPDF} we only consider the flockmates within a certain radius when we evaluate this behavior. The red vector is the obtained steering force with this behavior.
+\textit{Separation} can be described as the steering force that would maintain each entity of the flock separated by at least a minimum determined distance. Craig Reynolds first called this rule \textit{collision avoidance} because he meant to avoid collision with nearby flockmates. Later on, the rule was named \textit{separation}. This steering behavior prevents crowding between the boids. As can be seen in Figure~\ref{separationPDF} only flockmates within a certain radius when evaluating this behavior are considered. The red vector is the obtained steering force with this behavior.
 
 % separation figure
 \begin{figure}[htbp]
@@ -21,7 +21,7 @@ These steering behaviors are velocity vectors, they have direction and magnitude
 \end{center}
 \end{figure}
 
-We can said that separation is a repulsive force. The mathematical expression that we implemented is showed in equation~\ref{separationEquation}.
+Separation is a repulsive force. The mathematical expression that was implemented is showed in equation~\ref{separationEquation}.
 
 % separation equation
 \begin{equation}
@@ -31,7 +31,7 @@ Separation =\frac{1}{M} \sum_{n=1}^{M} \frac{\overline{p_i - p_n}}{d(p_i,p_n)}
 
 Where $M$ is the number of boids within the minimum distance from the boid in question, $p_i$ is the position of boid $i$, and $d(p_i,p_n)$ is the distance between boids $i$ and boid $n$.
 
-We first loop over the nearest neighbors, then for this rule we only pick the neighbors that are with the minimum separation distance, we sum up the normalization of difference between the positions of boid $i$ and boid $n$ divided by the distance of boid $i$ from boid $n$. Then, we average over the number of boids that were within the minimum distance to finally get the the vector that is going to correct the heading and speed of the \textit{separation} of boid $i$  and their nearest neighbors. 
+Looping over the nearest neighbors is the first step, then only neighbors that are with the minimum separation distance are picked. Next, is to sum up the normalization of difference between the positions of boid $i$ and boid $n$ divided by the distance of boid $i$ from boid $n$. Then, take the average over the number of boids that were within the minimum distance to finally get the the vector that is going to correct the heading and speed of the \textit{separation} of boid $i$  and their nearest neighbors. 
 
 % alignment
 \subsection{Alignment}
@@ -54,11 +54,11 @@ We first loop over the nearest neighbors, then for this rule we only pick the ne
 Alignment = \left[  \frac{1}{N} \sum_{n=1}^{N} v_n \right ] - v_i
 \end{equation}
 
-Where $N$ is the number of boids in the nearest neighbor within the search radius, this radius is bigger than the radius of the minimum separation distance used for \textit{separation}. $v_n$ is the velocity of boid $n$, we average the velocities of all boids inside the neighbor, then we subtract the velocity of the current boid from it to finally get the \textit{alignment} corrective force.
+Where $N$ is the number of boids in the nearest neighbor within the search radius, this radius is bigger than the radius of the minimum separation distance used for \textit{separation}. $v_n$ is the velocity of boid $n$, average the velocities of all boids inside the neighbor, then subtract the velocity of the current boid from it to finally get the \textit{alignment} corrective force.
 
 % cohesion
 \subsection{Cohesion}
-\textit{Cohesion} is the behavior that steers towards the center of the flock. When Reynolds introduced its \textit{Boids} model, he called this behavior \textit{flock centering} and defined as \textit{the attempt to stay close to nearby objects}. The definition was kept while the name of the rule changed to \textit{cohesion}. This behavior makes each boid attracted to the center of the flock, in our case we calculated it using the local neighbor of each boid, so they would be attracted to the center of their local neighbor.  Figure~\ref{cohesionPDF} shows the \textit{cohesion} steering force in red.
+\textit{Cohesion} is the behavior that steers towards the center of the flock. When Reynolds introduced its \textit{Boids} model, he called this behavior \textit{flock centering} and defined as \textit{the attempt to stay close to nearby objects}. The definition was kept while the name of the rule changed to \textit{cohesion}. This behavior makes each boid attracted to the center of the flock, in our case the calculation is using the local neighbor of each boid, so they would be attracted to the center of their local neighbor.  Figure~\ref{cohesionPDF} shows the \textit{cohesion} steering force in red.
 
 % cohesion figure
 \begin{figure}[htbp]
@@ -69,7 +69,7 @@ Where $N$ is the number of boids in the nearest neighbor within the search radiu
 \end{center}
 \end{figure}
 
-The formula that we used for \textit{cohesion} is very similar to the formula used for \textit{alignment}, the only difference is that \textit{cohesion} uses the positions of the boid and \textit{alignment} uses the velocities. Equation~\ref{cohesionEquation} shows the \textit{cohesion} formula.
+The formula used for \textit{cohesion} is very similar to the formula used for \textit{alignment}, the only difference is that \textit{cohesion} uses the positions of the boid and \textit{alignment} uses the velocities. Equation~\ref{cohesionEquation} shows the \textit{cohesion} formula.
 
 % cohesion equation
 \begin{equation}
@@ -77,15 +77,15 @@ The formula that we used for \textit{cohesion} is very similar to the formula us
 Cohesion = \left[  \frac{1}{N} \sum_{n=1}^{N} p_n \right ] - p_i
 \end{equation}
 
-Where $N$ is the number of boids in the local neighborhood of boid $i$. $p_n$ is the position of flockmate $n$. We average the position of the local flockmates in order to get the average position of the local neighborhood of boid $i$. Then, we subtract the current boid $i$ from the average position. That would give us the \textit{cohesion} force vector.
+Where $N$ is the number of boids in the local neighborhood of boid $i$. $p_n$ is the position of flockmate $n$. Then, take the average the position of the local flockmates in order to get the average position of the local neighborhood of boid $i$. Finally, subtract the current boid $i$ from the average position. That would give us the \textit{cohesion} force vector.
 
 % other behaviors
 \section{Other Steering Behaviors}\label{otherbehaviors}
-Besides the three main steering behaviors discussed in the above section many more steering forces have been previosly developed, see Section~\ref{currentwork} for a list of some of them. In this section we are going to discuss only the behaviors we implemented: \textit{goal}, \textit{avoid}, and \textit{follow the leader}.
+Besides the three main steering behaviors discussed in the above section many more steering forces have been previously developed, see Section~\ref{currentwork} for a list of some of them. In this section only the behaviors that were implemented: \textit{goal}, \textit{avoid}, and \textit{follow the leader} are discussed.
 
 % goal
 \subsection{Goal}
-\textit{Goal} is the steering behavior that attracts the boids to a specific location in global space. This location is static. Figure~\ref{seekfleePDF} shows the action taken when we want to approach or avoid the target. The red vector shows the \textit{goal} steering, the blue vector, avoid, which is discussed in the next section. The gray vector to the right of the boid is the desired velocity and the dotted line would be the path taken by the boid.
+\textit{Goal} is the steering behavior that attracts the boids to a specific location in global space. This location is static. Figure~\ref{seekfleePDF} shows the action taken when approaching or avoiding the target. The red vector shows the \textit{goal} steering, the blue vector, avoid, which is discussed in the next section. The gray vector to the right of the boid is the desired velocity and the dotted line would be the path taken by the boid.
 
 % seek and flee figure
 \begin{figure}[htbp]
@@ -96,7 +96,7 @@ Besides the three main steering behaviors discussed in the above section many mo
 \end{center}
 \end{figure}
 
-\textit{Goal} behavior adjusts the boid's velocity in a way that it is aligned towards the target. So, \textit{how do we compute it?} Since the target is static, we subtract the position of the boid and the position of the target, normalized and multiply it by the current speed of the boid. This would gave us the desired velocity at what we would like to steer. Then, to get the steering vector, we subtract the current velocity from the desired velocity. The formula is in equation~\ref{goalEquation}
+\textit{Goal} behavior adjusts the boid's velocity in a way that it is aligned towards the target. So, \textit{how it was computed?} Since the target is static, subtract the position of the boid and the position of the target, normalize it and multiply it by the current speed of the boid. This would gave us the desired velocity at which the boid is going to steer. Then, to get the steering vector, subtract the current velocity from the desired velocity. The formula is in equation~\ref{goalEquation}
 
 % goal equation
 \begin{equation}
@@ -116,7 +116,7 @@ Where $p_i$ and $v_i$ are the position and velocity of boid $i$, respectively. T
 Avoid = -((p_i - p_t) * v_i) - v_i
 \end{equation}
 
-We called $((p_i - p_t) * v_i)$ the desired velocity, and here it has a negative sign preceding it, so that means that it is going to point in the opposite direction than the desired velocity of ~\textit{goal}.
+$((p_i - p_t) * v_i)$ is called the desired velocity, and here it has a negative sign preceding it, so that means that it is going to point in the opposite direction than the desired velocity of ~\textit{goal}.
 
 % leader following
 \subsection{Follow the Leader}
@@ -135,26 +135,125 @@ Most of the time the followers want to stay closer to the leader without getting
 
 % combining behaviors
 \section{Combining the Steering Behaviors}
-Each of the steering behaviors discussed above would return a velocity vector. Now the question is \textit{how do we combine it in order to move the boid?}. First, each steering force is normalized, then we weight them\footnote{Weights are given by the user, they are not constant values set it by us.}. For example, if we would like to combine \textit{separation}, \textit{alignment}, and \textit{cohesion} only, we would use equation~\ref{combine}. Each behavior is multiplied by a constant, then we add them up to get the acceleration vector.
+Each of the steering behaviors discussed above would return a velocity vector. Now the question is \textit{how to combine the behaviors in order to move the boid?}. First, each steering force is normalized, then weight it\footnote{Weights are given by the user, they are not constant values set it by us.}. For example, combining \textit{separation}, \textit{alignment}, and \textit{cohesion} only, would be done using equation~\ref{combine}. Each behavior is multiplied by a constant, then add it to get the acceleration vector.
 
 % combine equation
 \begin{equation}
 \label{combine}
-acceleration = Separation * C_S + Alignment * C_A + Cohesion * C_C
+acceleration = C_S Separation  + C_A Alignment  + C_C Cohesion 
 \end{equation}
 
-Now that we have the acceleration, we add this acceleration to the current velocity to obtain the new velocity and we do \textit{Euler's Integration} to obtain the new position. See equation~\ref{velocity}, where $v_i$ and $p_i$ are the velocity and position of of boid $i$, respectively, and equation~\ref{integrate} where $dt$ is the time step. 
+Now that the acceleration has been calculated, the velocity is just the acceleration plus the current velocity. See Equation~\ref{velocity}, where $v_i^{k+1}$ represents the velocity of boid $i$ at step $k+1$. 
+
+Then, first order Euler integration method is used  to calculate the new position of each boid. As shown in Equation~\ref{integrate}, where $p_i^{k+1}$ is the position of boid $i$ at step $k+1$, $v_i$ is the velocity of the boid, and $dt$ is the time step of the integration.
 
 % integrate equation
 \begin{align}
 \label{velocity}
-v_i = v_i + acceleration\\
+v_i^{k+1} = v_i^k + acceleration\\
 \label{integrate}
-p_i = p_i + dt * v_i
+p_i^{k=1} = p_i^k + dt~ v_i
 \end{align}
 
-By doing this we finally obtain a new position for each of the boids. Recalling that each of these rules are going to be calculated for each boid every time step. \textcolor{red}{** OLMO: explain more this last part **}
+Each of the steering behaviors is going to be calculated, and combined for each boid every time step in order to update their positions.
 
 % algorithm
 \section{Algorithm}
-\textcolor{red}{TODO: Write the algorithm in pseudocode}
+
+In this Section a few algorithms are going to be presented. The first one is the algorithm developed to update all the boids at each frame of the simulation. The rest of them are the approaches taken to compute each of the steering behaviors that were implemented in the code to follow flocking behavior, this algorithms are executed at each time step.
+
+
+% update
+\begin{algorithm}
+\caption{Update of each frame of the simulation}
+\label{updateAlgorithm}
+\begin{algorithmic}
+\STATE Create a FLOCK particle system.
+\FOR {each frame}
+\STATE Do the nearest neighbor search.
+\STATE Check if the weight of each rule is greater than zero, if it is then compute that rule.
+\STATE Integrate over time.
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+The Algorithm~\ref{updateAlgorithm} is a simplify version of what the \texttt{updateGPU()} function is doing. See Section~\ref{flocksection} for more details of the \texttt{updateGPU()} function. What is cleaver in this algorithm is that each of the rules is computed independently, not all at once. Only is the user set the weight greater than zero, then that rule is going to be computed. If the weight is zero, there is no waste of computation since the vector that stores the steering value for rule is initialized at zero and when combined, there is no error in the computation of the final steering.
+
+Now internally, \textit{how the rules are computed?}. The following algorithms would present the approaches taken for each of the rules. Recalling that not all rules are going to be computed at once, only rules with weights greater than zero would be computed.
+
+
+% flockmates
+\begin{algorithm}
+\caption{Compute the number of flockmates and nearest flockmates in the neighborhood.}
+\label{flockmatesAlgorithm}
+\begin{algorithmic}
+\FOR {each neighbor $j$ of boid $i$}
+\IF{dist($i$, $j$) $<=$ searching radius}
+\STATE flockmates++
+\IF{dist($i$, $j$) $<=$ minimum distance}
+\STATE nearestFlockmates++
+\ENDIF
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+Algorithm~\ref{flockmatesAlgorithm} counts how many flockmates and nearest flockmates are in the neighborhood of each boid. The number of flockmates is needed for the rules \textit{cohesion} and \textit{alignment} while the number of nearest flockmates is only needed by the \textit{separation} rule. The algorithm for the \textit{separation} rule is shown in Algorithm~\ref{separationAlgorithm}.
+
+
+% separation
+\begin{algorithm}
+\caption{Compute the separation steering behavior.}
+\label{separationAlgorithm}
+\begin{algorithmic}
+\FOR {each neighbor $j$ of boid $i$}
+\IF{dist($i$, $j$) $<=$ minimum distance}
+\STATE s = dist($i$, $j$) 
+\STATE normalize(s)
+\STATE s /= dist($i$, $j$) 
+\STATE separation += s
+\ENDIF
+\ENDFOR
+\IF{nearestFlockmates $> 0$)}
+\STATE separation /= nearestFlockmates
+\STATE normalize(separation)
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+In the \textit{separation} rule, only boids within the minimum distance are used for calculations. Algorithm~\ref{alignmentAlgorithm} presents how the \textit{alignment} rule is computed. This algorithm is very similar to the algorithm followed to computed \textit{cohesion}, shown in Algorithm~\ref{cohesionAlgorithm}. The only difference is that \textit{alignment} uses velocities while \textit{cohesion} uses positions.
+
+
+% alignment
+\begin{algorithm}
+\caption{Compute the alignment steering behavior.}
+\label{alignmentAlgorithm}
+\begin{algorithmic}
+\FOR {each neighbor $j$ of boid $i$}
+\IF{dist($i$, $j$) $<=$ searching radius}
+\STATE alignment += velocity($j$)
+\ENDIF
+\ENDFOR
+\IF{flockmates $> 0$)}
+\STATE alignment /=  flockmates
+\ENDIF
+\STATE alignment -= velocity($i$)
+\end{algorithmic}
+\end{algorithm}
+
+% cohesion
+\begin{algorithm}
+\caption{Compute the cohesion steering behavior.}
+\label{cohesionAlgorithm}
+\begin{algorithmic}
+\FOR {each neighbor $j$ of boid $i$}
+\IF{dist($i$, $j$) $<=$ searching radius}
+\STATE cohesion += position($j$)
+\ENDIF
+\ENDFOR
+\IF{flockmates $> 0$)}
+\STATE cohesiont /=  flockmates
+\ENDIF
+\STATE cohesion -= position($i$)
+\end{algorithmic}
+\end{algorithm}
