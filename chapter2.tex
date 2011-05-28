@@ -7,7 +7,7 @@
 \section{Introduction}
 Flocking is a nature-inspired behavior that can be seen in different social animals. It is most seen in birds, i.e. flock of birds. The pioneer of flocking, Craig Reynolds defined flocking as \textit{the result of the interaction between the behaviors of individual birds}\cite{craig1}. Since its publication in 1987 the field of flocking started to grown rapidly. %Research work related to flocking started to been developed by mid 1980s. 
 
-This chapter discuss some of the related work that have been done in flocking. The chapter goes as follows, first we are going to talk about flocking by mentioning Reynolds early work and then we would go more deeply on some of the current work that have been done using flocking. This is going to be followed by a discussion on GPU computing, and some work that have been dome with flocking and GPUs. The final section talks about Educational Games and some of the approaches that have been done with Flocking and Games.
+This chapter discuss some of the related work that have been done in flocking. The chapter goes as follows, first there is a discussion about the early work of Craig Reynolds follow by a description of some of the current work that have been done using flocking. Then, there is a discussion on GPU computing, and some work that have been dome with flocking and GPUs. The final section talks about Educational Games and some of the approaches that have been done with Flocking and Games.
 
 
 %%%%%%%%%%%%%
@@ -39,7 +39,7 @@ This chapter discuss some of the related work that have been done in flocking. T
 % Flocking
 %%%%%%%%%%%%%
 \section{Flocking}
-Flocking became very popular in the late 1980s. Inspired by the behavior of birds, Craig Reynolds developed a behavioral model that simulates self-organizing boids. After, this development flocking became very popular and many applications of it have been published. We would discuss some of the current work that have been done in the last decade and also we would mention some of the applications.
+Flocking became very popular in the late 1980s. Inspired by the behavior of birds, Craig Reynolds developed a behavioral model that simulates self-organizing boids. After, this development flocking became very popular and many applications of it have been published. A discussion of some of the current work that have been done in the last decade and also some of the applications are going to be mentioned.
 
 % Early work by Craig Reynolds
 \subsection{Early Work by Craig Reynolds}
@@ -91,7 +91,7 @@ The behavior mentioned above can be combined to produce more complex patterns of
 Von Mammen did a study in how the formations of the flock are going to be, depending on the dynamic change of the neighbor search\cite{spatialSwarms}. Marina Klotsman and Ayellet Tal  did a classification of the different flock formations\cite{lineFormations}. They classify them in two groups: \textit{cluster} and \textit{line} formations.
 
 \subsubsection{Applications}
-The application areas of flocking are broad, they range from bio-inspired systems to clustering. Next, we would mention some results in a few of these application areas. One of the nature-inspired applications is prey/predator. Flocking can be used for both, the group of preys and the group of predators\cite{gems2}. Also, crowds simulations have been done using flocking\cite{crowdsPS3}. 
+The application areas of flocking are broad, they range from bio-inspired systems to clustering. Next are some results in a few of these application areas. One of the nature-inspired applications is prey/predator. Flocking can be used for both, the group of preys and the group of predators\cite{gems2}. Also, crowds simulations have been done using flocking\cite{crowdsPS3}. 
 
 In the area of robotics, Yang et al. developed a collision avoidance flocking algorithm in which they used convex objects as obstacles\cite{flockingRobots}. They defined four states that a robot may be in: wait, observe, compute, and move. The life of this robots was a defined sequence of cycles of these states. The applications that Yang et al. are looking forward in this research are rescue after earthquakes and space exploration. They found that the algorithm that they developed can efficiently adapt to complex environments. Lindhé also focused in using a flocking algorithm to move a group of robots but he also tested his implementation in real robots\cite{flockingRobotsThesis}. Lindhé prioritize his algorithm, the highest priority would be safety which means collision avoidance, then goal converge, then cohesion. He found that when robots were moving in open fields they maintain together while having a formation that facilitates the communication between the robots. 
 
@@ -99,47 +99,53 @@ Related to the area of robotics is the unmanned air vehicles (UAV) application. 
 
 In 2006 Cui et al. presented a flocking based approach for document clustering\cite{document1}. In this study each document is represented by a boid. They did the study using the three basic flocking rules plus they added another rule which they called feature similarity and dissimilarity rule. This rule is introduced in order to do the classification. 
 
-The last application that we would mention is a variation of flocking, influence maps are used to implement the flocking behavior, and it is compared to the traditional implementation of flocking\cite{flockingInfluenceMaps}. The influence map procedure outperforms the traditional procedure for large compact and for large flocks in general. Many other applications of flocking are currently investigated, here we just mentioned a few of them.
+The last application that would be mentioned is a variation of flocking, influence maps are used to implement the flocking behavior, and it is compared to the traditional implementation of flocking\cite{flockingInfluenceMaps}. The influence map procedure outperforms the traditional procedure for large compact and for large flocks in general. Many other applications of flocking are currently investigated, here only a few of them were mentioned.
 
 %%%%%%%%%%%%%
 % GPU Computing
 %%%%%%%%%%%%%
 \section{GPU Computing}
-GPUs stand for \textit{Graphics Processing Units}, and they were original created for graphics, general imaging and games. GPUs been used lately for non-rendering purposes in which only intensive computation is needed. GPUs are mainly used for massively computation in the computers.  Two of the most used GPU programming languages are CUDA and OpenCL. Since flocking is a parallelizable algorithm, GPUs can be used to improve its performance.
+\textit{GPU computing}, also known as GPGPU is when using GPUs for general computing. GPUs stand for \textit{Graphics Processing Units}, and they are devices that were originally created to do graphics, general imaging and games. 
 
-%They are used for graphics but lately they are commonly used as computation devices since their vectorial architecture has significant advantages to do vector operations.
+Scientists and engineers have been taken advantage of GPU computing to enhance the performance of their applications.
+
+GPU computing is an heterogeneous system, that uses GPUs and CPUs together when processing a task. Sequential code runs on the CPU and computationally-intensive code runs on the GPU.
+
+Two of the most known GPU programming languages are CUDA and OpenCL. Flocking is a parallelizable algorithm, therefore GPUs can be used to improve its performance.
+
 
 % GPU device
 \subsection{Programmable GPU}
-\textcolor{red}{*** GORDON: describe GPU architecture a little more ***}
-% GPUs eveolves rapidly, almost every 6 months NVIDIA duplicate their current computational power on the GPUs, allowing graphics artists, game developers and scientists to improve their work in quality and quantity. 
-A GPU device is a numeric computing engine\cite{GPUbook}. It focus on perform a massive number of floating-point calculations in parallel. They have many Arithmetic Logic Units with small control unit and a small cache memory. While CPU in contrast are made to improve sequential code performance, therefore they have a large logical control unit and a large cache memory.
+A GPU device is a numeric computing engine\cite{GPUbook}. It focus on perform a massive number of floating-point calculations in parallel. The floating-point horsepower of a GPU overcomes the CPU.  
+
+GPUs has a vectorial architecture that has significant advantages when doing vectorial operations. They have many Arithmetic Logic Units with small control unit and a small cache memory. While CPU in contrast have a large logical control unit and a large cache memory. This is because CPUs are made only to improve sequential code performance.
+
+GPUs evolves rapidly, almost every 6 months NVIDIA\footnote{http://www.nvidia.com/}, a company that produces some of these GPU devices, duplicate their current computational power on the GPUs, allowing graphics artists, game developers and scientists to improve their work in quality and quantity. 
 
 % GPU programming languages
-% OpenCL - Open Computing Language; is a C-language extension; use for parallel programming of heterogeneous systems, i.e. GPUs and CPUs; initially proposed by Apple and now managed by Khronos Group
 \subsection{GPU Programming Languages}
-Since the GPUs have a different architecture than the CPUs, they need to be programmed in a special way. Two of the main programming languages used for GPU programming are CUDA and OpenCL. \textcolor{red}{** OLMO: Who is NVIDIA and what is an API? **} CUDA is the NVIDIA  general purpose API\cite{CUDAandOpenCL}. While OpenCL belongs to Khronos Group. OpenCL is a specification, different computing devices can execute OpenCL code, this is not possible with CUDA.
-
+Since the GPUs have a different architecture than the CPUs, they need to be programmed in a special manner. Two of the most known programming languages used for GPU programming are CUDA and OpenCL. CUDA is the NVIDIA  general purpose application programming interface (API)\cite{CUDAandOpenCL}. While OpenCL belongs to Khronos Group. OpenCL is a specification meaning that different computing devices can execute OpenCL code. This is not possible with CUDA. OpenCL is a C-language extension.
  
 % Flocking in GPU
 \subsection{Flocking in GPU}\label{flockingGPU}
 Flocking algorithms can take the advantage of GPU-based implementations. Era et al. developed a GPU-based library for autonomous character called BehaveRT\cite{BehaveRT}. This library can be used to do simulations in real-time and visualization of large groups of individuals. BehaveRT was implemented using CUDA. They were able to run 130K individuals at 15 FPS in a NIVIDIA 8800GTS card. \textit{Boids that See}, this publication proposed a self-occlusion GPU flocking implementation that allows groups of up to 65K boids at 30 FPS\cite{boidsThatSee}. 
 
-Other applications of flocking have been also implemented in the GPU.  Crowd simulations of more than 1 million boids have been done\cite{supermassiveCrowd}. The frame rate of this simulation was 25 FPS. Weiss developed a ClusterFlockGPU algorithm\cite{SI_GPU}. ClusterFlockGPU was implemented in CUDA; and it was possible to achieve feasible result for large groups of up to 5000 instances at 12 FPS. The last application we are going to mention is document clustering, the GPU implementation clusters 3,000 documents 4.6 faster than in the CPU\cite{document2}.
+Other applications of flocking have been also implemented in the GPU.  Crowd simulations of more than 1 million boids have been done\cite{supermassiveCrowd}. The frame rate of this simulation was 25 FPS. Weiss developed a ClusterFlockGPU algorithm\cite{SI_GPU}. ClusterFlockGPU was implemented in CUDA; and it was possible to achieve feasible result for large groups of up to 5000 instances at 12 FPS. The last application to mention is document clustering, the GPU implementation clusters 3,000 documents 4.6 faster than in the CPU\cite{document2}.
 
 %%%%%%%%%%%%%
 % Educational Games
 %%%%%%%%%%%%%
 \section{Educational Games}
-Games can be classified in multiple types. We focus on educational games which are games that teach the user. Some of the academic areas that educational games have been addressing are language and literacy, mathematics, history, and science\cite{makingDesignGames}. Three issues that have to be addressed while integrating educational content in computer games are\cite{educationalComputerGames}:
-\textcolor{red}{*** TODO: rewrite this part because I copied as it is in the paper ***}
+Games can be classified in multiple types. This thesis would focus on educational games which are games that teach the user. Some of the academic areas that educational games have been focus are language and literacy, mathematics, history, and science\cite{makingDesignGames}. 
+
+Three issues that have to be address while integrating educational content in computer games are\cite{educationalComputerGames}:
 \begin{enumerate}
-\item{Matching particular educational topics or concepts to their most appropiate media}
-\item{Placing educational content at the heart of game play do that children engage in the targeted real-world behavior or thinking as they play the game}
-\item{Building feedback and hint structures in ways that support and scaffold children into challenging content} 
+\item{matching educational topics with their most appropriate media}
+\item{having educational content during the game, so the player can think while playing the game}
+\item{built feedback and hint structures for support of the player} 
 \end{enumerate} 
-Some of the benefits of educational games are: enriching knowledge, fostering skills, and stimulating motivation and interest.  Fun educational games must have fantasy, curiosity and they have to be challenge\cite{computerGamesEducationalTool}.
+Some of the benefits of educational games are gain of knowledge, motivation, and interest. A game must have fantasy, curiosity, and it has to be challenge in order to be a fun educational game\cite{computerGamesEducationalTool}.
 
 % Flocking games
 \subsection{Flocking Games}
-Steven Woodcock published a code in the book Game Programming Gems in which he implemented flocking as a simple technique to simulate group behavior\cite{gems1}. \textcolor{red}{*** GORDON: this sentence implies that most of the time there are more than four rules*** In this code, only four rules were implemented i.e. separation, alignment, cohesion, and avoidance.} One advantage of flocking that can be take into account when implementing it is that flocking is a stateless algorithm which means that no information has to be stored at each update step. Flocking can be used in games to create this \textit{illusion of reality} to the user. In 2001 Woodcock published on the 2nd edition of Game Programming Gems. In here, he describes an application of flocking using a predators and prey inspiration\cite{gems2}. He also implemented obstacle avoidance.
+Steven Woodcock published a code in the book Game Programming Gems in which he implemented flocking as a simple technique to simulate group behavior\cite{gems1}. In this code, four rules were implemented i.e. separation, alignment, cohesion, and avoidance. One advantage of flocking that can be take into account when implementing it is that flocking is a stateless algorithm which means that no information has to be stored at each update step. Flocking can be used in games to create this \textit{illusion of reality} to the user. In 2001 Woodcock published on the 2nd edition of Game Programming Gems. In here, he describes an application of flocking using a predators and prey inspiration\cite{gems2}. He also implemented obstacle avoidance.
