@@ -7,10 +7,10 @@
 Video games have been around since the 1950s\cite{computerVideoGamesHistory}. They became available in the market by the 1970s, at that time they were very popular. Currently, games are the attraction of many people. There are all kinds of video game available now. They are available for consoles, portable consoles, computer, cell phones; video games are everywhere. 
 
 % our aim
-Our intention is to create tools that helps to create games but not any kind of games, we focus in \textit{educational games}. Educational games are the games that not only the player enjoy while he/she is playing moreover the player also learn playing it. Therefore we chose \textit{Blender} as the software to enhance in this project. We would be working on its \textit{Game Engine} which lacks of Particle Systems.
+Our intention is to create tools that helps to create games but not any kind of games with a focus in \textit{educational games}. Educational games are the games that not only the player enjoy while he/she is playing moreover the player also learn playing it. Therefore, \textit{Blender} was chosen as the software to enhance in this project. The work presented in this thesis is done for the \textit{Game Engine} which lacks of Particle Systems.
 
 % layout of the chapter
-This chapter goes as follows, we are going to briefly discuss what is \textit{Blender}, following by a description of its \textit{Game Engine}. Then, we are going to present the Boids particle system outside the Blender Game Engine, and finally we would present the modifier developed for the use of the RTPS library.
+This chapter starts with a brief discussion of what is \textit{Blender}, following by a description of its \textit{Game Engine}. Then, the Boids particle system outside the Blender Game Engine will be presented, and finally the modifier developed for the use of the RTPS library is described.
 
 % blender background info
 \section{Blender}\label{blenderSec}
@@ -18,13 +18,13 @@ This chapter goes as follows, we are going to briefly discuss what is \textit{Bl
 
 When searching for the right software to use the following properties of Blender made it the top software in the list. Blender has a free game engine built-in, it can be extended (Open Source project), it is cross-platform i.e. it can be used in either Windows, MacOSX and Linux, and it can support simulations with real physics. Blender also has a big support from the gaming industry, and there is a large community helping with tutorials and documentation for either beginners or technical functionality of Blender.
 
-For this thesis we worked on Blender 2.57.
+The work done in this thesis was on Blender 2.57.
 
 % game engine
 \section{Game Engines}
 
 % what is a game engine?
-\textcolor{red}{** OLMO: change the word part in this sentence ** A game engine is a software or part of a software that simulates part of reality\cite{bookGameKit2}}. Game engines let you interact with 3D world in real-time. Also, you can control objects that interact with other objects in the world. A game engine consist of several functions:
+A game engine is a software or part of a software that simulates partial reality\cite{bookGameKit2}. Game engines let you interact with 3D world in real-time. Also, you can control objects that interact with other objects in the world. A game engine consist of several functions:
 \begin{enumerate}
 \item{render the 3D world and the objects on it}
 \item{re-render the scenes when something in the world changes}
@@ -33,10 +33,10 @@ For this thesis we worked on Blender 2.57.
 \item{collision detection and reaction}
 \end{enumerate}
 
-Game engines would try to simulates these parts as quick as possible, so the game has a smooth fluency. Game engines are much more complicated than this, here we just mentioned a few of the most important parts that characterize them.
+Game engines would try to simulates these parts as quick as possible, so the game has a smooth fluency. Game engines are much more complicated than this, these are just a few of the most important parts that characterize them.
 
 % blender game engine
-As we mentioned in section~\ref{blenderSec} Blender has a \textit{Game Engine} built-in. The Blender Game Engine is a very powerful tool, it allows games to be created without  the need for explicit programming. With its GUI you are able to create simple games just by clicking and dragging. After creating the 3D objects and 3D world you can use the simple logic editor to bring the scene to life. The logic editor interface is shown in Figure~\ref{logic}.
+As mentioned in section~\ref{blenderSec} Blender has a \textit{Game Engine} built-in. The Blender Game Engine is a very powerful tool, it allows games to be created without  the need for explicit programming. With its GUI you are able to create simple games just by clicking and dragging. After creating the 3D objects and 3D world you can use the simple logic editor to bring the scene to life. The logic editor interface is shown in Figure~\ref{logic}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -56,9 +56,9 @@ This is the simplest way to create life within the world. For more complex behav
 
 % particle system outside the blender game engine
 \section{Boids Particle System outside the Blender Game Engine}
-Although Blender has extensive particle-based tools, including hair styling, these are absent from the Game Engine. A submodule of the particle system is a rather sophisticated Boid system. In this section we would present how this Boid system works.
+Although Blender has extensive particle-based tools, including hair styling, these are absent from the Game Engine. A submodule of the particle system is a rather sophisticated Boid system. This section would present how this Boid system works.
 
-First you would need to create a particle emitter, it can be a cube, a plane, or any other object. Then, you make that object a particle system. Figure~\ref{boidsCreatePS} shows the panel used to add the particle system. The amount of particles is set to 50, using the starting and ending time as 1 would make the simulation to be calculate at each time step, there is no repetition (oscillation) in the movement of the boids, the lifetime is set to a big number to keep our boids a life for long time, using these settings would be as much as we can do to run real-time like simulation using the Boids system of Blender.
+First you would need to create a particle emitter, it can be a cube, a plane, or any other object. Then, you make that object a particle system. Figure~\ref{boidsCreatePS} shows the panel used to add the particle system. The amount of particles is set to 50, using the starting and ending time as 1 would make the simulation to be calculate at each time step, there is no repetition (oscillation) in the movement of the boids, the lifetime is set to a big number to keep our boids a life for long time, using these settings would be as much as can be done to run real-time like simulation using the Boids system of Blender.
 
 % figure: create PS
 \begin{figure}[htbp]
@@ -69,7 +69,7 @@ First you would need to create a particle emitter, it can be a cube, a plane, or
 \end{center}
 \end{figure}
 
-After the system is created, we can edit the physics of it, see Figure~\ref{boidsPhysics}. First, we click on \textit{Boids}, and all the settings of the system show up. The default Blender particle system is Newtonian. Settings can be changed dynamically while the animation is running.
+After the system is created, the physics of the system can be edited, see Figure~\ref{boidsPhysics}. First, click on \textit{Boids}, and all the settings of the system show up. The default Blender particle system is Newtonian. Settings can be changed dynamically while the animation is running.
 
 % figure: boids physics
 \begin{figure}[htbp]
@@ -94,9 +94,9 @@ Each boid has its own brain, therefore their actions are evaluated individually.
 \item{Fight: go to closest enemy and attack when in range}
 \end{enumerate}
 
-When clicking in a rule, if that rule needs some extra parameters, the respective input areas are going to show up. As can be seen in Figure~\ref{boidsBrain}, after clicking the rule Goal the options of which object is going to be target shows, we set it to the empty object target which was created by us. There are three ways available to evaluate the rule: fuzzy logic with a fuzziness level, averaging all rules, and weighting the rules randomly. Each of these evaluations leads to completely different results. The type of evaluation that is most commonly used is Fuzzy.
+When clicking in a rule, if that rule needs some extra parameters, the respective input areas are going to show up. As can be seen in Figure~\ref{boidsBrain}, after clicking the rule Goal the options of which object is going to be target shows, set it to the empty object target which was created by us. There are three ways available to evaluate the rule: fuzzy logic with a fuzziness level, averaging all rules, and weighting the rules randomly. Each of these evaluations leads to completely different results. The type of evaluation that is most commonly used is Fuzzy.
 
-The render panel can be also seen in Figure~\ref{boidsBrain}. We changed the rendering type to object and set a monkey to be the object to be render as a boid.
+The render panel can be also seen in Figure~\ref{boidsBrain}. Change the rendering type to object and set a monkey to be the object to be render as a boid.
 
 % figure: boid brain
 \begin{figure}[htbp]
@@ -123,21 +123,22 @@ Figure~\ref{boidsAction} shows two screenshots of an animation in which the boid
 
 % RTPS modifier
 \section{RTPS Modifier}\label{modifiersection}
-In this section we are going to present the interface we developed to connect Blender with our FLOCK system defined in the RTPS library described in Chapter~\ref{RTPSchapter}. This interface is a custom modifier. Modifiers are used to edit the object by assigning certain properties to it. For example in our case, we first create a domain using a Blender cube and then assign the RTPS modifier to it, this modifier is going to set the cube as the RTPS domain and assign all the properties defined to the domain depending on the system you selected to use.
+This section presents the interface developed to connect Blender with our FLOCK system defined in the RTPS library described in Chapter~\ref{RTPSchapter}. This interface is a custom modifier. Modifiers are used to edit the object by assigning certain properties to it. For example in our case, first is to create the domain using a Blender cube and then assign the RTPS modifier to it, this modifier is going to set the cube as the RTPS domain and assign all the properties defined to the domain depending on the system you selected to use.
 
-This modifier was mainly developed by Ian Johnson\footnote{Go to http://enja.org/2010/05/24/blender-creating-a-custom-modifier/ for a step by step description and full paths of the files.}, we created the functionality for the Boids system following the SPH one developed by him.
+This modifier was mainly developed by Ian Johnson\footnote{Go to http://enja.org/2010/05/24/blender-creating-a-custom-modifier/ for a step by step description and full paths of the files.}, the functionality for the Boids system was created by us. 
 
 % code modifications
 \subsection{Game Engine Source Code Modifications}
-In order to create the custom modifier few files has to be modified. We can divide this modifications into three categories: Functionality of the Game Engine, Functionality of the UI Modifier, and  Creation of the UI Modifier.
+In order to create the custom modifier few files has to be modified. This modifications are divided into three categories: Functionality of the Game Engine, Functionality of the UI Modifier, and  Creation of the UI Modifier.
 
-We summarized the changes made to the Blender source code in Tables~\ref{geTable},~\ref{funcTable},~\ref{uiTable}.
+The changes made to the Blender source code are summarized in Tables~\ref{geTable},~\ref{funcTable},~\ref{uiTable}.
 
 % tables summarizing the changes made to the source code
 
 % GE table
 \begin{table}[htdp]
-\caption{Modifications made for the functionality of the Game Engine}\begin{center}
+\caption{Modifications made for the functionality of the Game Engine}
+\begin{center}
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline 
 \textbf{File} & \textbf{Summary of the Modifications} \\\hline 
@@ -145,11 +146,15 @@ BL\_BlenderDataConversion.cpp & Check if the RTPS modifier is been used. \\\hlin
 BL\_ModifierDeformer.cpp & Implementation of all the functionality of Blender and RTPS. The RTPS object is created and update it every frame. \\\hline 
 RAS\_ListRasterizer.cpp & Call the \texttt{render()} method. \\
 \hline 
-\end{tabular} \end{center}\label{geTable}\end{table}
+\end{tabular} 
+\end{center}
+\label{geTable}
+\end{table}
 
 % Functionality table
 \begin{table}[htdp]
-\caption{Modifications made for the functionality of the UI modifier}\begin{center}
+\caption{Modifications made for the functionality of the UI modifier}
+\begin{center}
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline 
 \textbf{File} & \textbf{Summary of the Modifications} \\\hline 
@@ -157,17 +162,24 @@ DNA\_modifier\_types.h & Defines the \texttt{struct} of the RTPS modifier. \\\hl
 rna\_modifer.c & Defines the properties of the items in the UI, i.e. maximum values. \\\hline 
 MOD\_rtps.c & This file was created and defines the default values of the parameters in the UI. \\
 \hline 
-\end{tabular}\end{center}\label{funcTable}\end{table}
+\end{tabular}
+\end{center}
+\label{funcTable}
+\end{table}
 
 % UI table
 \begin{table}[htdp]
-\caption{Modifications made for the creation of the UI modifier}\begin{center}
+\caption{Modifications made for the creation of the UI modifier}
+\begin{center}
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline 
 \textbf{File} & \textbf{Summary of the Modifications} \\\hline 
 properties\_data\_modifier.py & Created the UI modifier using the properties defined in \texttt{rna\_modifier.c}. \\
 \hline 
-\end{tabular}\end{center}\label{uiTable}\end{table}
+\end{tabular}
+\end{center}
+\label{uiTable}
+\end{table}
 
 % UI description
 \subsection{Development of the UI}
@@ -184,7 +196,7 @@ The UI modifier as all the Blender interface is implemented using \textit{Python
 
 The RTPS modifier has the options to chose from the three available systems: SPH, Boids, and Simple\footnote{System used for testing and debugging.}. Inside the Boids systems currently you can set the simulation parameters which are the maximum number of particles and the time step used for integration.  Next to the simulation parameters is the Render types area: Points, Sprites, and Screen Space. The color used to render the particles is gotten from the Materials section of Blender.
 
-Then, we have the Flock Parameters area in which you can specify the maximum speed of the boids, the separation distance that is going to be kept by the boids and the searching radius for the neighbor search. The last area is the Weights of the Rules area, here you are able to select how much do you want each of your rules to weight when they are evaluated, they are basically the constant values of equation~\ref{combine}.
+Then, in the Flock Parameters area in which you can specify the maximum speed of the boids, the separation distance that is going to be kept by the boids and the searching radius for the neighbor search. The last area is the Weights of the Rules area, here you are able to select how much do you want each of your rules to weight when they are evaluated, they are basically the constant values of equation~\ref{combine}.
 
 \textit{How does it work internally?} The modifier is apply it to the object when the game engine starts. In the RTPS modifier \textit{Apply} means that the RTPS object is created and initialized using the current parameters in the modifier. After, the RTPS is created it can be \textit{Update} it. The object is Update it at every frame, and the next step is computed.    
 
@@ -192,7 +204,8 @@ Then, we have the Flock Parameters area in which you can specify the maximum spe
 
 % properties table
 \begin{table}[htdp]
-\caption{Properties available in the RTPS modifer}\begin{center}
+\caption{Properties available in the RTPS modifer}
+\begin{center}
 \begin{tabular}{|p{3cm}|p{9cm}|}
 \hline 
 \textbf{Property} & \textbf{Type and Description} \\\hline 
@@ -204,5 +217,8 @@ Then, we have the Flock Parameters area in which you can specify the maximum spe
 \texttt{refill}	& \texttt{integer}: 	refill the hose \\\hline
 \texttt{collider}	& \texttt{boolean}: used to active collisions detections in the SPH system	\\
 \hline 
-\end{tabular}\end{center}\label{properties}\end{table}
+\end{tabular}
+\end{center}
+\label{properties}
+\end{table}
 
