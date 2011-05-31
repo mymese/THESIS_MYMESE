@@ -35,6 +35,7 @@
 \IfNoValueTF {#1}
 {\textcolor{blue}{Author's Note: \uline{#2}}} 
 {\textcolor{blue}{Author's Note: \uline{#2}}\footnote{Comment: #1}}%
+{\textcolor{red}{Gordon's Note: \uline{#2}}\footnote{Comment: #1}}%
 }
 %%%%%%%%%%%%%%%
 
@@ -310,7 +311,11 @@ breakatwhitespace=false,        % sets if automatic breaks should only happen at
 \newcommand{\toevan}[1]{\textbf{\red{*** Evan: #1 ***}}}
 \newcommand{\toe}[1]{\textbf{\red{*** Evan: #1 ***}}}
 
-\newcommand{\tog}[1]{\textbf{\blue{*** Gordon: #1 ***}}}
+% to Accept all edits, simply remove the color
+\newcommand{\EDIT}[2]{\cyan{#1}}
+\newcommand{\ED}[2]{\cyan{#1}}
+
+\newcommand{\mmy}[1]{\textbf{\blue{*** To Myrna: #1 ***}}}
 \newcommand{\toi}[1]{\textbf{\magenta{*** Ian: #1 ***}}}
 \newcommand{\togordon}[1]{\textbf{\blue{*** Gordon: #1 ***}}}
 \newcommand{\gee}[1]{{\bf{\blue{{\em #1}}}}}
