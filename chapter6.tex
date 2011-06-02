@@ -20,7 +20,7 @@ Since, the rendering methods that are available at this moment in RTPS are point
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.5]{figures/align.pdf}
-\caption{Initial state of the boids}
+\caption{Initial state of the boids: the weights for each of the rules are zero, the boids are initialized equally spaced forming a symmetric square}
 \label{alignRule}
 \end{center}
 \end{figure}
@@ -33,7 +33,7 @@ Since, the rendering methods that are available at this moment in RTPS are point
 \includegraphics[scale= 0.5]{figures/sep2.pdf}
 \end{array}$
 \end{center}
-\caption{Screenshots of the separation rule}
+\caption{Screenshots of the separation rule: the weight for \textit{separation} was set to 1 while the weights of the other two rules were zero, the boids started to spread out symmetrically}
 \label{sepRule}
 \end{figure}
 
@@ -47,7 +47,7 @@ Since, the rendering methods that are available at this moment in RTPS are point
 \includegraphics[scale= 0.5]{figures/coh4.pdf}
 \end{tabular}
 \end{center}
-\caption{Screenshots of the cohesionrule}
+\caption{Screenshots of the cohesion rule: the weight for the \textit{cohesion} rule was set to 1 while the weights for the other two rules were zero, the boids move towards the center causing them to merge symmetrically}
 \label{cohRule}
 \end{figure}
 
@@ -60,10 +60,11 @@ Since, the rendering methods that are available at this moment in RTPS are point
 
 The flocking OpenCL implementation presented in this thesis was timed. The RTPS library seems to outperform the Blender Boid system. Figure~\ref{plot} show the timings for more than half of a million boids. This boids were represented as spheres in a simple scene with no other objects. Blender was running faster than RTPS when the amount of particles were small, then when big numbers came around, Blender's performance disappear.  We were able to render more than $65K$ boids at $60$ fps and more than half of a million boids at a rate of $10$ fps.
 
+% benchmarks 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.45]{figures/benchmarks.pdf}
-\caption{Timings of RTPS modifier and Blender Boids system}
+\caption{Timings of RTPS modifier and Blender Boids system: the RTPS-GPU implementation outperforms the Blender Boids system}
 \label{plot}
 \end{center}
 \end{figure}

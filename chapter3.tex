@@ -16,7 +16,7 @@ These steering behaviors are velocity vectors, they have direction and magnitude
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.3]{figures/separation.pdf}
-\caption{Separation steering force}
+\caption{Separation steering force: the gray circle is the neighborhood of the green boid, \textit{separation} would steer the green boid away/near the neighboring boids until a minimum distance between them is met}
 \label{separationPDF}
 \end{center}
 \end{figure}
@@ -41,7 +41,7 @@ Looping over the nearest neighbors is the first step, then only neighbors that a
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.3]{figures/alignment.pdf}
-\caption{Alignment steering force}
+\caption{Alignment steering force: the gray circle is the neighborhood of the green boid, \textit{alignment} match the heading and speed of the green boid with respect to the neighbors}
 \label{alignmentPDF}
 \end{center}
 \end{figure}
@@ -64,7 +64,7 @@ Where $N$ is the number of boids in the nearest neighbor within the search radiu
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.3]{figures/cohesion.pdf}
-\caption{Cohesion steering force}
+\caption{Cohesion steering force: the gray circle is the neighborhood of the green boid, \textit{cohesion} steers the green boid towards the center of their local neighborhood}
 \label{cohesionPDF}
 \end{center}
 \end{figure}
@@ -91,7 +91,7 @@ Besides the three main steering behaviors discussed in the above section many mo
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.5]{figures/seekANDflee.pdf}
-\caption{Goal and Avoid behaviors}
+\caption{Goal and Avoid behaviors: the green boid would approach the target when is following the \textit{goal} behavior, or it would \textit{avoid} the target by backing out from it}
 \label{seekfleePDF}
 \end{center}
 \end{figure}
@@ -126,7 +126,7 @@ $((p_i - p_t) * v_i)$ is called the desired velocity, and here it has a negative
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.5]{figures/leaderFollowing.pdf}
-\caption{Leader Following behavior}
+\caption{Leader Following behavior: the followers would follow the leader by approaching a point slightly behind the leader, if a follower find itself in a rectangular area in front of the leader it would move out of the way of the leader}
 \label{leaderPDF}
 \end{center}
 \end{figure}
