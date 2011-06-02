@@ -64,7 +64,7 @@ The \texttt{Domain} class defines the grid in which the simulation is being comp
 
 % Render
 \section{Render}
-Most of the code developed to do the render for the RTPS library was developed by Andrew Young\footnote{http://andrewfsu.blogspot.com/}. There are few classes that are in charge of the rendering process. Those classes are \texttt{Render}, \texttt{SpriteRender}, \texttt{SSFRender}. The \texttt{Render} renders the particles as points. The \texttt{SpriteRender} class uses images that are mapped to spheres. A special shader was developed for the use of sprites for boids rendering. This special shader let us render a 2D image with transparent background as a boid.
+Most of the code developed to do the render for the RTPS library was developed by Andrew Young\cite{andrewBlog}. There are few classes that are in charge of the rendering process. Those classes are \texttt{Render}, \texttt{SpriteRender}, \texttt{SSFRender}. The \texttt{Render} renders the particles as points. The \texttt{SpriteRender} class uses images that are mapped to spheres. A special shader was developed for the use of sprites for boids rendering. This special shader let us render a 2D image with transparent background as a boid.
 
 % System
 \section{System}
@@ -98,7 +98,7 @@ Having the particle information and the neighbor particle information, then the 
 
 % SPH
 \section{SPH}\label{sphsection}
-The \texttt{SPH} system is the main system of the RTPS library. It was developed and it is currently maintained by Ian Johnson\footnote{http://enja.org/}\cite{ianPaper}. This system uses the SPH formulation to compute the different forces between particles.
+The \texttt{SPH} system is the main system of the RTPS library. It was developed and it is currently maintained by Ian Johnson\cite{ianBlog}\cite{ianPaper}. This system uses the SPH formulation to compute the different forces between particles.
 
 The difference only between the \texttt{FLOCK} system and the \texttt{SPH} is the calculation of the forces. The algorithm followed is very very similar. The SPH formulation is used to compute forces while the boids only need to compute their steering behaviors. At the end both systems have a new velocity that is used to update the positions of the particles.
 
@@ -163,7 +163,7 @@ Then, the initial settings of the system are calculated and updated. The setting
 
 The next important step is to set the domain. During the setup of the domain the grid parameters are initalized.
 
-Then, the function \texttt{prepareSorted()} is called. What \texttt{prepareSorted()} does is to initialize the different vectors and buffers that were created i.e \texttt{velocities}, \texttt{flockmates}, etc. This function also creates the VBOs. VBOs stands for Vertex Buffer Objects and what this buffer objects are used to store vertex data that its aim to be used for rendering purposes\footnote{http://www.songho.ca/opengl/gl\_vbo.html}. Then, the positions and color vectors are copied to the respective VBOs. If using the GPU the different \texttt{Buffer} objects are initialized with their respective CPU arrays. The \texttt{FLOCK} parameters are also copied to the GPU. 
+Then, the function \texttt{prepareSorted()} is called. What \texttt{prepareSorted()} does is to initialize the different vectors and buffers that were created i.e \texttt{velocities}, \texttt{flockmates}, etc. This function also creates the VBOs. VBOs stands for Vertex Buffer Objects and what this buffer objects are used to store vertex data that its aim to be used for rendering purposes\cite{vbo}. Then, the positions and color vectors are copied to the respective VBOs. If using the GPU the different \texttt{Buffer} objects are initialized with their respective CPU arrays. The \texttt{FLOCK} parameters are also copied to the GPU. 
 
 Finally, the \texttt{setRenderer()} function is called, and it creates the \texttt{renderer} object depending on which render type was set in the \texttt{RTPSettings}.
 
