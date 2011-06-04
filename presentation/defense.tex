@@ -364,43 +364,80 @@
 
 % RTPS diagram
 \begin{frame}{RTPS organization diagram}
-	\begin{itemize}
-		\pause \item
-	\end{itemize}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.25]{../figures/RTPSdiagramMyrna.pdf}
+	\caption{RTPS organization diagram}
+	\end{center}
+	\end{figure}
 \end{frame}
 
 % FLOCK diagram
 \begin{frame}{FLOCK system organization diagram}
-	\begin{itemize}
-		\pause \item
-	\end{itemize}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.25]{../figures/FLOCKdiagramMyrna.pdf}
+	\caption{FLOCK system organization diagram}
+	\end{center}
+	\end{figure}
 \end{frame}
 
 % FLOCK
 \begin{frame}{\texttt{FLOCK} class}
 	\begin{itemize}
-		\pause \item
+		\pause \item Main class of the FLOCK system
+		\pause \item Some of the objectives of this class are:
+			\begin{itemize}
+				\pause \item Create a FLOCK particle system.
+				\pause \item Call the respective functions to initialize the positions and velocities of the particles.
+				\pause \item Send the respective information to the GPU to do the calculations.
+				\pause \item Call the OpenCL kernel that computes the rules and the new positions
+				 \pause \item Call the rendering method to render the particles on the screen.
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
 % FLOCKSettings
 \begin{frame}{\texttt{FLOCKSettings} class}
 	\begin{itemize}
-		\pause \item
+		\pause \item Initialize the data structure that stores the settings of the FLOCK system.
+		\pause \item Update the values of the settings when the user changes them.
+	\end{itemize}
+\end{frame}
+
+% Common
+\begin{frame}{Common classes}
+	\begin{itemize}
+		\pause \item The common classes are:
+			\begin{itemize}
+				\pause \item Hash, BitonicSort, Permute, and CellIndices: classes that are in charge of the nearest neighbor search.
+					\begin{itemize}
+						\pause \item Hash: creates a hash values by overlaying the system into a uniform grid, and calculating an index value from the 3D cell index
+						\pause \item BitonicSort: sorts the hash and index arrays by the hash values
+						\pause \item Permute: permutes the arrays of positions, velocities and colors according to the sorted index array
+						\pause \item CellIndices: updates two arrays that keep track of the first and last particle at each cell
+					\end{itemize}
+				\pause \item Hose: class that insert particles to the system in a hose fashion
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
 % Rules
 \begin{frame}{\texttt{Rules} class}
 	\begin{itemize}
-		\pause \item
+		\pause \item Create and initialize the OpenCL kernel that computes the rules.
+		\pause \item Set the arguments for the kernel.
+		\pause \item Launch the kernel.
+		\pause \item The kernel follows the previously discussed algorithm that computes the rules.
 	\end{itemize}
 \end{frame}
 
 % EulerIntegration
 \begin{frame}{\texttt{EulerIntegration} class}
 	\begin{itemize}
-		\pause \item
+		\pause \item Has a similar structure than the \texttt{Rules} class.
+		\pause \item Its kernel follows the previously discussed algorithm that combine the rules and integrate over time to get the new position.
+		\pause \item Also, this kernel check the boundaries and apply periodic boundary conditions to the positions of the particles.
 	\end{itemize}
 \end{frame}
 
@@ -410,12 +447,53 @@
 \subsection{The RTPS Modifier}
 
 % Blender
-
-% Game Engines
+\begin{frame}{Blender}
+	\begin{itemize}
+		\pause \item Blender is a free modeling/simulation software.
+		\pause \item Blender has a game engine built-in.
+		\pause \item Blender is open source.
+		\pause \item Blender is cross-platform.
+		\pause \item Blender supports simulations with real physics.
+		\pause \item Blender has big support in the gaming industry and a large documentation community.
+		\pause \item Blender 2.57 was the release used in this project.
+	\end{itemize}
+\end{frame}
 
 % The Blender Game Engine
+\begin{frame}{The Blender Game Engine}
+	\begin{itemize}
+		\pause \item The Blender Game Engine lacks of particles systems.
+		\pause \item We would like to add this missing feature to it.
+		\pause \item Boids particle systems are added to the Blender Game Engine in a modifier interface.
+	\end{itemize}
+\end{frame}
 
 % The RTPS Modifier
+\begin{frame}{The RTPS Modifier}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.35]{../figures/modifier.pdf}
+	\caption{The RTPS modifier in the Boids system}
+	\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Emitting particles to the system}
+	\begin{table}[htdp]
+	\caption{Properties available in the RTPS modifer}
+	\begin{center}
+	\begin{tabular}{|p{2cm}|p{6cm}|}
+	\hline 
+	\textbf{Property} & \textbf{Type and Description} \\\hline 
+	\texttt{num} 	& \texttt{integer}: if num $>$ 0, num particles are going to be emitted every frame and num is set to 0	\\\hline 
+	\texttt{hose}	& \texttt{boolean}: used to active the hose	\\\hline
+	\texttt{speed}	& \texttt{float}: initial velocity of the particles that are going to be emitted from the hose	\\\hline
+	\texttt{radius}	& \texttt{float}: width of the hose	\\
+	\hline 
+	\end{tabular}
+	\end{center}
+	\end{table}
+\end{frame}
 
 
 %--------------------------------------------
@@ -429,8 +507,52 @@
 \subsection{Demos}
 
 % Symmetry
+\begin{frame}{Symmetry Demo}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.35]{../figures/align.pdf}
+	\caption{Initial state of the boids}
+	\label{alignRule}
+	\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Symmetry Demo}
+	\begin{figure}[htbp]
+	\begin{center}$
+	\begin{array}{cc}
+	\includegraphics[scale= 0.35]{../figures/sep1.pdf} &
+	\includegraphics[scale= 0.35]{../figures/sep2.pdf}
+	\end{array}$
+	\end{center}
+	\caption{Screenshots of the separation rule}
+	\label{sepRule}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Symmetry Demo}
+	\begin{figure}[htbp]
+	\begin{center}
+	\begin{tabular}{cc}
+	\includegraphics[scale= 0.25]{../figures/coh1.pdf} &
+	\includegraphics[scale= 0.25]{../figures/coh2.pdf} \\
+	\includegraphics[scale= 0.25]{../figures/coh3.pdf} &
+	\includegraphics[scale= 0.25]{../figures/coh4.pdf}
+	\end{tabular}
+	\end{center}
+	\caption{Screenshots of the cohesion rule}
+	\label{cohRule}
+	\end{figure}
+\end{frame}
 
 % Blender
+\begin{frame}{Blender Demo}
+\textcolor{red}{*** MISSING ***}
+\end{frame}
+
+\begin{frame}{Blender Demo}
+\textcolor{red}{*** MISSING ***}
+\end{frame}
 
 %--------------------------------------------
 % timings
@@ -438,20 +560,53 @@
 \subsection{Benchmarks}
 
 % RTPS vs Blender
+\begin{frame}{RTPS vs Blender}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.30]{../figures/benchmarks.pdf}
+	\caption{Timings of RTPS modifier and Blender Boids system}
+	\label{plot}
+	\end{center}
+	\end{figure}
+\end{frame}
 
 % RTPS Blender vs Blender
+\begin{frame}{RTPS Blender vs Blender}
+\textcolor{red}{*** MISSING ***}
+\end{frame}
 
 % RTPS kernels
+\begin{frame}{RTPS kernels}
+\textcolor{red}{*** MISSING ***}
+\end{frame}
 
 %--------------------------------------------
 % conclusion
 %--------------------------------------------
 \section{Conclusion}
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Using the RTPS library we were able to implement a flocking algorithm in OpenCL.
+		\item A custom modifier was developed in Blender to call the RTPS library.
+		\item The RTPS modifier able to run a Boids system inside the Blender Game Engine.
+		\item The performance of the RTPS modifier outperforms the Boids system of Blender.
+	\end{itemize}
+\end{frame}
 
 %--------------------------------------------
 % future work
 %--------------------------------------------
 \subsection{Future Work}
+\begin{frame}{Future work}
+	\begin{itemize}
+		\item Expand the list of the implemented rules.
+		\item Simulate also, terrain and swimming behavior.
+		\item Use Swarm Intelligence or Evolutionary Algorithm to select an optimized set of parameters for the system.
+		\item Hybrids systems.
+		\item Add the necessary parameters to the RTPS modifier when doing modifications to the RTPS library.
+		\item Use Blender objects as emitter particles.
+	\end{itemize}
+\end{frame}
 
 %--------------------------------------------
 %acknowledgments
@@ -460,15 +615,16 @@
 
 \begin{frame}{Acknowledgements}
 	\begin{table}[htdp]
-	\begin{center}\begin{tabular}{ccc}
-	& \textbf{Adviser} &\\
-	& Dr. Gordon Erlebacher&\\
-	& &\\
-	& &\\
-	\textbf{Committee} 		& & \textbf{Special Recognition}\\
-	Dr. Xiaoqiang Wang 	& & Ian Johnson\\
-	Dr. Ming Ye 			& & Andrew Young\\
-	 					& &  Evan Bollig
+	\begin{center}
+	\begin{tabular}{ccc}
+	 & \textbf{Adviser} &\\
+	 & Dr. Gordon Erlebacher &\\ 
+	& &  \\
+	& &  \\ 
+	\textbf{Committee} 		&&  \textbf{Special Recognition}\\ 
+	Dr. Xiaoqiang Wang 	&&  Ian Johnson\\ 
+	Dr. Ming Ye 			&&  Andrew Young\\ 
+	 					&&   Evan Bollig \\
 	\end{tabular} 
 	\end{center}
 	\end{table}
