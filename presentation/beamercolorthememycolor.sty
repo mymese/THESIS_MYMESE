@@ -1,0 +1,48 @@
+% Copyright 2004 by Madhusudan Singh <madhusudan.singh@gmail.com>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: ./beamercolorthememycolor.sty,v 1.2 2007/01/28 20:48:24 tantau Exp $
+
+
+\mode<presentation>
+
+\definecolor{darkred}{rgb}{0.8,0,0}
+\definecolor{gold}{rgb}{1,0.7,0}
+
+\setbeamercolor{section in toc}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=darkred!80!gold}
+%top right sidebar
+\setbeamercolor*{palette primary}{fg=gold!80!black,bg=darkred}
+\setbeamercolor*{palette secondary}{fg=darkred!70!black,bg=gold!15!white}
+\setbeamercolor*{palette tertiary}{bg=darkred!80!black,fg=gold!10!white}
+
+%text top left
+\setbeamercolor*{palette quaternary}{fg=darkred,bg=gold!5!white}
+
+\setbeamercolor*{sidebar}{fg=darkred,bg=gold!15!white}
+
+\setbeamercolor*{palette sidebar primary}{fg=darkred!10!black}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{fg=darkred!50!black}
+\setbeamercolor*{palette sidebar quaternary}{fg=gold!10!white}
+
+%\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{titlelike}{parent=pallette primary,fg=darkred}
+\setbeamercolor{frametitle}{fg=darkred,bg=gold!10!white}
+\setbeamercolor{frametitle right}{bg=gold!60!white}
+
+\setbeamercolor{section number projected}{bg=darkred,fg=white}
+\setbeamercolor{subsection number projected}{bg=darkred}
+%\setbeamercolor{itemize item}{fg=darkred}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\mode
+<all>

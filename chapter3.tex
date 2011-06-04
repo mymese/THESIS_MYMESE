@@ -26,12 +26,12 @@ Separation is a repulsive force. The mathematical expression that was implemente
 % separation equation
 \begin{equation}
 \label{separationEquation}
-Separation =\frac{1}{M} \sum_{n=1}^{M} \frac{\overline{p_i - p_n}}{d(p_i,p_n)}
+Separation =\frac{1}{M} \sum_{n=1}^{M} \frac{p_i - p_n}{d(p_i,p_n)}
 \end{equation}
 
 Where $M$ is the number of boids within the minimum distance from the boid in question, $p_i$ is the position of boid $i$, and $d(p_i,p_n)$ is the distance between boids $i$ and boid $n$.
 
-Looping over the nearest neighbors is the first step, then only neighbors that are with the minimum separation distance are picked. Next, is to sum up the normalization of difference between the positions of boid $i$ and boid $n$ divided by the distance of boid $i$ from boid $n$. Then, take the average over the number of boids that were within the minimum distance to finally get the the vector that is going to correct the heading and speed of the \textit{separation} of boid $i$  and their nearest neighbors. 
+Looping over the nearest neighbors is the first step, then only neighbors that are with the minimum separation distance are picked. Next, is to sum up the difference between the positions of boid $i$ and boid $n$ divided by the distance of boid $i$ from boid $n$. Then, take the average over the number of boids that were within the minimum distance to finally get the the vector that is going to correct the heading and speed of the \textit{separation} of boid $i$  and their nearest neighbors. 
 
 % alignment
 \subsection{Alignment}
@@ -198,8 +198,9 @@ Now internally, \textit{how the rules are computed?}. The following algorithms w
 \end{algorithmic}
 \end{algorithm}
 
-Algorithm~\ref{flockmatesAlgorithm} counts how many flockmates and nearest flockmates are in the neighborhood of each boid. The number of flockmates is needed for the rules \textit{cohesion} and \textit{alignment} while the number of nearest flockmates is only needed by the \textit{separation} rule. The algorithm for the \textit{separation} rule is shown in Algorithm~\ref{separationAlgorithm}.
+Algorithm~\ref{flockmatesAlgorithm} counts how many flockmates and nearest flockmates are in the neighborhood of each boid. The number of flockmates is needed for the rules \textit{cohesion} and \textit{alignment} while the number of nearest flockmates is only needed by the \textit{separation} rule. The algorithm for the \textit{separation} rule is shown in Algorithm~\ref{separationAlgorithm}. In the \textit{separation} rule, only boids within the minimum distance are used for calculations. 
 
+Algorithm~\ref{alignmentAlgorithm} presents how the \textit{alignment} rule is computed. This algorithm is very similar to the algorithm followed to computed \textit{cohesion}, shown in Algorithm~\ref{cohesionAlgorithm}. The only difference is that \textit{alignment} uses velocities while \textit{cohesion} uses positions.
 
 % separation
 \begin{algorithm}
@@ -208,20 +209,18 @@ Algorithm~\ref{flockmatesAlgorithm} counts how many flockmates and nearest flock
 \begin{algorithmic}
 \FOR {each neighbor $j$ of boid $i$}
 \IF{dist($i$, $j$) $<=$ minimum distance}
-\STATE s = dist($i$, $j$) 
-\STATE normalize(s)
+\STATE s = $pos_i$ - $pos_j$ 
 \STATE s /= dist($i$, $j$) 
 \STATE separation += s
 \ENDIF
 \ENDFOR
 \IF{nearestFlockmates $> 0$)}
 \STATE separation /= nearestFlockmates
-\STATE normalize(separation)
 \ENDIF
 \end{algorithmic}
 \end{algorithm}
 
-In the \textit{separation} rule, only boids within the minimum distance are used for calculations. Algorithm~\ref{alignmentAlgorithm} presents how the \textit{alignment} rule is computed. This algorithm is very similar to the algorithm followed to computed \textit{cohesion}, shown in Algorithm~\ref{cohesionAlgorithm}. The only difference is that \textit{alignment} uses velocities while \textit{cohesion} uses positions.
+
 
 
 % alignment
