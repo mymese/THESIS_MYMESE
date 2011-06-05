@@ -1,6 +1,6 @@
 \chapter{RESULTS}\label{resultsChapter}
 
-This chapter would focus on summarize the results of this thesis. Some of those results were already discussed. For example, the implementation of a flocking algorithm in OpenCL was discussed in Section~\ref{flocksection}, and the developed of the UI modifier for the Blender Game Engine discussed in Section~\ref{modifiersection}. 
+This chapter would focus on summarize the results of this thesis. Some of those results were already discussed. For example, the implementation of a flocking algorithm in OpenCL was discussed in Section~\ref{flocksection}, and the development of the UI modifier for the Blender Game Engine discussed in Section~\ref{modifiersection}. 
 
 In this chapter demonstrations using the RTPS library and the RTPS modifier are going to be presented.
 
@@ -58,7 +58,7 @@ Since, the rendering methods that are available at this moment in RTPS are point
 \section{Benchmarks}
 % mention which kind of hardware I'm using
 
-The flocking OpenCL implementation presented in this thesis was timed. The RTPS library seems to outperform the Blender Boid system. Figure~\ref{plot} show the timings for more than half of a million boids. This boids were represented as spheres in a simple scene with no other objects. Blender was running faster than RTPS when the amount of particles were small, then when big numbers came around, Blender's performance disappear.  We were able to render more than $65K$ boids at $60$ fps and more than half of a million boids at a rate of $10$ fps.
+The flocking OpenCL implementation presented in this thesis was timed. The RTPS library seems to outperform the Blender Boid system. Figure~\ref{plot} show the timings for more than half of a million boids. These boids were represented as spheres in a simple scene with no other objects. Blender was running faster than RTPS when the amount of particles were small, then when big numbers came around, Blender's performance disappears.  We were able to render more than $65K$ boids at $60$ fps and more than half of a million boids at a rate of $10$ fps.
 
 % benchmarks 
 \begin{figure}[htbp]
@@ -69,7 +69,7 @@ The flocking OpenCL implementation presented in this thesis was timed. The RTPS 
 \end{center}
 \end{figure}
 
-Comparing our performance with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still outperforming them. The library BehaveRT was used to run simulations in real-time and visualization, in that paper Era et al. ran $130K$ boids at 15 fps, we ran more than $131K$ boids at 41 fps. Of course, the timings depend on which hardware they used to get the benchmarks. Our benchmarks were taken in a Dell XXX with a processor XXX, and a NVIDIA GeForce 480 GTX GPU computing device. 
+Comparing our performance with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still outperforms them. The library BehaveRT was used to run simulations in real-time and visualization, in that paper Era et al. ran $130K$ boids at 15 fps, we ran more than $131K$ boids at 41 fps. Of course, the timings depend on which hardware they used to get the benchmarks. Our benchmarks were taken in a Dell XXX with a processor XXX, and a NVIDIA GeForce 480 GTX GPU computing device. 
 
 We also measured the inner performance of our flocking implementation in the RTPS library, to do so, we measured the time that took every kernel to be executed. Figure~\ref{kernelBench} shows the timings for the kernels.
 

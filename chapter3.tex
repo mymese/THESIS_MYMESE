@@ -10,7 +10,7 @@ These steering behaviors are velocity vectors, they have direction and magnitude
 
 % separation
 \subsection{Separation}\label{separationsection}
-\textit{Separation} can be described as the steering force that would maintain each entity of the flock separated by at least a minimum determined distance. Craig Reynolds first called this rule \textit{collision avoidance} because he meant to avoid collision with nearby flockmates. Later on, the rule was named \textit{separation}. This steering behavior prevents crowding between the boids. As can be seen in Figure~\ref{separationPDF} only flockmates within a certain radius when evaluating this behavior are considered. The red vector is the obtained steering force with this behavior.
+\textit{Separation} can be described as the steering force that maintains each entity of the flock separated by at least a minimum determined distance. Craig Reynolds first called this rule \textit{collision avoidance} because he meant to avoid collision with nearby flockmates. Later on, the rule was named \textit{separation}. This steering behavior prevents crowding between boids. As can be seen in Figure~\ref{separationPDF} only flockmates within a certain radius when evaluating this behavior are considered. The red vector is the obtained steering force with this behavior.
 
 % separation figure
 \begin{figure}[htbp]
@@ -58,7 +58,7 @@ Where $N$ is the number of boids in the nearest neighbor within the search radiu
 
 % cohesion
 \subsection{Cohesion}
-\textit{Cohesion} is the behavior that steers towards the center of the flock. When Reynolds introduced its \textit{Boids} model, he called this behavior \textit{flock centering} and defined as \textit{the attempt to stay close to nearby objects}. The definition was kept while the name of the rule changed to \textit{cohesion}. This behavior makes each boid attracted to the center of the flock, in our case the calculation is using the local neighbor of each boid, so they would be attracted to the center of their local neighbor.  Figure~\ref{cohesionPDF} shows the \textit{cohesion} steering force in red.
+\textit{Cohesion} is the behavior that steers towards the center of the flock. When Reynolds introduced its \textit{Boids} model, he called this behavior \textit{flock centering} and defined it as \textit{the attempt to stay close to nearby objects}. The definition was kept while the name of the rule changed to \textit{cohesion}. This behavior makes each boid attracted to the center of the flock, in our case the calculation is using the local neighbor of each boid, so they would be attracted to the center of their local neighbor.  Figure~\ref{cohesionPDF} shows the \textit{cohesion} steering force in red.
 
 % cohesion figure
 \begin{figure}[htbp]
@@ -96,7 +96,7 @@ Besides the three main steering behaviors discussed in the above section many mo
 \end{center}
 \end{figure}
 
-\textit{Goal} behavior adjusts the boid's velocity in a way that it is aligned towards the target. So, \textit{how it was computed?} Since the target is static, subtract the position of the boid and the position of the target, normalize it and multiply it by the current speed of the boid. This would gave us the desired velocity at which the boid is going to steer. Then, to get the steering vector, subtract the current velocity from the desired velocity. The formula is in equation~\ref{goalEquation}
+\textit{Goal} behavior adjusts the boid's velocity in a way that it is aligned towards the target. So, \textit{how it was computed?} Since the target is static, subtract the position of the boid and the position of the target, normalize it and multiply it by the current speed of the boid. This gives us the desired velocity at which the boid is going to steer. Then, to get the steering vector, subtract the current velocity from the desired velocity. The formula is in equation~\ref{goalEquation}
 
 % goal equation
 \begin{equation}
@@ -104,7 +104,7 @@ Besides the three main steering behaviors discussed in the above section many mo
 Goal = ((p_i - p_t) * v_i) - v_i
 \end{equation}
 
-Where $p_i$ and $v_i$ are the position and velocity of boid $i$, respectively. This rule will cause that the boid will keep approaching the goal over and over, kind of like moth buzzing around a light bulb.
+Where $p_i$ and $v_i$ are the position and velocity of boid $i$, respectively. This rule causes the boid to keep approaching the goal over and over, kind of like moth buzzing around a light bulb.
 
 % avoid
 \subsection{Avoid}
@@ -120,7 +120,7 @@ $((p_i - p_t) * v_i)$ is called the desired velocity, and here it has a negative
 
 % leader following
 \subsection{Follow the Leader}
-\textit{Follow the Leader} is the behavior in which there is a boid in charge of the flock, called \textit{leader}, and the boids that follow it are the \textit{followers}. This is one of the many complex behaviors that a flock can exhibit. There is a pattern, individual boids evaluate different rules. Followers would act like a point slightly behind the leader is its target, while the leader would approach randomly selected locations as its target.
+\textit{Follow the Leader} is the behavior in which there is a boid in charge of the flock, called \textit{leader}, and the boids that follow it are the \textit{followers}. This is one of the many complex behaviors that a flock can exhibit. There is a pattern, individual boids evaluate different rules. Followers act like a point slightly behind the leader is its target, while the leader approaches randomly selected locations as its target.
 
 % leader following figure
 \begin{figure}[htbp]
@@ -131,7 +131,7 @@ $((p_i - p_t) * v_i)$ is called the desired velocity, and here it has a negative
 \end{center}
 \end{figure}
 
-Most of the time the followers want to stay closer to the leader without getting into its way. As can be seen in Figure~\ref{leaderPDF}.  If the follower is inside the rectangular region in front of the leader it would move away from it, leaving the way for the leader to move free without worrying of colliding with flockmates. The leader would compute its movement using equation~\ref{goalEquation} where $p_t$ is a random position within the global space. The followers that are outside the rectangular region will approach a point slightly behind from the leader using equation~\ref{goalEquation}.
+Most of the time the followers want to stay closer to the leader without getting in its way. As can be seen in Figure~\ref{leaderPDF}.  If the follower is inside the rectangular region in front of the leader it moves away from it, leaving the way for the leader to move free without worrying about colliding with flockmates. The leader computes its movement using equation~\ref{goalEquation} where $p_t$ is a random position within the global space. The followers that are outside the rectangular region will approach a point slightly behind from the leader using equation~\ref{goalEquation}.
 
 % combining behaviors
 \section{Combining the Steering Behaviors}

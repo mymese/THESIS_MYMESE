@@ -5,9 +5,9 @@
 % Introduction
 %%%%%%%%%%%%%
 %\section{Introduction}
-Flocking is a nature-inspired behavior that can be seen in different social animals. It is most seen in birds, i.e. flock of birds. The pioneer of flocking, Craig Reynolds defined flocking as \textit{the result of the interaction between the behaviors of individual birds}\cite{craig1}. Since its publication in 1987 the field of flocking started to grown rapidly. %Research work related to flocking started to been developed by mid 1980s. 
+Flocking is a nature-inspired behavior that can be seen in different social animals. It is most seen in birds, i.e. flock of birds. The pioneer of flocking, Craig Reynolds, defined flocking as \textit{the result of the interaction between the behaviors of individual birds}\cite{craig1}. Since its publication in 1987 the field of flocking has grown rapidly. %Research work related to flocking started to been developed by mid 1980s. 
 
-This chapter discuss some of the related work that have been done in flocking. The chapter goes as follows, first there is a discussion about the early work of Craig Reynolds follow by a description of some of the current work that have been done using flocking. Then, there is a discussion on GPU computing, and some work that have been dome with flocking and GPUs. The final section talks about Educational Games and some of the approaches that have been done with Flocking and Games.
+This chapter discusses some of the related work that has been done in flocking. The chapter goes as follows, first there is a discussion about the early work done by Craig Reynolds follow by a description of some of the proceeding work that have been done in the flocking area. Then, there is a discussion on GPU computing, and some work that has been done with flocking and GPUs. The final section talks about Educational Games and some of the approaches that have been done with Flocking and Games.
 
 
 %%%%%%%%%%%%%
@@ -39,67 +39,67 @@ This chapter discuss some of the related work that have been done in flocking. T
 % Flocking
 %%%%%%%%%%%%%
 \section{Flocking}
-Flocking became very popular in the late 1980s. Inspired by the behavior of birds, Craig Reynolds developed a behavioral model that simulates self-organizing boids. After, this development flocking became very popular and many applications of it have been published. A discussion of some of the current work that have been done in the last decade and also some of the applications are going to be mentioned.
+Flocking became very popular in the late 1980s. Inspired by the behavior of birds, Craig Reynolds developed a behavioral model that simulates self-organizing boids. After this development, flocking became very popular and many applications of it have been published. A discussion of some of the proceeding work that have been done after the development of the Boids model and also some of the applications of flocking are going to be mentioned.
 
 % Early work by Craig Reynolds
 \subsection{Original Boids Model by Craig Reynolds}
-As mentioned before flocking became very popular after Craig Reynolds published his flocking model called \textit{Boids}\cite{craig1}. Reynolds introduced the name Boid as \textit{simulated bird-like, \textbf{bird-old} objects generically as \textbf{boids} even when they represent other sorts of creatures such as schooling fish}. Reynolds model was inspired in the flocking behavior observed on birds. His contributions on this paper made more researchers became interested on studying this naturally-inspired behavior.
+As mentioned before flocking became very popular after Craig Reynolds published his flocking model called \textit{Boids}\cite{craig1}. Reynolds introduced the name Boid as \textit{simulated bird-like, \textbf{bird-old} objects generically as \textbf{boids} even when they represent other sorts of creatures such as schooling fish}. Reynolds model was inspired in the flocking behavior observed on birds. His contributions on this paper made more researchers become interested on studying this naturally-inspired behavior.
 
-Before presenting the model he described the bird mechanisms and the aspects of the physics of the flight. The behaviors of the boids are represented with rules and the internal state of each of them is stored in a data structure. The geometric flight of each boid is the motion along the path it is traveling. Geometric flight relates translation, pitch and yaw. 
+Before presenting the model, he described the bird mechanisms and the aspects of the physics of their flight. The behaviors of the boids are represented with rules and the internal state of each of them is stored in a data structure. The geometric flight of each boid is the motion along the path it is traveling. Geometric flight relates translation, pitch and yaw. 
 
-Natural flocks flight have balance between  a desire to stay closer to each other and a desire to avoid collisions with their neighbors. This balance lead to the definition of the Boid model. The first rule defined by Reynolds is \textit{collision avoidance} which means that each boid is going to avoid collisions with their nearby flockmates; the second rule is \textit{velocity matching}, this rule attempt to match the velocity of the boids with the nearby flockmates; the last rule is \textit{flock centering} which tries to make boids closer to their flockmates.
+Natural flocks flight have balance between  a desire to stay closer to each other and a desire to avoid collisions with their neighbors. This balance lead to the definition of the Boid model. The first rule defined by Reynolds is \textit{collision avoidance} which means that each boid is going to avoid collisions with their nearby flockmates; the second rule is \textit{velocity matching}, this rule attempts to match the velocity of the boids with the nearby flockmates; the last rule is \textit{flock centering} which tries to make boids closer to their flockmates.
 
-Collision avoidance is based on the relative positions and velocity matching is based only on the velocities, therefore they are complementary. Flock centering make each boid to steer towards the center of the flock. Each boid stores its internal state and evaluate each of the rules individually based on their flockmates. 
+Collision avoidance is based on the relative positions and velocity matching is based only on the velocities, therefore they are complementary. Flock centering makes each boid to steer towards the center of the flock. Each boid stores its internal state and evaluates each of the rules individually based on their flockmates. 
 
 In its model the neighborhood is defined as a spherical zone around the boid's local origin. For each run Reynolds initializes the positions, velocities, and various parameters with random values. 
 
-When avoiding collisions with obstacles, the boids reacts depending on the force field that is surrounding, then, the boids consider objects that are only in front of it. The naive implementation of the Boids model developed by Reynolds in 1987 was $O(N^2)$. He also did a parallel implementation which was $O(N)$ with respect to the population.
+When avoiding collisions with obstacles, the boids reacts depending on the force field that is surrounding them, then, the boids consider objects that are only in front of it. The naive implementation of the Boids model developed by Reynolds in 1987 was $O(N^2)$. He also did a parallel implementation which was $O(N)$ with respect to the population.
 
-This paper was successful in the developing of an algorithm that simulates independent boids that try to avoid collisions with themselves and with obstacles objects in the environment, while also being able to stick together.
+This paper was successful in the development of an algorithm that simulates independent boids that try to avoid collisions with themselves and with obstacles objects in the environment, while also being able to stick together.
 
 % Current work
 \subsection{Proceeding Flocking Work}\label{currentwork}
-After Craig's paper describing the Boid model more papers have been published in this area. Some researchers have focus in expanding the list of the steering behaviors, enhancing the neighbor search, analyzing the different boid's formations, or just applying flocking or modified flocking algorithms to an specific research problem.
+Since Craig's paper describing the Boid model more papers have been published in this area. Some researchers have focused in expanding the list of the steering behaviors, enhancing the neighbor search, analyzing the different boid's formations, or just applying flocking or modified flocking algorithms to an specific research problem.
 
-In 1999, Reynolds published another paper in which he introduced more steering behaviors to define autonomous characters\cite{craigSteeringBehaviors}. Autonomous characters are the agents in the animations or games that does not need to be controlled because they improvise their actions and moves. In games these agents are called, non-player characters. The motion behaviors of an autonomous character can be divided into three layers: action selection (strategy, goals, and planning), steering behaviors (path determination), and locomotion (animation). In this paper he focused in the second layer. The steering behaviors presented were:
+In 1999, Reynolds published another paper in which he introduced more steering behaviors to define autonomous characters\cite{craigSteeringBehaviors}. Autonomous characters are the agents in the animations or games that do not need to be controlled because they improvise their actions and moves. In games these agents are called non-player characters. The motion behaviors of an autonomous character can be divided into three layers: action selection (strategy, goals, and planning), steering behaviors (path determination), and locomotion (animation). In this paper he focused in the second layer. The steering behaviors presented were:
 \begin{enumerate}
 \item \textbf{seek}: boids steer towards a static target in global space
-\item \textbf{flee}: the inverse of seek, steers aways from the target in global space
+\item \textbf{flee}: the inverse of seek, steers away from the target in global space
 \item \textbf{pursuit}: similar to seek but the target is a moving object
 \item \textbf{evasion}: similar to flee but the target is a moving object
 \item \textbf{offset pursuit}: steer the path to pass \textit{near to} but not \textit{directly to} the moving object
 \item \textbf{arrival}: similar to seek, but the character is far from the target
-\item \textbf{obstacle avoidance}: gives the ability to the character to maneuver in the environment while not colliding with the obstacles 
+\item \textbf{obstacle avoidance}: gives the character the ability to maneuver in the environment while not colliding with the obstacles 
 \item \textbf{wander}: random steering
 \item \textbf{path following}: steer along a predetermined path
 \item \textbf{wall following}: variation of path following, approach a wall and maintain a certain offset from it
 \item \textbf{containment}: variation of path following, motion is restricted to a region
 \item \textbf{flow field following}: steers the position of the character in direction to the flow
-\item \textbf{unaligned collision avoidance}: prevent collision between characters that are moving in arbitrary directions
+\item \textbf{unaligned collision avoidance}: prevents collision between characters that are moving in arbitrary directions
 \item \textbf{separation}: maintain certain separation from others nearby
 \item \textbf{cohesion}: steers towards the center of nearby characters
 \item \textbf{alignment}: align itself with nearby characters
 \item \textbf{flocking}: combination of separation, alignment, and cohesion
-\item \textbf{leader following}: one or more character follow another moving character (leader)
+\item \textbf{leader following}: one or more characters follow another moving character (leader)
 \item \textbf{interpose}: try to put a character in between two moving characters
 \item \textbf{shadow}: approach a character and then use alignment to match their speed and heading
 \item \textbf{hide}: identify the position of a target that is on the opposite side of an obstacle and  steer towards it using seek
 \end{enumerate} 
  
-The behavior mentioned above can be combined to produce more complex patterns of behavior. Later in 2000, Reynolds published another paper\cite{craigInteractionGroups} in which he focused on the interaction of large groups of autonomous characters in real-time. 
+The behaviors mentioned above can be combined to produce more complex patterns of behavior. Later in 2000, Reynolds published another paper\cite{craigInteractionGroups} in which he focused on the interaction of large groups of autonomous characters in real-time. 
 
 Von Mammen did a study in how the formations of the flock are going to be, depending on the dynamic change of the neighbor search\cite{spatialSwarms}. Marina Klotsman and Ayellet Tal  did a classification of the different flock formations\cite{lineFormations}. They classify them in two groups: \textit{cluster} and \textit{line} formations.
 
 \subsubsection{Applications}
 The application areas of flocking are broad, they range from bio-inspired systems to clustering. Next are some results in a few of these application areas. One of the nature-inspired applications is prey/predator. Flocking can be used for both, the group of preys and the group of predators\cite{gems2}. Also, crowds simulations have been done using flocking\cite{crowdsPS3}. 
 
-In the area of robotics, Yang et al. developed a collision avoidance flocking algorithm in which they used convex objects as obstacles\cite{flockingRobots}. They defined four states that a robot may be in: wait, observe, compute, and move. The life of this robots was a defined sequence of cycles of these states. The applications that Yang et al. are looking forward in this research are rescue after earthquakes and space exploration. They found that the algorithm that they developed can efficiently adapt to complex environments. Lindhé also focused in using a flocking algorithm to move a group of robots but he also tested his implementation in real robots\cite{flockingRobotsThesis}. Lindhé prioritize his algorithm, the highest priority would be safety which means collision avoidance, then goal converge, then cohesion. He found that when robots were moving in open fields they maintain together while having a formation that facilitates the communication between the robots. 
+In the area of robotics, Yang et al. developed a collision avoidance flocking algorithm in which they used convex objects as obstacles\cite{flockingRobots}. They defined four states that a robot may be in: wait, observe, compute, and move. The life of these robots was a defined sequence of cycles of these states. The applications that Yang et al. are looking for in this research are rescue after earthquakes and space exploration. They found that the algorithm they developed can efficiently adapt to complex environments. Lindhe also focused in using a flocking algorithm to move a group of robots but he also tested his implementation in real robots\cite{flockingRobotsThesis}. Lindhe prioritized his algorithm, the highest priority would be safety which means collision avoidance, then goal convergence, then cohesion. He found that when robots were moving in open fields they maintain together while having a formation that facilitates the communication between the robots. 
 
-Related to the area of robotics is the unmanned air vehicles (UAV) application. Crowther focus in civil and military applications of  UAV\cite{flockingUAV}. Crowther determined that using only cohesion and alignment was sufficient to generate the wanted behavior. Another UAV investigation was conducted by Ryan et al\cite{UAVControl}. They used flocking to UAV control. Collision avoidance with respect to other UAV and obstacles was implemented.
+Related to the area of robotics is the unmanned air vehicles (UAV) application. Crowther focus in civil and military applications of  UAV\cite{flockingUAV}. Crowther determined that using only cohesion and alignment was sufficient to generate the wanted behavior. Another UAV investigation was conducted by Ryan et al\cite{UAVControl}. They used flocking for UAV control. Collision avoidance with respect to other UAV and obstacles was implemented.
 
 In 2006 Cui et al. presented a flocking based approach for document clustering\cite{document1}. In this study each document is represented by a boid. They did the study using the three basic flocking rules plus they added another rule which they called feature similarity and dissimilarity rule. This rule is introduced in order to do the classification. 
 
-The last application that would be mentioned is a variation of flocking, influence maps are used to implement the flocking behavior, and it is compared to the traditional implementation of flocking\cite{flockingInfluenceMaps}. The influence map procedure outperforms the traditional procedure for large compact and for large flocks in general. Many other applications of flocking are currently investigated, here only a few of them were mentioned.
+The last application that will be mentioned is a variation of flocking, influence maps are used to implement the flocking behavior, and it is compared to the traditional implementation of flocking\cite{flockingInfluenceMaps}. The influence map procedure outperforms the traditional procedure for large compact and for large flocks in general. Many other applications of flocking are currently investigated, here only a few of them were mentioned.
 
 %%%%%%%%%%%%%
 % GPU Computing
@@ -116,19 +116,19 @@ Two of the most known GPU programming languages are CUDA and OpenCL. Flocking is
 
 % GPU device
 \subsection{Programmable GPU}
-A GPU device is a numeric computing engine\cite{GPUbook}. It focus on perform a massive number of floating-point calculations in parallel. The floating-point horsepower of a GPU overcomes the CPU.  
+A GPU device is a numeric computing engine\cite{GPUbook}. It focuses on performing a massive number of floating-point calculations in parallel. The floating-point horsepower of a GPU overcomes the CPU.  
 
-GPUs has a vectorial architecture that has significant advantages when doing vectorial operations. They have many Arithmetic Logic Units with small control unit and a small cache memory. While CPU in contrast have a large logical control unit and a large cache memory. This is because CPUs are made only to improve sequential code performance.
+GPUs has a vectorial architecture that has significant advantages when doing vectorial operations. They have many Arithmetic Logic Units with small control unit and a small cache memory. While CPUs, in contrast, have a large logical control unit and a large cache memory. This is because CPUs are made only to improve sequential code performance.
 
 GPUs evolves rapidly, almost every 6 months NVIDIA\cite{nvidia}, a company that produces some of these GPU devices, duplicate their current computational power on the GPUs, allowing graphics artists, game developers and scientists to improve their work in quality and quantity. 
 
 % GPU programming languages
 \subsection{GPU Programming Languages}
-Since the GPUs have a different architecture than the CPUs, they need to be programmed in a special manner. Two of the most known programming languages used for GPU programming are CUDA and OpenCL. CUDA is the NVIDIA  general purpose application programming interface (API)\cite{CUDAandOpenCL}. While OpenCL belongs to Khronos Group. OpenCL is a specification meaning that different computing devices can execute OpenCL code. This is not possible with CUDA. OpenCL is a C-language extension.
+Since the GPUs have a different architecture than the CPUs, they need to be programmed in a special manner. Two of the most known programming languages used for GPU programming are CUDA and OpenCL. CUDA is the NVIDIA  general purpose application programming interface (API)\cite{CUDAandOpenCL}, while OpenCL belongs to Khronos Group. OpenCL is a specification meaning that different computing devices can execute OpenCL code, this is not possible with CUDA. OpenCL is a C-language extension.
  
 % Flocking in GPU
 \subsection{Flocking in GPU}\label{flockingGPU}
-Flocking algorithms can take the advantage of GPU-based implementations. Era et al. developed a GPU-based library for autonomous character called BehaveRT\cite{BehaveRT}. This library can be used to do simulations in real-time and visualization of large groups of individuals. BehaveRT was implemented using CUDA. They were able to run 130K individuals at 15 FPS in a NIVIDIA 8800GTS card. \textit{Boids that See}, this publication proposed a self-occlusion GPU flocking implementation that allows groups of up to 65K boids at 30 FPS\cite{boidsThatSee}. 
+Flocking algorithms can take advantage of GPU-based implementations. Era et al. developed a GPU-based library for autonomous character called BehaveRT\cite{BehaveRT}. This library can be used to do simulations in real-time and visualization of large groups of individuals. BehaveRT was implemented using CUDA. They were able to run 130K individuals at 15 FPS in a NIVIDIA 8800GTS card. \textit{Boids that See}, proposed a self-occlusion GPU flocking implementation that allows groups of up to 65K boids at 30 FPS\cite{boidsThatSee}. 
 
 Other applications of flocking have been also implemented in the GPU.  Crowd simulations of more than 1 million boids have been done\cite{supermassiveCrowd}. The frame rate of this simulation was 25 FPS. Weiss developed a ClusterFlockGPU algorithm\cite{SI_GPU}. ClusterFlockGPU was implemented in CUDA; and it was possible to achieve feasible result for large groups of up to 5000 instances at 12 FPS. The last application to mention is document clustering, the GPU implementation clusters 3,000 documents 4.6 faster than in the CPU\cite{document2}.
 
@@ -148,4 +148,4 @@ Some of the benefits of educational games are gain of knowledge, motivation, and
 
 % Flocking games
 \subsection{Flocking Games}
-Steven Woodcock published a code in the book Game Programming Gems in which he implemented flocking as a simple technique to simulate group behavior\cite{gems1}. In this code, four rules were implemented i.e. separation, alignment, cohesion, and avoidance. One advantage of flocking that can be take into account when implementing it is that flocking is a stateless algorithm which means that no information has to be stored at each update step. Flocking can be used in games to create this \textit{illusion of reality} to the user. In 2001 Woodcock published on the 2nd edition of Game Programming Gems. In here, he describes an application of flocking using a predators and prey inspiration\cite{gems2}. He also implemented obstacle avoidance.
+Steven Woodcock published a code in the book Game Programming Gems in which he implemented flocking as a simple technique to simulate group behavior\cite{gems1}. In this code, four rules were implemented i.e. separation, alignment, cohesion, and avoidance. One advantage of flocking that can be taken into account when implementing it, is that flocking is a stateless algorithm which means that no information has to be stored at each update step. Flocking can be used in games to create this \textit{illusion of reality} to the user. In 2001 Woodcock published on the 2nd edition of Game Programming Gems. In here, he describes an application of flocking using a predators and prey inspiration\cite{gems2}. He also implemented obstacle avoidance.
