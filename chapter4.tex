@@ -4,20 +4,20 @@
 %\section{Introduction}
 The Real-Time Particle Systems (RTPS) library was designed and developed by Ian Johnson\cite{ianPaper}. RTPS is capable to simulate various particle systems including Smooth Particle Hydrodynamics (SPH) and Flocking (Boids) systems. In collaboration with Ian Johnson, a \texttt{FLOCK} system was created.
 
-This chapter will introduce the RTPS framework. The description of the RTPS library will follow the structure of the RTPS implementation. At the end of the chapter a detailed description of the extended implementation developed for the \texttt{FLOCK} system is going to be given. 
+This chapter introduces the RTPS framework. The description of the RTPS library follows the structure of the RTPS implementation. At the end of the Chapter a detailed description of the extended implementation developed for the \texttt{FLOCK} system is given. 
 
 % RTPS diagram
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.30]{figures/RTPSdiagramMyrna.pdf}
-\caption{RTPS hierarchy diagram: presents the structure of the main classes of the RTPS library}
+\caption{RTPS hierarchy diagram: depicts the structure of the RTPS library}
 \label{RTPSdiagram}
 \end{center}
 \end{figure}
 
 % RTPS
 \section{RTPS}\label{rtpssection}
-\texttt{RTPS.h} is the head class of the RTPS library. An \texttt{RTPS} object is a particle system, this system may be initialized with given a set of settings. The settings are going to be discussed in Section~\ref{rtpsettings}. 
+\texttt{RTPS.h} is the main class of the RTPS library. An \texttt{RTPS} object is a particle system, this system may be initialized with given a set of settings. The settings are going to be discussed in Section~\ref{rtpsettings}. 
 
 As can be seen in Figure~\ref{RTPSdiagram}, \texttt{RTPS} its included in various classes which are going to be discussed later in this chapter. Only two methods are defined in this class: \texttt{update()} and \texttt{render()}. \texttt{update()} will compute the next positions of the particles, while \texttt{render()} is in charge of rendering the particles. These methods are implemented individually by each of the systems available in the RTPS library. The following code represents the definition of the \texttt{RTPS} constructor used when creating the \texttt{FLOCK} system.
 
