@@ -107,16 +107,16 @@
 %--------------------------------------------
 \subsection{Background and Related Work}
 
-\begin{frame}{Background and Related Work Outline}
-	\begin{itemize}
-		\pause \item Flocking
-		\pause \item Early work
-		\pause \item Current work
-		\pause \item Applications
-		\pause \item GPU computing
-		\pause \item Flocking using the GPU
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Background and Related Work Outline}
+%	\begin{itemize}
+%		\pause \item Flocking
+%		\pause \item Early work
+%		\pause \item Current work
+%		\pause \item Applications
+%		\pause \item GPU computing
+%		\pause \item Flocking using the GPU
+%	\end{itemize}
+%\end{frame}
 
 % flocking
 \begin{frame}{Flocking}
@@ -213,14 +213,12 @@
 % separation
 \begin{frame}{Separation}
 	% equation: separation 
-	\pause
 	\begin{equation}
 	\label{separationEquation}
 	Separation =\frac{1}{M} \sum_{n=1}^{M} \frac{p_i - p_n}{d(p_i,p_n)}
 	\end{equation}
 	
 	% figure: separation
-	\pause
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.15]{../figures/separation.pdf}
@@ -239,7 +237,6 @@
 	\end{equation}
 	
 	% figure: alignment
-	\pause
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.15]{../figures/alignment.pdf}
@@ -258,7 +255,6 @@
 	\end{equation}
 	
 	% figure: cohesion
-	\pause
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.15]{../figures/cohesion.pdf}
@@ -276,7 +272,6 @@
 % goal and avoid
 \begin{frame}{Goal and Avoid}
 	% figure: seek and flee
-	\pause
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.35]{../figures/seekANDflee.pdf}
@@ -289,7 +284,6 @@
 % follow the leader
 \begin{frame}{Follow the Leader}
 	% figure: leader following
-	\pause
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.35]{../figures/leaderFollowing.pdf}
@@ -307,18 +301,18 @@
 % rules
 \begin{frame}{Algorithm to compute the rules}
 	\alert<1>{$for$ each neighbor $j$ of boid $i$ $do$}			\\
-	\alert<2>{~~$if$ dist($i$, $j$) $<=$ searching radius $then$}	\\
+	\alert<2>{~~$if$ dist($pos_i$, $pos_j$) $<=$ searching radius $then$}	\\
 	\alert<3>{~~~~flockmates++}							\\
-	\alert<4>{~~$if$ $w_{sep}$ $>$ 0 $then$}					\\
-	\alert<5>{~~~~$if$ dist($i$, $j$) $<=$ minimum distance $then$}	\\
-	\alert<6>{~~~~~~nearestFlockmates++}						\\
-	\alert<6>{~~~~~~s = $pos_i$ - $pos_j$} 					\\
-	\alert<6>{~~~~~~s /= dist($i$, $j$)} 						\\
-	\alert<6>{~~~~~~separation += s}							\\
-	\alert<7>{~~$if$ $w_{align}$ $>$ 0 $then$}				\\
-	\alert<7>{~~~~alignment += $vel_j$}						\\
-	\alert<8>{~~$if$ $w_{coh}$ $>$ 0 $then$}					\\
-	\alert<8>{~~~~cohesion += $pos_j$}						\\
+	\alert<4>{~~~~$if$ $w_{sep}$ $>$ 0 $then$}					\\
+	\alert<5>{~~~~~~$if$ dist($pos_i$, $pos_j$) $<=$ minimum distance $then$}	\\
+	\alert<6>{~~~~~~~~nearestFlockmates++}						\\
+	\alert<6>{~~~~~~~~s = $pos_i$ - $pos_j$} 					\\
+	\alert<6>{~~~~~~~~s /= dist($pos_i$, $pos_j$)} 						\\
+	\alert<6>{~~~~~~~~separation += s}							\\
+	\alert<7>{~~~~$if$ $w_{align}$ $>$ 0 $then$}				\\
+	\alert<7>{~~~~~~alignment += $vel_j$}						\\
+	\alert<8>{~~~~$if$ $w_{coh}$ $>$ 0 $then$}					\\
+	\alert<8>{~~~~~~cohesion += $pos_j$}						\\
 \end{frame}
 
 % integration
@@ -346,7 +340,8 @@
 		\alert<2>{$for$ each frame $do$}			\\
 		\alert<3>{~~Do the nearest neighbor search.}	\\
 		\alert<4>{~~Compute the Rules.}				\\
-		\alert<5>{~~Integrate over time.}				\\	
+		\alert<5>{~~Integrate over time.}				\\
+		\alert<6>{~~Render the \textit{new} position.}	\\	
 	%\end{block}
 %\end{tabbing}
 \end{frame}
@@ -391,7 +386,7 @@
 				\pause \item Create a FLOCK particle system.
 				\pause \item Call the respective functions to initialize the positions and velocities of the particles.
 				\pause \item Send the respective information to the GPU to do the calculations.
-				\pause \item Call the OpenCL kernel that computes the rules and the new positions
+				\pause \item Call the OpenCL kernel that computes the rules and the new positions.
 				 \pause \item Call the rendering method to render the particles on the screen.
 			\end{itemize}
 	\end{itemize}
@@ -412,7 +407,7 @@
 			\begin{itemize}
 				\pause \item Hash, BitonicSort, Permute, and CellIndices: classes that are in charge of the nearest neighbor search.
 					\begin{itemize}
-						\pause \item Hash: creates a hash values by overlaying the system into a uniform grid, and calculating an index value from the 3D cell index
+						\pause \item Hash: creates a hash value by overlaying the system into a uniform grid, and calculating an index value from the 3D cell index
 						\pause \item BitonicSort: sorts the hash and index arrays by the hash values
 						\pause \item Permute: permutes the arrays of positions, velocities and colors according to the sorted index array
 						\pause \item CellIndices: updates two arrays that keep track of the first and last particle at each cell
@@ -450,11 +445,11 @@
 \begin{frame}{Blender}
 	\begin{itemize}
 		\pause \item Blender is a free modeling/simulation software.
-		\pause \item Blender has a game engine built-in.
+		\pause \item Blender has a built-in game engine.
 		\pause \item Blender is open source.
 		\pause \item Blender is cross-platform.
 		\pause \item Blender supports simulations with real physics.
-		\pause \item Blender has big support in the gaming industry and a large documentation community.
+		\pause \item Blender has big support in the gaming industry and a large community helping on documentation.
 		\pause \item Blender 2.57 was the release used in this project.
 	\end{itemize}
 \end{frame}
@@ -502,6 +497,50 @@
 \section{Results}
 
 %--------------------------------------------
+% timings
+%--------------------------------------------
+\subsection{Benchmarks}
+
+% RTPS vs Blender
+\begin{frame}{RTPS vs Blender}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.30]{../figures/benchmarks.pdf}
+	\caption{Timings of RTPS modifier and Blender Boids system}
+	\label{plot}
+	\end{center}
+	\end{figure}
+\end{frame}
+
+% RTPS Blender vs Blender
+%\begin{frame}{RTPS Blender vs Blender}
+%\textcolor{red}{*** MISSING ***}
+%\end{frame}
+
+% speedup
+\begin{frame}{Speedup} 
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.30]{../figures/speedup.pdf}
+	\caption{Speedup of the FLOCK system of the RTPS library over the Blender Boids system}
+	\label{speedup}
+	\end{center}
+	\end{figure}
+\end{frame}
+
+% RTPS kernels
+\begin{frame}{RTPS kernels}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.30]{../figures/kernelsPlot.pdf}
+	\caption{Timings for the kernels executed by the FLOCK system of RTPS}
+	\label{kernelBench}
+	\end{center}
+	\end{figure}
+\end{frame}
+
+
+%--------------------------------------------
 % demos
 %--------------------------------------------
 \subsection{Demos}
@@ -547,38 +586,32 @@
 
 % Blender
 \begin{frame}{Blender Demo}
-\textcolor{red}{*** MISSING ***}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.20]{../figures/demo1_1.pdf}
+	\caption{Two hoses emitting boids into the FLOCK system}
+	\end{center}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Blender Demo}
-\textcolor{red}{*** MISSING ***}
-\end{frame}
-
-%--------------------------------------------
-% timings
-%--------------------------------------------
-\subsection{Benchmarks}
-
-% RTPS vs Blender
-\begin{frame}{RTPS vs Blender}
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.30]{../figures/benchmarks.pdf}
-	\caption{Timings of RTPS modifier and Blender Boids system}
-	\label{plot}
+	\includegraphics[scale=0.20]{../figures/demo1_2.pdf}
+	\caption{Boids are following the rules and they already spread out.}
 	\end{center}
 	\end{figure}
 \end{frame}
 
-% RTPS Blender vs Blender
-\begin{frame}{RTPS Blender vs Blender}
-\textcolor{red}{*** MISSING ***}
+\begin{frame}{Blender Demo}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.20]{../figures/demo1_logic.pdf}
+	\caption{Logic bricks of the first demo.}
+	\end{center}
+	\end{figure}
 \end{frame}
 
-% RTPS kernels
-\begin{frame}{RTPS kernels}
-\textcolor{red}{*** MISSING ***}
-\end{frame}
 
 %--------------------------------------------
 % conclusion
@@ -600,7 +633,7 @@
 \begin{frame}{Future work}
 	\begin{itemize}
 		\item Expand the list of the implemented rules.
-		\item Simulate also, terrain and swimming behavior.
+		\item Simulate terrain and swimming behavior.
 		\item Use Swarm Intelligence or Evolutionary Algorithm to select an optimized set of parameters for the system.
 		\item Hybrids systems.
 		\item Add the necessary parameters to the RTPS modifier when doing modifications to the RTPS library.
@@ -633,7 +666,7 @@
 % questions
 \begin{frame}
 	\begin{center}
-	Questions?
+	\textbf{Questions?}
 	\end{center}
 \end{frame}
 
