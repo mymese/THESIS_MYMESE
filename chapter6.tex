@@ -2,7 +2,47 @@
 
 This chapter would focus on summarize the results of this thesis. Some of those results were already discussed. For example, the implementation of a flocking algorithm in OpenCL was discussed in Section~\ref{flocksection}, and the development of the UI modifier for the Blender Game Engine discussed in Section~\ref{modifiersection}. 
 
-In this chapter demonstrations using the RTPS library and the RTPS modifier are going to be presented.
+In this chapter benchmarks and demonstrations using the RTPS library and the RTPS modifier are going to be presented.
+
+\section{Benchmarks}
+% mention which kind of hardware I'm using
+
+The flocking OpenCL implementation presented in this thesis was timed. The RTPS library seems to outperform the Blender Boid system. Figure~\ref{plot} show the timings for more than half of a million boids. These boids were represented as spheres in a simple scene with no other objects. Blender was running faster than RTPS when the amount of particles were small, then when big numbers came around, Blender's performance disappears.  We were able to render more than $65K$ boids at $87$ fps and more than half of a million boids at a rate of $8$ fps.
+
+% benchmarks 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.55]{figures/benchmarks.pdf}
+\caption{Timings of RTPS and Blender Boids system: the RTPS-GPU implementation outperforms the Blender Boids system}
+\label{plot}
+\end{center}
+\end{figure}
+
+The speedup of the FLOCK system of the RTPS library as seen in Figure~\ref{speedup} RTPS FLOCK system exceeds Blender Boids system all the time.
+
+% speedup 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.55]{figures/speedup.pdf}
+\caption{Speedup of the FLOCK system of the RTPS library over the Blender Boids system}
+\label{speedup}
+\end{center}
+\end{figure}
+
+
+Comparing our performance with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still outperforms them. The library BehaveRT was used to run simulations in real-time and visualization, in that paper Era et al. ran $130K$ boids at 15 fps, we ran more than $131K$ boids at 25 fps. Of course, the timings depend on which hardware they used to get the benchmarks. Our benchmarks were taken in a Dell XXX with a processor XXX, and a NVIDIA GeForce 480 GTX GPU computing device. 
+
+We also measured the inner performance of our flocking implementation in the RTPS library, to do so, we measured the time that took every kernel to be executed. Figure~\ref{kernelBench} shows the timings for the kernels. For $32K$ boids or less the Bitonic Sort was the kernel that was dominating the timing of each update loop. Around $35K$ boids the computation starts relying on the rules. The massive computation to compute the rules for each boids is larger than the computation for any other kernel.
+
+% benchmarks per kernels 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.55]{figures/kernelsPlot.pdf}
+\caption{Timings for the kernels executed by the FLOCK system of RTPS}
+\label{kernelBench}
+\end{center}
+\end{figure}
+
 
 % demos
 \section{Demos}
@@ -53,27 +93,37 @@ Since, the rendering methods that are available at this moment in RTPS are point
 
 % Blender demo
 \subsection{Blender Demo}
-\textcolor{red}{** TODO: missing the Blender demo ***}
 
-\section{Benchmarks}
-% mention which kind of hardware I'm using
+The following Blender demo of the RTPS library uses two hoses that emit 100 boids. See the hoses in Figure~\ref{demo1_1}, in Figure~\ref{demo1_2} the boids have already spread out into the system. The logic bricks and properties set in this demo are shown in Figure~\ref{demo1_logic}.
 
-The flocking OpenCL implementation presented in this thesis was timed. The RTPS library seems to outperform the Blender Boid system. Figure~\ref{plot} show the timings for more than half of a million boids. These boids were represented as spheres in a simple scene with no other objects. Blender was running faster than RTPS when the amount of particles were small, then when big numbers came around, Blender's performance disappears.  We were able to render more than $65K$ boids at $60$ fps and more than half of a million boids at a rate of $10$ fps.
-
-% benchmarks 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.45]{figures/benchmarks.pdf}
-\caption{Timings of RTPS modifier and Blender Boids system: the RTPS-GPU implementation outperforms the Blender Boids system}
-\label{plot}
+\includegraphics[scale=0.32]{figures/demo1_1.pdf}
+\caption{Two hoses emitting boids into the FLOCK system}
+\label{demo1_1}
 \end{center}
 \end{figure}
 
-Comparing our performance with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still outperforms them. The library BehaveRT was used to run simulations in real-time and visualization, in that paper Era et al. ran $130K$ boids at 15 fps, we ran more than $131K$ boids at 41 fps. Of course, the timings depend on which hardware they used to get the benchmarks. Our benchmarks were taken in a Dell XXX with a processor XXX, and a NVIDIA GeForce 480 GTX GPU computing device. 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.32]{figures/demo1_2.pdf}
+\caption{Boids are following the rules and they already spread out.}
+\label{demo1_2}
+\end{center}
+\end{figure}
 
-We also measured the inner performance of our flocking implementation in the RTPS library, to do so, we measured the time that took every kernel to be executed. Figure~\ref{kernelBench} shows the timings for the kernels.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.32]{figures/demo1_logic.pdf}
+\caption{Logic bricks for the first demo.}
+\label{demo1_label}
+\end{center}
+\end{figure}
 
-\textcolor{red}{TODO: create a chart with the timings per kernel}
 
+% still need to talk about the parameters
+In this demo the rules were equally weighted. The flock would exhibit differently depending on the combination of the weights. As shown in the previous demo, when we were showing the symmetry of the rules. Currently, you are able to play with weight between zero and one for each of the three implemented rules.
+
+Next demo shows examples of different combinations of the weights.
 
 
