@@ -41,7 +41,7 @@
 \subsection{Educational Games}
 \begin{frame}{Educational Games}
 	\begin{itemize}
-		\pause \item \textbf{Goal}: learn while you are playing
+		\pause \item \textbf{Goal}: the player learns while is playing
 		\pause \item Some of the benefits of playing Educational Games are:
 			\begin{itemize}
 				\pause \item gain more knowledge
@@ -82,25 +82,6 @@
 	\end{itemize}
 \end{frame}
 
-%--------------------------------------------
-% BGE
-%--------------------------------------------
-\begin{frame}{The Blender Game Engine}
-	\begin{itemize}
-		\pause \item BGE is a very powerful tool.
-		\pause \item Games can be created without the need for explicit programming.
-		\pause \item After creating the 3D scene you can bring it to life by using the simple logic editor.
-			% figure: logic editor 
-			\pause
-			\begin{figure}[htbp]
-			\begin{center}
-			\includegraphics[scale=0.25]{../figures/logic.pdf}
-			\caption{Blender Game Logic Editor}
-			\label{logicEditor}
-			\end{center}
-			\end{figure}
-	\end{itemize}
-\end{frame}
 
 %--------------------------------------------
 % related work
@@ -133,14 +114,40 @@
 	\begin{itemize}
 		\pause \item Craig Reynolds is the pioneer of flocking, his most recognized paper: \textit{Flocks, herds, and school: A Distributed Behavioral Model} revolutionized the field of flocking.
 		\pause \item He stated that the behavior of the boids is represented by a set of rules and its internal state.
-		\pause \item The set of rules, also called \textit{Boids Model}, that he defined consist of the following:
-			\begin{itemize}
-				\pause \item collision avoidance
-				\pause \item velocity matching
-				\pause \item flock centering
-			\end{itemize}
+		\pause \item The set of rules, also called \textit{Boids Model}, consist of:	
 	\end{itemize}
+	
+	\begin{columns}[b]
+		\pause
+		\begin{column}{4cm}
+			\begin{figure}[htbp]
+			\begin{center}
+			\includegraphics[scale=0.1]{../figures/sep_Craig.pdf}
+			\caption{Collision Avoidance}
+			\end{center}
+			\end{figure}
+		\end{column}
+		\pause
+		\begin{column}{4cm}
+			\begin{figure}[htbp]
+			\begin{center}
+			\includegraphics[scale=0.1]{../figures/align_Craig.pdf}
+			\caption{Velocity Matching}
+			\end{center}
+			\end{figure}
+		\end{column}
+		\pause
+		\begin{column}{4cm}
+			\begin{figure}[htbp]
+			\begin{center}
+			\includegraphics[scale=0.1]{../figures/coh_Craig.pdf}
+			\caption{Flock Centering}
+			\end{center}
+			\end{figure}
+		\end{column}
+	\end{columns}		
 \end{frame}
+
 
 % other rules
 \begin{frame}{Proceeding Work}
@@ -172,9 +179,9 @@
 % GPU computing
 \begin{frame}{GPU Computing}
 	\begin{itemize}
+		\pause \item Graphics processing unit or GPU is a numeric computing engine used for massive computation.
 		\pause \item \textit{GPU computing}, also know as \textit{GPGPU} is when we use GPUs for general computing.
 		\pause \item \textit{GPU computing} is an heterogeneous system that uses GPUs and CPUs together to process a task.
-		\pause \item GPUs are numeric computing engines.
 		\pause \item GPUs have their own architecture therefore, they also have their own programming languages.
 	\end{itemize}
 \end{frame}
@@ -302,17 +309,21 @@
 \begin{frame}{Algorithm to compute the rules}
 	\alert<1>{$for$ each neighbor $j$ of boid $i$ $do$}			\\
 	\alert<2>{~~$if$ dist($pos_i$, $pos_j$) $<=$ searching radius $then$}	\\
-	\alert<3>{~~~~flockmates++}							\\
+	%\alert<3>{~~~~flockmates++}							\\
 	\alert<4>{~~~~$if$ $w_{sep}$ $>$ 0 $then$}					\\
-	\alert<5>{~~~~~~$if$ dist($pos_i$, $pos_j$) $<=$ minimum distance $then$}	\\
-	\alert<6>{~~~~~~~~nearestFlockmates++}						\\
-	\alert<6>{~~~~~~~~s = $pos_i$ - $pos_j$} 					\\
-	\alert<6>{~~~~~~~~s /= dist($pos_i$, $pos_j$)} 						\\
-	\alert<6>{~~~~~~~~separation += s}							\\
-	\alert<7>{~~~~$if$ $w_{align}$ $>$ 0 $then$}				\\
-	\alert<7>{~~~~~~alignment += $vel_j$}						\\
-	\alert<8>{~~~~$if$ $w_{coh}$ $>$ 0 $then$}					\\
-	\alert<8>{~~~~~~cohesion += $pos_j$}						\\
+	\alert<4>{~~~~~~$if$ dist($pos_i$, $pos_j$) $<=$ minimum distance $then$}	\\
+	\alert<4>{~~~~~~~~Compute the separation rule.} \\
+	%\alert<4>{~~~~~~~~nearestFlockmates++}						\\
+	%\alert<4>{~~~~~~~~s = $pos_i$ - $pos_j$} 					\\
+	%\alert<4>{~~~~~~~~s /= dist($pos_i$, $pos_j$)} 						\\
+	%\alert<4>{~~~~~~~~separation += s}							\\
+	\alert<5>{~~~~$if$ $w_{align}$ $>$ 0 $then$}				\\
+	\alert<5>{~~~~~~Compute the alignment rule.} \\
+	%\alert<5>{~~~~~~alignment += $vel_j$}						\\
+	\alert<6>{~~~~$if$ $w_{coh}$ $>$ 0 $then$}					\\
+	\alert<6>{~~~~~~Compute the cohesion rule.} \\
+	%\alert<6>{~~~~~~cohesion += $pos_j$}						\\
+	\alert<7>{end $for$}
 \end{frame}
 
 % integration
@@ -320,16 +331,16 @@
  	%\alert<1>{$acc_{sep}$ = separation * $w_{sep}$}			\\
 	%\alert<1>{$acc_{align}$ = alignment * $w_{align}$}		\\
 	%\alert<1>{$acc_{coh}$ = cohesion * $w_{coh}$}			\\ 
- 	\alert<1>{Multiply each rule by its weight to get the respective acceleration.} 	\\
+ 	\alert<1>{Multiply each rule by its weight to get the respective velocity.} 	\\
 	%\alert<2>{$acc$ = $vel_i$ + $acc_{sep}$ + $acc_{align}$ + $acc_{coh}$} 	\\ 
-	\alert<2>{Add the acceleration of each rule and the current velocity.} 	\\
-	\alert<3>{Constraint the acceleration to a maximum speed.}			\\ 
-	\alert<4>{Optional: Set any artificial velocity.}						\\ 
+	\alert<2>{Add the velocity of each rule and the current velocity.} 	\\
+	\alert<3>{Constraint the velocity to a maximum speed.}			\\ 
+	\alert<4>{Optional: Set any artificial velocity and add it to the velocity.}	\\ 
 	%\alert<5>{$vel_i$ = $vel_{external}$ + $acc$}				\\ 
-	\alert<5>{Add the artificial velocity to the acceleration to get the \textit{new} velocity.} \\
+	%\alert<5>{Add the artificial velocity to the acceleration to get the \textit{new} velocity.} \\
 	%\alert<6>{$pos_i$ +=  $dt $* $vel_i$}					\\
-	\alert<6>{Multiply the velocity by the time step.}			\\
-	\alert<7>{Add the velocity to the position to get the \textit{new} position.}	\\
+	\alert<5>{Multiply the \textit{new} velocity by the time step.}			\\
+	\alert<6>{Add the velocity to the position to get the \textit{new} position.}	\\
 \end{frame}
 
 % each frame
@@ -378,27 +389,27 @@
 \end{frame}
 
 % FLOCK
-\begin{frame}{\texttt{FLOCK} class}
-	\begin{itemize}
-		\pause \item Main class of the FLOCK system
-		\pause \item Some of the objectives of this class are:
-			\begin{itemize}
-				\pause \item Create a FLOCK particle system.
-				\pause \item Call the respective functions to initialize the positions and velocities of the particles.
-				\pause \item Send the respective information to the GPU to do the calculations.
-				\pause \item Call the OpenCL kernel that computes the rules and the new positions.
-				 \pause \item Call the rendering method to render the particles on the screen.
-			\end{itemize}
-	\end{itemize}
-\end{frame}
+%\begin{frame}{\texttt{FLOCK} class}
+%	\begin{itemize}
+%		\pause \item Main class of the FLOCK system
+%		\pause \item Some of the objectives of this class are:
+%			\begin{itemize}
+%				\pause \item Create a FLOCK particle system.
+%				\pause \item Call the respective functions to initialize the positions and velocities of the particles.
+%				\pause \item Send the respective information to the GPU to do the calculations.
+%				\pause \item Call the OpenCL kernel that computes the rules and the new positions.
+%				 \pause \item Call the rendering method to render the particles on the screen.
+%			\end{itemize}
+%	\end{itemize}
+%\end{frame}
 
 % FLOCKSettings
-\begin{frame}{\texttt{FLOCKSettings} class}
-	\begin{itemize}
-		\pause \item Initialize the data structure that stores the settings of the FLOCK system.
-		\pause \item Update the values of the settings when the user changes them.
-	\end{itemize}
-\end{frame}
+%\begin{frame}{\texttt{FLOCKSettings} class}
+%	\begin{itemize}
+%		\pause \item Initialize the data structure that stores the settings of the FLOCK system.
+%		\pause \item Update the values of the settings when the user changes them.
+%	\end{itemize}
+%\end{frame}
 
 % Common
 \begin{frame}{Common classes}
@@ -412,29 +423,39 @@
 						\pause \item Permute: permutes the arrays of positions, velocities and colors according to the sorted index array
 						\pause \item CellIndices: updates two arrays that keep track of the first and last particle at each cell
 					\end{itemize}
-				\pause \item Hose: class that insert particles to the system in a hose fashion
+				\pause \item Hose: insert particles like
 			\end{itemize}
 	\end{itemize}
 \end{frame}
 
-% Rules
-\begin{frame}{\texttt{Rules} class}
-	\begin{itemize}
-		\pause \item Create and initialize the OpenCL kernel that computes the rules.
-		\pause \item Set the arguments for the kernel.
-		\pause \item Launch the kernel.
-		\pause \item The kernel follows the previously discussed algorithm that computes the rules.
-	\end{itemize}
+% FLOCK diagram
+\begin{frame}{FLOCK system organization diagram}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.25]{../figures/FLOCKdiagramMyrna.pdf}
+	\caption{FLOCK system organization diagram}
+	\end{center}
+	\end{figure}
 \end{frame}
 
+% Rules
+%\begin{frame}{\texttt{Rules} class}
+%	\begin{itemize}
+%		\pause \item Create and initialize the OpenCL kernel that computes the rules.
+%		\pause \item Set the arguments for the kernel.
+%		\pause \item Launch the kernel.
+%		\pause \item The kernel follows the previously discussed algorithm that computes the rules.
+%	\end{itemize}
+%\end{frame}
+
 % EulerIntegration
-\begin{frame}{\texttt{EulerIntegration} class}
-	\begin{itemize}
-		\pause \item Has a similar structure than the \texttt{Rules} class.
-		\pause \item Its kernel follows the previously discussed algorithm that combine the rules and integrate over time to get the new position.
-		\pause \item Also, this kernel check the boundaries and apply periodic boundary conditions to the positions of the particles.
-	\end{itemize}
-\end{frame}
+%\begin{frame}{\texttt{EulerIntegration} class}
+%	\begin{itemize}
+%		\pause \item Has a similar structure than the \texttt{Rules} class.
+%		\pause \item Its kernel follows the previously discussed algorithm that combine the rules and integrate over time to get the new position.
+%		\pause \item Also, this kernel check the boundaries and apply periodic boundary conditions to the positions of the particles.
+%	\end{itemize}
+%\end{frame}
 
 %--------------------------------------------
 % blender
@@ -451,6 +472,26 @@
 		\pause \item Blender supports simulations with real physics.
 		\pause \item Blender has big support in the gaming industry and a large community helping on documentation.
 		\pause \item Blender 2.57 was the release used in this project.
+	\end{itemize}
+\end{frame}
+
+%--------------------------------------------
+% BGE
+%--------------------------------------------
+\begin{frame}{The Blender Game Engine}
+	\begin{itemize}
+		\pause \item BGE is a very powerful tool.
+		\pause \item Games can be created without the need for explicit programming.
+		\pause \item After creating the 3D scene you can bring it to life by using the simple logic editor.
+			% figure: logic editor 
+			\pause
+			\begin{figure}[htbp]
+			\begin{center}
+			\includegraphics[scale=0.25]{../figures/logic.pdf}
+			\caption{Blender Game Logic Editor}
+			\label{logicEditor}
+			\end{center}
+			\end{figure}
 	\end{itemize}
 \end{frame}
 
