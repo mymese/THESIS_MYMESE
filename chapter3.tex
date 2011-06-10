@@ -185,14 +185,14 @@ The following Algorithm presents how we computed each of the rules on the GPU. N
 		\ENDIF
 	\ENDIF
 \ENDFOR
-\IF{$w_{sep} > 0$ \&\& nearestFlockmates $> 0$)}
+\IF{$w_{sep} > 0$ \&\& nearestFlockmates $> 0$}
 	\STATE separation /= nearestFlockmates
 \ENDIF
-\IF{$w_{align} > 0$ \&\& flockmates $> 0$)}
+\IF{$w_{align} > 0$ \&\& flockmates $> 0$}
 	\STATE alignment /=  flockmates
 	\STATE alignment -= velocity($i$)
 \ENDIF
-\IF{$w_{coh} > 0$ \&\& flockmates $> 0$)}
+\IF{$w_{coh} > 0$ \&\& flockmates $> 0$}
 	\STATE cohesiont /=  flockmates
 	\STATE cohesion -= position($i$)
 \ENDIF
