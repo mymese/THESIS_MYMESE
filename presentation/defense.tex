@@ -278,10 +278,23 @@
 
 % goal and avoid
 \begin{frame}{Goal and Avoid}
+
+	% goal equation
+	\begin{equation}
+	\label{goalEquation}
+	Goal = ((p_t - p_i) * max_{speed}) - v_i
+	\end{equation}
+
+	% avoid equation
+	\begin{equation}
+	\label{avoidEquation}
+	Avoid = -((p_t - p_i) * max_{speed}) - v_i
+	\end{equation}
+	
 	% figure: seek and flee
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.35]{../figures/seekANDflee.pdf}
+	\includegraphics[scale=0.25]{../figures/seekANDflee.pdf}
 	\caption{Goal and Avoid steering behavior}
 	\label{seekANDflee}
 	\end{center}
@@ -323,7 +336,11 @@
 	\alert<6>{~~~~$if$ $w_{coh}$ $>$ 0 $then$}					\\
 	\alert<6>{~~~~~~Compute the cohesion rule.} \\
 	%\alert<6>{~~~~~~cohesion += $pos_j$}						\\
-	\alert<7>{end $for$}
+	\alert<7>{~~~~$if$ $w_{goal}$ $>$ 0 $then$}					\\
+	\alert<7>{~~~~~~Compute the goal rule.} \\
+	\alert<8>{~~~~$if$ $w_{avoid}$ $>$ 0 $then$}					\\
+	\alert<8>{~~~~~~Compute the avoid rule.} \\
+	\alert<9>{end $for$}
 \end{frame}
 
 % integration
@@ -423,7 +440,7 @@
 						\pause \item Permute: permutes the arrays of positions, velocities and colors according to the sorted index array
 						\pause \item CellIndices: updates two arrays that keep track of the first and last particle at each cell
 					\end{itemize}
-				\pause \item Hose: insert particles like
+				\pause \item Hose: sprays particles into the system
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -481,7 +498,7 @@
 \begin{frame}{The Blender Game Engine}
 	\begin{itemize}
 		\pause \item BGE is a very powerful tool.
-		\pause \item Games can be created without the need for explicit programming.
+		\pause \item Simple games can be created without the need for explicit programming.
 		\pause \item After creating the 3D scene you can bring it to life by using the simple logic editor.
 			% figure: logic editor 
 			\pause
@@ -674,10 +691,8 @@
 \begin{frame}{Future work}
 	\begin{itemize}
 		\item Expand the list of the implemented rules.
-		\item Simulate terrain and swimming behavior.
 		\item Use Swarm Intelligence or Evolutionary Algorithm to select an optimized set of parameters for the system.
 		\item Hybrids systems.
-		\item Add the necessary parameters to the RTPS modifier when doing modifications to the RTPS library.
 		\item Use Blender objects as emitter particles.
 	\end{itemize}
 \end{frame}
