@@ -43,11 +43,15 @@ Game engines try to simulate the scenes as quickly as possible, so the game has 
 As mentioned in Section~\ref{blenderSec} Blender has a \textit{Game Engine} built-in. The Blender Game Engine is a very powerful tool, it allows simple games to be created without  the need for explicit programming. With its GUI you are able to create simple games just by clicking and dragging. After creating the 3D objects and 3D world you can use the simple logic editor to bring the scene to life. The logic editor interface is shown in Figure~\ref{logic}.
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.4]{figures/logic.pdf}
+\begin{center}$
+\begin{array}{c}
+%\includegraphics[scale=0.4]{figures/logic.pdf}
+\includegraphics[scale=0.5]{figures/demo1_logic_properties.pdf} \\
+\includegraphics[scale=0.45]{figures/demo1_logic_bricks.pdf}
+\end{array}$
+\end{center}
 \caption{The Blender Game Engine Logic Editor interface: consists of the Properties and the Logic Bricks areas}
 \label{logic}
-\end{center}
 \end{figure}
 
 The logic editor interface consists of two parts: \textit{Properties} and \textit{Logic Bricks}. Properties are used to give more specific actions to the objects, these properties can be called using the variables' names. The name of the variables has to match with the implementation in the source code. The second part is the logic bricks. The logic bricks are divided into \textit{sensors}, \textit{controllers}, and \textit{actuators}. Each of these has different subtypes to chose from.
