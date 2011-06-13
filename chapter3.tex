@@ -219,13 +219,13 @@ An similar approach was taken for the CPU implementation of Algorithm~\ref{flock
 \caption{Combine, integrate and check the boundaries}
 \label{combineAlgorithm}
 \begin{algorithmic}
-\STATE $vel_{rule}$  = rule * $w_{rule}$
-\STATE $velocity$ = $vel_{rule_1}$ + ... + $vel_{rule_n}$
-\IF{lenghth($velocity$) $>$ $max_{speed}$}
-	\STATE $velocity$ = normalize($velocity$) * $max_{speed}$
+\STATE $vel_{rule_i}$  = $rule_i$ * $w_{rule_i}$ 
+\STATE $vel_i^{k+1}$ = $vel_i^k$ + $vel_{rule_1}$ + ... + $vel_{rule_n}$
+\IF{length($vel_i^{k+1}$) $>$ $max_{speed}$}
+	\STATE $vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$
 \ENDIF  
 \STATE (Optional) Add circular velocity field to the current velocity.
-\STATE $position$ = $dt$ * $velocity$
+\STATE $pos_i^{k+1}$ += $dt$ * $vel_i^{k+1}$
 \STATE Apply periodic boundary conditions to the new position.
 \end{algorithmic}
 \end{algorithm}
