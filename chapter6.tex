@@ -1,43 +1,58 @@
 \chapter{RESULTS}\label{resultsChapter}
 
-This chapter would focus on summarize the results of this thesis. Some of those results were already discussed. For example, the implementation of a flocking algorithm in OpenCL was discussed in Section~\ref{flocksection}, and the development of the UI modifier for the Blender Game Engine discussed in Section~\ref{modifiersection}. 
+This chapter would focus on summarize the results of this thesis. Some of those results were already discussed. 
 
-In this chapter benchmarks and demonstrations using the RTPS library and the RTPS modifier are going to be presented.
+The results discussed already include the implementation of a flocking algorithm in OpenCL which was discussed in Section~\ref{flocksection}, and the development of the RTPS modifier for the Blender Game Engine discussed in Section~\ref{modifiersection}. 
+
+In this chapter benchmarks and demonstrations using the RTPS library and the RTPS modifier are presented.
 
 \section{Benchmarks}
-% mention which kind of hardware I'm using
 
-The flocking OpenCL implementation presented in this thesis was timed. The RTPS library seems to outperform the Blender Boid system. Figure~\ref{plot} show the timings for more than half of a million boids. These boids were represented as spheres in a simple scene with no other objects. Blender was running faster than RTPS when the amount of particles were small, then when big numbers came around, Blender's performance disappears.  We were able to render more than $65K$ boids at $87$ fps and more than half of a million boids at a rate of $8$ fps.
+%comments about the RTPS vs RTPS plot
+The flocking OpenCL implementation presented in this thesis was timed. We took benchmarks for the RTPS standalone code (outside Blender), also for the RTPS modifier. These timers were taken when setting the maximum number of particles to $256K$ boids. The minimum distance set to 1, and a searching radius of 1.5. Only the three main steering behaviors were considered when doing the benchmarks. The rules were equally weighted. The maximum speed allowed in the 10x10x10 domain was 2. The boids were rendered as points in a simple scene with no other objects.The performance of RTPS standalone and the RTPS modifier is shown in Figure~\ref{RTPSvsRTPS}. The plot show \textit{frames per second} (fps) in the \textit{y-axis} and Number of Boids in the \textit{x-axis}. Frames per second means how many frames are refreshed in one second. An acceptable frame rate for video games range between 30fps and 60fps. In general our GPU implementation runs at a frame rate that is over the acceptable range. 
 
-% benchmarks 
+% RTPS vs RTPS
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.55]{figures/benchmarks.pdf}
-\caption{Timings of RTPS and Blender Boids system: the RTPS-GPU implementation outperforms the Blender Boids system}
-\label{plot}
+\includegraphics[scale=0.7]{figures/RTPSvsRTPS.pdf}
+\caption{Timings of RTPS-FLOCK system: FLOCK system run from the standalone (outside the Blender Game Engine and the FLOCK system run from inside the Blender Game Engine}
+\label{RTPSvsRTPS}
 \end{center}
 \end{figure}
 
-The speedup of the FLOCK system of the RTPS library as seen in Figure~\ref{speedup} RTPS FLOCK system exceeds Blender Boids system all the time.
+% comments about the RTPS vs Blender plot
+We also, measure the time that takes our Boids system and the time that Blender Boids system (outside the game engine) takes to run the same amount of particles with the same conditions stated above. Figure~\ref{RTPSvsBlender} shows the timings of the RTPS Boids system (computed in real-time) versus the Blender Boid system (outside the game engine, and only available for animations and simulations). The RTPS-FLOCK system has better performance than the Blender-Boids system all the time. Our FLOCK system renders up to almost $130K$ boids at the acceptable fps rate. Blender-Boids system renders up tp $8K$ boids at the acceptable fps.
+
+%RTPS vs Blender
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.7]{figures/benchmarks.pdf}
+\caption{Timings of the RTPS modifier and the Blender Boids system: the RTPS-GPU implementation outperforms the Blender Boids system}
+\label{RTPSvsBlender}
+\end{center}
+\end{figure}
+
+% comments about the speedup plot
+The speedup of the RTPS-FLOCK system over the Blender Boids system is seen in Figure~\ref{speedup}. RTPS-FLOCK system is 20x faster than Blender-Boids system for flocks of $65K$. The frame rate of Blender-Boids system for flocks with more than $65K$ boids is less than a frame per second.
 
 % speedup 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.55]{figures/speedup.pdf}
+\includegraphics[scale=0.7]{figures/speedup.pdf}
 \caption{Speedup of the FLOCK system of the RTPS library over the Blender Boids system}
 \label{speedup}
 \end{center}
 \end{figure}
 
+Comparing our performance with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still having better performance than them. The library BehaveRT was used to run autonomous characters simulations in real-time and visualization, in that paper Era et al. ran $130K$ boids at 15 fps, we ran $130K$ boids at 25 fps. The GPU computing device they used was a NVIDIA 8800GTS with 512 MB RAM while we used a NVIDIA 480GTX with 1.5 GB RAM. 
 
-Comparing our performance with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still outperforms them. The library BehaveRT was used to run simulations in real-time and visualization, in that paper Era et al. ran $130K$ boids at 15 fps, we ran more than $131K$ boids at 25 fps. Of course, the timings depend on which hardware they used to get the benchmarks. Our benchmarks were taken in a Dell XXX with a processor XXX, and a NVIDIA GeForce 480 GTX GPU computing device. 
-
-We also measured the inner performance of our flocking implementation in the RTPS library, to do so, we measured the time that took every kernel to be executed. Figure~\ref{kernelBench} shows the timings for the kernels. For $32K$ boids or less the Bitonic Sort was the kernel that was dominating the timing of each update loop. Around $35K$ boids the computation starts relying on the rules. The massive computation to compute the rules for each boids is larger than the computation for any other kernel.
+% comments about the timings per kernels
+We also measured the inner performance of our FLOCK system. Timings of the execution of the kernels were measured. This timings were of a system with the settings specified above. The searching radius was constant trough out the benchmarks. Figure~\ref{kernelBench} shows that most of the kernels took the same amount of time for the different flock sizes. The only kernel that increased the time spent to be computed was the Rules kernel. This increase in time was because our searching radius was constant, therefore more boids are going to be used to compute the rules.
 
 % benchmarks per kernels 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.55]{figures/kernelsPlot.pdf}
+\includegraphics[scale=0.7]{figures/kernelsPlot.pdf}
 \caption{Timings for the kernels executed by the FLOCK system of RTPS}
 \label{kernelBench}
 \end{center}
@@ -47,14 +62,12 @@ We also measured the inner performance of our flocking implementation in the RTP
 % demos
 \section{Demos}
 
-\subsection{Symmetry of the Basic Rules}
-As discussed before the three basic rules of flocking are: \textit{separation}, \textit{alignment}, and \textit{cohesion}. We can see that running demonstrations of each of the rules by themselves, an important property between the rules is preserved. This property is symmetry. When we said that a rule is symmetric, we mean that when starting from a shape like a square where all points are distributed equally from the origin which is the center of the square, the points are going to be moving equally at each quadrant. This would be symmetry, if the most top right particle moves to the right, the bottom right would also move to the right, and the top and bottom left particles would move to the left, respectively.
+\subsection{Symmetry of the Main Rules}
+As discussed before the three main rules of flocking are: \textit{separation}, \textit{alignment}, and \textit{cohesion}. The velocity of each boid is determined by the linear combination of three effects, each one with its own weighing parameter. We seek to better understand the effect of each of these parameters. Consider first isolation each of the three effects: only a single effect is active at a time. 
 
-We are going to start from an squared initial position showed in Figure~\ref{alignRule}. From there, the symmetric moves of \textit{separation} and \textit{cohesion} are shown in Figure~\ref{sepRule} and~\ref{cohRule}, respectively. These figures show 144 boids in a centralized square inside a $5$x$5$x$5$ box.
+The property of each term is best visualized with a an initial configuration of boids that is symmetric. To this end, we uniformly space the boids in a rectangular configuration.  From symmetry arguments, a boid in the top-left quadrant has the same relationship with respect to its neighbors as a boid in the same relative location in each of the other three quadrants. Thus the four-fold symmetry of the rectangle will be maintained during the time evolution of the boids. Figure~\ref{alignRule} shows the starting conditions of the boids. The symmetric moves of \textit{separation} and \textit{cohesion} are shown in Figures~\ref{sepRule} and~\ref{cohRule}, respectively. These figures show 144 boids in a centralized square inside a $5$x$5$x$5$ box.
 
-When running \textit{separation}, its weight was the only one with a value of one, the weights for the other rules were set to zero. We did the same, when we were testing cohesion.
-
-Since, the rendering methods that are available at this moment in RTPS are points, sprites, screen space and spheres we are not able to present a visual demo on the symmetry of alignment. Although \textit{alignment} is also symmetric. Consider starting with the same initial conditions than in Figure~\ref{alignRule}, what only matters for \textit{alignment} is the velocities. If starting with velocities equal to zero, the particles would be aligned and pointing to the direction since the demo starts. Recalling that we only want to prove that the rules are symmetric assuming that they start from a symmetric configuration, and we only assure that the symmetry is preserved.
+The current available rendering methods in RTPS does not let us present a visual demo od the symmetry of alignment. Although \textit{alignment} is also symmetric. Consider starting with the same initial conditions than in Figure~\ref{alignRule}, what only matters for \textit{alignment} is the velocities. If the boids have identical velocities (in magnitude and directions) initially, they will continue in the same direction. Recalling that we only want to prove that the rules are symmetric assuming that they start from a symmetric configuration, and we assure that the symmetry is preserved.
 
 % alignment
 \begin{figure}[htbp]
@@ -73,7 +86,7 @@ Since, the rendering methods that are available at this moment in RTPS are point
 \includegraphics[scale= 0.5]{figures/sep2.pdf}
 \end{array}$
 \end{center}
-\caption{Screenshots of the separation rule: the weight for \textit{separation} was set to 1 while the weights of the other two rules were zero, the boids started to spread out symmetrically}
+\caption{Screenshots of the separation rule: the weight for \textit{separation} was set to 1 while the weights of the other two rules were set to zero, the boids started to spread out symmetrically}
 \label{sepRule}
 \end{figure}
 
@@ -87,8 +100,42 @@ Since, the rendering methods that are available at this moment in RTPS are point
 \includegraphics[scale= 0.5]{figures/coh4.pdf}
 \end{tabular}
 \end{center}
-\caption{Screenshots of the cohesion rule: the weight for the \textit{cohesion} rule was set to 1 while the weights for the other two rules were zero, the boids move towards the center causing them to merge symmetrically}
+\caption{Screenshots of the cohesion rule: the weight for the \textit{cohesion} rule was set to 1 while the weights for the other two rules were set to zero, the boids move towards the center causing them to merge symmetrically}
 \label{cohRule}
+\end{figure}
+
+% Goal demo
+\subsection{Goal Demo}
+The \textit{goal} and \textit{avoid} rules currently are available to be used only in the RTPS standalone code. They have not beed added to the RTPS modifier yet. 
+
+In this demo we simulate a swarm of bees, when they try to approach the target (in the demo a blue box) which is their hive. The center of the cube is used as the coordinates of the target. The number of boids emitted is 648. Only the goal rules is computed, with a weight constant of 1. The settings of this demo were a maximum speed equals to 2, and a searching radius of 1.5. 
+
+\begin{figure}[htbp]
+\begin{center}$
+\begin{array}{ccc}
+\includegraphics[scale=0.35]{figures/demo_goal1.pdf} &&
+\includegraphics[scale=0.35]{figures/demo_goal2.pdf} \\ \\
+\includegraphics[scale=0.35]{figures/demo_goal3.pdf} &&
+\includegraphics[scale=0.35]{figures/demo_goal4.pdf} \\ \\
+\includegraphics[scale=0.35]{figures/demo_goal5.pdf} &&
+\includegraphics[scale=0.35]{figures/demo_goal6.pdf}
+\end{array}$
+\end{center}
+\caption{Screenshots of the demonstration of the \textit{goal} rule: there are 648 boids and the blue cube is the target of the flock.}
+\label{demo_goal}
+\end{figure}
+ 
+Figure~\ref{demo_goal} shows a series of screenshots of this demo. The flock starts from an artificial cube shape. They start approaching the target until they got it. After the boids found the target, they stay rounding it. 
+
+We ran another demo in which the three main steering behaviors plus the \textit{goal} rule were used to compute the behavior of the boids. Figure~\ref{goal_4rules} shows the resulting flock. Each rule was weighted equally. A minimum separation distance of 2 and a searching radius of 2.5 were used. The initial positions of the boids were the same than in Figure~\ref{demo_goal}. From the Figure we can see that the boids are more separated than in the first example, this is because we are using the separation rule and the minimum separation distance is double than the initial distance that separates the boids. Although, four rules were computed we can see that the objective of the flock was made.
+
+% 4 rules
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.35]{figures/demo_goal_4rules.pdf}
+\caption{Screenshot of the flock following the target: \textit{separation}, \textit{alignment}, \textit{cohesion}, and \textit{goal} rules were used to compute the behavior of the boids.}
+\label{goal_4rules}
+\end{center}
 \end{figure}
 
 % Blender demo

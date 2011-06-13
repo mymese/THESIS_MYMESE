@@ -216,13 +216,16 @@ An similar approach was taken for the CPU implementation of Algorithm~\ref{flock
 
 % combine and integrate
 \begin{algorithm}
-\caption{Combine the steering vectors, calculate new position and check the boundaries}
+\caption{Combine, integrate and check the boundaries}
 \label{combineAlgorithm}
 \begin{algorithmic}
-\STATE Multiply each steering behavior by its respective weight to get the weighted velocity.
-\STATE Combine the weighted velocities by adding them to get the final velocity.
-\STATE Constraint the final velocity to a maximum allowed speed.
-\STATE Integrate over time to get the new position.
+\STATE $vel_{rule}$  = rule * $w_{rule}$
+\STATE $velocity$ = $vel_{rule_1}$ + ... + $vel_{rule_n}$
+\IF{lenghth($velocity$) $>$ $max_{speed}$}
+	\STATE $velocity$ = normalize($velocity$) * $max_{speed}$
+\ENDIF  
+\STATE (Optional) Add circular velocity field to the current velocity.
+\STATE $position$ = $dt$ * $velocity$
 \STATE Apply periodic boundary conditions to the new position.
 \end{algorithmic}
 \end{algorithm}
