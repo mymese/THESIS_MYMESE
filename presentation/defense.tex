@@ -78,7 +78,7 @@
 %--------------------------------------------
 \begin{frame}{Aim}
 	\begin{itemize}
-		\pause \item To develop a flocking implementation that can be used in the Blender Game Engine
+		\pause \item To develop a flocking implementation that can be used in the Blender Game Engine.
 	\end{itemize}
 \end{frame}
 
@@ -101,8 +101,28 @@
 
 % flocking
 \begin{frame}{Flocking}
+	\pause \textit{Flocking} is a nature-inspired behavior, mostly seen in social animals.
+	
+	\pause
+	
+	\begin{figure}[htbp]
+	\begin{center}$
+	\begin{array}{cc}
+	\includegraphics{figures/flock.pdf} &
+	\includegraphics[scale=0.025]{figures/school.pdf} \\
+	\includegraphics[scale=0.18]{figures/herd.pdf} &
+	\includegraphics[scale=0.21]{figures/swarm.pdf}
+	\end{array}$
+	\end{center}
+	\caption{Flocking behavior}
+	\label{default}
+	\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Flocking}
 	\begin{itemize}
-		\pause \item \textit{Flocking} is a nature-inspired behavior, mostly seen in social animals.
 		\pause \item Inspired by the behavior of birds Craig Reynolds developed a behavioral model that simulated the self-organization of \textit{boids}.
 		\pause \item \textit{Boids} are the entities of a flock.
 		\pause \item Since, Reynolds publication in 1987, the field of flocking became very popular and many applications have been published.
