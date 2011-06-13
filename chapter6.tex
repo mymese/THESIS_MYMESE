@@ -141,36 +141,37 @@ We ran another demo in which the three main steering behaviors plus the \textit{
 % Blender demo
 \subsection{Blender Demo}
 
-The following Blender demo of the RTPS library uses two hoses that emit 100 boids. See the hoses in Figure~\ref{demo1_1}, in Figure~\ref{demo1_2} the boids have already spread out into the system. The logic bricks and properties set in this demo are shown in Figure~\ref{demo1_logic}.
+The following Blender demo of the RTPS library uses one hose that emit 500 boids. This demo would simulate a crowd of people. Figure~\ref{crowd_prop} shows the properties to create the hose, and Figure~\ref{crowd_modifier} shows the settings used on this demo. 
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.32]{figures/demo1_1.pdf}
-\caption{Two hoses emitting boids into the FLOCK system}
-\label{demo1_1}
+\includegraphics[scale=0.7]{figures/demo_crowds_prop.pdf}
+\caption{Properties to create a hose}
+\label{crowd_prop}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.32]{figures/demo1_2.pdf}
-\caption{Boids are following the rules and they already spread out.}
-\label{demo1_2}
+\includegraphics[scale=0.8]{figures/demo_crowds_modifier.pdf}
+\caption{Settings of the crowd simulation demo}
+\label{crowd_modifier}
 \end{center}
 \end{figure}
+
+Figure~\ref{crowd_shots} shows the screenshots of the demo. The emitter hose, starts emitting the boids at the center of the world. Then, the boids start reacting according to the settings of the simulation. Finally, the boids are spread out into the world domain and still following the rules.
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.32]{figures/demo1_logic.pdf}
-\caption{Logic bricks for the first demo.}
-\label{demo1_label}
+\begin{center}$
+\begin{array}{c}
+\includegraphics[scale=0.28]{figures/demo_crowds1.pdf} \\
+\includegraphics[scale=0.28]{figures/demo_crowds2.pdf} \\
+\includegraphics[scale=0.28]{figures/demo_crowds3.pdf}
+\end{array}$
 \end{center}
+\caption{Screenshots of the crowd simulation}
+\label{crowd_shots}
 \end{figure}
 
-
-% still need to talk about the parameters
-In this demo the rules were equally weighted. The flock would exhibit differently depending on the combination of the weights. As shown in the previous demo, when we were showing the symmetry of the rules. Currently, you are able to play with weight between zero and one for each of the three implemented rules.
-
-Next demo shows examples of different combinations of the weights.
 
 
