@@ -446,7 +446,7 @@
 	\alert<3>{~~$vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$} \\
 	\alert<3>{end $if$} \\
 	\alert<4>{(Optional) Add circular velocity to the current velocity.}	\\ 
-	\alert<5>{$pos_i^{k+1}$ +=  $dt $* $vel_i^{k+1}$}					\\
+	\alert<5>{$pos_i^{k+1}$ = $pos_i^{k}$  $dt $* $vel_i^{k+1}$}					\\
 	\alert<6>{Apply periodic boundary conditions to the \textit{new} position.} 
 \end{frame}
 

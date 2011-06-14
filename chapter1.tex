@@ -90,10 +90,10 @@ An interface to the Blender Game Engine was developed to link with the RTPS libr
 The remainder of the thesis is structured as follows:  in Chapter~\ref{chap2}, we describe the related work in the area of flocking. Chapter~\ref{chap3} describes the flocking algorithm used and the specific rules implemented. Chapter~\ref{RTPSchapter} provides details on the structure of the RTPS library. In Chapter~\ref{chap5}, the Custom Modifier that was developed for Blender and the properties defined to be able to interact with Blender are presented. Chapter~\ref{resultsChapter} discusses the results with benchmarks and presents demonstrations. Conclusions are found in Chapter~\ref{conclusionChapter}.  And finally, Chapter~\ref{chap8} discusses the Future work. 
 
 \section{Contributions of this thesis}
-List of the contributions made in this thesis:
+The main contributions made in this thesis were:
 \begin{enumerate}
-\item Added a second system called FLOCK to the Real-Time Particle Systems (RTPS) library showing that the mentioned library can be extended to create particle systems in general.
-\item Developed a CPU and GPU flocking implementation that computes separation, alignment, cohesion, goal, and avoid rules. The GPU implementation ensures portability between graphics cards because it was done in OpenCL. 
-\item Added the FLOCK system to the RTPS modifier of the Blender Game Engine demonstrating that the RTPS modifier is able to be expanded to insert any particle system that is already defined in the RTPS library.
+\item Developed a CPU and GPU flocking implementation that computes separation, alignment, cohesion, goal, and avoidance rules. An OpenCL implementation ensures portability between ATI and NVIDIA graphics cards.
+\item Added a FLOCK to the Real-Time Particle Systems (RTPS) library.
+\item Added the FLOCK system to the RTPS modifier of the Blender Game Engine.
 \item Successfully created a simple game demo that uses the FLOCK system and played it inside the Blender Game Engine.
 \end{enumerate}

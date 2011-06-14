@@ -225,7 +225,7 @@ An similar approach was taken for the CPU implementation of Algorithm~\ref{flock
 	\STATE $vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$
 \ENDIF  
 \STATE (Optional) Add circular velocity field to the current velocity.
-\STATE $pos_i^{k+1}$ += $dt$ * $vel_i^{k+1}$
+\STATE $pos_i^{k+1}$ = $pos_i^{k}$ + $dt$ * $vel_i^{k+1}$
 \STATE Apply periodic boundary conditions to the new position.
 \end{algorithmic}
 \end{algorithm}
