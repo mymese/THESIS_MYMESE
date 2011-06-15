@@ -22,7 +22,11 @@ Each behavior is evaluated at each time step for each boid.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.3]{figures/separation.pdf}
+<<<<<<< HEAD
 \caption{Separation steering velocity: the gray circle is the neighborhood of the green boid, \textit{separation} steers the green boid away/near the neighboring boids until a minimum distance between them is met}
+=======
+\caption{Separation steering force: the outer gray circle is the neighborhood of the green boid, the inner gray circle is the minimum distance, \textit{separation} would steer the green boid away/near the neighboring boids until a minimum distance between them is met}
+>>>>>>> c72014e2e0b295225b70e52b90b1da134c595ad4
 \label{separationPDF}
 \end{center}
 \end{figure}
@@ -141,35 +145,59 @@ The \textit{Follow the Leader} behavior is when there is a boid in charge of the
 \end{center}
 \end{figure}
 
-Most of the time the followers want to stay close to the leader without getting into its way, as can be seen in Figure~\ref{leaderPDF}.  If a follower is inside the rectangular region in front of the leader it moves away from it, clearing a path for the leader to move freely without worrying about colliding with their flockmates. The leader computes its movement using Equation~\ref{goalEquation} where $p_t$ is a random position within the global space. The followers that are outside the rectangular region will approach a point slightly behind from the leader using also Equation~\ref{goalEquation}.
+Generally, the followers tend to stay close to the leader while staying
+out of its path, as seen in Figure~\ref{leaderPDF}.  
+If a follower is within the rectangular region ahead of the leader 
+it distances itself, clearing a path for the leader to move freely 
+without worry of collision. The leader's movement is  based on 
+Equation~\ref{goalEquation} where $p_t$ is a random position within the 
+global space. The followers that are outside the rectangular region 
+will approach a point slightly behind the leader, also governed by 
+Equation~\ref{goalEquation}.
 
 % combining behaviors
 \section{Combining the Steering Behaviors}
-Each of the steering behaviors discussed above would return a velocity vector. Now the question arise on \textit{how to combine the behaviors in order to move the boids?}. Each steering force multiplied by a respective weight\footnote{Weights are given by the user, they are not constant values assigned by us.}. For example, combining \textit{separation}, \textit{alignment}, and \textit{cohesion} is done by using Equation~\ref{combine}. Each behavior is multiplied by its constant weight, then they are added to get the final velocity vector.
-
+Each of the steering behaviors discussed above returns a velocity vector. These
+velocities are combined linearly to produce a final boid velocity. The 
+strength of each velocity contribution is controlled by a separate
+weight constant, specified by the user: 
+%velocity contribution is 
+%The question that nwo  arises is \textit{how to combine the behaviors in order to move the boids?}. Each steering force multiplied by a respective weight\footnote{Weights are given by the user, they are not constant values assigned by us.}. For example, combining \textit{separation}, \textit{alignment}, and \textit{cohesion} is done by using Equation~\ref{combine}. Each behavior is multiplied by its constant weight, then they are added to get the final velocity vector.
+%
 % combine equation
 \begin{equation}
 \label{combine}
 velocity = C_S Separation  + C_A Alignment  + C_C Cohesion 
 \end{equation}
-
-The \textit{new} velocity is just the velocity of Equation~\ref{combine} plus the current velocity. Then, first order Euler integration method is used  to calculate the \textit{new} position of each boid. As shown in Equation~\ref{integrate}, where $p_i^{k+1}$ is the position of boid $i$ at step $k+1$, $v_i$ is the velocity of the boid, and $dt$ is the time step of the integration.
-
+\mmy{I do not see avoidance and the other behaviors you implemented}
+%The \textit{new} velocity is just the velocity of Equation~\ref{combine} plus the current velocity. 
+A first order Euler integration method is used  to calculate 
+the \textit{new} position of each boid: 
 % integrate equation
 \begin{align}
 \label{integrate}
 p_i^{k=1} = p_i^k + dt~ v_i
 \end{align}
+where $p_i^{k+1}$ is the position of boid $i$ at step $k+1$, 
+$v_i$ is the velocity of the boid, and $dt$ is the integration time step. 
 
-Each of the steering behaviors is calculated and combined for each boid every time step in order to update their positions.
+The various velocities are recomputed and the boid positions are updated at every time step. 
 
 % algorithms
 \section{Algorithms}
 
-In this Section three algorithms are going to be presented. The first one is the algorithm developed to compute the different rules implemented. The second one is the algorithm that combines the rules and compute the new positions of the boids. The last algorithm presented is the algorithm used to update all the boids at each frame of the simulation. 
+In this Section, we present three algorithms.  \old{are going to be presented.}
+The first algorithm computes the different steering rules. The second algorithm
+that combines the rules and updates the boid positions. The third algorithm
+updates the boids at each frame of the simulation. 
+\mmy{What is the difference between algorithm 2 and 3. This stuff is so 
+trivial it is not clear one should describe these as separate algorithms.}
 
 
-The following Algorithm presents how we computed each of the rules on the GPU. Not all rules are computed at once, only rules with weights greater than zero would be computed.
+The following Algorithm presents the GPU implementation of each of the 
+steering rules. To save time, one only computes the rules with non-zero
+weights. 
+\old{the rules on the GPU. Not all rules are computed at once, only rules with weights greater than zero would be computed.}
 
 % flocking algorithm
 \begin{algorithm}
@@ -220,9 +248,22 @@ The following Algorithm presents how we computed each of the rules on the GPU. N
 \end{algorithmic}
 \end{algorithm}
 
-What is cleaver about Algorithm~\ref{flockingAlgorithm} is that each of the rules is computed independently, not all at once. Algorithm~\ref{flockingAlgorithm} has various steps. Note that the iterative loop is over the flockmates of boid $i$. First we count how many flockmates are in the neighborhood determined by a searching radius. The number of flockmates is needed for the rules \textit{cohesion} and \textit{alignment}. Then, if the weight of the rule is greater than zero, that rule is computed. Since we do not want to waste computations by computing rules that the user do not want to use. The steering vectors that store the values for the rules are initialized with zeros and there is no problem if the rule is not calculated since when combining them, there is going to be no error in the computation of the final velocity vector.
+In the Algorithm~\ref{flockingAlgorithm}, each rule is computed sequentially for each boid. 
+%Algorithm~\ref{flockingAlgorithm} has several components. 
+The iterative loop is over the flockmates of boid $i$. 
+First we determine (and count) the flockmates in the neighborhood covered
+by the searching radius, which are input into 
+rules \textit{cohesion} and \textit{alignment}. \old{Then, if the 
+weight of the rule is greater than zero, that rule is computed. }
+\old{Since we do not want to waste computations by computing rules that 
+the user do not want to use.} 
+\old{The steering vectors that store the values 
+for the rules are initialized with zeros and there is no problem if the 
+rule is not calculated since when combining them, there is going to be 
+no error in the computation of the final velocity vector.}
 
-An similar approach was taken for the CPU implementation of Algorithm~\ref{flockingAlgorithm}.
+A similar approach was taken for the CPU implementation of 
+Algorithm~\ref{flockingAlgorithm}.
 
 % combine and integrate
 \begin{algorithm}
@@ -234,13 +275,14 @@ An similar approach was taken for the CPU implementation of Algorithm~\ref{flock
 \IF{length($vel_i^{k+1}$) $>$ $max_{speed}$}
 	\STATE $vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$
 \ENDIF  
-\STATE (Optional) Add circular velocity field to the current velocity.
-\STATE $pos_i^{k+1}$ += $dt$ * $vel_i^{k+1}$
+\STATE (Optional) Add an imposed velocity field to the current velocity.
+\STATE $pos_i^{k+1}$ = $pos_i^{k}$ + $dt$ * $vel_i^{k+1}$
 \STATE Apply periodic boundary conditions to the new position.
 \end{algorithmic}
 \end{algorithm}
 
-Algorithm~\ref{combineAlgorithm} presents the steps done to calculate the new position of each boid at each time step.
+Algorithm~\ref{combineAlgorithm} presents the steps \old{done} necessary  
+to update the boid position at each time step.
 
 % update
 \begin{algorithm}
@@ -257,5 +299,10 @@ Algorithm~\ref{combineAlgorithm} presents the steps done to calculate the new po
 \end{algorithmic}
 \end{algorithm}
 
-The Algorithm~\ref{updateAlgorithm} is a simplify version of what the \texttt{updateGPU()} function does. See Section~\ref{flocksection} for more details of the \texttt{updateGPU()} function. First a FLOCK system has to be created then the boids enter into a loop that is going to be running until the user quits the simulation.
+Algorithm~\ref{updateAlgorithm} is a simplified version of 
+the \texttt{updateGPU()} function (Section~\ref{flocksection}) 
+\old{for more details of the \texttt{updateGPU()} function.}
+First a FLOCK system is created. The boids then enter into a continuous loop 
+that is broken when the simulation ends. 
+\old{that is going to be running until} 
 

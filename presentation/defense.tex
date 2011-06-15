@@ -41,7 +41,7 @@
 \subsection{Educational Games}
 \begin{frame}{Educational Games}
 	\begin{itemize}
-		\pause \item \textbf{Goal}: the player learns while is playing
+		%\pause \item \textbf{Goal}: the player learns while is playing
 		\pause \item Some of the benefits of playing Educational Games are:
 			\begin{itemize}
 				\pause \item gain more knowledge
@@ -291,7 +291,7 @@
 \begin{frame}{Flocking}
 	\begin{itemize}
 		\pause \item \textit{Flocking} is used to simulate social behavior between entities by following a simple set of rules.
-		\pause \item The three main rules, also called \textit{steering behaviors} were introduced by Craig Reynolds and they are:
+		\pause \item The three main rules, also called \textit{steering behaviors} are:
 			\begin{itemize}
 				\pause \item Separation
 				\pause \item Alignment
@@ -446,7 +446,7 @@
 	\alert<3>{~~$vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$} \\
 	\alert<3>{end $if$} \\
 	\alert<4>{(Optional) Add circular velocity to the current velocity.}	\\ 
-	\alert<5>{$pos_i^{k+1}$ +=  $dt $* $vel_i^{k+1}$}					\\
+	\alert<5>{$pos_i^{k+1}$ = $pos_i^{k}$  $dt $* $vel_i^{k+1}$}					\\
 	\alert<6>{Apply periodic boundary conditions to the \textit{new} position.} 
 \end{frame}
 
@@ -649,8 +649,18 @@
 %--------------------------------------------
 \subsection{Benchmarks}
 
-% RTPS vs Blender
-\begin{frame}{RTPS vs Blender}
+% RTPS vs RTPS
+\begin{frame}{RTPS-FLOCK system}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.3]{../figures/RTPSvsRTPS.pdf}
+	\caption{Timings of RTPS-FLOCK system}
+	\end{center}
+	\end{figure}
+\end{frame}
+
+% RTPS Blender vs Blender
+\begin{frame}{RTPS Blender vs Blender}
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.30]{../figures/benchmarks.pdf}
@@ -659,11 +669,6 @@
 	\end{center}
 	\end{figure}
 \end{frame}
-
-% RTPS Blender vs Blender
-%\begin{frame}{RTPS Blender vs Blender}
-%\textcolor{red}{*** MISSING ***}
-%\end{frame}
 
 % speedup
 \begin{frame}{Speedup} 
@@ -732,30 +737,59 @@
 	\end{figure}
 \end{frame}
 
-% Blender
-\begin{frame}{Blender Demo}
+% Goal Demo
+\begin{frame}{Bees approaching their hive simulation}
 	\begin{figure}[htbp]
-	\begin{center}
-	\includegraphics[scale=0.20]{../figures/demo1_1.pdf}
-	\caption{Two hoses emitting boids into the FLOCK system}
+	\begin{center}$
+	\begin{array}{cc}
+	\includegraphics[scale=0.35]{../figures/demo_goal1.pdf} &
+	\includegraphics[scale=0.35]{../figures/demo_goal2.pdf} 
+	\end{array}$
 	\end{center}
-\end{figure}
+	\caption{Demonstration of the \textit{goal} rule}
+	\end{figure}
 \end{frame}
-
-\begin{frame}{Blender Demo}
+\begin{frame}{Bees approaching their hive simulation}
 	\begin{figure}[htbp]
-	\begin{center}
-	\includegraphics[scale=0.20]{../figures/demo1_2.pdf}
-	\caption{Boids are following the rules and they already spread out.}
+	\begin{center}$
+	\begin{array}{cc}
+	\includegraphics[scale=0.35]{../figures/demo_goal3.pdf} &
+	\includegraphics[scale=0.35]{../figures/demo_goal4.pdf} 
+	\end{array}$
 	\end{center}
+	\caption{Demonstration of the \textit{goal} rule}
+	\end{figure}
+\end{frame}
+\begin{frame}{Bees approaching their hive simulation}
+	\begin{figure}[htbp]
+	\begin{center}$
+	\begin{array}{cc}
+	\includegraphics[scale=0.35]{../figures/demo_goal5.pdf} &
+	\includegraphics[scale=0.35]{../figures/demo_goal6.pdf}
+	\end{array}$
+	\end{center}
+	\caption{Demonstration of the \textit{goal} rule}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Blender Demo}
+% Blender
+\begin{frame}{Crowding simulation}
+	\begin{figure}[htbp]
+	\begin{center}$
+	\begin{array}{ccc}
+	\includegraphics[scale=0.15]{../figures/demo_crowds1.pdf} &
+	\includegraphics[scale=0.15]{../figures/demo_crowds2.pdf}
+	\end{array}$
+	\end{center}
+	\caption{A hose emitting boids into the FLOCK system}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Crowding simulation}
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.20]{../figures/demo1_logic.pdf}
-	\caption{Logic bricks of the first demo.}
+	\includegraphics[scale=0.20]{../figures/demo_crowds3.pdf}
+	\caption{Boids are following the rules and they already spread out into the world.}
 	\end{center}
 	\end{figure}
 \end{frame}
