@@ -226,18 +226,18 @@ In the Algorithm~\ref{flockingAlgorithm}, each rule is computed sequentially for
 \caption{Combine, integrate and check the boundaries}
 \label{combineAlgorithm}
 \begin{algorithmic}
-\STATE $vel_{rule_i}$  = $rule_i$ * $w_{rule_i}$ 
+\STATE $vel_{rule_j}$  = $rule_j$ * $w_{rule_j}$ 
 \STATE $vel_i^{k+1}$ = $vel_i^k$ + $vel_{rule_1}$ + ... + $vel_{rule_n}$
 \IF{length($vel_i^{k+1}$) $>$ $max_{speed}$}
 	\STATE $vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$
 \ENDIF  
 \STATE (Optional) Add an imposed velocity field to the current velocity.
 \STATE $pos_i^{k+1}$ = $pos_i^{k}$ + $dt$ * $vel_i^{k+1}$
-\STATE Apply periodic boundary conditions to the new position.
+\STATE Apply periodic boundary conditions to the \textit{new} position.
 \end{algorithmic}
 \end{algorithm}
 
-Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid's position at each time step. First order, Euler integration is done to calculate the positions. Since flocking is an overall behavior we are not concern on getting very accuracy positions. A first order algorithm is enough. We would like to maintain the boid's density in our system, that is why we applied periodic boundary conditions to the positions to the boids.
+Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid's position at each time step. For each $j$ rule, the respective velocity is computed. By adding the velocities of each rule and the current velocity, the final velocity vector of boid $i$ at time step $k+1$ is obtained. First order, Euler integration is done to calculate the positions. Since flocking is an overall behavior we are not concern on getting very accuracy positions. A first order algorithm is enough. We would like to maintain the boid's density in our system, that is why we applied periodic boundary conditions to the positions to the boids.
  
 % update
 \begin{algorithm}
