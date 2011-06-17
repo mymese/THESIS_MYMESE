@@ -1,6 +1,9 @@
-\documentclass[red]{beamer}
+%\documentclass[red]{beamer}
+\documentclass[handout]{beamer}
 
 \usepackage{fixltx2e}
+\usepackage{movie15}
+\usepackage{hyperref}
 
 %\usetheme{MyTheme} 
 %\usetheme{Berkeley}
@@ -365,30 +368,42 @@
 %--------------------------------------------
 \subsection{Other Steering Behaviors}
 
-% goal and avoid
-\begin{frame}{Goal and Avoid}
-
+% goal 
+\begin{frame}{Goal}
 	% goal equation
 	\begin{equation}
 	\label{goalEquation}
-	Goal = ((p_t - p_i) * max_{speed}) - v_i
-	\end{equation}
-
-	% avoid equation
-	\begin{equation}
-	\label{avoidEquation}
-	Avoid = -((p_t - p_i) * max_{speed}) - v_i
+	Goal = \left(\frac{p_t - p_i}{d(p_t,p_i)} * max_{speed}\right) - v_i
 	\end{equation}
 	
 	% figure: seek and flee
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.25]{../figures/seekANDflee.pdf}
-	\caption{Goal and Avoid steering behavior}
+	\includegraphics[scale=0.45]{../figures/goal.pdf}
+	\caption{Goal steering behavior}
 	\label{seekANDflee}
 	\end{center}
 	\end{figure}
 \end{frame}
+
+% avoid
+\begin{frame}{Avoidance}
+	\begin{equation}
+	\label{avoidEquation}
+	Avoidance = -\left(\frac{p_t - p_i}{d(p_t,p_i)} * max_{speed}\right) - v_i
+	\end{equation}
+
+	% figure: seek and flee
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.45]{../figures/avoidance.pdf}
+	\caption{Avoidance steering behavior}
+	\label{seekANDflee}
+	\end{center}
+	\end{figure}
+\end{frame}
+% avoid equation
+	
 
 % follow the leader
 %\begin{frame}{Follow the Leader}
@@ -445,7 +460,7 @@
 	\alert<3>{$if$ length($vel_i^{k+1}$) $>$ $max_{speed}$ $then$}			\\ 
 	\alert<3>{~~$vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$} \\
 	\alert<3>{end $if$} \\
-	\alert<4>{(Optional) Add circular velocity to the current velocity.}	\\ 
+	\alert<4>{(Optional) Add an external velocity to the current velocity.}	\\ 
 	\alert<5>{$pos_i^{k+1}$ = $pos_i^{k}$  $dt $* $vel_i^{k+1}$}					\\
 	\alert<6>{Apply periodic boundary conditions to the \textit{new} position.} 
 \end{frame}
@@ -479,7 +494,7 @@
 \begin{frame}{RTPS organization diagram}
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.25]{../figures/RTPSdiagramMyrna.pdf}
+	\includegraphics[scale=0.28]{../figures/RTPSdiagramMyrna.pdf}
 	\caption{RTPS organization diagram}
 	\end{center}
 	\end{figure}
@@ -589,19 +604,24 @@
 	\begin{itemize}
 		\pause \item BGE is a very powerful tool.
 		\pause \item Simple games can be created without the need for explicit programming.
-		\pause \item After creating the 3D scene you can bring it to life by using the simple logic editor.
-			% figure: logic editor 
-			\pause
-			\begin{figure}[htbp]
-			\begin{center}
-			\includegraphics[scale=0.25]{../figures/logic.pdf}
-			\caption{Blender Game Logic Editor}
-			\label{logicEditor}
-			\end{center}
-			\end{figure}
+		\pause \item After creating the 3D scene you can bring it to life by using the simple logic editor.	
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{The Blender Game Engine}
+	% figure: logic editor 
+	\pause
+	\begin{figure}[htbp]
+	\begin{center}$
+	\begin{array}{c}
+	\includegraphics[scale=0.35]{../figures/demo1_logic_properties.pdf} \\
+	\includegraphics[scale=0.32]{../figures/demo1_logic_bricks.pdf}
+	\end{array}$
+	\end{center}
+	\caption{Blender Game Logic Editor}
+	\label{logicEditor}
+	\end{figure}
+\end{frame}
 % The Blender Game Engine
 \begin{frame}{The Blender Game Engine}
 	\begin{itemize}
@@ -653,8 +673,8 @@
 \begin{frame}{RTPS-FLOCK system}
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.3]{../figures/RTPSvsRTPS.pdf}
-	\caption{Timings of RTPS-FLOCK system}
+	\includegraphics[scale=0.5]{../figures/RTPSvsRTPS.pdf}
+	%\caption{Timings of RTPS-FLOCK system}
 	\end{center}
 	\end{figure}
 \end{frame}
@@ -663,8 +683,8 @@
 \begin{frame}{RTPS Blender vs Blender}
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.30]{../figures/benchmarks.pdf}
-	\caption{Timings of RTPS modifier and Blender Boids system}
+	\includegraphics[scale=0.50]{../figures/benchmarks.pdf}
+	%\caption{Timings of RTPS modifier and Blender Boids system}
 	\label{plot}
 	\end{center}
 	\end{figure}
@@ -674,8 +694,8 @@
 \begin{frame}{Speedup} 
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.30]{../figures/speedup.pdf}
-	\caption{Speedup of the FLOCK system of the RTPS library over the Blender Boids system}
+	\includegraphics[scale=0.50]{../figures/speedup.pdf}
+	%\caption{Speedup of the FLOCK system of the RTPS library over the Blender Boids system}
 	\label{speedup}
 	\end{center}
 	\end{figure}
@@ -685,8 +705,8 @@
 \begin{frame}{RTPS kernels}
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.30]{../figures/kernelsPlot.pdf}
-	\caption{Timings for the kernels executed by the FLOCK system of RTPS}
+	\includegraphics[scale=0.50]{../figures/kernelsPlot.pdf}
+	%\caption{Timings for the kernels executed by the FLOCK system of RTPS}
 	\label{kernelBench}
 	\end{center}
 	\end{figure}
@@ -709,91 +729,31 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Symmetry Demo}
-	\begin{figure}[htbp]
-	\begin{center}$
-	\begin{array}{cc}
-	\includegraphics[scale= 0.35]{../figures/sep1.pdf} &
-	\includegraphics[scale= 0.35]{../figures/sep2.pdf}
-	\end{array}$
+\begin{frame}{Symmetry Demo: Separation}
+	\begin{center}
+  		\includemovie[poster, text=(Separation Video), repeat]{6cm}{6cm}{../videos/video_separation.mpg}
 	\end{center}
-	\caption{Screenshots of the separation rule}
-	\label{sepRule}
-	\end{figure}
 \end{frame}
 
-\begin{frame}{Symmetry Demo}
-	\begin{figure}[htbp]
+\begin{frame}{Symmetry Demo: Cohesion}
 	\begin{center}
-	\begin{tabular}{cc}
-	\includegraphics[scale= 0.25]{../figures/coh1.pdf} &
-	\includegraphics[scale= 0.25]{../figures/coh2.pdf} \\
-	\includegraphics[scale= 0.25]{../figures/coh3.pdf} &
-	\includegraphics[scale= 0.25]{../figures/coh4.pdf}
-	\end{tabular}
+  		\includemovie[poster, text=(Cohesion Video), repeat]{6cm}{6cm}{../videos/video_cohesion.mpg}
 	\end{center}
-	\caption{Screenshots of the cohesion rule}
-	\label{cohRule}
-	\end{figure}
 \end{frame}
 
 % Goal Demo
 \begin{frame}{Bees approaching their hive simulation}
-	\begin{figure}[htbp]
-	\begin{center}$
-	\begin{array}{cc}
-	\includegraphics[scale=0.35]{../figures/demo_goal1.pdf} &
-	\includegraphics[scale=0.35]{../figures/demo_goal2.pdf} 
-	\end{array}$
+	\begin{center}
+  		\includemovie[poster, text=(Goal Video), repeat]{6cm}{6cm}{../videos/video_goal.mpg}
 	\end{center}
-	\caption{Demonstration of the \textit{goal} rule}
-	\end{figure}
-\end{frame}
-\begin{frame}{Bees approaching their hive simulation}
-	\begin{figure}[htbp]
-	\begin{center}$
-	\begin{array}{cc}
-	\includegraphics[scale=0.35]{../figures/demo_goal3.pdf} &
-	\includegraphics[scale=0.35]{../figures/demo_goal4.pdf} 
-	\end{array}$
-	\end{center}
-	\caption{Demonstration of the \textit{goal} rule}
-	\end{figure}
-\end{frame}
-\begin{frame}{Bees approaching their hive simulation}
-	\begin{figure}[htbp]
-	\begin{center}$
-	\begin{array}{cc}
-	\includegraphics[scale=0.35]{../figures/demo_goal5.pdf} &
-	\includegraphics[scale=0.35]{../figures/demo_goal6.pdf}
-	\end{array}$
-	\end{center}
-	\caption{Demonstration of the \textit{goal} rule}
-	\end{figure}
 \end{frame}
 
 % Blender
 \begin{frame}{Crowding simulation}
-	\begin{figure}[htbp]
-	\begin{center}$
-	\begin{array}{ccc}
-	\includegraphics[scale=0.15]{../figures/demo_crowds1.pdf} &
-	\includegraphics[scale=0.15]{../figures/demo_crowds2.pdf}
-	\end{array}$
-	\end{center}
-	\caption{A hose emitting boids into the FLOCK system}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Crowding simulation}
-	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.20]{../figures/demo_crowds3.pdf}
-	\caption{Boids are following the rules and they already spread out into the world.}
+  		\includemovie[poster, text=(Crowding Video), repeat]{6cm}{6cm}{../videos/video_crowd.mov}
 	\end{center}
-	\end{figure}
 \end{frame}
-
 
 %--------------------------------------------
 % conclusion

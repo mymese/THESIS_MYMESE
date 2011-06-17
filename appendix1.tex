@@ -1,0 +1,31 @@
+\chapter{GETTING THE CODE}
+
+The implementation of what was done in this thesis was stored in a \texttt{git} repository. You may download, compile, and run our modified Blender code by following the next steps. \\
+
+% download
+\noindent
+\textit{Download:} \\
+\texttt{git clone git@github.com:enjalot/BGERTPS.git} \\
+\texttt{cd BGERTPS} \\
+\texttt{git checkout mymese} \\
+\texttt{git submodule init} \\
+\texttt{git submodule update} \\
+\texttt{cd blender/extern/rtps/} \\
+\texttt{git checkout myrnasph} \\
+\texttt{cd ../../../../} \\
+
+% compile
+\noindent
+\textit{Compile:} \\
+\texttt{mkdir build} \\
+\texttt{cd build} \\
+\texttt{cmake ../BGERTPS/blender} \\
+\texttt{make -j 8} \\
+\texttt{make install} \\
+
+% run
+\noindent
+\textit{Run:} \\
+\texttt{./bin/blender} \\
+
+
