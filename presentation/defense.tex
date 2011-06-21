@@ -1,9 +1,12 @@
-%\documentclass[red]{beamer}
-\documentclass[handout]{beamer}
+\documentclass[red]{beamer}
+%\documentclass[handout]{beamer}
 
 \usepackage{fixltx2e}
 \usepackage{movie15}
 \usepackage{hyperref}
+
+%\input{../macros.tex}
+%\input{../misc_mac.tex}
 
 %\usetheme{MyTheme} 
 %\usetheme{Berkeley}
@@ -42,82 +45,66 @@
 % educational games
 %--------------------------------------------
 \subsection{Educational Games}
-\begin{frame}{Educational Games}
+\begin{frame}{Motivation}
 	\begin{itemize}
-		%\pause \item \textbf{Goal}: the player learns while is playing
-		\pause \item Some of the benefits of playing Educational Games are:
-			\begin{itemize}
-				\pause \item gain more knowledge
-				\pause \item motivation
-				\pause \item interest
-			\end{itemize}
-		\pause \item A game must be challenge, have fantasy and curiosity in order to be a fun Educational game.
+		\pause \item Develop tools for educational games.
+		\pause \item Address the poor performance in the basic classes of students.
+		\pause \item Incorporate general tools such as flocking into public domain game engines.
 	\end{itemize}	
 \end{frame}
-% ASK: HOW EDUCATIONAL GAMES OR ANY OTHER GAME CAN BE CREATED?
-% ANSWER: USING GAME ENGINES
-
-%--------------------------------------------
-% GEs
-%--------------------------------------------
-\subsection{Game Engines}
-\begin{frame}{Game Engines}
-	\begin{itemize}
-		\pause \item Game Engines (GE) are used to simulate partial reality.
-		\pause \item Let you interact with 3D world in real-time. \pause FUN!
-		\pause \item A GE consist of:
-			\begin{itemize}
-				\pause \item render the 3D world and the objects on it
-				\pause \item rerender the world when something change
-				\pause \item game logic
-				\pause \item simulate the physics
-				\pause \item collision detection and reaction
-			\end{itemize}
-	\end{itemize}
-\end{frame}
-
-%--------------------------------------------
-% aim
-%--------------------------------------------
-\begin{frame}{Aim}
-	\begin{itemize}
-		\pause \item To develop a flocking implementation that can be used in the Blender Game Engine.
-	\end{itemize}
-\end{frame}
-
 
 %--------------------------------------------
 % related work
 %--------------------------------------------
 \subsection{Background and Related Work}
 
-%\begin{frame}{Background and Related Work Outline}
-%	\begin{itemize}
-%		\pause \item Flocking
-%		\pause \item Early work
-%		\pause \item Current work
-%		\pause \item Applications
-%		\pause \item GPU computing
-%		\pause \item Flocking using the GPU
-%	\end{itemize}
-%\end{frame}
-
 % flocking
 \begin{frame}{Flocking}
-	\pause \textit{Flocking} is a nature-inspired behavior, mostly seen in social animals.
-	
-	\pause
-	
+	\begin{itemize}
+		\pause \item \textit{Flocking} is a nature-inspired behavior, mostly seen in animals.
+		\pause \item Collective motion of large group of entities, that exhibits interesting behavior as a whole.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Flocking}
 	\begin{figure}[htbp]
-	\begin{center}$
-	\begin{array}{cc}
-	\includegraphics{figures/flock.pdf} &
-	\includegraphics[scale=0.23]{figures/school.pdf} \\
-	\includegraphics[scale=0.18]{figures/herd.pdf} &
-	\includegraphics[scale=0.22]{figures/swarm.pdf}
-	\end{array}$
+	\begin{center}
+	\includegraphics[scale=2.25]{figures/flock.pdf} 
 	\end{center}
-	\caption{Flocking behavior}
+	\caption{Flocking behavior: Flock of birds}
+	\label{default}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Flocking}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=.55]{figures/school.pdf} 
+	\end{center}
+	\caption{Flocking behavior: Schooling}
+	\label{default}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Flocking}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.4]{figures/herd.pdf} 
+	\end{center}
+	\caption{Flocking behavior: Herd of quadrupeds}
+	\label{default}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Flocking}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.5]{figures/swarm.pdf}
+	\end{center}
+	\caption{Flocking behavior: Swarms of insects}
 	\label{default}
 	\end{figure}
 
@@ -126,19 +113,15 @@
 
 \begin{frame}{Flocking}
 	\begin{itemize}
-		\pause \item Inspired by the behavior of birds Craig Reynolds developed a behavioral model that simulated the self-organization of \textit{boids}.
+		\pause \item Inspired by the flocking behavior of birds Craig Reynolds developed a behavioral model that simulated the self-organization of \textit{boids}.
 		\pause \item \textit{Boids} are the entities of a flock.
-		\pause \item Since, Reynolds publication in 1987, the field of flocking became very popular and many applications have been published.
+		\pause \item Craig Reynolds is the pioneer of flocking, his most recognized paper: \textit{Flocks, herds, and school: A Distributed Behavioral Model} revolutionized the field of flocking.
 	\end{itemize}
 \end{frame}
 
 % craig
 \begin{frame}{Original Boids Model by Craig Reynolds}
-	\begin{itemize}
-		\pause \item Craig Reynolds is the pioneer of flocking, his most recognized paper: \textit{Flocks, herds, and school: A Distributed Behavioral Model} revolutionized the field of flocking.
-		\pause \item He stated that the behavior of the boids is represented by a set of rules and its internal state.
-		\pause \item The set of rules, also called \textit{Boids Model}, consist of:	
-	\end{itemize}
+	\pause The set of rules, also called \textit{Boids Model}, consist of:
 	
 	\begin{columns}[b]
 		\pause
@@ -173,12 +156,7 @@
 
 
 % other rules
-\begin{frame}{Proceeding Work}
-	\begin{itemize}
-		\pause \item In 1999 Reynolds expanded the set of behaviors.
-		\pause \item Some of the new behaviors were:
-	\end{itemize}
-	
+\begin{frame}{Previous Flocking Work}
 	\begin{columns}[b]
 		\begin{column}{6cm}
 			\pause
@@ -202,7 +180,7 @@
 	\end{columns}
 \end{frame}
 		
-\begin{frame}{Proceeding Work}
+\begin{frame}{Previous Flocking Work}
 	\begin{columns}[b]
 		\begin{column}{6cm}
 			\pause
@@ -263,7 +241,7 @@
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=3.5]{figures/documents.pdf}
-	\caption{Flocking clustering on 800 two-dimensional synthetic objects from \textit{A flocking based algorithm for document clustering analysis}}
+	\caption{Flocking clustering on 800 two-dimensional objects from \textit{A flocking based algorithm for document clustering analysis}}
 	\end{center}
 	\end{figure}
 \end{frame}
@@ -271,10 +249,10 @@
 % GPU computing
 \begin{frame}{GPU Computing}
 	\begin{itemize}
-		\pause \item Graphics processing unit or GPU is a numeric computing engine used for massive computation.
-		\pause \item \textit{GPU computing}, also know as \textit{GPGPU} is when we use GPUs for general computing.
-		\pause \item \textit{GPU computing} is an heterogeneous system that uses GPUs and CPUs together to process a task.
-		\pause \item GPUs have their own architecture therefore, they also have their own programming languages.
+		\pause \item Graphical processing units or \textit{GPUs} are numeric computing engines used to perform a massive number of floating-point calculations in parallel.
+		\pause \item \textit{GPU computing}, also know as \textit{GPGPU} is a field of study that develops the use of GPUs for general computing.
+		\pause \item GPU computing is often considered an heterogeneous system, a mixture of GPUs and CPUs used together to process one or more tasks.
+		\pause \item GPUs have different architecture than the CPUs therefore, they need to be programmed in a special manner.
 	\end{itemize}
 \end{frame}
 
@@ -282,7 +260,17 @@
 \begin{frame}{Flocking Using the GPU}
 	\begin{itemize}
 		\pause \item Flocking algorithms are parallelizable algorithms because the same operations are computed for all boids in the flock.
-		\pause \item GPUs can be used to implement flocking algorithms and enhance the performance of the execution of the program.
+		\pause \item GPUs can be used to implement flocking algorithms and allow flocks with tens or hundreds of thousands of boids.
+	\end{itemize}
+\end{frame}
+
+%--------------------------------------------
+% aim
+%--------------------------------------------
+\subsection{Aim}
+\begin{frame}{Aim}
+	\begin{itemize}
+		\pause \item To develop a flocking implementation that can be used in the Blender Game Engine.
 	\end{itemize}
 \end{frame}
 
@@ -300,7 +288,7 @@
 				\pause \item Alignment
 				\pause \item Cohesion
 			\end{itemize}
-		\pause \item The steering behaviors are velocity vectors with direction and magnitude.
+		\pause \item Each rule is associated to a velocity vector and a scalar weight.
 	\end{itemize}
 \end{frame}
 
@@ -320,8 +308,8 @@
 	% figure: separation
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.15]{../figures/separation.pdf}
-	\caption{Separation steering behavior}
+	\includegraphics[scale=0.25]{../figures/separation.pdf}
+	%\caption{Separation steering behavior}
 	\label{separation}
 	\end{center}
 	\end{figure}
@@ -338,8 +326,8 @@
 	% figure: alignment
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.15]{../figures/alignment.pdf}
-	\caption{Alignment steering behavior}
+	\includegraphics[scale=0.25]{../figures/alignment.pdf}
+	%\caption{Alignment steering behavior}
 	\label{alignment}
 	\end{center}
 	\end{figure}
@@ -356,8 +344,8 @@
 	% figure: cohesion
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.15]{../figures/cohesion.pdf}
-	\caption{Cohesion steering behavior}
+	\includegraphics[scale=0.25]{../figures/cohesion.pdf}
+	%\caption{Cohesion steering behavior}
 	\label{cohesion}
 	\end{center}
 	\end{figure}
@@ -380,7 +368,7 @@
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.45]{../figures/goal.pdf}
-	\caption{Goal steering behavior}
+	%\caption{Goal steering behavior}
 	\label{seekANDflee}
 	\end{center}
 	\end{figure}
@@ -397,25 +385,24 @@
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.45]{../figures/avoidance.pdf}
-	\caption{Avoidance steering behavior}
+	%\caption{Avoidance steering behavior}
 	\label{seekANDflee}
 	\end{center}
 	\end{figure}
 \end{frame}
 % avoid equation
 	
-
-% follow the leader
-%\begin{frame}{Follow the Leader}
-	% figure: leader following
-%	\begin{figure}[htbp]
-%	\begin{center}
-%	\includegraphics[scale=0.35]{../figures/leaderFollowing.pdf}
-%	\caption{Follow the leader steering behavior}
-%	\label{leadFollow}
-%	\end{center}
-%	\end{figure}
-%\end{frame}
+% combine
+\begin{frame}{Final Velocity}
+	\pause The final velocity of the boids is calculated by doing a linear combination of the steering behaviors.
+	 
+	\begin{equation}
+	vel^{k+1} = vel^{k} + \sum_{rule_r} w_{rule_r} {rule_r}
+	\end{equation}
+	
+	where ${rule}_r$ is the resulting velocity of each steering behavior and $w_{rule_r}$ is the respective scalar weight for that rule. 
+	 
+\end{frame}
 
 %--------------------------------------------
 % algorithm
@@ -426,57 +413,26 @@
 \begin{frame}{Algorithm to compute the rules}
 	\alert<1>{$for$ each boid $i$ $do$}	 \\
 	\alert<2>{~~$for$ each neighbor $j$ of boid $i$ $do$}			\\
-	\alert<3>{~~~~$if$ dist($pos_i$, $pos_j$) $<=$ searching radius $then$}	\\
-	%\alert<3>{~~~~flockmates++}							\\
-	\alert<4>{~~~~~~$if$ $w_{rule_i}$ $>$ 0 $then$}					\\
-	\alert<4>{~~~~~~~~~~Compute $rule_i$}  \\
+	\alert<3>{~~~~$if$ d($pos_i$, $pos_j$) $<=$ searching radius $then$}	\\
+	\alert<4>{~~~~~~$if$ $w_{rule_r}$ $>$ 0 $then$}					\\
+	\alert<4>{~~~~~~~~~~Compute $rule_r$}  \\
 	\alert<4>{~~~~~~end $if$} \\
 	\alert<5>{~~~~~~$Comment: Compute ~all ~the ~other ~rules. $} \\
 	\alert<3>{~~~~end $if$} \\
-	%\alert<4>{~~~~~~$if$ dist($pos_i$, $pos_j$) $<=$ minimum distance $then$}	\\
-	%\alert<4>{~~~~~~~~Compute the separation rule.} \\
-	%\alert<4>{~~~~~~~~nearestFlockmates++}						\\
-	%\alert<4>{~~~~~~~~s = $pos_i$ - $pos_j$} 					\\
-	%\alert<4>{~~~~~~~~s /= dist($pos_i$, $pos_j$)} 						\\
-	%\alert<4>{~~~~~~~~separation += s}							\\
-	%\alert<5>{~~~~$if$ $w_{align}$ $>$ 0 $then$}				\\
-	%\alert<5>{~~~~~~Compute the alignment rule.} \\
-	%\alert<5>{~~~~~~alignment += $vel_j$}						\\
-	%\alert<6>{~~~~$if$ $w_{coh}$ $>$ 0 $then$}					\\
-	%\alert<6>{~~~~~~Compute the cohesion rule.} \\
-	%\alert<6>{~~~~~~cohesion += $pos_j$}						\\
-	%\alert<7>{~~~~$if$ $w_{goal}$ $>$ 0 $then$}					\\
-	%\alert<7>{~~~~~~Compute the goal rule.} \\
-	%\alert<8>{~~~~$if$ $w_{avoid}$ $>$ 0 $then$}					\\
-	%\alert<8>{~~~~~~Compute the avoid rule.} \\
 	\alert<2>{~~end $for$} \\
 	\alert<1>{end $for$}
 \end{frame}
 
 % integration
 \begin{frame}{Combine and Integrate}
- 	\alert<1>{$vel_{rule_i}$ = $rule_i$ * $w_{rule_i}$}			\\
-	\alert<2>{$vel_i^{k+1}$ = $vel_i^k$ + $vel_{rule_1}$ + ... + $vel_{rule_n}$} 	\\ 
+ 	\alert<1>{$vel_{rule_r}$ = $rule_r$ $w_{rule_r}$}			\\
+	\alert<2>{$vel_i^{k+1} = vel_i^{k} + \sum_{rule_r} vel_{rule_r}$} 	\\ 
 	\alert<3>{$if$ length($vel_i^{k+1}$) $>$ $max_{speed}$ $then$}			\\ 
-	\alert<3>{~~$vel_i^{k+1}$ = normalize($vel_i^{k+1}$) * $max_{speed}$} \\
+	\alert<3>{~~$vel_i^{k+1}$ = normalize($vel_i^{k+1}$)  $max_{speed}$} \\
 	\alert<3>{end $if$} \\
-	\alert<4>{(Optional) Add an external velocity to the current velocity.}	\\ 
-	\alert<5>{$pos_i^{k+1}$ = $pos_i^{k}$  $dt $* $vel_i^{k+1}$}					\\
+	\alert<4>{(Optional) Add an imposed velocity to the current velocity.}	\\ 
+	\alert<5>{$pos_i^{k+1}$ = $pos_i^{k}$  + $dt $ $vel_i^{k+1}$}					\\
 	\alert<6>{Apply periodic boundary conditions to the \textit{new} position.} 
-\end{frame}
-
-% each frame
-\begin{frame}{Algorithm to update the simulation at each frame}
-%\begin{tabbing}
-	%\begin{block}{Algorithm to update the simulation at each frame}
-		\alert<1>{Create a FLOCK particle system.}	\\
-		\alert<2>{$for$ each frame $do$}			\\
-		\alert<3>{~~Do the nearest neighbor search.}	\\
-		\alert<4>{~~Compute the Rules.}				\\
-		\alert<5>{~~Integrate over time.}				\\
-		\alert<6>{~~Render the \textit{new} position.}	\\	
-	%\end{block}
-%\end{tabbing}
 \end{frame}
 
 
@@ -495,7 +451,7 @@
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.28]{../figures/RTPSdiagramMyrna.pdf}
-	\caption{RTPS organization diagram}
+	%\caption{RTPS organization diagram}
 	\end{center}
 	\end{figure}
 \end{frame}
@@ -505,48 +461,37 @@
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.25]{../figures/FLOCKdiagramMyrna.pdf}
-	\caption{FLOCK system organization diagram}
+	%\caption{FLOCK system organization diagram}
 	\end{center}
 	\end{figure}
 \end{frame}
 
-% FLOCK
-%\begin{frame}{\texttt{FLOCK} class}
-%	\begin{itemize}
-%		\pause \item Main class of the FLOCK system
-%		\pause \item Some of the objectives of this class are:
-%			\begin{itemize}
-%				\pause \item Create a FLOCK particle system.
-%				\pause \item Call the respective functions to initialize the positions and velocities of the particles.
-%				\pause \item Send the respective information to the GPU to do the calculations.
-%				\pause \item Call the OpenCL kernel that computes the rules and the new positions.
-%				 \pause \item Call the rendering method to render the particles on the screen.
-%			\end{itemize}
-%	\end{itemize}
-%\end{frame}
+% NNS
+\begin{frame}{Nearest Neighbor Search}
+	%\pause Two phases: \textit{preparation} and \textit{lookup}.
+	
+	\pause
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.35]{../figures/hash.pdf}
+	\caption{First step of NNS: Hash}
+	\end{center}
+	\end{figure}
+	
+	%\begin{cppcode}{0}
+	\pause
+	$cell_{index} = ( pos - grid_{min} )  grid_{delta} $
+	\pause
+	$hash = ( cell_{index_z} cells_y + cell_{index_y} )  cells_x + cell_{index_x}$
+	%\end{cppcode}
+	
+\end{frame}
 
-% FLOCKSettings
-%\begin{frame}{\texttt{FLOCKSettings} class}
-%	\begin{itemize}
-%		\pause \item Initialize the data structure that stores the settings of the FLOCK system.
-%		\pause \item Update the values of the settings when the user changes them.
-%	\end{itemize}
-%\end{frame}
-
-% Common
-\begin{frame}{Common classes}
+\begin{frame}{Nearest Neighbor Search}
 	\begin{itemize}
-		\pause \item The common classes are:
-			\begin{itemize}
-				\pause \item Hash, BitonicSort, Permute, and CellIndices: classes that are in charge of the nearest neighbor search.
-					\begin{itemize}
-						\pause \item Hash: creates a hash value by overlaying the system into a uniform grid, and calculating an index value from the 3D cell index
-						\pause \item BitonicSort: sorts the hash and index arrays by the hash values
-						\pause \item Permute: permutes the arrays of positions, velocities and colors according to the sorted index array
-						\pause \item CellIndices: updates two arrays that keep track of the first and last particle at each cell
-					\end{itemize}
-				\pause \item Hose: sprays particles into the system
-			\end{itemize}
+		\pause \item \textbf{BitonicSort} sorts the hash array by the hash values
+		\pause \item \textbf{Permute} permutes the arrays of positions, velocities and colors according to the sorted index array
+		\pause \item \textbf{CellIndices} updates two arrays that keep track of the first and last particle at each cell
 	\end{itemize}
 \end{frame}
 
@@ -555,29 +500,10 @@
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.25]{../figures/FLOCKdiagramMyrna.pdf}
-	\caption{FLOCK system organization diagram}
+	%\caption{FLOCK system organization diagram}
 	\end{center}
 	\end{figure}
 \end{frame}
-
-% Rules
-%\begin{frame}{\texttt{Rules} class}
-%	\begin{itemize}
-%		\pause \item Create and initialize the OpenCL kernel that computes the rules.
-%		\pause \item Set the arguments for the kernel.
-%		\pause \item Launch the kernel.
-%		\pause \item The kernel follows the previously discussed algorithm that computes the rules.
-%	\end{itemize}
-%\end{frame}
-
-% EulerIntegration
-%\begin{frame}{\texttt{EulerIntegration} class}
-%	\begin{itemize}
-%		\pause \item Has a similar structure than the \texttt{Rules} class.
-%		\pause \item Its kernel follows the previously discussed algorithm that combine the rules and integrate over time to get the new position.
-%		\pause \item Also, this kernel check the boundaries and apply periodic boundary conditions to the positions of the particles.
-%	\end{itemize}
-%\end{frame}
 
 %--------------------------------------------
 % blender
@@ -587,14 +513,14 @@
 % Blender
 \begin{frame}{Blender}
 	\begin{itemize}
-		\pause \item Blender is a free modeling/simulation software.
-		\pause \item Blender has a built-in game engine.
-		\pause \item Blender is open source.
-		\pause \item Blender is cross-platform.
-		\pause \item Blender supports simulations with real physics.
-		\pause \item Blender has big support in the gaming industry and a large community helping on documentation.
-		\pause \item Blender 2.57 was the release used in this project.
+		\pause \item Free of cost
+		\pause \item Built-in game engine 
+		\pause \item Powerful modeling/simulation tools
+		\pause \item Open-source
+		\pause \item Cross-platform
+		\pause \item Have a strong and active community
 	\end{itemize}
+	\pause \em{Blender 2.57 was the release used in this project}.
 \end{frame}
 
 %--------------------------------------------
@@ -602,8 +528,9 @@
 %--------------------------------------------
 \begin{frame}{The Blender Game Engine}
 	\begin{itemize}
-		\pause \item BGE is a very powerful tool.
-		\pause \item Simple games can be created without the need for explicit programming.
+		\pause \item Game Engines (GE) are used to simulate partial reality.
+		\pause \item Let you interact with 3D world in real-time. \pause FUN!
+		\pause \item BGE the you create simple games can be created without the need for explicit programming.
 		\pause \item After creating the 3D scene you can bring it to life by using the simple logic editor.	
 	\end{itemize}
 \end{frame}
@@ -612,20 +539,18 @@
 	% figure: logic editor 
 	\pause
 	\begin{figure}[htbp]
-	\begin{center}$
-	\begin{array}{c}
-	\includegraphics[scale=0.35]{../figures/demo1_logic_properties.pdf} \\
-	\includegraphics[scale=0.32]{../figures/demo1_logic_bricks.pdf}
-	\end{array}$
+	\begin{center}
+	\includegraphics[scale=0.32]{../figures/logic_bricks.pdf}
 	\end{center}
-	\caption{Blender Game Logic Editor}
+	\caption{Blender Game Logic Editor: Logic Bricks}
 	\label{logicEditor}
 	\end{figure}
 \end{frame}
+
 % The Blender Game Engine
 \begin{frame}{The Blender Game Engine}
 	\begin{itemize}
-		\pause \item The Blender Game Engine lacks of particles systems.
+		\pause \item The Blender Game Engine lacks particles systems.
 		\pause \item We would like to add this missing feature to it.
 		\pause \item Boids particle systems are added to the Blender Game Engine in a modifier interface.
 	\end{itemize}
@@ -635,27 +560,45 @@
 \begin{frame}{The RTPS Modifier}
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.35]{../figures/modifier.pdf}
-	\caption{The RTPS modifier in the Boids system}
+	\includegraphics[scale=0.4]{../figures/modifier.pdf}
+	%\caption{The RTPS modifier in the Boids system}
 	\end{center}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Emitting particles to the system}
+
+	\pause
+	\begin{columns}
+	
+	\begin{column}{5cm}
 	\begin{table}[htdp]
-	\caption{Properties available in the RTPS modifer}
+	%\caption{Properties available in the RTPS modifer}
 	\begin{center}
-	\begin{tabular}{|p{2cm}|p{6cm}|}
+	\begin{tabular}{|p{1.5cm}|p{3cm}|}
 	\hline 
-	\textbf{Property} & \textbf{Type and Description} \\\hline 
-	\texttt{num} 	& \texttt{integer}: if num $>$ 0, num particles are going to be emitted every frame and num is set to 0	\\\hline 
-	\texttt{hose}	& \texttt{boolean}: used to active the hose	\\\hline
-	\texttt{speed}	& \texttt{float}: initial velocity of the particles that are going to be emitted from the hose	\\\hline
-	\texttt{radius}	& \texttt{float}: width of the hose	\\
+	\textbf{Property} & \textbf{Description} \\\hline 
+	\texttt{num} 	& num particles are emitted and num is set back to 0	\\\hline 
+	\texttt{hose}	& used to active the hose	\\\hline
+	\texttt{speed}	& initial velocity of the particles emitted from the hose	\\\hline
+	\texttt{radius}	& width of the hose	\\
 	\hline 
 	\end{tabular}
 	\end{center}
 	\end{table}
+	\end{column}
+	
+	\begin{column}{5cm}
+	\begin{figure}[htbp]
+	\begin{center}
+	\includegraphics[scale=0.45]{../figures/logic_properties.pdf}
+	\end{center}
+	\caption{Blender Properties}
+	\label{logicEditor}
+	\end{figure}
+	\end{column}
+	
+	\end{columns}
 \end{frame}
 
 
@@ -677,6 +620,7 @@
 	%\caption{Timings of RTPS-FLOCK system}
 	\end{center}
 	\end{figure}
+
 \end{frame}
 
 % RTPS Blender vs Blender
@@ -751,7 +695,7 @@
 % Blender
 \begin{frame}{Crowding simulation}
 	\begin{center}
-  		\includemovie[poster, text=(Crowding Video), repeat]{6cm}{6cm}{../videos/video_crowd.mov}
+  		\includemovie[poster, text=(Crowding Video), repeat]{10cm}{6cm}{../videos/video_crowd.mov}
 	\end{center}
 \end{frame}
 
@@ -777,7 +721,7 @@
 		\item Expand the list of the implemented rules.
 		\item Use Swarm Intelligence or Evolutionary Algorithm to select an optimized set of parameters for the system.
 		\item Hybrids systems.
-		\item Use Blender objects as emitter particles.
+		\item Use Blender objects as emitter objects.
 	\end{itemize}
 \end{frame}
 
