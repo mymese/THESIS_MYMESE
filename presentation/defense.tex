@@ -1,5 +1,5 @@
-\documentclass[red]{beamer}
-%\documentclass[handout]{beamer}
+%\documentclass[red]{beamer}
+\documentclass[handout]{beamer}
 
 \usepackage{fixltx2e}
 \usepackage{movie15}
@@ -62,7 +62,7 @@
 \begin{frame}{Flocking}
 	\begin{itemize}
 		\pause \item \textit{Flocking} is a nature-inspired behavior, mostly seen in animals.
-		\pause \item Collective motion of large group of entities, that exhibits interesting behavior as a whole.
+		\pause \item Collective motion of large group of entities. %, that exhibits interesting behavior as a whole.
 	\end{itemize}
 \end{frame}
 
@@ -111,11 +111,12 @@
 \end{frame}
 
 
-\begin{frame}{Flocking}
+\begin{frame}{Craig Reynolds}
 	\begin{itemize}
-		\pause \item Inspired by the flocking behavior of birds Craig Reynolds developed a behavioral model that simulated the self-organization of \textit{boids}.
+		\pause \item Craig Reynolds is the pioneer of flocking.
+		\pause \item Inspired by the flocking behavior of birds he developed a behavioral model that simulates the self-organization of \textit{boids}.
 		\pause \item \textit{Boids} are the entities of a flock.
-		\pause \item Craig Reynolds is the pioneer of flocking, his most recognized paper: \textit{Flocks, herds, and school: A Distributed Behavioral Model} revolutionized the field of flocking.
+		\pause \item Most recognized paper: \textit{Flocks, herds, and school: A Distributed Behavioral Model} revolutionized the field of flocking.
 	\end{itemize}
 \end{frame}
 
@@ -210,8 +211,8 @@
 	\pause Prey and predator simulations
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=1]{figures/predatorPrey.pdf}
-	\caption{Prey flock escaping from predator from \textit{Predator’s attack-induced phase-like transition in prey flock}}
+	\includegraphics[scale=1.3]{figures/predatorPrey.pdf}
+	\caption{\textit{Predator’s attack-induced phase-like transition in prey flock} by S.-H. Lee (2006)}
 	\end{center}
 	\end{figure}	
 \end{frame}
@@ -220,8 +221,8 @@
  	Crowding simulations
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.4]{figures/crowds.pdf}
-	\caption{10,000 schooling fish from \textit{Big Fast Crowds on PS3}}
+	\includegraphics[scale=0.47]{figures/crowds.pdf}
+	\caption{\textit{Big Fast Crowds on PS3} by Craig Reynolds (2006)}
 	\end{center}
 	\end{figure}
 \end{frame}
@@ -230,8 +231,8 @@
 	Robotics
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.2]{figures/robots.pdf}
-	\caption{Obstacle avoidance of robots from \textit{A Decentralized and Adaptive Flocking Algorithm for Autonomous Mobile Robots}}
+	\includegraphics[scale=0.23]{figures/robots.pdf}
+	\caption{\textit{A Decentralized and Adaptive Flocking Algorithm for Autonomous Mobile Robots} by Yan Yang et al. (2008) }
 	\end{center}
 	\end{figure}	
 \end{frame}
@@ -241,7 +242,7 @@
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=3.5]{figures/documents.pdf}
-	\caption{Flocking clustering on 800 two-dimensional objects from \textit{A flocking based algorithm for document clustering analysis}}
+	\caption{\textit{A flocking based algorithm for document clustering analysis} by Xiaohui Cui et al. (2006)}
 	\end{center}
 	\end{figure}
 \end{frame}
@@ -308,7 +309,7 @@
 	% figure: separation
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.25]{../figures/separation.pdf}
+	\includegraphics[scale=0.45]{../figures/separation.pdf}
 	%\caption{Separation steering behavior}
 	\label{separation}
 	\end{center}
@@ -326,7 +327,7 @@
 	% figure: alignment
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.25]{../figures/alignment.pdf}
+	\includegraphics[scale=0.45]{../figures/alignment.pdf}
 	%\caption{Alignment steering behavior}
 	\label{alignment}
 	\end{center}
@@ -344,7 +345,7 @@
 	% figure: cohesion
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.25]{../figures/cohesion.pdf}
+	\includegraphics[scale=0.45]{../figures/cohesion.pdf}
 	%\caption{Cohesion steering behavior}
 	\label{cohesion}
 	\end{center}
@@ -367,7 +368,7 @@
 	% figure: seek and flee
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.45]{../figures/goal.pdf}
+	\includegraphics[scale=0.65]{../figures/goal.pdf}
 	%\caption{Goal steering behavior}
 	\label{seekANDflee}
 	\end{center}
@@ -384,7 +385,7 @@
 	% figure: seek and flee
 	\begin{figure}[htbp]
 	\begin{center}
-	\includegraphics[scale=0.45]{../figures/avoidance.pdf}
+	\includegraphics[scale=0.65]{../figures/avoidance.pdf}
 	%\caption{Avoidance steering behavior}
 	\label{seekANDflee}
 	\end{center}
@@ -448,6 +449,7 @@
 
 % RTPS diagram
 \begin{frame}{RTPS organization diagram}
+	\pause
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.28]{../figures/RTPSdiagramMyrna.pdf}
@@ -458,6 +460,7 @@
 
 % FLOCK diagram
 \begin{frame}{FLOCK system organization diagram}
+	\pause
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.25]{../figures/FLOCKdiagramMyrna.pdf}
@@ -614,24 +617,66 @@
 
 % RTPS vs RTPS
 \begin{frame}{RTPS-FLOCK system}
-	\begin{figure}[htbp]
-	\begin{center}
+
+	\begin{columns}
+	\begin{column}{2cm}
+	\tiny
+	~~\textbf{Settings} \\
+	~~~maxBoids = 256K \\
+	~~~maxSpeed = 2 \\
+	~~~searchRad = 1.5 \\
+	~~~minDist = 1 \\
+	~~~w\_sep = 1 \\
+	~~~w\_align = 1 \\
+	~~~w\_coh = 1 \\
+	~~~w\_goal = 0 \\
+	~~~w\_avoid = 0 \\
+	\end{column}
+	
+	\begin{column}{15cm}
 	\includegraphics[scale=0.5]{../figures/RTPSvsRTPS.pdf}
+	\end{column}
+	\end{columns}
+
+	%\begin{figure}[htbp]
+	%\begin{center}
+	%\includegraphics[scale=0.5]{../figures/RTPSvsRTPS.pdf}
 	%\caption{Timings of RTPS-FLOCK system}
-	\end{center}
-	\end{figure}
+	%\end{center}
+	%\end{figure}
 
 \end{frame}
 
 % RTPS Blender vs Blender
 \begin{frame}{RTPS Blender vs Blender}
-	\begin{figure}[htbp]
-	\begin{center}
-	\includegraphics[scale=0.50]{../figures/benchmarks.pdf}
+
+	\begin{columns}
+	\begin{column}{2cm}
+	\tiny
+	~~\textbf{Settings} \\
+	~~~maxBoids = 256K \\
+	~~~maxSpeed = 2 \\
+	~~~searchRad = 1.5 \\
+	~~~minDist = 1\\
+	~~~w\_sep = 1 \\
+	~~~w\_align = 1 \\
+	~~~w\_coh = 1 \\
+	~~~w\_goal = 0 \\
+	~~~w\_avoid = 0 \\
+	\end{column}
+	
+	\begin{column}{15cm}
+	\includegraphics[scale=0.5]{../figures/benchmarks.pdf}
+	\end{column}
+	\end{columns}
+	
+	%\begin{figure}[htbp]
+	%\begin{center}
+	%\includegraphics[scale=0.50]{../figures/benchmarks.pdf}
 	%\caption{Timings of RTPS modifier and Blender Boids system}
-	\label{plot}
-	\end{center}
-	\end{figure}
+	%\label{plot}
+	%\end{center}
+	%\end{figure}
 \end{frame}
 
 % speedup
@@ -647,13 +692,34 @@
 
 % RTPS kernels
 \begin{frame}{RTPS kernels}
-	\begin{figure}[htbp]
-	\begin{center}
-	\includegraphics[scale=0.50]{../figures/kernelsPlot.pdf}
+	
+	\begin{columns}
+	\begin{column}{2cm}
+	\tiny
+	~~\textbf{Settings} \\
+	~~~maxBoids = 256K \\
+	~~~maxSpeed = 2 \\
+	~~~searchRad = 1.5 \\
+	~~~minDist = 1 \\
+	~~~w\_sep = 1 \\
+	~~~w\_align = 1 \\
+	~~~w\_coh = 1 \\
+	~~~w\_goal = 0 \\
+	~~~w\_avoid = 0 \\
+	\end{column}
+	
+	\begin{column}{15cm}
+	\includegraphics[scale=0.5]{../figures/kernelsPlot.pdf}
+	\end{column}
+	\end{columns}
+	
+	%\begin{figure}[htbp]
+	%\begin{center}
+	%\includegraphics[scale=0.50]{../figures/kernelsPlot.pdf}
 	%\caption{Timings for the kernels executed by the FLOCK system of RTPS}
-	\label{kernelBench}
-	\end{center}
-	\end{figure}
+	%\label{kernelBench}
+	%\end{center}
+	%\end{figure}
 \end{frame}
 
 
@@ -674,29 +740,108 @@
 \end{frame}
 
 \begin{frame}{Symmetry Demo: Separation}
-	\begin{center}
-  		\includemovie[poster, text=(Separation Video), repeat]{6cm}{6cm}{../videos/video_separation.mpg}
-	\end{center}
+
+	\begin{columns}
+	\begin{column}{3.25 cm}
+	\tiny
+	~~\textbf{Settings} \\
+	~~~maxSpeed = 2 \\
+	~~~searchRad = 2 \\
+	~~~minDist = 1.5 \\
+	~~~w\_sep = 1 \\
+	~~~w\_align = 0 \\
+	~~~w\_coh = 0 \\
+	~~~w\_goal = 0 \\
+	~~~w\_avoid = 0 \\
+	\end{column}
+	
+	\begin{column}{10cm}
+	\includemovie[poster, text=(Separation Video), repeat]{6cm}{6cm}{../videos/video_separation.mpg}
+	\end{column}
+	\end{columns}
+
+	%\begin{center}
+  	%	\includemovie[poster, text=(Separation Video), repeat]{6cm}{6cm}{../videos/video_separation.mpg}
+	%\end{center}
 \end{frame}
 
 \begin{frame}{Symmetry Demo: Cohesion}
-	\begin{center}
-  		\includemovie[poster, text=(Cohesion Video), repeat]{6cm}{6cm}{../videos/video_cohesion.mpg}
-	\end{center}
+
+	\begin{columns}
+	\begin{column}{3.25 cm}
+	\tiny
+	~~\textbf{Settings} \\
+	~~~maxSpeed = 2 \\
+	~~~searchRad = 1 \\
+	~~~minDist = 1 \\
+	~~~w\_sep = 0 \\
+	~~~w\_align = 0 \\
+	~~~w\_coh = 1 \\
+	~~~w\_goal = 0 \\
+	~~~w\_avoid = 0 \\
+	\end{column}
+	
+	\begin{column}{10cm}
+	\includemovie[poster, text=(Cohesion Video), repeat]{6cm}{6cm}{../videos/video_cohesion.mpg}
+	\end{column}
+	\end{columns}
+	
+	%\begin{center}
+  	%	\includemovie[poster, text=(Cohesion Video), repeat]{6cm}{6cm}{../videos/video_cohesion.mpg}
+	%\end{center}
 \end{frame}
 
 % Goal Demo
 \begin{frame}{Bees approaching their hive simulation}
-	\begin{center}
-  		\includemovie[poster, text=(Goal Video), repeat]{6cm}{6cm}{../videos/video_goal.mpg}
-	\end{center}
+
+	\begin{columns}
+	\begin{column}{3.25 cm}
+	\tiny
+	~~\textbf{Settings} \\
+	~~~maxSpeed = 2 \\
+	~~~searchRad = 1.5 \\
+	~~~minDist = 1 \\
+	~~~w\_sep = 0.5 \\
+	~~~w\_align = 0 \\
+	~~~w\_coh = 0 \\
+	~~~w\_goal = 1 \\
+	~~~w\_avoid = 0 \\
+	\end{column}
+	
+	\begin{column}{10cm}
+	\includemovie[poster, text=(Goal Video), repeat]{6cm}{6cm}{../videos/video_goal.mpg}
+	\end{column}
+	\end{columns}
+	
+	%\begin{center}
+  	%	\includemovie[poster, text=(Goal Video), repeat]{6cm}{6cm}{../videos/video_goal.mpg}
+	%\end{center}
 \end{frame}
 
 % Blender
 \begin{frame}{Crowding simulation}
-	\begin{center}
-  		\includemovie[poster, text=(Crowding Video), repeat]{10cm}{6cm}{../videos/video_crowd.mov}
-	\end{center}
+
+	\begin{columns}
+	\begin{column}{2 cm}
+	\tiny
+	~~\textbf{Settings} \\
+	~~~maxSpeed = 1 \\
+	~~~searchRad = 6 \\
+	~~~minDist = 5 \\
+	~~~angVel = 1.5 \\
+	~~~w\_sep = 1 \\
+	~~~w\_align = 0.5 \\
+	~~~w\_coh = 0.5 \\
+	\end{column}
+	
+	\begin{column}{15cm}
+	\includemovie[poster, text=(Crowding Video), repeat]{10cm}{6cm}{../videos/video_crowd.mov}
+	\end{column}
+	\end{columns}
+	
+	%\begin{center}
+  	%	\includemovie[poster, text=(Crowding Video), repeat]{10cm}{6cm}{../videos/video_crowd.mov}
+	%\end{center}
 \end{frame}
 
 %--------------------------------------------
