@@ -82,7 +82,7 @@
 	\begin{center}
 	\includegraphics[scale=.55]{figures/school.pdf} 
 	\end{center}
-	\caption{Flocking behavior: Schooling}
+	\caption{Flocking behavior: School of fish}
 	\label{default}
 	\end{figure}
 
@@ -116,7 +116,7 @@
 		\pause \item Craig Reynolds is the pioneer of flocking.
 		\pause \item Inspired by the flocking behavior of birds he developed a behavioral model that simulates the self-organization of \textit{boids}.
 		\pause \item \textit{Boids} are the entities of a flock.
-		\pause \item Most recognized paper: \textit{Flocks, herds, and school: A Distributed Behavioral Model} revolutionized the field of flocking.
+		\pause \item Most recognized paper: \textit{Flocks, Herds, and Schools: A Distributed Behavioral Model} revolutionized the field of flocking.
 	\end{itemize}
 \end{frame}
 
@@ -259,8 +259,8 @@
 % flocking using the GPU
 \begin{frame}{Flocking Using the GPU}
 	\begin{itemize}
-		\pause \item Flocking algorithms is amenable to massive parallelization since each boid is subject to identical rules.
-		\pause \item Thus, the power of GPUs  can be leveraged to implement flocking strategies with upwards of tens or hundreds of thousands of boids.
+		\pause \item Flocking algorithms are amenable to massive parallelization since each boid is subject to identical rules.
+		\pause \item Thus, the power of GPUs can be leveraged to implement flocking strategies with upwards of tens or hundreds of thousands of boids.
 	\end{itemize}
 \end{frame}
 
@@ -269,9 +269,8 @@
 %--------------------------------------------
 \subsection{Aim}
 \begin{frame}{Aim}
-	\begin{itemize}
-		\pause \item To develop a flocking implementation that can be used in the Blender Game Engine.
-	\end{itemize}
+	\pause
+	\textit{To develop a flocking implementation that can be used in the Blender Game Engine.}
 \end{frame}
 
 %--------------------------------------------
@@ -458,7 +457,7 @@
 \subsection{The RTPS Library}
 
 % RTPS diagram
-\begin{frame}{RTPS organization diagram}
+\begin{frame}{RTPS library diagram}
 	\pause
 	\begin{figure}[htbp]
 	\begin{center}
@@ -469,7 +468,7 @@
 \end{frame}
 
 % FLOCK diagram
-\begin{frame}{FLOCK system organization diagram}
+\begin{frame}{FLOCK system diagram}
 	\pause
 	\begin{figure}[htbp]
 	\begin{center}
@@ -507,7 +506,7 @@
 \end{frame}
 
 % FLOCK diagram
-\begin{frame}{FLOCK system organization diagram}
+\begin{frame}{FLOCK system diagram}
 	\begin{figure}[htbp]
 	\begin{center}
 	\includegraphics[scale=0.25]{../figures/FLOCKdiagramMyrna.pdf}
@@ -541,7 +540,7 @@
 	\begin{itemize}
 		\pause \item Game Engines are used to simulate virtual reality.
 		\pause \item Let you interact with 3D world in real-time. \pause FUN!
-		\pause \item The Blender Game Engine lets you create simple games can be created without the need for explicit programming.
+		\pause \item The Blender Game Engine lets you create simple games without the need for explicit programming.
 		\pause \item After creating the 3D scene you can bring it to life by using the logic editor.	
 	\end{itemize}
 \end{frame}
@@ -589,7 +588,7 @@
 	\hline 
 	\textbf{Property} & \textbf{Description} \\\hline 
 	\texttt{num} 	& num boids are emitted and num is reset to 0	\\\hline 
-	\texttt{hose}	& used to active the hose	\\\hline
+	\texttt{hose}	& active the hose	\\\hline
 	\texttt{speed}	& initial velocity of the boids emitted from the hose	\\\hline
 	\texttt{radius}	& hose's width	\\
 	\hline 
@@ -864,9 +863,9 @@
 \begin{frame}{Conclusions}
 	\begin{itemize}
 		\item Using the RTPS library we were able to implement a flocking algorithm in OpenCL.
-		\item A custom modifier was developed in Blender to call the RTPS library.
-		\item The RTPS modifier can run a Boids system inside the Blender Game Engine.
-		\item The performance of the RTPS modifier outperforms the Boids system of Blender.
+		%\item A custom modifier was developed in Blender to call the RTPS library.
+		\item A Boids system can be run inside the Blender Game Engine using the RTPS modifier.
+		\item The RTPS modifier runs up to 20x faster than the Boids system of Blender.
 	\end{itemize}
 \end{frame}
 
@@ -877,8 +876,8 @@
 \begin{frame}{Future work}
 	\begin{itemize}
 		\item Expand the list of the implemented rules.
-		\item Use Swarm Intelligence or Evolutionary Algorithm to select an optimized set of parameters for the system.
-		\item Hybrid systems.
+		\item Use Swarm Intelligence or Evolutionary Algorithm to select an optimized set of parameters for the Boids system.
+		\item Support hybrid systems.
 		\item Use Blender objects as emitter objects.
 	\end{itemize}
 \end{frame}
