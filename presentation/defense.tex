@@ -184,7 +184,6 @@
 \begin{frame}{Previous Flocking Work}
 	\begin{columns}[b]
 		\begin{column}{6cm}
-			\pause
 			\begin{figure}[htbp]
 			\begin{center}
 			\includegraphics[scale=0.2]{../figures/obstacle.pdf}
@@ -278,7 +277,13 @@
 %--------------------------------------------
 % flocking algorithm
 %--------------------------------------------
-\section{Algorithm}
+\section{Rules and Algorithm}
+
+\begin{frame}
+	\begin{center}
+		\textbf{Rules and Algorithm}
+	\end{center}
+\end{frame}
 
 \begin{frame}{Flocking}
 	\begin{itemize}
@@ -395,7 +400,7 @@
 	
 % combine
 \begin{frame}{Final Velocity}
-	\pause The final velocity of the boids is calculated as a linear combination of the steering behaviors.
+	The final velocity of the boids is calculated as a linear combination of the steering behaviors.
 	 
 	\begin{equation}
 	vel^{k+1} = vel^{k} + \sum_{rule_r} w_{rule_r} {rule_r}
@@ -440,6 +445,12 @@
 % implementation
 %--------------------------------------------
 \section{Implementation}
+
+\begin{frame}
+	\begin{center}
+		\textbf{Implementation}
+	\end{center}
+\end{frame}
 
 %--------------------------------------------
 % RTPS
@@ -528,7 +539,7 @@
 %--------------------------------------------
 \begin{frame}{The Blender Game Engine}
 	\begin{itemize}
-		\pause \item Game Engines are used to simulate partial reality.
+		\pause \item Game Engines are used to simulate virtual reality.
 		\pause \item Let you interact with 3D world in real-time. \pause FUN!
 		\pause \item The Blender Game Engine lets you create simple games can be created without the need for explicit programming.
 		\pause \item After creating the 3D scene you can bring it to life by using the logic editor.	
@@ -568,7 +579,6 @@
 
 \begin{frame}{Emitting boids to the system}
 
-	\pause
 	\begin{columns}
 	
 	\begin{column}{5cm}
@@ -606,6 +616,12 @@
 % results
 %--------------------------------------------
 \section{Results}
+
+\begin{frame}
+	\begin{center}
+		\textbf{Results}
+	\end{center}
+\end{frame}
 
 %--------------------------------------------
 % timings
@@ -822,8 +838,8 @@
 	\begin{column}{2 cm}
 	\scriptsize
 	~\textbf{Settings} \\
-	~~maxSpeed = 1 \\
-	~~searchRad = 6 \\
+	~~maxSpeed=1\\
+	~~searchRad=6\\
 	~~minDist = 5 \\
 	~~angVel = 1.5 \\
 	~~w\_sep = 1 \\
@@ -831,7 +847,7 @@
 	~~w\_coh = 0.5 \\
 	\end{column}
 	
-	\begin{column}{15cm}
+	\begin{column}{11cm}
 	\includemovie[poster, text=(Crowding Video), repeat]{10cm}{6cm}{../videos/video_crowd.mov}
 	\end{column}
 	\end{columns}
