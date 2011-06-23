@@ -1,5 +1,5 @@
-%\documentclass[red]{beamer}
-\documentclass[handout]{beamer}
+\documentclass[red]{beamer}
+%\documentclass[handout]{beamer}
 
 \usepackage{fixltx2e}
 \usepackage{movie15}
@@ -251,17 +251,17 @@
 \begin{frame}{GPU Computing}
 	\begin{itemize}
 		\pause \item Graphical processing units or \textit{GPUs} are numeric computing engines used to perform a massive number of floating-point calculations in parallel.
-		\pause \item \textit{GPU computing}, also know as \textit{GPGPU} is a field of study that develops the use of GPUs for general computing.
+		\pause \item \textit{GPU computing}, also know as \textit{GPGPU} is a field of study that develops the use of GPUs for general purpose computing.
 		\pause \item GPU computing is often considered an heterogeneous system, a mixture of GPUs and CPUs used together to process one or more tasks.
-		\pause \item GPUs have different architecture than the CPUs therefore, they need to be programmed in a special manner.
+		\pause \item GPUs have different architecture than the CPUs therefore, special languages have been developed (e.g. CUDA, OpenCL). 
 	\end{itemize}
 \end{frame}
 
 % flocking using the GPU
 \begin{frame}{Flocking Using the GPU}
 	\begin{itemize}
-		\pause \item Flocking algorithms are parallelizable algorithms because the same operations are computed for all boids in the flock.
-		\pause \item GPUs can be used to implement flocking algorithms and allow flocks with tens or hundreds of thousands of boids.
+		\pause \item Flocking algorithms is amenable to massive parallelization since each boid is subject to identical rules.
+		\pause \item Thus, the power of GPUs  can be leveraged to implement flocking strategies with upwards of tens or hundreds of thousands of boids.
 	\end{itemize}
 \end{frame}
 
@@ -289,7 +289,7 @@
 				\pause \item Alignment
 				\pause \item Cohesion
 			\end{itemize}
-		\pause \item Each rule is associated to a velocity vector and a scalar weight.
+		\pause \item Each rule is associated with a velocity vector and a scalar weight.
 	\end{itemize}
 \end{frame}
 
@@ -395,7 +395,7 @@
 	
 % combine
 \begin{frame}{Final Velocity}
-	\pause The final velocity of the boids is calculated by doing a linear combination of the steering behaviors.
+	\pause The final velocity of the boids is calculated as a linear combination of the steering behaviors.
 	 
 	\begin{equation}
 	vel^{k+1} = vel^{k} + \sum_{rule_r} w_{rule_r} {rule_r}
@@ -426,14 +426,13 @@
 
 % integration
 \begin{frame}{Combine and Integrate}
- 	\alert<1>{$vel_{rule_r}$ = $rule_r$ $w_{rule_r}$}			\\
-	\alert<2>{$vel_i^{k+1} = vel_i^{k} + \sum_{rule_r} vel_{rule_r}$} 	\\ 
-	\alert<3>{$if$ length($vel_i^{k+1}$) $>$ $max_{speed}$ $then$}			\\ 
-	\alert<3>{~~$vel_i^{k+1}$ = normalize($vel_i^{k+1}$)  $max_{speed}$} \\
-	\alert<3>{end $if$} \\
-	\alert<4>{(Optional) Add an imposed velocity to the current velocity.}	\\ 
-	\alert<5>{$pos_i^{k+1}$ = $pos_i^{k}$  + $dt $ $vel_i^{k+1}$}					\\
-	\alert<6>{Apply periodic boundary conditions to the \textit{new} position.} 
+	\alert<1>{$vel_i^{k+1} = vel_i^{k} + \sum_{rule_r} w_{rule_r} {rule_r}$} 	\\ 
+	\alert<2>{$if$ length($vel_i^{k+1}$) $>$ $max_{speed}$ $then$}			\\ 
+	\alert<2>{~~$vel_i^{k+1}$ = normalize($vel_i^{k+1}$)  $max_{speed}$} \\
+	\alert<2>{end $if$} \\
+	\alert<3>{(Optional) Add an imposed velocity to the current velocity.}	\\ 
+	\alert<4>{$pos_i^{k+1}$ = $pos_i^{k}$  + $dt $ $vel_i^{k+1}$}					\\
+	\alert<5>{Apply periodic boundary conditions to the \textit{new} position.} 
 \end{frame}
 
 
@@ -482,9 +481,7 @@
 	\end{figure}
 	
 	%\begin{cppcode}{0}
-	\pause
 	$cell_{index} = ( pos - grid_{min} )  grid_{delta} $
-	\pause
 	$hash = ( cell_{index_z} cells_y + cell_{index_y} )  cells_x + cell_{index_x}$
 	%\end{cppcode}
 	
@@ -492,7 +489,7 @@
 
 \begin{frame}{Nearest Neighbor Search}
 	\begin{itemize}
-		\pause \item \textbf{BitonicSort} sorts the hash array by the hash values
+		\pause \item \textbf{BitonicSort} sorts their hash array by the hash values
 		\pause \item \textbf{Permute} permutes the arrays of positions, velocities and colors according to the sorted index array
 		\pause \item \textbf{CellIndices} updates two arrays that keep track of the first and last particle at each cell
 	\end{itemize}
@@ -516,12 +513,12 @@
 % Blender
 \begin{frame}{Blender}
 	\begin{itemize}
-		\pause \item Free of cost
+		\pause \item Free 
 		\pause \item Built-in game engine 
 		\pause \item Powerful modeling/simulation tools
 		\pause \item Open-source
 		\pause \item Cross-platform
-		\pause \item Have a strong and active community
+		\pause \item Has a strong and active community
 	\end{itemize}
 	\pause \em{Blender 2.57 was the release used in this project}.
 \end{frame}
@@ -531,10 +528,10 @@
 %--------------------------------------------
 \begin{frame}{The Blender Game Engine}
 	\begin{itemize}
-		\pause \item Game Engines (GE) are used to simulate partial reality.
+		\pause \item Game Engines are used to simulate partial reality.
 		\pause \item Let you interact with 3D world in real-time. \pause FUN!
-		\pause \item BGE the you create simple games can be created without the need for explicit programming.
-		\pause \item After creating the 3D scene you can bring it to life by using the simple logic editor.	
+		\pause \item The Blender Game Engine lets you create simple games can be created without the need for explicit programming.
+		\pause \item After creating the 3D scene you can bring it to life by using the logic editor.	
 	\end{itemize}
 \end{frame}
 
@@ -553,9 +550,9 @@
 % The Blender Game Engine
 \begin{frame}{The Blender Game Engine}
 	\begin{itemize}
-		\pause \item The Blender Game Engine lacks particles systems.
+		\pause \item The Blender Game Engine has no particles systems.
 		\pause \item We would like to add this missing feature to it.
-		\pause \item Boids particle systems are added to the Blender Game Engine in a modifier interface.
+		\pause \item Boids particle systems are added to the Blender Game Engine as a modifier interface.
 	\end{itemize}
 \end{frame}
 
@@ -581,10 +578,10 @@
 	\begin{tabular}{|p{1.5cm}|p{3cm}|}
 	\hline 
 	\textbf{Property} & \textbf{Description} \\\hline 
-	\texttt{num} 	& num particles are emitted and num is set back to 0	\\\hline 
+	\texttt{num} 	& num particles are emitted and num is reset to 0	\\\hline 
 	\texttt{hose}	& used to active the hose	\\\hline
 	\texttt{speed}	& initial velocity of the particles emitted from the hose	\\\hline
-	\texttt{radius}	& width of the hose	\\
+	\texttt{radius}	& hose's width	\\
 	\hline 
 	\end{tabular}
 	\end{center}
@@ -619,18 +616,18 @@
 \begin{frame}{RTPS-FLOCK system}
 
 	\begin{columns}
-	\begin{column}{2cm}
-	\tiny
-	~~\textbf{Settings} \\
-	~~~maxBoids = 256K \\
-	~~~maxSpeed = 2 \\
-	~~~searchRad = 1.5 \\
-	~~~minDist = 1 \\
-	~~~w\_sep = 1 \\
-	~~~w\_align = 1 \\
-	~~~w\_coh = 1 \\
-	~~~w\_goal = 0 \\
-	~~~w\_avoid = 0 \\
+	\begin{column}{2.25cm}
+	\scriptsize
+	~\textbf{Settings} \\
+	~~maxBoids=256K \\
+	~~maxSpeed = 2 \\
+	~~searchRad = 1.5 \\
+	~~minDist = 1 \\
+	~~w\_sep = 1 \\
+	~~w\_align = 1 \\
+	~~w\_coh = 1 \\
+	~~w\_goal = 0 \\
+	~~w\_avoid = 0 \\
 	\end{column}
 	
 	\begin{column}{15cm}
@@ -651,18 +648,18 @@
 \begin{frame}{RTPS Blender vs Blender}
 
 	\begin{columns}
-	\begin{column}{2cm}
-	\tiny
-	~~\textbf{Settings} \\
-	~~~maxBoids = 256K \\
-	~~~maxSpeed = 2 \\
-	~~~searchRad = 1.5 \\
-	~~~minDist = 1\\
-	~~~w\_sep = 1 \\
-	~~~w\_align = 1 \\
-	~~~w\_coh = 1 \\
-	~~~w\_goal = 0 \\
-	~~~w\_avoid = 0 \\
+	\begin{column}{2.25cm}
+	\scriptsize
+	~\textbf{Settings} \\
+	~~maxBoids=256K \\
+	~~maxSpeed = 2 \\
+	~~searchRad = 1.5 \\
+	~~minDist = 1\\
+	~~w\_sep = 1 \\
+	~~w\_align = 1 \\
+	~~w\_coh = 1 \\
+	~~w\_goal = 0 \\
+	~~w\_avoid = 0 \\
 	\end{column}
 	
 	\begin{column}{15cm}
@@ -694,18 +691,18 @@
 \begin{frame}{RTPS kernels}
 	
 	\begin{columns}
-	\begin{column}{2cm}
-	\tiny
-	~~\textbf{Settings} \\
-	~~~maxBoids = 256K \\
-	~~~maxSpeed = 2 \\
-	~~~searchRad = 1.5 \\
-	~~~minDist = 1 \\
-	~~~w\_sep = 1 \\
-	~~~w\_align = 1 \\
-	~~~w\_coh = 1 \\
-	~~~w\_goal = 0 \\
-	~~~w\_avoid = 0 \\
+	\begin{column}{2.25 cm}
+	\scriptsize
+	~\textbf{Settings} \\
+	~~maxBoids=256K \\
+	~~maxSpeed = 2 \\
+	~~searchRad = 1.5 \\
+	~~minDist = 1 \\
+	~~w\_sep = 1 \\
+	~~w\_align = 1 \\
+	~~w\_coh = 1 \\
+	~~w\_goal = 0 \\
+	~~w\_avoid = 0 \\
 	\end{column}
 	
 	\begin{column}{15cm}
@@ -743,7 +740,7 @@
 
 	\begin{columns}
 	\begin{column}{3.25 cm}
-	\tiny
+	\scriptsize
 	~~\textbf{Settings} \\
 	~~~maxSpeed = 2 \\
 	~~~searchRad = 2 \\
@@ -769,7 +766,7 @@
 
 	\begin{columns}
 	\begin{column}{3.25 cm}
-	\tiny
+	\scriptsize
 	~~\textbf{Settings} \\
 	~~~maxSpeed = 2 \\
 	~~~searchRad = 1 \\
@@ -796,7 +793,7 @@
 
 	\begin{columns}
 	\begin{column}{3.25 cm}
-	\tiny
+	\scriptsize
 	~~\textbf{Settings} \\
 	~~~maxSpeed = 2 \\
 	~~~searchRad = 1.5 \\
@@ -823,15 +820,15 @@
 
 	\begin{columns}
 	\begin{column}{2 cm}
-	\tiny
-	~~\textbf{Settings} \\
-	~~~maxSpeed = 1 \\
-	~~~searchRad = 6 \\
-	~~~minDist = 5 \\
-	~~~angVel = 1.5 \\
-	~~~w\_sep = 1 \\
-	~~~w\_align = 0.5 \\
-	~~~w\_coh = 0.5 \\
+	\scriptsize
+	~\textbf{Settings} \\
+	~~maxSpeed = 1 \\
+	~~searchRad = 6 \\
+	~~minDist = 5 \\
+	~~angVel = 1.5 \\
+	~~w\_sep = 1 \\
+	~~w\_align = 0.5 \\
+	~~w\_coh = 0.5 \\
 	\end{column}
 	
 	\begin{column}{15cm}
@@ -852,7 +849,7 @@
 	\begin{itemize}
 		\item Using the RTPS library we were able to implement a flocking algorithm in OpenCL.
 		\item A custom modifier was developed in Blender to call the RTPS library.
-		\item The RTPS modifier able to run a Boids system inside the Blender Game Engine.
+		\item The RTPS modifier can run a Boids system inside the Blender Game Engine.
 		\item The performance of the RTPS modifier outperforms the Boids system of Blender.
 	\end{itemize}
 \end{frame}
@@ -865,7 +862,7 @@
 	\begin{itemize}
 		\item Expand the list of the implemented rules.
 		\item Use Swarm Intelligence or Evolutionary Algorithm to select an optimized set of parameters for the system.
-		\item Hybrids systems.
+		\item Hybrid systems.
 		\item Use Blender objects as emitter objects.
 	\end{itemize}
 \end{frame}
