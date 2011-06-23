@@ -491,7 +491,7 @@
 	\begin{itemize}
 		\pause \item \textbf{BitonicSort} sorts their hash array by the hash values
 		\pause \item \textbf{Permute} permutes the arrays of positions, velocities and colors according to the sorted index array
-		\pause \item \textbf{CellIndices} updates two arrays that keep track of the first and last particle at each cell
+		\pause \item \textbf{CellIndices} updates two arrays that keep track of the first and last boid at each cell
 	\end{itemize}
 \end{frame}
 
@@ -552,7 +552,7 @@
 	\begin{itemize}
 		\pause \item The Blender Game Engine has no particles systems.
 		\pause \item We would like to add this missing feature to it.
-		\pause \item Boids particle systems are added to the Blender Game Engine as a modifier interface.
+		\pause \item A \textit{Boids} system is added to the Blender Game Engine as a modifier interface.
 	\end{itemize}
 \end{frame}
 
@@ -566,7 +566,7 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Emitting particles to the system}
+\begin{frame}{Emitting boids to the system}
 
 	\pause
 	\begin{columns}
@@ -578,9 +578,9 @@
 	\begin{tabular}{|p{1.5cm}|p{3cm}|}
 	\hline 
 	\textbf{Property} & \textbf{Description} \\\hline 
-	\texttt{num} 	& num particles are emitted and num is reset to 0	\\\hline 
+	\texttt{num} 	& num boids are emitted and num is reset to 0	\\\hline 
 	\texttt{hose}	& used to active the hose	\\\hline
-	\texttt{speed}	& initial velocity of the particles emitted from the hose	\\\hline
+	\texttt{speed}	& initial velocity of the boids emitted from the hose	\\\hline
 	\texttt{radius}	& hose's width	\\
 	\hline 
 	\end{tabular}
