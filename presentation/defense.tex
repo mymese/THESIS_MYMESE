@@ -270,7 +270,9 @@
 \subsection{Aim}
 \begin{frame}{Aim}
 	\pause
+	\begin{center}
 	\textit{To develop a flocking implementation that can be used in the Blender Game Engine.}
+	\end{center}
 \end{frame}
 
 %--------------------------------------------
@@ -399,7 +401,7 @@
 	
 % combine
 \begin{frame}{Final Velocity}
-	The final velocity of the boids is calculated as a linear combination of the steering behaviors.
+	The final velocity of the boids is calculated as the current velocity plus a linear combination of the steering behaviors.
 	 
 	\begin{equation}
 	vel^{k+1} = vel^{k} + \sum_{rule_r} w_{rule_r} {rule_r}
