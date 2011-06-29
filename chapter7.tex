@@ -2,10 +2,13 @@
 
 % Conclusion: what lessons have you learned from the experience? Difficulties, what things should/could be done differently to push the state of the art?
 
-The RTPS library was extended by adding another system. This system was named FLOCK because it has the implementation of a flocking algorithm. The flocking algorithm followed by the FLOCK system was implemented for CPU and GPU use. The GPU version was implemented using OpenCL to ensure portability between graphics cards. FLOCK system computes the three basic steering behaviors: separation, alignment, and cohesion. 
+The RTPS library was extended by adding another system, named FLOCK, specialized to our flocking system. 
+%This system was named FLOCK because it has the implementation of a flocking algorithm. 
+The flocking algorithm followed by the FLOCK system was implemented to run on both CPU and GPU. The GPU version was implemented using OpenCL to ensure portability between graphics cards. The FLOCK system computes the three basic steering behaviors at the root of all flocking algorithms: separation, alignment, and cohesion. 
 
-The Blender Game Engine was enhanced by adding a custom modifier called RTPS. This modifier links the RTPS library with the Blender Game Engine. Our contribution in the development of the modifier was creating the UI for the FLOCK system.
+The Blender Game Engine was enhanced by adding a custom modifier called RTPS. This modifier links the RTPS library with the Blender Game Engine. Our contribution in the development of the modifier was in creating the UI for the FLOCK system.
 
-The RTPS modifier is able to run three different particles systems inside the Blender Game Engine. These systems are: SPH, FLOCK, and Simple. Creating a particle system that proficiently runs boids inside the Blender Game Engine was our aim and the main contribution in this thesis.
+The RTPS modifier can run three different particles systems inside the Blender Game Engine: SPH, FLOCK, and Simple). The main contribution of this thesis was in extending the SPH particle framework in Blender to include flocking behavior.   %Creating a particle system that proficiently runs boids inside the Blender 
+%Game Engine was our aim and the main contribution in this thesis.
 
-The performance of our code is very important. A comparison between our RTPS GPU implementation and Blender Boids system (which is available only outside the Blender Game Engine) was done. It was found that our library outperforms Blender capabilities at all times. A flock of more than $130K$ boids was rendered at a rate of $41$ fps and another flock of more than $500K$ boids was rendered at a rate of $10$ fps. 
+The performance of our code is very important. A comparison between our RTPS GPU implementation and Blender Boids system (which is available only outside the Blender Game Engine) was performed. We found that our library outperforms Blender capabilities at all times by at least an order of magnitude (10x). Of cours, rendering speed depended on flock size, and on the number of boids inside the search radius. For example, a flock of more than $130K$ boids was rendered at a rate of $41$ fps and another flock of more than $500K$ boids was rendered at a rate of $10$ fps. 
