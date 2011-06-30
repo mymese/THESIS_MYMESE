@@ -2,9 +2,9 @@
 
 % Introduction
 %\section{Introduction}
-The Real-Time Particle Systems (RTPS) library was designed and developed by Ian Johnson\cite{ianPaper}, including a particle module. In this thesis, we have extended RTPS to include a flocking (boid) system. 
+The Real-Time Particle Systems (RTPS) library was designed and developed by Ian Johnson\cite{ianPaper}. This library includes a particle module. In this thesis, we have extended the RTPS library to include a flocking boids system. 
 
-This chapter introduces the RTPS framework. The description of the RTPS library follows the structure of the RTPS implementation showed in Figure~\ref{RTPSdiagram}. At the end of the Chapter, we provide a detailed description of the extended implementation developed for the \texttt{FLOCK} system.
+This chapter introduces the framework of the RTPS library. The description of the RTPS library follows the structure of the RTPS implementation showed in Figure~\ref{RTPSdiagram}. At the end of the Chapter, we provide a detailed description of the extended implementation developed for the \texttt{FLOCK} system.
 
 % RTPS diagram
 \begin{figure}[htbp]
@@ -17,9 +17,9 @@ This chapter introduces the RTPS framework. The description of the RTPS library 
 
 % RTPS
 \section{RTPS}\label{rtpssection}
-\texttt{RTPS.h} is the main class of the RTPS library. An \texttt{RTPS} object is a particle system initialized with a set of user settings,  discussed in Section~\ref{rtpsettings}. 
+As seen in Figure~\ref{RTPSdiagram}, \texttt{RTPS} is the root of the library. An \texttt{RTPS} object is a particle system initialized with a set of user settings,  discussed in Section~\ref{rtpsettings}. 
 
-As seen in Figure~\ref{RTPSdiagram}, \texttt{RTPS} is the root of the library. Only two methods are defined in the \texttt{RTPS} class: \texttt{update()} and \texttt{render()}. \texttt{update()} computes the positions of the particles at each frame, and \texttt{render()} is in charge of rendering the particles. These methods are implemented individually by each of the systems available in the RTPS library. The following code shows the \texttt{RTPS} constructor used when creating the \texttt{FLOCK} system.
+Only two methods are defined in the \texttt{RTPS} class: \texttt{update()} and \texttt{render()}. \texttt{update()} computes the positions of the particles/boids at each frame, and \texttt{render()} is in charge of display the particles/boids in the screen. These methods are implemented individually by each of the systems available in the RTPS library. The following code shows the \texttt{RTPS} constructor used when creating the \texttt{FLOCK} system.
 
 %\texttt{RTPS} has various instance variables: a \texttt{CL} object which is used to manage the \textit{OpenCL} functionality,  an \texttt{RTPSettings} object to manage the settings of the system and a \texttt{System} object which stores the type of particle system that has been created. 
 % RTPS constructor
@@ -34,11 +34,11 @@ RTPS::RTPS(RTPSettings *s, CL* _cli)
 }
 \end{cppcode}
 
-The \texttt{Init()} method called inside the constructor would creates the respective particle system, i.e. \texttt{SPH} or \texttt{FLOCK}, depending on the settings.
+The \texttt{Init()} method called inside the constructor creates the respective particle system, i.e. \texttt{SPH} or \texttt{FLOCK}, depending on the specified settings.
 
 % RTPSettings
 \section{RTPS Settings}\label{rtpsettings}
-\texttt{RTPSettings} is the class that stores all the settings of the particle systems. This class defines the set of systems available in RTPS. The settings are defined depending on the systems. Two systems are currently available SPH and FLOCK. The constructor used to create the RTPS settings is presented below. \texttt{Systype} is an enumeration with the names of the two systems. 
+\texttt{RTPSettings} is the class that stores all the settings of the particle systems. This class also defines the set of systems available in RTPS. The settings are system-related. Two systems are currently available \texttt{SPH} and \texttt{FLOCK}. The constructor used to create the RTPS settings is presented below. \texttt{Systype} is an enumeration with the names of the two systems. 
 
 %The location of this class is at \texttt{rtpslib/RTPSettings.h}. It has the following instance variables defined: the maximum number of particles, the time step, and a \texttt{Domain} object. Also, there is an enumeration variable \texttt{SysType} that defines the names of the three available particle systems. Some of the rendering settings are set and get in this class. Here is the \texttt{RTPSettings} constructor that we use for the \texttt{FLOCK} system.
 
@@ -55,15 +55,15 @@ RTPSettings::RTPSettings(SysType system, int max_particles, float dt, Domain* gr
 \end{cppcode}
 
 %The parameters for this constructor are the type of system, the maximum number of particles, the time step and the grid domain. 
-As an OpenCL requirement, the maximum number of particles has to be a power of two. 
+As an OpenCL requirement, the maximum number of particles/boids has to be a power of two. 
 
 % Domain
 \section{Domain}
-The \texttt{Domain} class defines the grid in which the simulation is being computed. This class also stores the different grid parameters that are needed throughout the computation. The \texttt{IV} class defines and implements the methods that initialize the positions of the particles. Various geometric shapes are available to initialize the positions: rectangles, spheres, and discs. The \texttt{UniformGrid} class is used in the nearest neighbor search.
+Domain includes three important classes: \texttt{Domain}, \texttt{IV}, and \texttt{UniformGrid}. The \texttt{Domain} class defines the grid in which the simulation is being computed. This class also stores the different grid parameters that are needed throughout the computation. The \texttt{IV} (Initial Values) class defines and implements the methods that initialize the positions of the particles/boids. Various geometric shapes are available to initialize the positions: rectangles, spheres, and discs. The \texttt{UniformGrid} class is used in the nearest neighbor search.
 
 % Render
 \section{Render}
-Most of the code developed for rendering within the RTPS library was developed by Andrew Young\cite{andrewBlog}. There are several of possible rendering choices. The \texttt{Render} type renders the particles as Points; the \texttt{SpriteRender} uses a 2D image and mapped into a sphere and represents each particle as a textured sphere. \texttt{SSFRender} was specifically designed for the SPH system to provide a more "fluid-like" character to the flow. Finally, \texttt{Sphere3DRender} renders the boids as 3D spheres.  
+Most of the code developed for rendering of the particles/boids was developed by Andrew Young\cite{andrewBlog}. There are several of possible rendering choices. The \texttt{Render} type renders the particles/boids as Points; the \texttt{SpriteRender} uses a 2D image and mapped it into a sphere and represents each particle/boids as a textured sphere. \texttt{SSFRender} was specifically designed for the SPH system to provide a more "fluid-like" character to the flow. Finally, \texttt{Sphere3DRender} renders the boids as 3D spheres.  
 
 % System
 \section{System}
@@ -71,7 +71,7 @@ Each of the particle systems in the RTPS library inherits the \texttt{System} cl
 
 % Common
 \section{Common}\label{commonsection}
-The RTPS library has shared classes that are used for all systems. These classes share the implementation of a hose, used to spray particles into the physical domain. The other common classes include classes for the nearest neighbor search. The next section explains the nearest neighbor search algorithm.
+The RTPS library has shared classes that are used for all systems. These classes shared the implementation of a hose, used to spray particles/boids into the physical domain of the system. The other common classes are related to the nearest neighbor search. The next Section briefly explains the approach taken for the nearest neighbor search.
 
 % NNS
 \subsection{Nearest Neighbor Search}
@@ -80,36 +80,33 @@ The nearest neighbor search consists of two phases: \textit{preparation} and \te
 % preparation
 \begin{enumerate}
 \item{\textbf{Hash}: creates a hash value by overlaying a uniform grid on the system's domain, and calculating an index value from the 3D cell index. Each boid lies in one cell and has an associated hash.}
-\item{\textbf{Sort}: sorts the hash array with respect to hash, imposing an ordering on the particles. All particles in a given cell are contiguous in the sorted particle array.}
-\item{\textbf{Permute}:  permutes the arrays of positions, velocities, and color according to the sorted index array}
-\item{\textbf{Cell indices}: updates two arrays: \texttt{cell\_indices\_start} and \texttt{cell\_indices\_end} that keep track of which cells are populated with particles, \texttt{cell\_indices\_start} stores the index of the first particle in each cell, when there is no particle an index of $-1$ is assigned; the \texttt{cell\_indices\_end} arrays stores the index of the last particle in that cell}
+\item{\textbf{Sort}: sorts the hash array with respect to their hash values. This would impose an ordering on the particles/boids. All particles/boids in a given cell are contiguous in the sorted hash array.}
+\item{\textbf{Permute}:  permutes the arrays of positions, velocities, and color according to the sorted index array.}
+\item{\textbf{Cell indices}: updates two arrays: \texttt{cell\_indices\_start} and \texttt{cell\_indices\_end} that keep track of which cells are populated with particles/boids, \texttt{cell\_indices\_start} stores the index of the first particle/boid in each cell, when there is no particle/boid an index of $-1$ is assigned; the \texttt{cell\_indices\_end} arrays stores the index of the last particle/boid in that cell.}
 \end{enumerate}
 
-Once the preparation is complete, neighbor search is straightforward and consists of the following three functions:  
+Once the \textit{preparation} is complete, neighbor search or \textit{lookup} is straightforward and consists of calling the following three functions:  
 
 % lookup
 \begin{enumerate}
-\item{\textbf{IterateParticleInNearbyCells}: loops over the 26 cells surrounding the cell of the particle in question. This function calls \texttt{IterateParticlesInCells} for each cell }
-\item{\textbf{IterateParticlesInCells}: loops over the particles from the starting to the ending indices of that cell and calls \texttt{ForNeighbor} for each particle}
-\item{\textbf{ForNeighbor}: has access to both the particle and its neighbor, from which the influence of a single boid on the steering velocity can be computed.}
+\item{\textbf{IterateParticleInNearbyCells}: loops over the 26 cells surrounding the cell of the particle/boid that we are searching neighbors for. Then the function \texttt{IterateParticlesInCells} is called for each cell.}
+\item{\textbf{IterateParticlesInCells}: loops over the particles/boids from the starting to the ending indices of that cell and calls \texttt{ForNeighbor} for each particle/boid}
+\item{\textbf{ForNeighbor}: has access to both the particle/boid and its neighbor information, from which the influence of a single boid on the steering velocity can be computed.}
 \end{enumerate}
 
-The three main steering behaviors use the nearest neighbor search to compute the respective rules in the local neighborhood of each boid.
+The three main steering behaviors used the nearest neighbor search to compute the steering velocities in the local neighborhood of each boid.
 
 % SPH
 \section{SPH}\label{sphsection}
 \texttt{SPH} is the main system of the RTPS library. This system uses the SPH formulation to compute the different forces between particles.
 
-Both the \texttt{FLOCK} and \texttt{SPH} systems are particle-based and depend on a neighbor search to determine either velocities or forces. In the SPH formulation particle-particle interactions generated forces, while in the FLOCK formulation boid-boid interaction generates velocity 
-vectors that steer the boids. Both boids and fluid particles are integrated over time to update particle positions.
+Both the \texttt{FLOCK} and \texttt{SPH} systems are particle-based and depend on a neighbor search to determine either velocities or forces. In the SPH formulation particle-particle interactions generated forces, while in the FLOCK formulation boid-boid interaction generates velocity vectors that steer the boids. Both boids and fluid particles are integrated over time to update particle positions.
 
 For more detailed information about the \texttt{SPH} system implemented in the RTPS library, please refer to the Master thesis of Ian Johnson \cite{ianThesis}.
 
 % FLOCK
 \section{FLOCK}\label{flocksection}
-The \texttt{SPH} system served as a guide to create the \texttt{FLOCK} system with the root class \texttt{FLOCK}. The settings of the \texttt{FLOCK} system are stored in the \texttt{FLOCKSettings} class. 
-
-We implemented the three main steering behaviors of flocking, in addition to the goal and avoid behaviors. Figure~\ref{flockdiagram} shows the hierarchy of the \texttt{FLOCK} system. Most of the classes are detailed in this Section. 
+The \texttt{SPH} system served as a guide to create the \texttt{FLOCK} system. The settings of the \texttt{FLOCK} system are stored in the \texttt{FLOCKSettings} class. We implemented the three main steering behaviors of flocking, in addition to the \textit{goal} and \textit{avoid} behaviors. Figure~\ref{flockdiagram} shows the hierarchy of the \texttt{FLOCK} system. Most of the classes are detailed in this Section. 
 
 % FLOCK diagram
 \begin{figure}[htbp]
@@ -124,7 +121,7 @@ We implemented the three main steering behaviors of flocking, in addition to the
 
 % FLOCK class
 \subsection{FLOCK class}
-The header file of the \texttt{FLOCK} class defines the prototypes of the functions used to insert particles into our system. It is used to stored all vectors and buffers related to the boids. The following code illustrates the class constructor. 
+The \texttt{FLOCK} class defines the prototypes of the functions used to insert boids into our system. It also is used to stored all vectors and buffers related to the boids. The following code illustrates the class constructor. 
 
 \begin{cppcode}{0}
 FLOCK::FLOCK(RTPS *psfr, int n)
@@ -135,7 +132,7 @@ FLOCK::FLOCK(RTPS *psfr, int n)
 	grid = settings->grid;
 	max_num = n;
 	
-	// initial number of particles
+	// initial number of boids
 	num = 0;
  	
 	...
@@ -159,25 +156,23 @@ FLOCK::FLOCK(RTPS *psfr, int n)
 }
 \end{cppcode}
 
-First, some of the instance variables are initialized. The settings of \texttt{FLOCK} are stored in a structure called \texttt{FLOCKParameters}. When executing \texttt{calculate()}, the parameters 
-are set to their default values. Then, \texttt{updateFLOCKP()} updates the parameters to the user settings.
+First, some of the instance variables are initialized. Then, by executing \texttt{calculate()}, the parameters of the system are set to their default values. \texttt{updateFLOCKP()} would then update the parameters to the user settings.
 
-The function \texttt{prepareSorted()} initializes the different vectors and buffers that were created for our system, i.e \texttt{velocities}, \texttt{flockmates}, etc. This function also creates the Vertex Buffer Objects (VBOs). VBO objects store vertex data meant to be used during the rendering process {\em its aim to be used for rendering purposes}\cite{vbo}. Their use makes it possible for the vertex data to be a part of the GPU boid kernels, and of the rendering process without additional data copies or data transfers to and from the CPU. The positions and color vectors are then copied to the respective VBOs. If using the GPU the different \texttt{Buffer} objects are initialized with their respective CPU arrays. The \texttt{FLOCK} parameters are also copied to the GPU. 
+The function \texttt{prepareSorted()} initializes the different vectors and buffers that were created for our system, i.e \texttt{velocities}, \texttt{flockmates}, etc. This function also creates the Vertex Buffer Objects (VBOs). VBO objects store vertex data meant to be used during the rendering process, {\em its aim is to be used for rendering purposes}\cite{vbo}. Their use makes it possible for the vertex data to be a part of the GPU boids kernels, and of the rendering process without additional data copies or data transfers to and from the CPU. The positions and color vectors are then copied to the respective VBOs. If using the GPU the different \texttt{Buffer} objects are initialized with their respective CPU arrays. The \texttt{FLOCK} parameters are also copied to the GPU. 
 
-\subsubsection{Particles insertion}
-The system has being created and now the question arise in \textit{how do the particles are inserted into the system?} There are a few functions defined in the \texttt{FLOCK} that do that task. These functions are \texttt{addBox} , \texttt{addBall}, and \texttt{addHose}. First, these functions initialize the positions of the particles, then the positions of the particles are send to the GPU or CPU to be rendered. 
+\subsubsection{Boids insertion}
+The system has being created and now the question arise in \textit{how do the boids are inserted into the system?} There are a few functions defined in the \texttt{FLOCK} system to do that task. These functions are \texttt{addBox} , \texttt{addBall}, and \texttt{addHose}. First, these functions initialize the positions of the boids, then the positions of the boids are send to the GPU or CPU to be rendered. 
 
 \subsubsection{Update}
-As mentioned in Section~\ref{rtpssection}, each of the systems implements the methods \texttt{update()} and \texttt{render()}. In \texttt{FLOCK} the \texttt{update()} function updates the positions of the boids at each iteration (one iteration per frame). In the CPU implementation, \texttt{updateCPU()} function is called. In turn, this function calls the functions \texttt{cpuRules()} and \texttt{cpuEulerIntegration()}, responsible for the boid position update on the CPU. The CPU code was developed for testing and debugging purposes only. On the other hand, on the GPU, one uses the functipn \texttt{updateGPU()}, which calls the OpenCL kernels that perform the nearest neighbor search, then computes the flocking rules, and finally updates the boid positions. These kernels are described in more detail in Section~\ref{rulesclass}.
+As mentioned in Section~\ref{rtpssection}, each of the systems implements the methods \texttt{update()} and \texttt{render()}. In \texttt{FLOCK} the \texttt{update()} function updates the positions of the boids at each iteration (one iteration per frame). In the CPU implementation, \texttt{updateCPU()} function is called. In turn, this function calls the functions \texttt{cpuRules()} and \texttt{cpuEulerIntegration()}, responsible for the boid position update on the CPU. The CPU code was developed for testing and debugging purposes only. On the other hand, on the GPU, one uses the function \texttt{updateGPU()}, which calls the OpenCL kernels that perform the nearest neighbor search, then computes the flocking rules, and finally updates the boid positions. These kernels are described in more detail in Section~\ref{rulesclass} and \ref{eulerclass}.
 
 % FLOCKSettings class
 \subsection{FLOCKSettings class}
-In order to run a simulation, the settings of the system need to be set. The specific settings that related to flocking are defined in class \texttt{FLOCKSettings}. The \texttt{FLOCKParameters} struct stores all these settings. This struct includes variables such as the simulation scale, the searching radius, the maximum speed of the boids and the weights of each of the 
-steering behaviors. 
+In order to run a simulation, the settings of the system need to be specified. The settings related to flocking are defined in class \texttt{FLOCKSettings}. The \texttt{FLOCKParameters} struct stores all those settings. This struct includes variables such as the simulation scale, the searching radius, the maximum speed of the boids and the scalar weights of each of the implemented steering behaviors. 
 
 % Rules class
 \subsection{Rules class}\label{rulesclass}
-The \texttt{Rules} class computes the different steering behaviors that were implemented to simulate the flocking behavior. The steering behaviors or \textit{rules} are implemented both on the CPU and on the GPU. All the rules that run on the GPU are computed in the \texttt{rules} kernel. The following code shows the class \texttt{Rules}.
+The \texttt{Rules} class computes the different steering behaviors that were implemented to simulate flocking behavior. The steering behaviors or \textit{rules} are implemented on both the CPU and the GPU. All the rules that are executed on the GPU are computed in the \texttt{rules} kernel. The following code shows the class \texttt{Rules}.
 
 \begin{cppcode}{0}
 #ifndef RTPS_RULES_H_INCLUDED
@@ -212,8 +207,7 @@ namespace rtps
 #endif
 \end{cppcode}
 
-First, the kernel is initialized in the constructor of class \texttt{Rules}. The kernel 
-arguments are set in the \texttt{execute()} method of this class. 
+The kernel is initialized in the constructor of class \texttt{Rules}. The kernel arguments are set in the \texttt{execute()} method of this class. 
 
 The next code is part of the \texttt{Rules.cpp} file.
 
@@ -252,7 +246,7 @@ namespace rtps
 }
 \end{cppcode}
 
-The implementation of the kernel is stored separately from the \texttt{C++} classes in order to better modularize our framework. The kernel defined in \texttt{Rules} is called \texttt{rules}. 
+The implementation of the kernel is stored separately from the \texttt{C++} classes in order to better modularize our framework. The \texttt{cpuRules()} method is implemented inside the \texttt{Rules.cpp} file. 
 
 %, and \texttt{rule\_leaderfollowing}.
 
@@ -269,9 +263,9 @@ The implementation of the kernel is stored separately from the \texttt{C++} clas
 %This would finish the description of the \texttt{Rules} class. The next step is to integrate over time to get the new position of the boid.
 
 % Euler Integration class
-\subsection{EulerIntegration class}
+\subsection{EulerIntegration class} \label{eulerclass}
 %A discussion on how to get the different steering behaviors vectors have been done. 
-This Section describes briefly how to combine the vectors that stores the behaviors in order to get one single vector to update the positions. A class called \texttt{EulerIntegration} was developed in order to get the new positions. The {EulerIntegration.h} class is shown bellow.
+This Section describes briefly how to combine the steering vectors in order to get one single vector to update the positions. The \texttt{EulerIntegration} class is shown bellow.
 
 \begin{cppcode}{0}
 #ifndef RTPS_EULER_INTEGRATION_H_
@@ -298,9 +292,9 @@ namespace rtps
 #endif
 \end{cppcode}
 
-The structure of the \texttt{EulerIntegration} class is similar to that of the \texttt{Rules} class. \texttt{EulerIntegration.cpp} initializes the kernel and implements the \texttt{execute} function that sets the arguments of the kernels and executes it. It also carries the implementation of the function \texttt{cpuEulerIntegration()}. 
+The structure of the \texttt{EulerIntegration} class is similar to the \texttt{Rules} class. \texttt{EulerIntegration.cpp} initializes the kernel and implements the \texttt{execute} function that sets the arguments of the kernels and executes it. It also carries the implementation of the function \texttt{cpuEulerIntegration()}. 
 
-The kernel \texttt{\textbf{euler\_integration}} starts by retrieving the respective steering vectors and weights from the GPU.The weights are obtained from the flocking parameters object. The velocity vectors for each of the rules are then computed and combined to obtain the final velocity vector.
+The kernel \texttt{\textbf{euler\_integration}} starts by retrieving the respective steering vectors and scalar weights from the GPU. The scalar weights are obtained from the flocking parameters object. The weighted velocity vectors for each of the rules are then computed and combined to obtain the final velocity vector.
 
 \begin{cppcode}{0}
 // RULE 1. SEPARATION
@@ -322,15 +316,15 @@ vel_avoid = avoid * w_avoid;
 vel = vi + vel_sep + vel_aln + vel_coh + vel_goal + vel_avoid;
 \end{cppcode}
 
-Finally, the final velocity is constrained to a prescribed maximum speed. As an option, the boids can be subjected to an imposed velocity field, which is added to the steering velocity to obtain the actual vector used to move the boid. Finally, the updated boid positions are computed using the steering velocity.
+The final velocity is constrained to a prescribed maximum speed. As an option, the boids can be subjected to an imposed velocity field, which is added to the final steering velocity to obtain the actual vector used to move the boid. Finally, the updated boid positions are computed using the final steering velocity.
 
 \begin{cppcode}{0}
-// OPTIONAL CIRCULAR VELOCITY FIELD
+// OPTIONAL IMPOSE VELOCITY FIELD
 float4 v = (float4)(-3*pi.z, 0.f , pi.x, 0.f);
-v *= flockp->circular_vel_const;
+v *= flockp->impose_vel;
 
 // SET THE NEW VELOCITY
-vi = v + acc;
+vi = v + vel;
 vi.w = 0.f;
 
 // INTEGRATION

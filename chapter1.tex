@@ -27,7 +27,7 @@ Computer games have been around since the 1950s\cite{historyVideoGames}. They we
 % different software to create games available
 % why Blender?
 
-There are many commercial and free game engines available for users interested in their own game development. Our interest in games is to help improve education at all levels of schooling, from K-12 up to college. We feel that whatever the end results, the software should be widely available, low or no cost, and should run on the major platforms (Microsoft, MacOSX and Linux). A comprehensive list of some of the current game engines available can be found at (http://en.wikipedia.org/wiki/List\_of\_game\_engines).  
+There are many commercial and free game engines available for users interested in their own game development. A comprehensive list of some of the current game engines available can be found at (http://en.wikipedia.org/wiki/List\_of\_game\_engines). Our interest in games is to help improve education at all levels of schooling, from K-12 up to college. We feel that whatever the end results, the software should be widely available, low or no cost, and should run on the major platforms (Microsoft, MacOSX and Linux). 
 
 %\mmy{NO references? How about Wikipedia's list of game engines. there are other lists available. Use Google.}
 % You just told me that do not use wikipedia as a reference, I cited the list of game engines, I couldn't find any other list more comprehensive than the one in wikipedia
@@ -41,7 +41,7 @@ During the development of a new Game Design course created as part of the underg
 % Blender Particle Systems
 % issues between the Particle systems and the Game Engine
 
-However, there are some additional tools available to the Blender modeling and animation  area but not to the game engine. The particle systems can simulate particles with different types of physics i.e. Newtonian, or boids \footnote{entities following flocking behavior} and keyed physics. 
+However, there are some additional tools available to the Blender modeling and animation  area but not to the game engine. The particle systems can simulate particles with different types of physics i.e. newtonian, or boids \footnote{entities following flocking behavior} and keyed physics. 
 
 % CHECKED
 % why flocking?
@@ -49,12 +49,12 @@ However, there are some additional tools available to the Blender modeling and a
 
 % define the problem and mention the approaches to solve it
 
-When particles act according to Newtonian physics, they are subject to Newton's laws: force equals mass times acceleration. Particles are given an initial linear and angular velocity. The motion of each particle is determined from the force acting on it. For example, a collection of particles could be subject to pressure and viscosity forces. Another system of particles in Blender models flocking behavior. In this case, the individual particles are called boids, and they are subject to simple rules that determined their velocity, rather than a force. These rules are used to simulate flocks, schools, herds, and swarms of different entities.
+When particles act according to newtonian physics, they are subject to Newton's laws: force equals mass times acceleration. Particles are given an initial linear and angular velocity. The motion of each particle is determined from the force acting on it. For example, a collection of particles could be subject to pressure and viscosity forces. Another system of particles in Blender models flocking behavior. In this case, the individual particles are called boids, and they are subject to simple rules that determined their velocity, rather than a force. These rules are used to simulate flocks, schools, herds, and swarms of different entities.
 
 %CHECKED
-This thesis project focuses on the Boids system. Boids can be defined as entities, in most cases animals, that have an emerging behavior caused by following a set of rules called steering behaviors. This behavior is called \textit{flocking} and the name Boid was first introduced by the pioneer of flocking, Craig Reynolds, in his 1987 paper: Flocks, Herds, and Schools: A Distributed Behavioral Model\cite{craig1}. The model presented by Reynolds have been used by many scientists interested in this research area. This model will be discussed further in the next chapter.
+This thesis focuses on the Boids system. Boids can be defined as entities, in most cases animals, that have an emerging behavior caused by following a set of rules called steering behaviors. This behavior is called \textit{flocking} and the name Boid was first introduced by the pioneer of flocking, Craig Reynolds, in his 1987 paper: \textit{Flocks, Herds, and Schools: A Distributed Behavioral Model}\cite{craig1}. The model presented by Reynolds have been used by many scientists interested in this research area. This model will be discussed further in the next chapter.
 
-We will implement Reynolds' basic flocking model into the Blender Game Engine. Although there have been many publications on flocking since the original seminar paper, the algorithm has not changed much. Most of the modifications relate to the computation of the steering behaviors.
+We implemented Reynolds' basic flocking model into the Blender Game Engine. Although there have been many publications on flocking since the original seminar paper, the algorithm has not changed much. Most of the modifications relate to the computation of the steering behaviors.
 
 In order to introduce the flocking algorithm into the Blender Game Engine, Blender's source code had to be  modified, and Blender had to be rebuilt. Much effort was spent ensuring that Blender remained portable across platforms. All the modifications made to Blender were based on the Blender release 2.57. 
 
@@ -72,9 +72,8 @@ Since the advent of OpenCL\cite{opencl}, it became possible to write GPU softwar
 %Why are you doing this work? What are the issues? What are the objectives?
 %What have you done? What are you hoping to do with your implementation?
 
-Given that Blender is still evolving, and will for the foreseeable future, it was imperative to make our changes to blender in a way to minimize the code footprint on the Blender source code. Thus, our
-GPU code is maintained outside the Blender source tree. My colleague Ian Johnson\cite{ianBlog} developed a library named \textit{RTPS} (Run-Time Particle Systems) that defines particle systems (based on the Smoothed-Particle Hydrodynamics) that can be used inside the Blender Game Engine. SPH can simulate in real time real-time fluids with a few hundred thousand particles. 
-We extended \textit{RTPS} in order to implement flocking behavior. The steering rules: \textit{separation}, \textit{alignment}, and \textit{cohesion} were implemented inside the \textit{RTPS} library, which also implements all the rendering routines.
+Given that Blender is still evolving, and will for the foreseeable future, it was imperative to make our changes to Blender in a way to minimize the code footprint on the Blender source code. Thus, our
+GPU code is maintained outside the Blender source tree. Ian Johnson\cite{ianBlog} developed a library named \textit{RTPS} (Run-Time Particle Systems) that defines particle systems (based on the Smoothed-Particle Hydrodynamics) that can be used inside the Blender Game Engine. SPH can simulate in real time real-time fluids with a few hundred thousand particles. We extended \textit{RTPS} in order to implement flocking behavior. The steering rules: \textit{separation}, \textit{alignment}, \textit{cohesion}, \textit{goal}, and \textit{avoidance} were implemented inside the \textit{RTPS} library, which also implements all the rendering routines.
 
 %\mmy(YOU NEVER SAID THERE WERE THREE RULES yes}
 % now I do
@@ -92,8 +91,8 @@ The remainder of the thesis is structured as follows:  in Chapter~\ref{chap2}, w
 \section{Contributions of this thesis}
 The main contributions made in this thesis were:
 \begin{enumerate}
-\item Developed a CPU and GPU flocking implementation that computes separation, alignment, cohesion, goal, and avoidance rules. An OpenCL implementation ensures portability between ATI and NVIDIA graphics cards.
-\item Added a FLOCK to the Real-Time Particle Systems (RTPS) library.
+\item Developed a CPU and GPU flocking implementation that computes \textit{separation}, \textit{alignment}, \textit{cohesion}, \textit{goal}, and \textit{avoidance} rules. An OpenCL implementation ensures portability between ATI and NVIDIA graphics cards.
+\item Added a flocking boids system called FLOCK to the Real-Time Particle Systems (RTPS) library.
 \item Added the FLOCK system to the RTPS modifier of the Blender Game Engine.
 \item Successfully created a simple game demo that uses the FLOCK system and played it inside the Blender Game Engine.
 \end{enumerate}
