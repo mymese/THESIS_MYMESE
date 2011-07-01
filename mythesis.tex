@@ -72,7 +72,45 @@ The author of this thesis would like to acknowledge the unconditional help of he
 \onehalfspacing
 
 \begin{abstract}
-Blender is a free modeling/simulation software that has been out since 1993. It has recently been extended and now it includes modeling, texturing, animation, particle simulation, rendering, game creation, etc. The Blender Game Engine is a very powerful tool, allowing simple games to be created without the need for explicit programming. Although Blender has extensive particle-based tools, including hair styling, these are absent from the game module. A submodule of the particle system is a rather sophisticated Boid System. In this project we incorporate a Boid system inside the Blender Game Engine, enhancing the capabilities of Blender. The collective behavior of Boids is called flocking, which can be characterized as an emergent behavior caused by following three steering behaviors: separation, alignment, and cohesion. Boids are commonly used in games as non-player characters since they can behave like real entities by themselves without the need for explicit control. Our implementation involved the development of a new modifier inside Blender. This modifier is called RTPS because it depends on the library Real-Time Particles System (RTPS) developed by Ian Johnson as part of his work on Smooth Particle Hydrodynamics (SPH). RTPS is a library that currently defines three particle systems: SPH, FLOCK, and Simple. RTPS also incorporates CPU and GPU implementations of both systems. Benchmarks of the RTPS-FLOCK system indicate that our implementation has better performance than the Blender Boids system (available outside the game engine). Three demonstrations are presented here. The first demo shows the symmetry that each steering behavior maintains. The second demonstration is a simulation of a swarm of bees approaching their hive, this was done using the goal steering behavior. Our last demo, shows a crowd simulation of boids. 
+%Blender is a free modeling/simulation software available since 1993. 
+%It has recently been extended to include modeling, texturing, 
+%animation, particle simulation, rendering, game creation, etc. 
+%The Blender Game Engine is a very powerful tool, allowing simple 
+%games to be created without the need for explicit programming. 
+%Although Blender has extensive particle-based tools, including hair 
+%styling, these are absent from the game module. A submodule of the 
+%particle system is a rather sophisticated Boid System. 
+In this thesis, we discuss the development of a new Boid 
+system that simulates flocking behavior, inside the Blender 
+Game Engine, and within the framework of 
+the Real-Time Particles System (RTPS) library developed by Ian Johnson. 
+%the capabilities of Blender. 
+The collective behavior of Boids is characterized as an emergent behavior 
+caused by following three steering behaviors: separation, alignment, 
+and cohesion. 
+%Boids are commonly used in games as non-player characters 
+%since they can behave like real entities by themselves without the need 
+%for explicit control. 
+%We developed a new modifier for blender
+%This modifier is called RTPS because it 
+%depends on the library Real-Time Particles System (RTPS) developed by 
+%Ian Johnson as part of his work on Smooth Particle Hydrodynamics (SPH). 
+The implementation leverages the lastest OpenCL to maintain the portability 
+of the Blender across different operating systems. 
+%RTPS is a library that currently defines three particle systems: SPH, 
+%FLOCK, and Simple. RTPS also incorporates CPU and GPU implementations 
+%of both systems. 
+Benchmarks of the RTPS-FLOCK system show that 
+our implementation speeds up Blender's original Boid implementation (which 
+cannot run in the game engine) by more than an order of magnitude. 
+%as better performance than the Blender Boids system 
+%(available outside the game engine). 
+We illustrate our boid system with three demonstrations. 
+The first demo shows the symmetry that each steering behavior 
+maintains. The second demonstration illustrates the behavior of 
+a  swarm of bees approaching their hive, and the last demo 
+illustrates a simulation of a crowd crowd constrained to 
+a two-dimensional plane. 
 \end{abstract}
 
 \mainmatter
