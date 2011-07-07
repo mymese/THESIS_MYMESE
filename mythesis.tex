@@ -30,7 +30,6 @@
 \defensedate{June 24, 2011}
 
 \committeesig{Gordon Erlebacher}{Professor Directing Thesis}
-%\committeesig{XXX}{University Representative}
 \committeesig{Ming Ye}{Committee Member}
 \committeesig{Xiaoqiang Wang}{Committee Member}
 
@@ -60,57 +59,13 @@ The author of this thesis would like to acknowledge the unconditional help of he
 %\end{listofsymbols}
 
 %\begin{listofabbrevs}
-
-%\begin{acronym}{GPU}
-%\acro{GPU}{Graphics Processor Units}
-%\end{acronym}
-
-
 %\end{listofabbrevs}
 
 % spacing 1.5
 \onehalfspacing
 
-\begin{abstract}
-%Blender is a free modeling/simulation software available since 1993. 
-%It has recently been extended to include modeling, texturing, 
-%animation, particle simulation, rendering, game creation, etc. 
-%The Blender Game Engine is a very powerful tool, allowing simple 
-%games to be created without the need for explicit programming. 
-%Although Blender has extensive particle-based tools, including hair 
-%styling, these are absent from the game module. A submodule of the 
-%particle system is a rather sophisticated Boid System. 
-In this thesis, we discuss the development of a new Boid 
-system that simulates flocking behavior, inside the Blender 
-Game Engine, and within the framework of 
-the Real-Time Particles System (RTPS) library developed by Ian Johnson. 
-%the capabilities of Blender. 
-The collective behavior of Boids is characterized as an emergent behavior 
-caused by following three steering behaviors: separation, alignment, 
-and cohesion. 
-%Boids are commonly used in games as non-player characters 
-%since they can behave like real entities by themselves without the need 
-%for explicit control. 
-%We developed a new modifier for blender
-%This modifier is called RTPS because it 
-%depends on the library Real-Time Particles System (RTPS) developed by 
-%Ian Johnson as part of his work on Smooth Particle Hydrodynamics (SPH). 
-The implementation leverages the lastest OpenCL to maintain the portability 
-of the Blender across different operating systems. 
-%RTPS is a library that currently defines three particle systems: SPH, 
-%FLOCK, and Simple. RTPS also incorporates CPU and GPU implementations 
-%of both systems. 
-Benchmarks of the RTPS-FLOCK system show that 
-our implementation speeds up Blender's original Boid implementation (which 
-cannot run in the game engine) by more than an order of magnitude. 
-%as better performance than the Blender Boids system 
-%(available outside the game engine). 
-We illustrate our boid system with three demonstrations. 
-The first demo shows the symmetry that each steering behavior 
-maintains. The second demonstration illustrates the behavior of 
-a  swarm of bees approaching their hive, and the last demo 
-illustrates a simulation of a crowd crowd constrained to 
-a two-dimensional plane. 
+\begin{abstract} 
+In this thesis, we discuss the development of a new Boids system that simulates flocking behavior, inside the Blender Game Engine, and within the framework of the Real-Time Particles System (RTPS) library developed by Ian Johnson. The collective behavior of Boids is characterized as an emergent behavior caused by following three steering behaviors: \textit{separation}, \textit{alignment}, and \textit{cohesion}. The implementation leverages the latest OpenCL to maintain the portability of the Blender across different operating systems. Benchmarks of the RTPS-FLOCK system show that our implementation speeds up Blender's original Boids implementation (which cannot run in the game engine) by more than an order of magnitude. We illustrate our boids system with three demonstrations. The first demo shows the symmetry that each steering behavior maintains. The second demonstration illustrates the behavior of a  swarm of bees approaching their hive, and the last demo illustrates a simulation of a crowd crowd constrained to a two-dimensional plane. 
 \end{abstract}
 
 \mainmatter
@@ -147,12 +102,11 @@ a two-dimensional plane.
 \bibliography{myrefs}
 
 \begin{biosketch}
-Myrna Ivelisse Merced Serrano was born and raised at the southeast of the beautiful island of Puerto Rico. Myrna is athletic, her favorite sport is basketball and during her free time, she likes to go out with her friends, cook, and watch television. 
+Myrna Ivelisse Merced Serrano was born and raised at the southeast of the beautiful island of Puerto Rico. Myrna is athletic, her favorite sport is basketball and during her free time, she likes to go out with her friends, cook, and do sports. 
 
-She completd her Bachelors degree in Computational Mathematics at the University of Puerto Rico at Humacao. During her bachelors degree, she became interested on computers and programming. She went post most of the students of her class by developing interest in research. She wanted to combined nanotechnology with biology, somehow. This led to studies on molecular dynamic simulations between carbon nanotubes and single-stranded DNA. Pursuing research motivates her to further her goals, that is why she decided to enroll for graduate studies in a college in the United States, even though she had to move far from her family to achieve her goals.
+She completed her Bachelors degree in Computational Mathematics at the University of Puerto Rico at Humacao. During her bachelors degree, she became interested on computers and programming. She went post most of the students of her class by developing interest in research. She wanted to combined nanotechnology with biology, somehow. This led to studies on molecular dynamic simulations between carbon nanotubes and single-stranded DNA. Pursuing research motivates her to further her goals, that is why she decided to enroll for graduate studies in a college in the United States, even though she had to move far from her family to achieve her goals.
 
-In August 2009 she joined the Department of Scientific Computing (DSC) at Florida State University. While she was there she worked as a teaching assistant, and enjoys the satisfaction of helping other students to enhance their knowledge. 
-The research presented in this thesis was completed while she was a graduate student in DSC.
+In August 2009 she joined the Department of Scientific Computing (DSC) at Florida State University. While she was there she worked as a teaching assistant, and enjoys the satisfaction of helping other students to enhance their knowledge. The research presented in this thesis was completed while she was a graduate student in DSC.
 \end{biosketch}
 
 \end{document}

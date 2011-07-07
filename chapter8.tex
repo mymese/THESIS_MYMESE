@@ -1,16 +1,12 @@
 \chapter{FUTURE WORK}\label{chap8}
 
-This thesis presents the work done in the past eight months and there still much to one can envision . This chapter is  divided into two sections: the RTPS framework and the Blender RTPS modifier.
+This thesis presents the work done in eight months and there still much to one can envision. This chapter is  divided into two sections: the RTPS framework and the Blender RTPS modifier.
 
 \section{RTPS framework}
 
 % more randomize structures to initialize the positions
 % realistic field of view when searching for neighbors
-The RTPS framework is at the heart of this project, and includes the implementation of boid behavior. Since boid behavior derives from nature, they should be initialized with a certain degree of randomness, both in position, velocity, and geometry. 
-%that we should have more randomized initial structures, a rectangle, a cube or a disc are too sharp to be used as an initial structure of a flock. 
-In addition, real boids have a limited field of view. 
-%since they are alive entities. 
-The current implementation for neighbor search does a $360^{\circ}$ field of view search. Instead, a more realistic search would need a cone of vision.
+The RTPS framework is at the heart of this project, and includes the implementation of boids behavior. Since boids behavior derives from nature, they should be initialized with a certain degree of randomness, both in position, velocity, and geometry. In addition, real boids have a limited field of view. The current implementation for neighbor search does a $360^{\circ}$ field of view search. Instead, a more realistic search would need a cone of vision.
 
 % leader following - leader behavior
 % goal - static and dynamics
@@ -21,41 +17,35 @@ The current implementation for neighbor search does a $360^{\circ}$ field of vie
 Flocking behavior is much more complex than presented in this thesis. There are rules that are also very important that should be combined with the three basic steering behaviors. These additional rules are essential for natural-looking flocks. For example some rules that may be added are: 
 
 \begin{enumerate}
-\item{leader following, we already developed the behavior of the followers in this rule, the behavior of the leader  is still under development;}
-\item{goal, this rule was explained in Section~\ref{otherbehaviors}, a more complex implementation would include the attraction to static and dynamic objects;}
-\item{avoid, analog to goal, this rule would repeal a static or dynamic object;} 
-\item{obstacle/collision avoidance, which leads to boids that avoid obstacles that might lie in the path of the boids;}
-\item{fight, also may be known as predator/prey behavior, which imply two types of boids, which could attack or retreat depending on circumstances.}
+\item{\textit{leader following}: we already developed the behavior of the followers in this rule, the behavior of the leader  is still under development;}
+\item{\textit{goal}: this rule was explained in Section~\ref{otherbehaviors}, a more complex implementation would include the attraction to static and dynamic objects;}
+\item{\textit{avoid} analog to goal, this rule would repeal a static anf dynamic objects;} 
+\item{\textit{obstacle/collision avoidance}: which leads to boids that avoid obstacles that might lie in the path of the boids;}
+\item{\textit{fight}: also may be known as predator/prey behavior, which imply two types of boids, which could attack or retreat depending on circumstances.}
 \end{enumerate}
 
-These are only some of the rules that we consider to be essential in a Boids system in order to get a simulation with a natural appearance.
+These are only some of the rules that we consider to be essential in a boids system in order to get a simulation with a natural appearance.
 
 % terrain, fly and swim behaviors - add gravity and other parameters
-Flocks and Boids became more attractive to research scientists after Craig Reynolds publication in 1987\cite{craig1}, in which he presented his Boids model to simulate flocks. The inspiration of flocks and boids stems from the behavior, most of the time seen in birds. These terms, flock and boids, can be extended to a more general behavior and a more general entity, respectively. That is why, we would also like to be able to simulate, crowding and terrain flocking behavior, along with swimming or underwater entity behavior. Flocking algorithms have been used previously to simulate terrain and underwater behaviors\cite{supermassiveCrowd}. 
+Flocks and Boids became more attractive to research scientists after Craig Reynolds publication in 1987\cite{craig1}, in which he presented his Boids model to simulate flocks. These terms, flock and boids, can be extended to a more general behavior and a more general entity, respectively. That is why, we would also like to be able to simulate more complex crowding and terrain flocking behavior, along with swimming or underwater entity behavior. Flocking algorithms have been used previously to simulate terrain and underwater behaviors\cite{supermassiveCrowd}. 
 
 % optimal selection of the parameters using PSO or GA
 % evaluation of the rules
-Flocking simulations depend on several parameters that depend on the physical application. A question that often arises is \textit{which are the correct parameters?}. There are a series of algorithms that optimize the process of finding the optimal parameters of a given simulation. These algorithms include Particle Swarm Optimization (PSO), inspired by flocking, and Genetic Algorithms (GA). These two algorithms are based in Swarm Intelligence and in Evolutionary Algorithms, respectively, and they have been previously applied to flocking \cite{TODO:needReference}.
+Flocking simulations depend on several parameters that depend on the physical application. A question that often arises is \textit{which are the correct parameters?}. There are a series of algorithms that optimize the process of finding the optimal set of parameters of a given simulation. These algorithms include Particle Swarm Optimization, inspired by flocking, and Genetic Algorithms. These two algorithms are based in Swarm Intelligence and in Evolutionary Algorithms, respectively, and they have been previously applied to flocking\cite{opt_params_GA}.
 
 % remove boids from the flock
-Cohesion is the rule of flocking responsible for maintaining the entities of the flock closer together. However, on occasion the entities do not follow the rules and stray away from the flock. Alternatively, boids can die. It would therefore be interesting to include 
-the capability of deleting boids from our flock. 
-%Not all the time we are going to have the same amount of entities, something can cause an entity to die or just to go away.
+Cohesion is the rule of flocking responsible for maintaining the entities of the flock closer together. However, on occasion the entities do not follow the rules and stray away from the flock. Alternatively, boids can die. It would therefore be interesting to include the capability of deleting boids from our flock. 
 
 % add more than one flock
 % interaction between SPH and FLOCK particles
-Flocks may be heterogeneous, meaning that not all entities are from the same type , e.g. fish tank. Having the option to create multiple flocks and make the heterogenous boids interact with one another is another improvement we envision. This idea could be integrated  with the idea of supporting hybrid systems in one, i.e., making FLOCK particles interact with SPH particles.
+Flocks may be heterogeneous, meaning that not all entities are from the same type , e.g. fish tank. Having the option to create multiple flocks and make the heterogenous boids interact with one another is another improvement we envision. This idea also could be integrated  with the idea of supporting hybrid systems in one, i.e. interaction between FLOCK particles and SPH particles.
 
 % special rendering methods for boids
 The final improvement to consider within the RTPS framework is the development of special rendering methods for boids. 
 
 \section{Blender RTPS modifier}
 % meet almost all the specifications already available at the Boids system
-Our aim in this thesis was to enhance Blender capabilities by adding particle systems to its Game Engine. This was done by developing a modifier to the RTPS framework created in the context of fluid simulation. Since the current implemented flocking behavior in RTPS only includes the three basic steering behaviors, the Blender Boid system currently retains more flexibility to create animations with boids, but outside the Game Engine only.  Although our ambition was to duplicate most of the the options already available for the boid simulator, but inside the Game Engine and on the GPU, this was only partially achieved. All that is 
-missing is a few rules, that should be easy to handle. The most difficult problem might be boundary avoidance in an efficient manner. 
-%Engine. By developing the implementations of all that was stated in the above Section, we are going to be close to have a complete Boids system inside the Blender Game Engine.  
-
-%The UI modifier has more options for the parameters than required. Those parameters have default values and the option to be computed by the optimization algorithms already mentioned i.e. PSO and GA, or they can be manually controlled by the user before the game starts.
+Our aim in this thesis was to enhance Blender capabilities by adding particle systems to its Game Engine. This was done by developing a custom modifier to the RTPS framework created in the context of fluid simulation. Since the current implemented flocking behavior in the RTPS library only includes the three basic steering behaviors, the Blender Boid system currently retains more flexibility to create animations with boids, but only outside the Game Engine.  Although our ambition was to duplicate most of the the options already available for the boid simulator, but inside the Game Engine and on the GPU, this was only partially achieved. All that is missing is a few rules, that should be easy to handle. The most difficult problem might be boundary avoidance in an efficient manner. 
 
 % support other shapes besides box, not depend on the bounding box - emitter object
 Another improvement that would improve our new boid simulator is the capability to use different objects as emitters. Currently, the particles are emitted using the bounding box of the emitter object. However, it might be more useful to support not only all the primitive objects of Blender but also objects or characters custom made by the designer. Along with that we would like to support those custom objects also for rendering, and make all the connections to only not support materials but also to support textures.
