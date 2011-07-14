@@ -19,7 +19,7 @@ This chapter introduces the framework of the RTPS library. The description of th
 \section{RTPS}\label{rtpssection}
 As seen in Figure~\ref{RTPSdiagram}, \texttt{RTPS} is the root of the library. An \texttt{RTPS} object is a particle system initialized with a set of user settings,  discussed in Section~\ref{rtpsettings}. 
 
-Only two methods are defined in the \texttt{RTPS} class: \texttt{update()} and \texttt{render()}. \texttt{update()} computes the positions of the particles/boids at each frame, and \texttt{render()} is in charge of display the particles/boids in the screen. These methods are implemented individually by each of the systems available in the RTPS library. The following code shows the \texttt{RTPS} constructor used when creating the \texttt{FLOCK} system.
+Only two methods are defined in the \texttt{RTPS} class: \texttt{update()} and \texttt{render()}. \texttt{update()} computes the positions of the particles/boids at each frame, and \texttt{render()} is in charge of the display of the particles/boids in the screen. These methods are implemented individually by each of the systems available in the RTPS library. The following code shows the \texttt{RTPS} constructor used when creating the \texttt{FLOCK} system.
 
 %\texttt{RTPS} has various instance variables: a \texttt{CL} object which is used to manage the \textit{OpenCL} functionality,  an \texttt{RTPSettings} object to manage the settings of the system and a \texttt{System} object which stores the type of particle system that has been created. 
 % RTPS constructor
@@ -75,14 +75,14 @@ The RTPS library has shared classes that are used for all systems. These classes
 
 % NNS
 \subsection{Nearest Neighbor Search}
-The nearest neighbor search consists of two phases: \textit{preparation} and \textit{lookup}. The following following steps explain how the \textit{preparation} phase is accomplished.
+The nearest neighbor search consists of two phases: \textit{preparation} and \textit{lookup}. The following steps explain how the \textit{preparation} phase is accomplished.
 
 % preparation
 \begin{enumerate}
 \item{\textbf{Hash}: creates a hash value by overlaying a uniform grid on the system's domain, and calculating an index value from the 3D cell index. Each boid lies in one cell and has an associated hash.}
 \item{\textbf{Sort}: sorts the hash array with respect to their hash values. This would impose an ordering on the particles/boids. All particles/boids in a given cell are contiguous in the sorted hash array.}
 \item{\textbf{Permute}:  permutes the arrays of positions, velocities, and color according to the sorted index array.}
-\item{\textbf{Cell indices}: updates two arrays: \texttt{cell\_indices\_start} and \texttt{cell\_indices\_end} that keep track of which cells are populated with particles/boids, \texttt{cell\_indices\_start} stores the index of the first particle/boid in each cell, when there is no particle/boid an index of $-1$ is assigned; the \texttt{cell\_indices\_end} arrays stores the index of the last particle/boid in that cell.}
+\item{\textbf{Cell indices}: updates two arrays: \texttt{cell\_indices\_start} and \texttt{cell\_indices\_end} that keep track of which cells are populated with particles/boids. The \texttt{cell\_indices\_start} array stores the index of the first particle/boid in each cell, when there is no particle/boid an index of $-1$ is assigned, and the \texttt{cell\_indices\_end} array stores the index of the last particle/boid in that cell.}
 \end{enumerate}
 
 Once the \textit{preparation} is complete, neighbor search or \textit{lookup} is straightforward and consists of calling the following three functions:  
@@ -161,10 +161,10 @@ First, some of the instance variables are initialized. Then, by executing \textt
 The function \texttt{prepareSorted()} initializes the different vectors and buffers that were created for our system, i.e \texttt{velocities}, \texttt{flockmates}, etc. This function also creates the Vertex Buffer Objects (VBOs). VBO objects store vertex data meant to be used during the rendering process, {\em its aim is to be used for rendering purposes}\cite{vbo}. Their use makes it possible for the vertex data to be a part of the GPU boids kernels, and of the rendering process without additional data copies or data transfers to and from the CPU. The positions and color vectors are then copied to the respective VBOs. If using the GPU the different \texttt{Buffer} objects are initialized with their respective CPU arrays. The \texttt{FLOCK} parameters are also copied to the GPU. 
 
 \subsubsection{Boids insertion}
-The system has being created and now the question arise in \textit{how do the boids are inserted into the system?} There are a few functions defined in the \texttt{FLOCK} system to do that task. These functions are \texttt{addBox} , \texttt{addBall}, and \texttt{addHose}. First, these functions initialize the positions of the boids, then the positions of the boids are send to the GPU or CPU to be rendered. 
+The system has been created and now a question arises: \textit{how are the boids inserted into the system?} There are a few functions defined in the \texttt{FLOCK} system to do that task. These functions are \texttt{addBox} , \texttt{addBall}, and \texttt{addHose}. First, these functions initialize the positions of the boids, then the positions of the boids are send to the GPU or CPU to be rendered. 
 
 \subsubsection{Update}
-As mentioned in Section~\ref{rtpssection}, each of the systems implements the methods \texttt{update()} and \texttt{render()}. In \texttt{FLOCK} the \texttt{update()} function updates the positions of the boids at each iteration (one iteration per frame). In the CPU implementation, \texttt{updateCPU()} function is called. In turn, this function calls the functions \texttt{cpuRules()} and \texttt{cpuEulerIntegration()}, responsible for the boid position update on the CPU. The CPU code was developed for testing and debugging purposes only. On the other hand, on the GPU, one uses the function \texttt{updateGPU()}, which calls the OpenCL kernels that perform the nearest neighbor search, then computes the flocking rules, and finally updates the boid positions. These kernels are described in more detail in Section~\ref{rulesclass} and \ref{eulerclass}.
+As mentioned in Section~\ref{rtpssection}, each of the systems implements the methods \texttt{update()} and \texttt{render()}. In \texttt{FLOCK} the \texttt{update()} function updates the positions of the boids at each iteration (one iteration per frame). In the CPU implementation, \texttt{updateCPU()} function is called. In turn, this function calls the functions \texttt{cpuRules()} and \texttt{cpuEulerIntegration()}, responsible for the boid position update on the CPU. The CPU code was developed for testing and debugging purposes only. On the other hand, on the GPU, one uses the function \texttt{updateGPU()}, which calls the OpenCL kernels to perform the nearest neighbor search, then computes the flocking rules, and finally updates the boid positions. These kernels are described in more detail in Section~\ref{rulesclass} and \ref{eulerclass}.
 
 % FLOCKSettings class
 \subsection{FLOCKSettings class}
@@ -218,12 +218,12 @@ The next code is part of the \texttt{Rules.cpp} file.
 namespace rtps
 {
 	// Rules constructor
-	Rules::Rules(std::string wpath, CL* cli_, EB::Timer* timer_)
+	Rules::Rules(std::string path, CL* cli_, EB::Timer* timer_)
 	{
 		...
 		try
 		{
-			path = wpath + "/rules.cl";
+			path += "/rules.cl";
 			k_rules = Kernel(cli, path, "rules");
 		}
 		....
@@ -301,7 +301,7 @@ The kernel \texttt{\textbf{euler\_integration}} starts by retrieving the respect
 vel_sep = separation * w_sep;
    
 // RULE 2. ALIGNMENT
-vel_aln = alignment * w_aln;
+vel_align = alignment * w_align;
 
 // RULE 3. COHESION
 vel_coh = cohesion * w_coh;
@@ -313,7 +313,7 @@ vel_goal = goal * w_goal;
 vel_avoid = avoid * w_avoid;
 
 // FINAL VELOCITY
-vel = vi + vel_sep + vel_aln + vel_coh + vel_goal + vel_avoid;
+vel = vi + vel_sep + vel_align + vel_coh + vel_goal + vel_avoid;
 \end{cppcode}
 
 The final velocity is constrained to a prescribed maximum speed. As an option, the boids can be subjected to an imposed velocity field, which is added to the final steering velocity to obtain the actual vector used to move the boid. Finally, the updated boid positions are computed using the final steering velocity.

@@ -113,7 +113,7 @@ where $p_i$ and $v_i$ are the position and velocity of boid $i$, respectively. $
 
 % avoid
 \subsection{Avoid}
-\textit{Avoidance} or \textit{avoid} refers to a boid steering away from a static target in the global space. The approach is the opposite of the \textit{goal} steering. The desired velocity of \textit{avoid} points in the opposite direction of \textit{goal}. Figure~\ref{seekfleePDF} depicts the steering vector in red and the desired velocity in green. Equation~\ref{avoidEquation} shows the mathematical formula for \textit{avoidance}:
+\textit{Avoidance} or \textit{avoid} refers to a boid steering away from a static target in the global space. The approach is the opposite of the \textit{goal} steering. The desired velocity of \textit{avoid} points in the opposite direction of \textit{goal}. Figure~\ref{avoidPDF} depicts the steering vector in red and the desired velocity in green. Equation~\ref{avoidEquation} shows the mathematical formula for \textit{avoidance}:
 
 % avoid equation
 \begin{equation}
@@ -128,7 +128,7 @@ For the \textit{avoidance} behavior there is a negative sign preceding the desir
 \begin{center}
 \includegraphics[scale=0.75]{figures/avoidance.pdf}
 \caption{Avoidance behavior: boid $i$ would move away from the target when subject to the \textit{avoid} behavior}
-\label{goalPDF}
+\label{avoidPDF}
 \end{center}
 \end{figure}
 
@@ -140,7 +140,7 @@ The \textit{Follow the Leader} behavior is when a single boid is in charge of th
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.75]{figures/leaderFollowing.pdf}
-\caption{Leader Following behavior: the followers follow the leader by approaching a point slightly behind the leader. If a follower find itself in a rectangular area in front of the leader it will move out of the leader's way.}
+\caption{Leader Following behavior: the followers follow the leader by approaching a point slightly behind the leader. If a follower finds itself in a rectangular area in front of the leader it will move out of the leader's way.}
 \label{leaderPDF}
 \end{center}
 \end{figure}
@@ -209,7 +209,7 @@ The following Algorithm presents the GPU implementation of each of the steering 
 	\STATE alignment -= $vel_i$
 \ENDIF
 \IF{$w_{coh} > 0$ \&\& flockmates $> 0$}
-	\STATE cohesiont /=  flockmates
+	\STATE cohesion /=  flockmates
 	\STATE cohesion -= $pos_i$
 \ENDIF
 \IF{$w_{goal} > 0$}
@@ -243,7 +243,7 @@ In the Algorithm~\ref{flockingAlgorithm}, each rule is evaluated sequentially fo
 \end{algorithmic}
 \end{algorithm}
 
-Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid's position at each time step. For each $rule r$, the respective weighted velocity is computed. By adding the weighted velocities of each rule and the current velocity, the final velocity vector of boid $i$ at time step $k+1$ is obtained. First order, Euler integration is done to calculate the positions. Since flocking is an overall behavior we are not concern on getting very accuracy positions. A first order algorithm is enough. We would like to maintain the boid's density in our system, therefore we applied periodic boundary conditions to the positions to the boids.
+Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid's position at each time step. For each $rule r$, the respective weighted velocity is computed. By adding the weighted velocities of each rule and the current velocity, the final velocity vector of boid $i$ at time step $k+1$ is obtained. First order, Euler integration is done to calculate the positions. Since flocking is an overall behavior we are not concern on getting very accurate positions. A first order algorithm is enough. We would like to maintain the boid's density in our system, therefore we applied periodic boundary conditions to the positions of the boids.
  
 % update
 \begin{algorithm}

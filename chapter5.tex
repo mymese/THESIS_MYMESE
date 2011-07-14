@@ -16,7 +16,7 @@ This chapter starts with a brief discussion of \textit{Blender}, followed by a d
 \section{Blender}\label{blenderSec}
 \textit{Blender}\cite{blenderWeb} is a free modeling/simulation software, available since 1993. Originally meant for the creation of 2D and 3D content, it has been significantly extend to handle modeling, texturing, animation, particle simulation, rendering, game creation, and more. 
 
-When searching for the right software to use, the following features were considered important: inclusion of a game engine, extendability, open source, cross-platform, has a physics engine, and has a very large support based. Blender satisfied all the above criteria. The Blender release used in this thesis was 2.57.
+When searching for the right software to use, the following features were considered important: inclusion of a game engine, being extendable, being open source, being cross-platform, has a physics engine, and has a very large support based. Blender satisfied all the above criteria. The Blender release used in this thesis was 2.57.
 
 % game engine
 \section{Game Engines}
@@ -33,7 +33,7 @@ Game engines have several tasks:
 \item{handle collision detection and reaction to collisions}
 \end{enumerate}
 
-Game engines try to simulate the scenes as quickly as possible, so the game has a smooth fluency. Game engines are much more complicated than this, these are just a few of the most important jobs that characterize them.
+Game engines try to simulate the scenes as quickly as possible, so the game has a smooth fluency. Game engines are much more complicated than this for these are just a few of the most important jobs that characterize them.
 
 % blender game engine
 The Blender Game Engine is a very powerful tool, allowing the creation of simple games without  the need for explicit programming. With its GUI one can create simple games using a graphical logical editor, which has a click and drag interface, shown in Figure~\ref{logic}. Each object in the scene has logical components associated to it. 
@@ -62,7 +62,7 @@ The logic editor is the simplest approach creating objects that interact in the 
 \section{Boids Particle System outside the Blender Game Engine}
 Although Blender has extensive particle-based tools, including hair styling, these are absent from the Game Engine. A submodule of the particle system is a rather sophisticated Boids system. This Section presents a demonstration to illustrate the functionality of the built-in Boids system. 
 
-One initially creates a particle emitter, such as a cube, a plane, or other object. Then, make that object into a particle system. Figure~\ref{boidsCreatePS} shows the panel used to add the particle system. The number of particles is initially set to 50. The lifetime of the boids is set to a large number.
+One initially creates a particle emitter, such as a cube, a plane, or other object. Then, one makes that object into a particle system. Figure~\ref{boidsCreatePS} shows the panel used to add the particle system. The number of particles is initially set to 50. The lifetime of the boids is set to a large number.
 
 % figure: create PS
 \begin{figure}[htbp]
@@ -73,7 +73,7 @@ One initially creates a particle emitter, such as a cube, a plane, or other obje
 \end{center}
 \end{figure}
 
-After the system is created, the physics of the system can be edited, see Figure~\ref{boidsPhysics}. The \textit{Boids} button takes the user to a panel with all the settings of the Boid system.  Note that the settings can be changed dynamically during the animation. 
+After the system is created, the physics of the system can be edited, see Figure~\ref{boidsPhysics}. The \textit{Boids} button takes the user to a panel with all the settings of the Boids system.  Note that the settings can be changed dynamically during the animation. 
 
 % figure: boids physics
 \begin{figure}[htbp]
@@ -102,7 +102,7 @@ When clicking in a rule, parameter panels appear if needed. As seen in Figure~\r
 
 There are three methods available in Blender to evaluate the rules: 1) fuzzy logic with a fuzziness level, 2) averaging all the rules, and 3) weighting the rules randomly. Each of these evaluation methods leads to completely different results. The default method of rules evaluation is Fuzzy.
 
-The render panel, also seen in Figure~\ref{boidsBrain} shows the options for rendering the flock. We changed the rendering type to object and specified that each boid be rendered as a monkey object.
+The render panel, also seen in Figure~\ref{boidsBrain}, shows the options for rendering the flock. We changed the rendering type to \textit{Object} and specified that each boid be rendered as a \textit{Monkey} object.
 
 % figure: boid brain
 \begin{figure}[htbp]
@@ -131,7 +131,7 @@ Figure~\ref{boidsAction} shows two screenshots of an animation in which the boid
 \section{RTPS Modifier}\label{modifiersection}
 We now present the interface developed to link the Blender Game Engine with our FLOCK system defined in the RTPS library. Blender modifiers are ideally suited to this task. They are used to edit the object through the assignment of properties. For example in our case, first we create the domain using a Blender cube and then assign the RTPS modifier to it. 
 
-For a step by step description on how this modifier was created, see Ian Johnson post at \url{http://enja.org/2010/05/24/blender-creating-a-custom-modifier/}.  The functionality of the Boids system was added to the original RTPS modifier which was created to support only SPH systems. 
+For a step by step description on how this modifier was created, see Ian Johnson post at (\url{http://enja.org/2010/05/24/blender-creating-a-custom-modifier/}).  The functionality of the Boids system was added to the original RTPS modifier which was created to support only SPH systems. 
 
 % code modifications
 \subsection{Game Engine Source Code Modifications}
@@ -189,7 +189,7 @@ properties\_data\_modifier.py & Creates the UI modifier using the properties def
 
 % UI description
 \subsection{Development of the UI}
-Our RTPS modifier as the Blender interface is implemented using \textit{Python}. As described in table~\ref{uiTable} the only file modified for the development of the UI was \texttt{properties\_data\_modifier.py}. The RTPS modifier is shown in Figure~\ref{ui}.
+Our RTPS modifier as the Blender interface is implemented using \textit{Python}. As described in table~\ref{uiTable}, the only file modified for the development of the UI was \texttt{properties\_data\_modifier.py}. The RTPS modifier is shown in Figure~\ref{ui}.
 
 % figure: RTPS modifier
 \begin{figure}[htbp]
@@ -200,18 +200,18 @@ Our RTPS modifier as the Blender interface is implemented using \textit{Python}.
 \end{center}
 \end{figure}
 
-The RTPS modifier is used to initialize the particle systems available in the RTPS library by assigning certain properties to the Blender object. The Boids system in the RTPS modifier includes several simuliation parameters (the maximum number of particles, the time step used for integration, and the option for 2D flocking), Render types (render the boids as Points, Sprites, Screen Space, and 3D Spheres). The color used to render the particles is computed  from the Blender's materials.
+The RTPS modifier is used to initialize the particle systems available in the RTPS library by assigning certain properties to the Blender object. The Boids system in the RTPS modifier includes several simulation parameters (the maximum number of particles, the time step used for integration, and the option for 2D flocking), Render types (render the boids as Points, Sprites, Screen Space, and 3D Spheres). The color used to render the particles is computed  from the Blender's materials.
 
 The Flock Parameters area presents the user with control over the maximum speed of the boids, the minimum separation distance between boids and the searching radius for the neighbor search. One can specify the various scalar weights of Equation~\ref{combine}, in the Weights of the Rules area.
 
-\textit{How does the RTPS modifier works internally?} The modifier is applied to the object when the game engine starts. When the RTPS modifier is applied the RTPS object is created and initialized the RTPS object using the current parameters in the modifier interface. Once created, the RTPS object is updated, once per frame. 
+\textit{How does the RTPS modifier work internally?} The modifier is applied to the object when the game engine starts. When the RTPS modifier is applied the RTPS object is created and initialized the RTPS object using the current parameters in the modifier interface. Once created, the RTPS object is updated, once per frame. 
 %The object is updated at every frame.    
 
 \textit{How to emit particles into the system?} There are two emitters available in the RTPS modifier: \textit{Blob} and \textit{Hose}. One uses these emitters by setting their respective properties (see Table~\ref{properties}). \textit{Blob} has the single associated property \texttt{num}, while the \textit{Hose} emitter is controlled via the three properties \texttt{num}, \texttt{speed}, and \texttt{radius}. The direction in which the particles are emitted when using the \textit{Hose} is determined by the \textit{y-axis} of the emitter object. 
 
 % properties table
 \begin{table}[htdp]
-\caption{Properties available in the RTPS modifer}
+\caption{Properties available in the RTPS modifier}
 \begin{center}
 \begin{tabular}{|p{3cm}|p{9cm}|}
 \hline 

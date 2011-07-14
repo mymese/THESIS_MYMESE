@@ -19,7 +19,7 @@ We now provide timing results for our OpenCL implementation. We took benchmarks 
 \end{figure}
 
 % comments about the RTPS vs Blender plot
-We also compare the performance between our Boids system and the Blender's original Boid system with identical number of Boids, with other parameters set to those in the previous experiment. Figure~\ref{RTPSvsBlender} shows the benchmark results. The RTPS-FLOCK system has better performance than the Blender-Boids system at all times, as expected from a GPU implementation. Our FLOCK system renders up to almost 130K boids at frame rates above 30 fps. The Blender-Boids system can only render up to 8K boids at the acceptable fps range.
+We also compare the performance between our Boids system and the Blender's original Boids system with identical number of Boids as well as with other parameters set to those in the previous experiment. Figure~\ref{RTPSvsBlender} shows the benchmark results. The RTPS-FLOCK system has better performance than the Blender-Boids system at all times, as expected from a GPU implementation. Our FLOCK system renders up to almost 130K boids at frame rates above 30 fps. The Blender-Boids system can only render up to 8K boids at the acceptable fps range.
 
 %RTPS vs Blender
 \begin{figure}[htbp]
@@ -43,7 +43,7 @@ The speedup of the RTPS-FLOCK system over the Blender-Boids system is seen in Fi
 \end{figure}
 
 Comparing the performance of our implementation with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still has better performance. The library BehaveRT was used to run autonomous characters simulations in real-time. 
-In this work Era et al. simulate 130K boids at 15 fps, compared to our results of 130K boids at 30 fps. The GPU computing device they used was a NVIDIA 8800GTS with 512 MB RAM while we used a NVIDIA 480GTX with 1.5 GB RAM. 
+In this work Era et al. simulated 130K boids at 15 fps, compared to our results of 130K boids at 30 fps. The GPU computing device they used was a NVIDIA 8800GTS with 512 MB RAM while we used a NVIDIA 480GTX with 1.5 GB RAM. 
 
 % comments about the timings per kernels
 We also measured the performance of some of the kernels inside of the RTPS-FLOCK system. The parameter's settings were the same as for the previous tests. The searching radius was constant throughout the benchmarks. Figure~\ref{kernelBench} shows that most of the kernels took the same amount of time for the different flock sizes. The only kernel that increased the time spent to be computed was the Rules kernel. This increase in time was a consequence of maintaining a fixed searching radius, which leads to an increasing number of neighboring boids. If the searching radius doubles, the average number of neighbors increases by 4x in 2D and 8x in 3D, if the average separation between boids 
@@ -67,7 +67,7 @@ As discussed previously, the three main rules of flocking are: 1) \textit{separa
 
 The property of each term is best visualized with an initial configuration of boids that is symmetric, which also helps when debugging the code. To this end, we uniformly space the boids in a rectangular configuration.  From symmetry arguments, a boid in the top-left quadrant has the same relationship with respect to its neighbors as a boid in the same relative location in each of the other three quadrants. Thus the four-fold symmetry of the rectangle will be maintained during the time evolution of the boids. Figure~\ref{alignRule} shows the starting conditions of the boids. The symmetric motion that results from the \textit{separation} and \textit{cohesion} rules are shown in Figures~\ref{sepRule} and~\ref{cohRule}, respectively. These figures show 144 boids in a centralized square inside a $5\times 5\times 5$ box.
 
-The case of alignment is somewhat difference since is the boid velocities that must be taken into consideration. If the initial boid velocities are not symmetric, geometric symmetry will not be maintained. 
+The case of alignment is somewhat different since it is the boid velocities that must be taken into consideration. If the initial boid velocities are not symmetric, geometric symmetry will not be maintained. 
 
 % alignment
 \begin{figure}[htbp]
@@ -125,9 +125,9 @@ In this next demo, we simulate a ``\textit{swarm of bees}''. The bees try to app
 \label{demo_goal}
 \end{figure}
  
-Figure~\ref{demo_goal} shows a series of screenshots of bee flocking. The flock starts from an artificial shape of a cube. The boids start to appraoach the target until they reach it it. Once the boids find the target, they stay to move around it. 
+Figure~\ref{demo_goal} shows a series of screenshots of bee flocking. The flock starts from an artificial shape of a cube. The boids start to approach the target until they reach it it. Once the boids find the target, they stay to move around it. 
 
-We ran another demo in which the three main steering behaviors, together with the \textit{goal} rule were used to compute the behavior of the boids. Figure~\ref{goal_4rules} shows the resulting flock. Each rule was weighted equally. A minimum separation distance of 2 and a searching radius of 2.5 were used. The initial positions of the boids were identical to the conditions in Figure~\ref{demo_goal}. From the Figure we see that the boids are more separated than in the first example since we are using the \textit{separation} rule with a minimum separation distance that is double the initial distance that separates the boids. Although, all four rules were taken into account, we see that the overall flock objective (reach the target) was achieved. 
+We ran another demo in which the three main steering behaviors, together with the \textit{goal} rule were used to compute the behavior of the boids. Figure~\ref{goal_4rules} shows the resulting flock. Each rule was weighted equally. A minimum separation distance of 2 and a searching radius of 2.5 were used. The initial positions of the boids were identical to the conditions in Figure~\ref{demo_goal}. From the Figure we see that the boids are more separated than in the first example. This is due to the fact that we are using the \textit{separation} rule with a minimum separation distance that is double the initial distance that separates the boids. Although, all four rules were taken into account, we see that the overall flock objective (reach the target) was achieved. 
 
 % 4 rules
 \begin{figure}[htbp]
