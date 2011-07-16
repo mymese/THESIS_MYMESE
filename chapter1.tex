@@ -16,9 +16,9 @@
 % creating games
 % what a game must have in order to be a good game?
 
-Computer games have been around since the 1950s\cite{historyVideoGames}. They were available in the market place by the 1970s and they were very popular. Since then, there has been a veritable explosion of games as new hardware devices came on the market, as computers following Moore's law continuously increased their computational power, and as gamers made increasing demands on game requirements. We have now entered the seventh generation of video game consoles\cite{usingVideoGames}. Video consoles such as the PlayStation, Xbox, and Wii are the most popular ones. Just last November (6 months ago), Xbox released their new control-free body play experience called Kinect\cite{kinect}. This new hardware is again changing the game industry by allowing the player to control the game experience with their own body movements rather through the intermediary of some external device. This type of new hardware adds realism to the game in the sense that there are no artificial input devices.
+Computer games have been around since the 1950s\cite{historyVideoGames}. They were available in the marketplace by the 1970s and they were very popular. Since then, there has been a veritable explosion of games as new hardware devices came on the market, as computers following Moore's law continuously increased their computational power, and as gamers made increasing demands on game requirements. We have now entered the seventh generation of video game consoles\cite{usingVideoGames}. Video consoles such as the PlayStation, Xbox, and Wii are very popular. Just last November (six months ago), Xbox released their new control-free body play experience called Kinect\cite{kinect}. This new hardware is again changing the game industry by allowing the player to control the game experience with their own body movements rather through the intermediary of some external device. This type of new hardware adds realism to the game by eliminating artificial input devices not necessary in real-world interactions.
 
-\textit{How to know if a game is a good game?} A game, to be attractive to players, should have at least three important ingredients\cite{bookGameKit2}. First is the toy aspect, which refers to the immediate fun that you can have playing the game. You would not need to read any manual to play it, you just grab the controller or the mouse and start exploring. These types of games are more intuitive. Second is the immersive aspect of the game, the player forgets he is in a game and "lives" the game. Realism is a very important factor. An example of immersive games are simulator games. Third is the goal aspect. These games give you a goal that you have to achieve, and involve some kind of strategy and planning. When creating games it is important to create a balance between these three aspects. But, \textit{how to create the games?} Games are created using game engines.
+\textit{When is a game is a good game?} A game, to be attractive to players, should have at least three important ingredients\cite{bookGameKit2}. First is the toy aspect, which refers to the immediate fun one experiences when playing the game. Ideally, a manual would not be necessary;  just grab the controller or the mouse and start exploring. This type of games is most intuitive. Second is the immersive aspect of the game, the player forgets he is in a game and rather "lives" the game. Realism is a very important factor. An example of immersive games are simulators, which seek to imitate elements of real life with more complex interactions and more realism. Third is the goal aspect. These games ask that the player achieve some goal through strategy and planning. When creating games it is important to create a balance between these three aspects. But, \textit{how to create the games?} Games are created using existing game engines.
 
 %\mmy{NO REFERENCES IN THE ABOVE PARAGRAPH?}
 % the reference is only the book, the aspects were discussed there and I just summarized them, not sure if the citation then, goes at the end or at the beginning of the paragraph
@@ -36,12 +36,17 @@ There are many commercial and free game engines available for users interested i
 % benefits and difficulties of using Blender
 % Blender contents
 
-During the development of a new Game Design course created as part of the undergraduate curriculum of the Scientific Computing program, one of the requirements was that software used by the students satisfy the requirements above, be free of cost, have a strong and active user community, an easy to learn scripting language, a game engine and powerful modeling tools. This led to the choice of Blender as a software platform. Blender was created 1993, initially to create 2D and 3D content, but it grew to include modeling, texturing, animation, particle simulation, rendering, and game creation, among its many capabilities. The Blender Game Engine has powerful tools to create games without the need for explicit programming, although Python is also available for power users. Blender has strong support from the gaming industry and there is a lot of documentation available. The main webpage of Blender is (\url{http://www.blender.org}).  
+During the development of a new Game Design course created as part of the undergraduate curriculum of the Scientific Computing program, one of the requirements was that software used by the students satisfy the requirements above, have zero cost, have a strong and active user community, an easy to learn scripting language, a game engine and powerful modeling tools. This led to the choice of Blender as a software platform. Blender was created in 1993, initially to create 2D and 3D content, but it soon grew to include modeling, texturing, animation, particle simulation, rendering, and game creation, among its many capabilities. The Blender Game Engine has powerful tools to create games without the need for explicit programming, although Python is also available for power users. Blender has strong support from the gaming industry and there is extensive documentation available. The main webpage of Blender can be found at (\url{http://www.blender.org}).  
 
 % Blender Particle Systems
 % issues between the Particle systems and the Game Engine
 
-However, there are some additional tools available to the Blender modeling and animation  area but not to the game engine. The particle systems can simulate particles with different types of physics i.e. newtonian, or boids \footnote{entities following flocking behavior} and keyed physics. 
+Not all  of Blender's features can be used from within the game engine. Of particular 
+interest to us, are particles subject to forces (implemented by Ian Johnson) and 
+boids (entities in a flock) that move according to empirical laws (the subject of this
+thesis). 
+%exist, there are some additional tools available to the Blender modeling and animation  area but not to the game engine. 
+The particle systems built into blender can simulate particles with different types of physics i.e. Newtonian, or boids \footnote{entities following flocking behavior} and keyed physics. 
 
 % CHECKED
 % why flocking?
@@ -49,20 +54,20 @@ However, there are some additional tools available to the Blender modeling and a
 
 % define the problem and mention the approaches to solve it
 
-When particles act according to newtonian physics, they are subject to Newton's laws: force equals mass times acceleration. Particles are given an initial linear and angular velocity. The motion of each particle is determined from the force acting on it. For example, a collection of particles could be subject to pressure and viscosity forces. Another system of particles in Blender models flocking behavior. In this case, the individual particles are called boids, and they are subject to simple rules that determined their velocity, rather than a force. These rules are used to simulate flocks, schools, herds, and swarms of different entities.
+When particles behave  according to Newtonian physics, they are subject to Newton's laws: force equals mass times acceleration. Particles are given an initial linear and angular velocity. The motion of each particle is determined from the force acting on it. For example, a collection of particles could be subject to pressure and viscosity forces. Another system of particles in Blender models flocking behavior. In this case, the individual particles are called boids, and they are subject to simple rules that determined their velocity, rather than a force. These rules are used to simulate flocks, schools, herds, and swarms of different entities.
 
 %CHECKED
-This thesis focuses on the Boids system. Boids can be defined as entities, in most cases animals, that have an emerging behavior caused by following a set of rules called steering behaviors. This behavior is called \textit{flocking} and the name \textit{boid} was first introduced by the pioneer of flocking, Craig Reynolds, in his 1987 paper: \textit{Flocks, Herds, and Schools: A Distributed Behavioral Model}\cite{craig1}. The model presented by Reynolds have been used by many scientists interested in this research area. This model will be discussed further in the next chapter.
+This thesis focuses on the Boids system. Boids can be defined as entities, in many cases animals, that have emerging behavior that result from a set of rules collectively referred to  steering behaviors. This behavior is called \textit{flocking}. The name \textit{boid} was first introduced by Craig Reynods, the pioneer of flocking, in his 1987 paper: \textit{Flocks, Herds, and Schools: A Distributed Behavioral Model}\cite{craig1}. The model presented by Reynolds has been used by many scientists interested in this research area and will be discussed further in the next chapter.
 
-We implemented Reynolds' basic flocking model into the Blender Game Engine. Although there have been many publications on flocking since the original seminar paper, the algorithm has not changed much. Most of the modifications relate to the computation of the steering behaviors.
+We implemented Reynolds' basic flocking model within the Blender Game Engine. Although there have been many publications on flocking since the original seminar paper, the algorithm has not changed much. Most of the modifications relate to the computation of the steering behaviors.
 
-In order to introduce the flocking algorithm into the Blender Game Engine, Blender's source code had to be  modified, and Blender had to be rebuilt. Much effort was spent ensuring that Blender remained portable across platforms. All the modifications made to Blender were based on the Blender release 2.57. 
+In order to introduce the flocking algorithm into the Blender Game Engine, Blender's source code had to be  modified, and Blender had to be rebuilt. Much effort was spent ensuring that Blender remained portable across platforms. All our modifications were made to Blender release 2.57. 
 
 %CHECKED
 
 % may need a connection sentence between this paragraphs
 
-Up until this point, the developers in the Blender community restricted the software to a pure CPU implementation. The physics engine and other components of Blender were not ported to the GPU since portability was a major priority  and the dominant GPU language, CUDA, did not run on the AMD graphics cards.
+Up until this point, the developers in the Blender community only developed on the  CPU. The physics engine and other components of Blender were not ported to the GPU because portability was a major priority  and the dominant GPU language, CUDA, did not run on the AMD graphics cards.
 
 %The current version of Blender is CPU-based	
 Since the advent of OpenCL\cite{opencl}, it became possible to write GPU software portable across the dominant computer architectures. As a result, we have implemented a particle system for flocking that runs on the GPU, taking advantage of the CPU-based facilities already offered by Blender, such as object manipulation, modeling, and its current game engine. As the game levels  become increasingly complex or the physical effects too computationally demanding, Blender starts dropping frames to try and maintain the desired animation speed. Since we expect to handle thousands or tens of thousands of boids, it was imperative to leverage the power of the graphics processor\cite{nvidiaGPU}, which offers vector-based operations and light-weight multithreading. In this thesis, we implemented the boid system in OpenCL.
@@ -72,27 +77,27 @@ Since the advent of OpenCL\cite{opencl}, it became possible to write GPU softwar
 %Why are you doing this work? What are the issues? What are the objectives?
 %What have you done? What are you hoping to do with your implementation?
 
-Given that Blender is still evolving, and will for the foreseeable future, it was imperative to make our changes to Blender in a way to minimize the code footprint on the Blender source code. Thus, our
-GPU code is maintained outside the Blender source tree. Ian Johnson\cite{ianBlog} developed a library named \textit{RTPS} (Run-Time Particle Systems) that defines particle systems (based on the Smoothed-Particle Hydrodynamics) that can be used inside the Blender Game Engine. SPH can simulate in real time real-time fluids with a few hundred thousand particles. We extended \textit{RTPS} in order to implement flocking behavior. The steering rules: \textit{separation}, \textit{alignment}, \textit{cohesion}, \textit{goal}, and \textit{avoidance} were implemented inside the \textit{RTPS} library, which also implements all the rendering routines.
+Given that Blender is still evolving, and will continue to do so for the foreseeable future, it was imperative to change Blender while minimizing the code footprint on the Blender source code. Thus, we maintain our 
+GPU outside the Blender source tree. Ian Johnson\cite{ianBlog} developed a library named \textit{RTPS} (Run-Time Particle Systems) that defines particle systems (based on the Smoothed-Particle Hydrodynamics) that can be used inside the Blender Game Engine. SPH can simulate fluids in real time represented with a few hundred thousand particles. We extended \textit{RTPS} in order to implement flocking behavior. The steering rules \textit{separation}, \textit{alignment}, \textit{cohesion}, \textit{goal}, and \textit{avoidance} were implemented inside the \textit{RTPS} library, which include the needed rendering routines.
 
 %\mmy(YOU NEVER SAID THERE WERE THREE RULES yes}
 % now I do
 
 
 % CHECKED
-An interface to the Blender Game Engine was developed to link with the RTPS library. This interface is defined via Blender's modifier framework. It allows us to applied properties to objects inside the Blender Game Engine and define interactions between the various Particle Systems and Blender's own objects.
+An interface to the Blender Game Engine was developed to link with the RTPS library. This interface is defined via Blender's modifier framework. It allows us to apply properties to objects inside the Blender Game Engine and define interactions between the various Particle Systems and Blender's own objects.
 
 %Both the RTPS library and the Blender modifier were expanded in order to enhance the capabilities of the main implementation done by Ian Johnson.
 
 % guide to the reader of the content of the thesis
 
-The remainder of the thesis is structured as follows:  in Chapter~\ref{chap2}, we describe the related work in the area of flocking. Chapter~\ref{chap3} describes the flocking algorithm used and the specific rules implemented. Chapter~\ref{RTPSchapter} provides details on the structure of the RTPS library. In Chapter~\ref{chap5}, the Custom Modifier that was developed for Blender and the properties defined to be able to interact with Blender are presented. Chapter~\ref{resultsChapter} discusses the results with benchmarks and presents demonstrations. Conclusions are found in Chapter~\ref{conclusionChapter}.  And finally, Chapter~\ref{chap8} discusses the future work. 
+The remainder of the thesis is structured as follows:  in Chapter~\ref{chap2}, we describe related work in the area of flocking. Chapter~\ref{chap3} describes the flocking algorithm used and the specific rules implemented. Chapter~\ref{RTPSchapter} provides details on the structure of the RTPS library. In Chapter~\ref{chap5}, we present the Custom Modifier developed for Blender and the various properties necessary for interaction with Blender. Chapter~\ref{resultsChapter} discusses the results with benchmarks and some illustrations of our vlocking in action. We conclude in Chapter~\ref{conclusionChapter}.  Finally, we suggest some future work in Chapter~\ref{chap8}. 
 
 \section{Contributions of this thesis}
-The main contributions made in this thesis were:
+The main contributions made in this thesis were to
 \begin{enumerate}
-\item Developed a CPU and GPU flocking implementation that computes \textit{separation}, \textit{alignment}, \textit{cohesion}, \textit{goal}, and \textit{avoidance} rules. An OpenCL implementation ensures portability between ATI and NVIDIA graphics cards.
-\item Added a flocking boids system called FLOCK to the Real-Time Particle Systems (RTPS) library.
-\item Added the FLOCK system to the RTPS modifier of the Blender Game Engine.
-\item Successfully created a simple game demo that uses the FLOCK system and played it inside the Blender Game Engine.
+\item Develop CPU and GPU flocking implementations that compute \textit{separation}, \textit{alignment}, \textit{cohesion}, \textit{goal}, and \textit{avoidance} rules. An OpenCL implementation ensures portability between ATI and NVIDIA graphics cards,
+\item Add a flocking boids system (called FLOCK) to the Real-Time Particle Systems (RTPS) library,
+\item Add the FLOCK system to the RTPS modifier of the Blender Game Engine.
+\item Successfully create a simple game demo that uses the FLOCK system and play it inside the Blender Game Engine.
 \end{enumerate}
