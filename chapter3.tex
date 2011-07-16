@@ -2,28 +2,27 @@
 
 % introduction
 %\section{Introduction}
-The self-organization seen in social animals like birds and fishes is called \textit{flocking}. Flocking algorithms are used to simulate this social behavior by following a set of simple rules. These rules were introduced by the pioneer of flocking simulations Craig Reynolds\cite{craig1}. The three main rules or main steering behaviors are: \textit{separation}, \textit{alignment}, and \textit{cohesion}. This chapter discusses the different behaviors implemented in our code, which include the three main steering behaviors, along with three more behaviors.
+The self-organization seen in social animals like birds and fishes is called \textit{flocking}. Flocking behavior is simulated by following a set of simple rules. These rules were introduced by the pioneer of flocking simulations Craig Reynolds\cite{craig1}. The three main rules or main steering behaviors are: \textit{separation}, \textit{alignment}, and \textit{cohesion}. This chapter discusses the different behaviors implemented in our code, which include the three main steering behaviors and three additional behaviors.
 
 % 3 steering behaviors
 \section{Three Main Steering Behaviors}
-Boid evolution is subject to several behavior rules. To each rule, we associate a velocity vector that will direct the movement of the boid. These velocity vectors are added together, each subject to a scalar weight. More generally, given a $rule_r$, and a scalar weight $w_{rule_r}$, the boid will move in the direction of the velocity, 
-
-	\begin{equation}
-	vel^{k+1} = vel^{k} + \sum_{rule_r} w_{rule_r} {rule_r}
-	\end{equation}
+Boid evolution is subject to several behavior rules. To each rule, we associate a velocity vector that will direct the movement of the boid. These velocity vectors are summed, each scaled by a weight factor. More generally, given a $rule_r$, and a scalar weight $w_{rule_r}$, the boid will move in the direction of the velocity, 
+\begin{equation}
+vel^{k+1} = vel^{k} + \sum_{rule_r} w_{rule_r} {rule_r}
+\end{equation}
 	
 %The steering behaviors are velocity vectors, they have direction and magnitude. 
 Each behavior is evaluated at each time step for each boid.
 
 % separation
 \subsection{Separation}\label{separationsection}
-\textit{Separation} can be described as the steering velocity that maintains each boid separated by at least a minimum determined distance. Craig Reynolds called this rule \textit{collision avoidance} to indicate that boids tried to avoid colliding with nearby flockmates. Later on, the name of the rule was changed to \textit{separation}. This steering behavior prevents excessive crowding of boids. \textit{Separation} is a repulsive velocity. Figure~\ref{separationPDF} shows that only flockmates within a certain radius $R_{sep}$ are considered when evaluating this behavior. The red vector is the resulting steering velocity.
+\textit{Separation} can be described as the steering velocity necessary to keep each boid at some minimal distance away from its neighbors. Reynolds called this rule \textit{collision avoidance} to indicate that boids try to avoid colliding with nearby flockmates. Later, the name of the rule was changed to \textit{separation}. This steering behavior prevents excessive crowding of boids. \textit{Separation} is a repulsive velocity. Figure~\ref{separationPDF} shows that only flockmates within a certain radius $R_{sep}$ are considered when evaluating this behavior. The red vector is the resulting steering velocity.
 
 % separation figure
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.85]{figures/separation.pdf}
-\caption{Separation steering velocity: the outer circle is the neighborhood of boid $i$, the inner circle is the minimum distance neighborhood, \textit{separation} steers boid $i$ away/near the neighboring boids until a minimum distance between them is met}
+\caption{Separation steering velocity: the outer circle is the neighborhood of boid $i$, the inner circle is the minimum distance neighborhood, \textit{separation} steers boid $i$ away/near the neighboring boids until a minimum distance between them is met.}
 \label{separationPDF}
 \end{center}
 \end{figure}
@@ -35,7 +34,7 @@ The mathematical expression that was implemented is showed in equation~\ref{sepa
 \label{separationEquation}
 Separation =\frac{1}{M} \sum_{n=1}^{M} \frac{p_i - p_n}{d(p_i,p_n)},
 \end{equation}
-where $M$ is the number of boids within the minimum distance from boid $i$, $p_i$ is the position of boid $i$, and $d(p_i,p_n)$ is the distance between boids $i$ and neighbor $n$.
+where $M$ is the number of boids within the minimum distance from boid $i$, $p_i$ is the position of boid $i$, and $d(p_i,p_n)$ is the distance between boid $i$ and neighbor $n$.
 
 %Only neighbors that are within the minimum separation distance are considered. The difference between the positions of boid $i$ and boid $n$ is divided by the distance between boid $i$ and boid $n$ are summed. Then, the sum is divided by the number of boids that were within the minimum distance. The resulting vector corresponds to the \textit{separation} steer of boid $i$ with respect to their nearest flockmates. 
 
@@ -43,13 +42,13 @@ The separation velocity of boid $i$ is a linear combination of unit vectors poin
 
 % alignment
 \subsection{Alignment}
-\textit{Alignment} is the steering behavior through which boids try to align its velocity with their neighbors. Reynolds initially called this behavior \textit{velocity matching}, later the name was changed to \textit{alignment}. This behavior also prevents crowding. According to this rule, each boid would \textit{align} its heading with the average heading of their flockmates. Figure~\ref{alignmentPDF} shows the corrective steering velocity vector in red.
+\textit{Alignment} is the steering behavior through which each boid tries to align its velocity with its neighbors. Reynolds initially called this behavior \textit{velocity matching}, later the name was changed to \textit{alignment}. This behavior also prevents crowding. According to this rule, each boid aligns \textit{align} its velocity with the average velocities of their flockmates. Figure~\ref{alignmentPDF} shows the corrective steering velocity vector in red.
 
 % alignment figure
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.85]{figures/alignment.pdf}
-\caption{Alignment steering velocity: the circle R is the neighborhood of boid $i$, the green vector acting on boid $i$ is its desired velocity, \textit{alignment} match the heading and speed of boid $i$ with respect to their neighbors}
+\caption{Alignment steering velocity: the circle R is the neighborhood of boid $i$, the green vector acting on boid $i$ is its desired velocity, \textit{alignment} matches the heading and speed of boid $i$ with that of its neighbors (taken as an average).}
 \label{alignmentPDF}
 \end{center}
 \end{figure}
@@ -71,7 +70,7 @@ where $N$ is the number of boids within the search radius centered at boid $i$. 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.85]{figures/cohesion.pdf}
-\caption{Cohesion steering velocity: the circle R is the neighborhood of boid $i$, \textit{cohesion} steers boid $i$ towards the center of its local neighborhood}
+\caption{Cohesion steering velocity: the circle R is the neighborhood of boid $i$, \textit{cohesion} steers boid $i$ towards the center of its local neighborhood.}
 \label{cohesionPDF}
 \end{center}
 \end{figure}
@@ -97,7 +96,7 @@ Besides the three main steering behaviors just discussed, there have been many m
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.95]{figures/goal.pdf}
-\caption{Goal behavior: boid $i$ would approach the target when subject to the \textit{goal} behavior}
+\caption{Goal behavior: boid $i$ would approach the target when subject to the \textit{goal} behavior.}
 \label{goalPDF}
 \end{center}
 \end{figure}
@@ -127,7 +126,7 @@ For the \textit{avoidance} behavior there is a negative sign preceding the desir
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.75]{figures/avoidance.pdf}
-\caption{Avoidance behavior: boid $i$ would move away from the target when subject to the \textit{avoid} behavior}
+\caption{Avoidance behavior: boid $i$ would move away from the target when subject to the \textit{avoid} behavior.}
 \label{avoidPDF}
 \end{center}
 \end{figure}
@@ -247,7 +246,7 @@ Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid
  
 % update
 \begin{algorithm}
-\caption{Update of each frame of the simulation}
+\caption{Update of each frame of the simulation.}
 \label{updateAlgorithm}
 \begin{algorithmic}
 \STATE Create a FLOCK boids system.
