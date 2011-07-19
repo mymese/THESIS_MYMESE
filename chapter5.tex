@@ -9,7 +9,7 @@ Video games have been available since the 1950s\cite{historyVideoGames}, althoug
 Our aim is to develop tools that would help to create \textit{educational} games. Educational games are played for enjoyment, but also for their ability to teach something to the player. 
 
 % layout of the chapter
-This chapter starts with a brief discussion of \textit{Blender}, followed by a description of its \textit{Game Engine}. We then cover the standalone Boids particle system of Blender, and finally, we describe the flocking modifier that has been integrated into the Blender Game Engine. 
+This chapter starts with a brief discussion of \textit{Blender}, followed by a description of its \textit{Game Engine}. We then cover the standalone Boids system of Blender, and finally, we describe the flocking modifier that has been integrated into the Blender Game Engine. 
 
 
 % blender background info
@@ -45,21 +45,23 @@ The Blender Game Engine is a very powerful tool, allowing the creation of simple
 \includegraphics[scale=0.45]{figures/logic_bricks.pdf}
 \end{array}$
 \end{center}
-\caption{The Blender Game Engine Logic Editor interface: Properties and Logic Bricks.}
+\caption{The Blender Game Engine Logic Editor interface: properties and logic bricks.}
 \label{logic}
+\vspace{32pt}
 \end{figure}
 
-The logic editor interface consists of two parts: \textit{Properties} and \textit{Logic Bricks}. Properties are used to provide objects with additional specific actions. These properties can be accessed by name either through the logic editor or through Python programming. In the second part, the logic bricks are divided into \textit{sensors}, \textit{controllers}, and \textit{actuators}. Each class of bricks has different subtypes to choose from.
+
+The logic editor interface consists of two parts: \textit{properties} and \textit{logic bricks}. Properties are used to provide objects with additional specific actions. These properties can be accessed by name either through the logic editor or through Python programming. In the second part, the logic bricks are divided into \textit{sensors}, \textit{controllers}, and \textit{actuators}. Each class of bricks has different subtypes to choose from.
 
 Sensors are used to detect the input from the user, e.g., keyboard, mouse, joysticks, etc. Controllers link the Sensors to the Actuators. Controllers incorprate the logic that determines the action taken by the actuators. For example, the object might move, rotate, create, destroy, change shape, etc. when two different sensors produce a \textit{True} state. 
 
-Object logic is formed from as many logic bricks as necessary. The bricks are interconnected: sensors to controllers and controllers to actuators. The properties in Figure~\ref{logic} shows the setup for a hose emitter; the logic bricks show the configuration that leads to the movement of a cube using the arrows.
+Object logic is formed from as many logic bricks as necessary. The bricks are interconnected: sensors to controllers and controllers to actuators. The properties in Figure~\ref{logic} shows the setup for a hose emitter; the logic bricks show the configuration that leads to the movement of the hose using the arrow keys.
 
 The logic editor is the simplest approach to creating objects that interact in the gameworld. More complex behavior is possible through the Python scripting interface.
 
 % particle system outside the blender game engine
-\section{Boids Particle System outside the Blender Game Engine}
-Although Blender has extensive particle-based tools, including hair styling, these are absent from the Game Engine. A submodule of the particle system is a rather sophisticated Boids system. This Section presents a demonstration to illustrate the functionality of the built-in Boids system. 
+\section{Boids System outside the Blender Game Engine}
+Although Blender has extensive particle-based tools, including hair styling, these are absent from the Game Engine. A submodule of the particle system is a rather sophisticated Boids system. This section presents a demonstration to illustrate the functionality of the built-in Boids system. 
 
 One first creates a particle emitter, such as a cube, a plane, or other object. Then, one makes that object into a particle system. Figure~\ref{boidsCreatePS} shows the panel used to add the particle system. The number of particles is initially set to 50. The lifetime of the boids is set to a large number.
 
@@ -78,26 +80,26 @@ After the system is created, the physics of the system can be edited, see Figure
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale = 0.65]{figures/boidsPhysics.pdf} 
-\caption{Blender Particle Systems Physics panel for Boids: set the physical properties of the Boids particle system.}
+\caption{Blender Particle Systems Physics panel for Boids: set the physical properties of the Boids system.}
 \label{boidsPhysics}
 \end{center}
 \end{figure}
 
-In the Blender Boids system, the boids have their own "brain"; therefore more specific settings can be assigned depending on the application. Figure~\ref{boidsBrain} shows the panel for the Boid's Brain (a Blender label). In this panel, one finds the rules available to the boids\footnote{The description of rules is listed as in the Blender source code.}.
+In the Blender Boids system, the boids have their own ``brain''; therefore more specific settings can be assigned depending on the application. Figure~\ref{boidsBrain} shows the panel for the Boid's Brain (a Blender label). In this panel, one finds the rules available to the boids\footnote{The description of rules is listed as in the Blender source code.}.
 
 %Blender boid's rules
 \begin{enumerate}
-\item{\textit{Goal}: go to the goal assigned object or loudest assigned signal source;}
-\item{\textit{Avoid}: get away from assigned object or loudest assigned signal source;}
-\item{\textit{Avoid Collision}: maneuver to avoid collisions with other boids and deflector object;} % in near future}
-\item{\textit{Separate}: keep from going through other boids;}
-\item{\textit{Flock}: move to center of neighbors and match their velocity;}
-\item{\textit{Follow Leader}: follow a boid or assigned object;}
-\item{\textit{Average Speed}: maintain speed, flight level or wander;}
-\item{\textit{Fight}: go to closest enemy and attack when in range}.
+\item{\textit{Goal}: go to the goal assigned object or loudest assigned signal source}
+\item{\textit{Avoid}: get away from assigned object or loudest assigned signal source}
+\item{\textit{Avoid Collision}: maneuver to avoid collisions with other boids and deflector objects} % in near future}
+\item{\textit{Separate}: keep from going through other boids}
+\item{\textit{Flock}: move to the center of neighbors and match their velocity}
+\item{\textit{Follow Leader}: follow a boid or assigned object}
+\item{\textit{Average Speed}: maintain speed, flight level or wander}
+\item{\textit{Fight}: go to closest enemy and attack when in range}
 \end{enumerate}
 
-When clicking in a rule, parameter panels appear if needed. As seen in Figure~\ref{boidsBrain}, clicking the rule \textit{Goal} leads to the option to set the boid target. The figure shows an empty object we created. 
+When clicking in a rule, parameter panels appear if needed. As seen in Figure~\ref{boidsBrain}, clicking the rule \textit{Goal} leads to the option to set the boid's target. The figure shows an empty object we created. 
 
 There are three methods available in Blender to evaluate the rules: 1) fuzzy logic with a fuzziness level, 2) averaging all the rules, and 3) weighting the rules randomly. Each of these evaluation methods leads to completely different results. The default method of rules evaluation is Fuzzy.
 
@@ -122,7 +124,7 @@ Figure~\ref{boidsAction} shows two screenshots of an animation in which the boid
 \includegraphics[scale= 0.35]{figures/boids2.pdf}
 \end{array}$
 \end{center}
-\caption{Screenshots of the boids approaching an empty object assigned as the target.}
+\caption{Screenshots of the boids approaching an empty object assigned as its target.}
 \label{boidsAction}
 \end{figure}
 
@@ -134,22 +136,23 @@ For a step by step description on how this modifier was created, see Ian Johnson
 
 % code modifications
 \subsection{Game Engine Source Code Modifications}
-The creation of the custom modifier involved modifying a few files. These modifications fell into three categories: functionality of the Game Engine, functionality of the UI modifier, and  creation of the UI modifier.
+The creation of the custom modifier involved modifying a few files. These modifications fell into three categories: functionality of the Game Engine, functionality of the user interface (UI) modifier, and  creation of the UI modifier.
 
 The main changes made to the Blender source code are summarized in Tables~\ref{geTable},~\ref{funcTable}, and \ref{uiTable}.
 
 % tables summarizing the changes made to the source code
 
 % GE table
+\vspace{16pt}
 \begin{table}[htdp]
 \caption{Modifications made for the functionality of the Game Engine.}
 \begin{center}
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline 
 \textbf{File} & \textbf{Summary of the Modifications} \\\hline 
-BL\_BlenderDataConversion.cpp & Checks if the RTPS modifier is in use. \\\hline 
-BL\_ModifierDeformer.cpp & Implementation of the RTPS functionality inside Blender. The RTPS object is created and updated. \\\hline 
-RAS\_ListRasterizer.cpp & Calls the \texttt{render()} method. \\
+\texttt{BL\_BlenderDataConversion.cpp} & Checks if the RTPS modifier is in use. \\\hline 
+\texttt{BL\_ModifierDeformer.cpp} & Implementation of the RTPS functionality inside Blender. The RTPS object is created and updated. \\\hline 
+\texttt{RAS\_ListRasterizer.cpp} & Calls the \texttt{render()} method. \\
 \hline 
 \end{tabular} 
 \end{center}
@@ -157,15 +160,16 @@ RAS\_ListRasterizer.cpp & Calls the \texttt{render()} method. \\
 \end{table}
 
 % Functionality table
+\vspace{16pt}
 \begin{table}[htdp]
 \caption{Modifications made to the functionality of the UI modifier.}
 \begin{center}
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline 
 \textbf{File} & \textbf{Summary of the Modifications} \\\hline 
-DNA\_modifier\_types.h & Defines the \texttt{struct} of the RTPS modifier. \\\hline 
-rna\_modifer.c & Defines the properties of the items in the UI. \\\hline 
-MOD\_rtps.c & This file was created and defines the default values of the parameters in the UI. \\
+\texttt{DNA\_modifier\_types.h} & Defines the \texttt{struct} of the RTPS modifier. \\\hline 
+\texttt{rna\_modifer.c} & Defines the properties of the items in the UI. \\\hline 
+\texttt{MOD\_rtps.c} & This file was created and defines the default values of the parameters in the UI. \\
 \hline 
 \end{tabular}
 \end{center}
@@ -173,13 +177,14 @@ MOD\_rtps.c & This file was created and defines the default values of the parame
 \end{table}
 
 % UI table
+\vspace{16pt}
 \begin{table}[htdp]
 \caption{Modifications made for the creation of the UI modifier.}
 \begin{center}
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline 
 \textbf{File} & \textbf{Summary of the Modifications} \\\hline 
-properties\_data\_modifier.py & Creates the UI modifier using the properties defined in \texttt{rna\_modifier.c}. \\
+\texttt{properties\_data\_modifier.py} & Creates the UI modifier using the properties defined in \texttt{rna\_modifier.c}. \\
 \hline 
 \end{tabular}
 \end{center}
@@ -187,11 +192,12 @@ properties\_data\_modifier.py & Creates the UI modifier using the properties def
 \end{table}
 
 % UI description
-\subsection{Development of the UI}
+\subsection{Development of the RTPS modifier user interface}
 We implemented the Blender interface of our RTPS modifier using \textit{Python}. As described in table~\ref{uiTable}, the only file modified for the development of the UI was \texttt{properties\_data\_modifier.py}. The RTPS modifier is shown in Figure~\ref{ui}.
 
 % figure: RTPS modifier
 \begin{figure}[htbp]
+\vspace{32pt}
 \begin{center}
 \includegraphics[scale=0.8]{figures/modifier.pdf}
 \caption{Boids system of the RTPS modifier: it includes the simulation parameters, the render types, the flock specific parameters, and the scalar weights for each of the rules; here showing the default values.}
@@ -199,9 +205,9 @@ We implemented the Blender interface of our RTPS modifier using \textit{Python}.
 \end{center}
 \end{figure}
 
-The RTPS modifier is used to initialize the particle systems available in the RTPS library by assigning certain properties to the Blender object. The Boids system in the RTPS modifier includes several simulation parameters (the maximum number of particles, the time step used for integration, and the option for 2D flocking), Render types (render the boids as Points, Sprites, Screen Space, or 3D Spheres). The color used to render the particles is computed  from Blender's materials.
+The RTPS modifier is used to initialize the particle systems available in the RTPS library by assigning certain properties to the Blender object. The Boids system in the RTPS modifier includes several \textit{Simulation Parameters} (the maximum number of particles, the time step used for integration, and the option for 2D flocking), \textit{Render Types} (render the boids as Points, Sprites, Screen Space, or 3D Spheres). The color used to render the particles is computed  from Blender's materials.
 
-The Flock Parameters area presents the user with control over the maximum speed of the boids, the minimum separation distance between boids and the searching radius for the neighbor search. One can specify the various scalar weights of Equation~\ref{combine}, in the Weights of the Rules area.
+The \textit{Flock Parameters} area presents the user with control over the maximum speed of the boids, the minimum separation distance between boids and the searching radius for the neighbor search. One can specify the various scalar weights of Equation~\ref{combine}, in the \textit{Weights of the Rules} area.
 
 \textit{How does the RTPS modifier work internally?} The modifier is applied to the object when the game engine starts. When the RTPS modifier is activated, the RTPS object is created and initialized using the current parameters in the modifier interface. Once created, the RTPS object is updated, once per frame. 
 %The object is updated at every frame.    
@@ -215,7 +221,7 @@ The Flock Parameters area presents the user with control over the maximum speed 
 \begin{tabular}{|p{3cm}|p{9cm}|}
 \hline 
 \textbf{Property} & \textbf{Type and Description} \\\hline 
-\texttt{num} 	& \texttt{integer}: if num $>$ 0, num particles are emitted every frame and num is reset to 0	\\\hline 
+\texttt{num} 	& \texttt{integer}: if \texttt{num} $>$ 0, \texttt{num} particles are emitted every frame and \texttt{num} is reset to 0	\\\hline 
 \texttt{hose}	& \texttt{boolean}: used to active the hose	\\\hline
 \texttt{speed}	& \texttt{float}: initial velocity of the particles emitted from the hose	\\\hline
 \texttt{radius}	& \texttt{float}: width of the hose	\\ %\hline

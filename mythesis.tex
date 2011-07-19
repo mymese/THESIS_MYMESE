@@ -2,7 +2,7 @@
 %\usepackage[overload]{textcase}
 %\usepackage[dvips]{graphics}
 \usepackage[pdfborder={0 0 0}]{hyperref}
-\hypersetup{breaklinks=true}
+%\hypersetup{breaklinks=true}
 %\usepackage{natbib}
 \usepackage{setspace}
 
@@ -50,7 +50,7 @@ Also, I would like to dedicate this thesis to my beautiful goddaughter Keilyane 
 \end{dedication}
 
 \begin{acknowledgments}
-I would like to acknowledge my advisor Dr. Gordon Erlebacher for motivating me to work harder everyday. His advice has made me a better person and a better student. Also, I would like to give special recognition to my colleague Ian Johnson, thanks for your guidance during this project and for your availability to assist me. I would also like to thank Evan Bollig and Andrew Young for your help in the course of this project. Last but not least, I would like to thank the graduate students from the Department of Scientific Computing, faculty and staff for their support.
+I would like to acknowledge my advisor Dr. Gordon Erlebacher for motivating me to work harder everyday. His advice has made me a better person and a better student. Also, I would like to give special recognition to my colleague Ian Johnson, thanks for your guidance during this project and for your availability to assist me. I would also like to thank Evan Bollig and Andrew Young for your help in the course of this project. Last but not least, I would like to thank the graduate students, faculty and staff  from the Department of Scientific Computing for their support.
 \end{acknowledgments}
 
 \tableofcontents
@@ -68,7 +68,7 @@ I would like to acknowledge my advisor Dr. Gordon Erlebacher for motivating me t
 \onehalfspacing
 
 \begin{abstract} 
-In this thesis, we discuss the development of a new Boids system that simulates flocking behavior inside the Blender Game Engine and within the framework of the Real-Time Particles System (RTPS) library developed by Ian Johnson. The collective behavior of Boids is characterized as an emergent behavior caused by following three steering behaviors: \textit{separation}, \textit{alignment}, and \textit{cohesion}. The implementation leverages OpenCL to maintain the portability of the Blender across different operating systems. Benchmarks of the RTPS-FLOCK system show that our implementation speeds up Blender's original Boids implementation (which only runs outside the game engine) by more than an order of magnitude. We demonstrate our boids system in three ways. First, we illustrate how symmetry of the steering behavior is maintained in time. Second, we consider the behavior of a  swarm of bees approaching their hive. And third, we simulate the motion of a crowd constrained to a two-dimensional plane. 
+In this thesis, we discuss the development of a new Boids system that simulates flocking behavior inside the Blender Game Engine and within the framework of the Real-Time Particles System (RTPS) library developed by Ian Johnson. The collective behavior of Boids is characterized as an emergent behavior caused by following three steering behaviors: \textit{separation}, \textit{alignment}, and \textit{cohesion}. The implementation leverages OpenCL to maintain the portability of the Blender across different graphics cards and operating systems. Benchmarks of the RTPS-FLOCK system show that our implementation speeds up Blender's original Boids implementation (which only runs outside the game engine) by more than an order of magnitude. We demonstrate our boids system in three ways. First, we illustrate how symmetry of the steering behavior is maintained in time. Second, we consider the behavior of a  ``swarm of bees'' approaching their hive. And third, we simulate the motion of a ``crowd'' constrained to a two-dimensional plane. 
 \end{abstract}
 
 \mainmatter

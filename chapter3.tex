@@ -23,10 +23,11 @@ velocity vector. We discuss some of these rules in this section.
 
 % separation
 \subsection{Separation}\label{separationsection}
-\textit{Separation} can be described as the steering velocity necessary to keep each boid some specified distance away from its neighbors. Reynolds called this rule \textit{collision avoidance} to indicate that boids try to avoid colliding with nearby flockmates. Later, the name of the rule was changed to \textit{separation}. This steering behavior prevents excessive crowding of boids. \textit{Separation} is a repulsive velocity. Figure~\ref{separationPDF} shows that only flockmates within a certain radius $R_{sep}$ are considered when evaluating this behavior. The red vector is the resulting steering velocity.
+\textit{Separation} can be described as the steering velocity necessary to keep each boid at some specified distance away from its neighbors. Reynolds called this rule \textit{collision avoidance} to indicate that boids try to avoid colliding with nearby flockmates. Later, the name of the rule was changed to \textit{separation}. This steering behavior prevents excessive crowding of boids. \textit{Separation} is a repulsive velocity. Figure~\ref{separationPDF} shows that only flockmates within a certain radius $R_{sep}$ are considered when evaluating this behavior. The red vector is the resulting steering velocity.
 
 % separation figure
 \begin{figure}[htbp]
+\vspace{16pt}
 \begin{center}
 \includegraphics[scale=0.85]{figures/separation.pdf}
 \caption{Separation steering velocity: the outer circle is the neighborhood of boid $i$, the inner circle is the minimum distance neighborhood, \textit{separation} steers boid $i$ away/near the neighboring boids until a minimum distance between them is met.}
@@ -49,13 +50,14 @@ The separation velocity of boid $i$ is a linear combination of unit vectors poin
 
 % alignment
 \subsection{Alignment}
-\textit{Alignment} is the steering behavior wherein each boid tries to align its velocity with its local neighbors. Reynolds initially called this behavior \textit{velocity matching}; later the name was changed to \textit{alignment}. This behavior also prevents crowding. According to this rule, each boid aligns \textit{align} its velocity with the average velocities of their flockmates. Figure~\ref{alignmentPDF} shows the corrective steering velocity vector in red.
+\textit{Alignment} is the steering behavior wherein each boid tries to align its velocity with that its local neighbors. Reynolds initially called this behavior \textit{velocity matching}; later the name was changed to \textit{alignment}. This behavior also prevents crowding. According to this rule, each boid \textit{aligns} its velocity with the average velocities of their flockmates. Figure~\ref{alignmentPDF} shows the corrective steering velocity vector in red.
 
 % alignment figure
 \begin{figure}[htbp]
+\vspace{16pt}
 \begin{center}
 \includegraphics[scale=0.85]{figures/alignment.pdf}
-\caption{Alignment steering velocity: the circle R is the neighborhood of boid $i$, the green vector acting on boid $i$ is its desired velocity, \textit{alignment} matches the heading and speed of boid $i$ with that of its neighbors (taken as an average).}
+\caption{Alignment steering velocity: the circle \textit{R} is the neighborhood of boid $i$, the green vector acting on boid $i$ is its desired velocity, \textit{alignment} matches the heading and speed of boid $i$ with the velocity of its neighbors (taken as an average).}
 \label{alignmentPDF}
 \end{center}
 \end{figure}
@@ -67,7 +69,7 @@ The separation velocity of boid $i$ is a linear combination of unit vectors poin
 \label{alignmentEquation}
 Alignment = \left[  \frac{1}{N} \sum_{n=1}^{N} v_n \right ] - v_i
 \end{equation}
-where $N$ is the number of boids within the search radius $R$ centered at boid $i$ ($R>$R_{sep}$). $v_n$ is the velocity of neighbor $n$. The \textit{alignment} corrective velocity is vector in the direction of the desired velocity, which is also the center of mass with respect to the velocities.
+where $N$ is the number of boids within the search radius $R$ centered at boid $i$ ($R>R_{sep}$). $v_n$ is the velocity of neighbor $n$. The \textit{alignment} corrective velocity is vector in the direction of the desired velocity, which is also the center of mass with respect to the velocities.
 
 % cohesion
 \subsection{Cohesion}
@@ -75,9 +77,10 @@ where $N$ is the number of boids within the search radius $R$ centered at boid $
 
 % cohesion figure
 \begin{figure}[htbp]
+\vspace{16pt}
 \begin{center}
 \includegraphics[scale=0.85]{figures/cohesion.pdf}
-\caption{Cohesion steering velocity: the circle R is the neighborhood of boid $i$, \textit{cohesion} steers boid $i$ towards the center of its local neighborhood.}
+\caption{Cohesion steering velocity: the circle \textit{R} is the neighborhood of boid $i$, \textit{cohesion} steers boid $i$ towards the center of its local neighborhood.}
 \label{cohesionPDF}
 \end{center}
 \end{figure}
@@ -99,8 +102,9 @@ Besides the three main steering behaviors just discussed, many additional behavi
 \subsection{Goal}
 \textit{Goal} is the steering behavior that attracts boids to a specific location in global space. This location is static. Figure~\ref{goalPDF} shows the action taken when approaching the target. The red vector shows the direction taken by the boid towards the \textit{goal}. The green vector is the desired velocity, while the dotted line is the actual path taken by the boid.
 
-% seek figure
+% goal figure
 \begin{figure}[htbp]
+\vspace{16pt}
 \begin{center}
 \includegraphics[scale=0.95]{figures/goal.pdf}
 \caption{Goal behavior: boid $i$ approaches the target when subjected to the \textit{goal} behavior.}
@@ -108,7 +112,7 @@ Besides the three main steering behaviors just discussed, many additional behavi
 \end{center}
 \end{figure}
 
-The \textit{Goal} behavior adjusts the boid velocity such that it is aligned towards the target. \textit{How it is computed?} Since the target is static, we compute the desired velocity which is the unit vector (from the boid to the target) and set the magnitude of the desired velocity to the maximum speed allowed to approach the target as rapidly as possible. 
+The \textit{goal} behavior adjusts the boid velocity such that it is aligned towards the target. \textit{How it is computed?} Since the target is static, we compute the desired velocity which is the unit vector (from the boid to the target) and set the magnitude of the desired velocity to the maximum speed allowed to approach the target as rapidly as possible. 
 %The steering vector is the vector that points from the boid to the desired velocity. 
 More succinctly, 
 
@@ -120,8 +124,8 @@ Goal = \left[\frac{(p_t - p_i)}{d(p_t,p_i)} * max_{speed} \right] - v_i
 where $p_i$ and $v_i$ are the position and velocity of boid $i$, respectively, and $p_t$ is the position of the target. Thus the boid approaches the goal without necessarily reaching it, somewhat akin to a moth buzzing around a light bulb.
 
 % avoid
-\subsection{Avoid}
-\textit{Avoidance} or \textit{avoid} refers to a boid steering away from a static target in the global space. The approach is the opposite of the \textit{goal} steering. The desired velocity of \textit{avoid} points in the opposite direction of \textit{goal}. Figure~\ref{avoidPDF} depicts the steering vector in red and the desired velocity in green. As a formula, 
+\subsection{Avoidance}
+\textit{Avoidance} or \textit{avoid} refers to a boid steering away from a static target in the global space. The approach is the opposite of the \textit{goal} steering. The desired velocity of \textit{avoid} points in the opposite direction of \textit{goal}'s desired velocity. Figure~\ref{avoidPDF} depicts the steering vector in red and the desired velocity in green. As a formula, 
 %Equation~\ref{avoidEquation} shows the mathematical formula for 
 \textit{avoidance} become
 
@@ -131,23 +135,25 @@ where $p_i$ and $v_i$ are the position and velocity of boid $i$, respectively, a
 Avoidance = -\left[\frac{(p_t - p_i)}{d(p_t,p_i)} * max_{speed} \right] - v_i
 \end{equation}
 
-The negative sign indicates that it points in a direction opposite to the velocity in \textit{goal}.
+The negative sign indicates that it points in a direction opposite to the velocity in \textit{goal}. \\ \\ 
 
 % flee figure
 \begin{figure}[htbp]
+\vspace{16pt}
 \begin{center}
-\includegraphics[scale=0.75]{figures/avoidance.pdf}
+\includegraphics[scale=0.95]{figures/avoidance.pdf}
 \caption{Avoidance behavior: boid $i$ moves away from the target when subject to the \textit{avoid} behavior.}
 \label{avoidPDF}
 \end{center}
 \end{figure}
 
 % leader following
-\subsection{Follow the Leader}
-A single boid (called \textit{leader}) is in charge of the flock. The remaining boids are the \textit{followers}. This behavior is just one of the many complex behaviors that a flock can exhibit as a whole. Followers come in slightly behind the leader, viewed as a target. At the same time, the leader targets a specific location in the global space.
+\subsection{Following the Leader}
+A single boid (called \textit{leader}) is in charge of the flock. The remaining boids are the \textit{followers}. This behavior is just one of the many complex behaviors that a flock can exhibit as a whole. Followers come in slightly behind the leader, viewed as a target. At the same time, the leader targets a specific location in the global space. 
 
 % leader following figure
 \begin{figure}[htbp]
+\vspace{16pt}
 \begin{center}
 \includegraphics[scale=0.75]{figures/leaderFollowing.pdf}
 \caption{Leader Following behavior: the followers follow the leader by approaching a point slightly behind the leader. If a follower finds itself in a rectangular area in front of the leader it will move out of the leader's way.}
@@ -169,7 +175,7 @@ vel_i^{k+1} = vel_i^{k} + \sum_{rule_r} w_{rule_r} {rule_r}
 
 %\mmy{I do not see avoidance and the other behaviors you implemented}
 %The \textit{new} velocity is just the velocity of Equation~\ref{combine} plus the current velocity. 
-A first order Euler integration method was used  to calculate the \textit{new} position for each boid: 
+A first order Euler integration method was used  to calculate the \textit{new} position of each boid: 
 
 % integrate equation
 \begin{align}
@@ -182,14 +188,13 @@ The various velocities are recomputed and the boid positions are updated at ever
 
 % algorithms
 \section{Algorithms}
+In this section, we present three algorithms. The first algorithm computes the different steering rules. The second algorithm combines the rules and updates the boid positions, and the third algorithm updates the FLOCK boids system at each frame of the simulation. 
 
-In this Section, we present three algorithms. The first algorithm computes the different steering rules. The second algorithm combines the rules and updates the boid positions, and the third algorithm updates the FLOCK boids system at each frame of the simulation. 
-
-The following Algorithm presents the GPU implementation of each of the steering rules. To save time, one only computes the rules with non-zero scalar weights. 
+The following algorithm presents the GPU implementation of each of the steering rules. To save time, one only computes the rules with non-zero scalar weights. 
 
 % flocking algorithm
 \begin{algorithm}
-\caption{Flocking algorithm to follow Separation, Alignment, Cohesion, Goal, and Avoid steering behaviors}
+\caption{Flocking algorithm to follow Separation, Alignment, Cohesion, Goal, and Avoid steering behaviors.}
 \label{flockingAlgorithm}
 \begin{algorithmic}
 \FOR {each neighbor $j$ of boid $i$}
@@ -236,11 +241,12 @@ The following Algorithm presents the GPU implementation of each of the steering 
 \end{algorithmic}
 \end{algorithm}
 
-In the Algorithm~\ref{flockingAlgorithm}, each rule is evaluated sequentially for each boid. The double loop is first over all boids and then over all the flockmates of those boids. First we determine (and count) the flockmates in the neighborhood covered by the searching radius, which are input into rules \textit{cohesion} and \textit{alignment}. A similar approach was taken for the CPU implementation of Algorithm~\ref{flockingAlgorithm}.
+In the Algorithm~\ref{flockingAlgorithm}, each rule is evaluated sequentially for each boid. The double loop is first over all boids and then over all the flockmates of those boids. First we determine (and count) the flockmates in the neighborhood covered by the searching radius, which are input into rules \textit{cohesion} and \textit{alignment}. A similar approach was taken for the CPU implementation of Algorithm~\ref{flockingAlgorithm}. 
 
 % combine and integrate
+\vspace{32pt}
 \begin{algorithm}
-\caption{Combine, integrate and check the boundaries}
+\caption{Combine, integrate and check the boundaries.}
 \label{combineAlgorithm}
 \begin{algorithmic}
 \STATE $vel_i^{k+1} = vel_i^{k} + \sum_{rule_r} w_{rule_r} {rule_r} $
@@ -251,11 +257,13 @@ In the Algorithm~\ref{flockingAlgorithm}, each rule is evaluated sequentially fo
 \STATE $pos_i^{k+1}$ = $pos_i^{k}$ + $dt$ * $vel_i^{k+1}$
 \STATE Apply periodic boundary conditions to the \textit{new} position.
 \end{algorithmic}
-\end{algorithm}
+\end{algorithm} 
+\vspace{32pt}
 
-Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid position at each iteration. For each $rule r$, the respective weighted velocity is computed. Adding the weighted velocities of each rule to the current velocity produces the final velocity vector of boid $i$ at time step $k+1$. First order Euler integration is applied to update the boid positions. Since flocking is an overall behavior we are not very concerned with spatial accuracy. A first order algorithm is sufficient. To maintain the boid's density in our system and avoid the treatment of boundaries, we applied periodic boundary conditions.
+Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid position at each iteration. For each $rule_r$, the respective weighted velocity is computed. Adding the weighted velocities of each rule to the current velocity produces the final velocity vector of boid $i$ at time step $k+1$. First order Euler integration is applied to update the boid positions. Since flocking is an overall behavior we are not very concerned with spatial accuracy. A first order algorithm is sufficient. To maintain the boid's density in our system and avoid the treatment of boundaries, we applied periodic boundary conditions. 
  
 % update
+\vspace{32pt}
 \begin{algorithm}
 \caption{Update of each frame of the simulation.}
 \label{updateAlgorithm}
@@ -263,11 +271,12 @@ Algorithm~\ref{combineAlgorithm} presents the steps necessary to update the boid
 \STATE Create a FLOCK boids system.
 \FOR {each frame}
 \STATE Do the nearest neighbor search.
-\STATE Compute that rule.
+\STATE Compute the rules.
 \STATE Integrate over time.
 \STATE Render the new position.
 \ENDFOR
 \end{algorithmic}
 \end{algorithm}
+\vspace{32pt}
 
 Algorithm~\ref{updateAlgorithm} is a simplified version of the \texttt{updateGPU()} function (see Section~\ref{flocksection}). First a FLOCK boids system is be created, then the boids enter into a continuous loop, only broken once the simulation ends. 

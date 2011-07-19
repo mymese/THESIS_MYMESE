@@ -6,7 +6,7 @@ This thesis presents the work done over a period of eight months and there is st
 
 % more randomize structures to initialize the positions
 % realistic field of view when searching for neighbors
-The RTPS framework is at the heart of the project and includes the implementation of boid behavior. Since boids behavior derives from nature, they should be initialized with a certain degree of randomness, both in position, velocity, and geometry. In addition, real boids have a limited field of view, hwhich is not implemented in this thesis. Rather, it is assumed that the boid's view is unrestricted. 
+The RTPS framework is at the heart of the project and includes the implementation of boid behavior. Since boids behavior derives from nature, they should be initialized with a certain degree of randomness, both in position, velocity, and geometry. In addition, real boids have a limited field of view, which is not implemented in this thesis. Rather, it is assumed that the boid's view is unrestricted. 
 %The current implementation for neighbor search does a $360^{\circ}$ field of view search. 
 A more realistic approach would limit the field of vision to a cone.  
 
@@ -35,7 +35,7 @@ Flocks and Boids became more attractive to research scientists after Reynolds pu
 
 % optimal selection of the parameters using PSO or GA
 % evaluation of the rules
-Flocking simulations are controlled by several parameters that depend on the physical application. A question often posed concerns the choice of {\correct} parameter values. 
+Flocking simulations are controlled by several parameters that depend on the physical application. A question often posed concerns the choice of correct parameter values. 
 %often arises is \textit{which are the correct parameters?}. 
 There exists a series of algorithms that optimize the process of finding the optimal set of parameters of a given simulation. These algorithms include Particle Swarm Optimization, inspired by flocking, and Genetic Algorithms. They are based on Swarm Intelligence and in Evolutionary Algorithms, respectively, and they have been previously applied to flocking\cite{opt_params_GA}.
 
@@ -44,14 +44,14 @@ Cohesion is the rule responsible for maintaining the entities of the flock close
 
 % add more than one flock
 % interaction between SPH and FLOCK particles
-Flocks may be heterogeneous, meaning that not all entities are from the same type  (e.g., several schools of fish of different types). Having the option to create multiple flocks and make the heterogenous boids interact with one another is another improvement we envision. This idea also could be integrated  with the idea of supporting hybrid systems as a single collection of particles, i.e., interactions between FLOCK particles and SPH particles.
+Flocks may be heterogeneous, meaning that not all entities are from the same type  (e.g., several schools of fish of different types). Having the option to create multiple flocks and make the heterogenous boids interact with one another is another improvement we envision. This idea also could be integrated  with the idea of supporting hybrid systems as a single collection of particles, i.e., interactions between FLOCK boids and SPH particles.
 
 % special rendering methods for boids
 The final improvement to consider within the RTPS framework is the development of special rendering methods for boids. 
 
 \section{Blender RTPS modifier}
 % meet almost all the specifications already available at the Boids system
-Our aim in this thesis was to enhance Blender capabilities by adding particle systems to its Game Engine. This was done by developing a custom modifier to the RTPS framework created in the context of fluid simulation. Since the current implemented flocking behavior in the RTPS library only includes the three basic steering behaviors, the Blender Boids system currently retains more flexibility to create animations with boids, but only outside the Game Engine.  Although our ambition was to duplicate most of the the options already available in the boid simulator, but inside the Game Engine and on the GPU, this was only partially achieved. All that is missing is a few rules, which should be easy to handle. The most difficult problem might be the implementation of efficient  boundary avoidance. 
+Our aim in this thesis was to enhance Blender capabilities by adding particle systems to its Game Engine. This was done by developing a custom modifier to the RTPS framework created in the context of fluid simulation. Since the current implemented flocking behavior in the RTPS library only includes six steering behaviors, the Blender Boids system currently retains more flexibility to create animations with boids, but only outside the Game Engine.  Although our ambition was to duplicate most of the options already available in the boid's simulator, but inside the Game Engine and on the GPU, this was only partially achieved. All that is missing is a few rules, which should be easy to handle. The most difficult problem might be the implementation of efficient  boundary avoidance. 
 %in an efficient manner. 
 
 % support other shapes besides box, not depend on the bounding box - emitter object

@@ -13,7 +13,7 @@ We now provide timing results for our OpenCL implementation. We took benchmarks 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{figures/RTPSvsRTPS.pdf}
-\caption{Timings of RTPS-FLOCK system: FLOCK system from the standalone (outside the Blender Game Engine and the FLOCK system from inside the Blender Game Engine.}
+\caption{Timings of RTPS-FLOCK system: FLOCK system from the standalone (outside the Blender Game Engine) and the FLOCK system from inside the Blender Game Engine.}
 \label{RTPSvsRTPS}
 \end{center}
 \end{figure}
@@ -43,7 +43,7 @@ The speedup of the RTPS-FLOCK system over the Blender-Boids system is seen in Fi
 \end{figure}
 
 Comparing the performance of our implementation with some of the benchmarks that were mentioned in Section~\ref{flockingGPU}, our flocking implementation still has better performance. The library BehaveRT was used to run autonomous characters simulations in real-time. 
-In this work Era {\em et al.\/} simulated 130K boids at 15 fps, compared to our results of 130K boids at 30 fps. The GPU computing device they used was a NVIDIA 8800GTS with 512 MB RAM while we used a NVIDIA 480GTX with 1.5 GB RAM. 
+In this work Erra et al.\cite{BehaveRT} simulated 130K boids at 15 fps, compared to our results of 130K boids at 30 fps. The GPU computing device they used was a NVIDIA 8800GTS with 512 MB RAM while we used a NVIDIA 480GTX with 1.5 GB RAM. 
 
 % comments about the timings per kernels
 We also measured the performance of some of the kernels inside of the RTPS-FLOCK system. The parameter's settings were the same as for the previous tests. The searching radius was constant throughout the benchmarks. Figure~\ref{kernelBench} shows that most of the kernels took the same amount of time for the different flock sizes. The only kernel that increased the time spent to be computed was the Rules kernel. This increase in time results from maintaining a fixed searching radius, which leads to an increasing number of neighboring boids. If the searching radius doubles, the average number of neighbors increases by 4x in 2D and 8x in 3D, given a constant average separation between boids. 
@@ -52,7 +52,7 @@ We also measured the performance of some of the kernels inside of the RTPS-FLOCK
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{figures/kernelsPlot.pdf}
-\caption{Timings for the kernels executed by the RTPS-FLOCK system.}
+\caption{Kernels timings of the RTPS-FLOCK system.}
 \label{kernelBench}
 \end{center}
 \end{figure}
@@ -61,7 +61,7 @@ We also measured the performance of some of the kernels inside of the RTPS-FLOCK
 % demos
 \section{Demos}
 
-\subsection{Symmetry of the Main Rules}
+\subsection{Symmetry Demo}
 As discussed previously, the three main rules of flocking are: 1) \textit{separation}, 2) \textit{alignment}, and 3) \textit{cohesion}. The velocity of each boid is the result of a linear combination of three effects, each one with its own scalar weight parameter. We seek to better understand the effect of each of these parameters. Consider first each effect taken in isolation.
 
 The property of each term is best visualized with an initial configuration of boids that is symmetric, which also helps when debugging the code. To this end, we uniformly space the boids in a rectangular configuration.  From symmetry arguments, a boid in the top-left quadrant has the same relationship with respect to its neighbors as a boid in the same relative location in each of the other three quadrants. Thus the four-fold symmetry of the rectangle will be maintained during the time evolution of the boids. Figure~\ref{alignRule} shows the starting conditions of the boids. The symmetric motion that results from the \textit{separation} and \textit{cohesion} rules are shown in Figures~\ref{sepRule} and~\ref{cohRule}, respectively. These figures show 144 boids in a centralized square inside a $5\times 5\times 5$ grid.
@@ -105,9 +105,9 @@ The case of alignment is somewhat different since it is the boid velocities that
 
 % Goal demo
 \subsection{Goal Demo}
-The \textit{goal} and \textit{avoid} rules can only be used in the RTPS standalone code. They have not yet been added to the RTPS modifier for use inside the Blender Game Engine. 
+The \textit{goal}, \textit{avoid}, and \textit{following the leader} rules can only be used in the RTPS standalone code. They have not yet been added to the RTPS modifier for use inside the Blender Game Engine. 
 
-In the next demo, we simulate a ``\textit{swarm of bees}''. The bees try to approach their target (a blue box) which represents their hive. The center of the cube is used as the coordinates of the target. In this demo, 648 boids were simulated. Only the \textit{goal} and \textit{separation} rules are taken into consideration. The scalar weights for \textit{goal} and \textit{separation} are 1 and 0.5, respectively. The maximum speed is set to 2, with a searching radius of 1.5. 
+In the next demo, we simulate a ``\textit{swarm of bees}''. The bees try to approach their target (a blue box) which represents their hive. The center of the box is used as the coordinates of the target. In this demo, 648 boids were simulated. Only the \textit{goal} and \textit{separation} rules are taken into consideration. The scalar weights for \textit{goal} and \textit{separation} are 1 and 0.5, respectively. The maximum speed is set to 2, with a searching radius of 1.5. 
 
 \begin{figure}[htbp]
 \begin{center}$
@@ -122,6 +122,7 @@ In the next demo, we simulate a ``\textit{swarm of bees}''. The bees try to appr
 \end{center}
 \caption{Screenshots of the ``\textit{swarm of bees}'' simulation: there are 648 boids and the blue cube is the target of the flock.}
 \label{demo_goal}
+\vspace{16pt}
 \end{figure}
  
 Figure~\ref{demo_goal} shows a series of screenshots of bee flocking. The flock starts from an artificial shape of a cube. The boids start to approach the target until they reach it. Once the boids find the target, they remain in the target neighborhood. 
@@ -132,7 +133,7 @@ We ran another demo in which the three main steering behaviors, together with th
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.35]{figures/demo_goal_4rules.pdf}
-\caption{Screenshot of the flock following the target: \textit{separation}, \textit{alignment}, \textit{cohesion}, and \textit{goal} rules were used to compute the behavior of the boids.}
+\caption{Screenshot of the flock when it reached its the target: \textit{separation}, \textit{alignment}, \textit{cohesion}, and \textit{goal} rules were used to compute the behavior of the boids.}
 \label{goal_4rules}
 \end{center}
 \end{figure}
@@ -145,7 +146,7 @@ The following Blender demo of the RTPS library uses one hose that emits 500 boid
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{figures/demo_crowds_prop.pdf}
-\caption{Logic editor properties area showing the properties used to create the hose of the ``\textit{crowding}'' simulation demo.}
+\caption{Logic Editor properties area showing the properties used to create the hose of the ``\textit{crowding}'' simulation demo.}
 \label{crowd_prop}
 \end{center}
 \end{figure}
@@ -168,7 +169,7 @@ Figure~\ref{crowd_shots} shows the screenshots of the demo. The emitter hose sta
 \includegraphics[scale=0.28]{figures/demo_crowds3.pdf}
 \end{array}$
 \end{center}
-\caption{Screenshots of the ``\textit{crowding}'' simulation showing the initial hose, the boids moving, and the boids already spread out throughout the world.}
+\caption{Screenshots of the ``\textit{crowding}'' simulation showing the initial hose, the boids moving, and the boids already spread out throughout the world domain.}
 \label{crowd_shots}
 \end{figure}
 
