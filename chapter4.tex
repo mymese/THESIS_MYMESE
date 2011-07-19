@@ -2,7 +2,7 @@
 
 % Introduction
 %\section{Introduction}
-The Real-Time Particle Systems (RTPS) library was designed and developed by Ian Johnson\cite{ianPaper} to include a particle module. In this thesis, we extended the RTPS library to include a flocking boids system. 
+The Real-Time Particle Systems (RTPS) library was designed and developed by Ian Johnson \cite{ianPaper} to include a particle module. In this thesis, we extended the RTPS library to include a flocking boids system. 
 
 This chapter introduces the framework of the RTPS library. The description of the RTPS library follows the structure of the RTPS implementation showed in Figure~\ref{RTPSdiagram}. At the end of the Chapter, we provide a detailed description of the extended implementation developed for the FLOCK system.
 
@@ -302,7 +302,7 @@ namespace rtps
 \end{cppcode}
 \vspace{16pt}
 
-The structure of the \texttt{EulerIntegration} class is similar to the \texttt{Rules} class. \texttt{EulerIntegration.cpp} initializes the kernel and implements the \texttt{execute} function that sets the arguments of the kernel and executes it. It also carries the implementation of the function \texttt{cpuEulerIntegration()}. 
+The structure of the \texttt{EulerIntegration} class is similar to the \texttt{Rules} class. \texttt{EulerInte-\\gration.cpp} initializes the kernel and implements the \texttt{execute} function that sets the arguments of the kernel and executes it. It also carries the implementation of the function \texttt{cpuEulerIntegration()}. 
 
 The kernel \texttt{\textbf{euler\_integration}} starts by retrieving the respective steering vectors and scalar weights from the GPU. The scalar weights are obtained from the flocking parameters object. The weighted velocity vectors for each of the rules are then computed and combined to obtain the final velocity vector.
 
